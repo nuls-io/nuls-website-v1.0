@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/docs/manual.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/docs/manual.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/docs/manual.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="docs/manual.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/docs/manual.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="NULS-Wallet-Linux64-User-Manual" class="article-heading"><a href="#NULS-Wallet-Linux64-User-Manual" class="headerlink" title="NULS-Wallet-Linux64 User Manual"></a>NULS-Wallet-Linux64 User Manual<a class="article-anchor" href="#NULS-Wallet-Linux64-User-Manual" aria-hidden="true"></a></h2><h3 id="Introduction" class="article-heading"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction<a class="article-anchor" href="#Introduction" aria-hidden="true"></a></h3><p>​    The User Manual (hereinafter referred to as Manual) is for the full-node wallet of NULS (Linux). Before reading this Manual, please know about the basic operation and usage of Linux system. The Manual includes operations for creating account, importing account, transferring, building nodes, agency and others with NULS wallet. It is recommended to build stable NULS nodes with Linux system server.</p>
+<h3 id="Version-Update-Records" class="article-heading"><a href="#Version-Update-Records" class="headerlink" title="Version Update Records"></a>Version Update Records<a class="article-anchor" href="#Version-Update-Records" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th style="text-align:center">Version</th>
+<th style="text-align:center">Date updated</th>
+<th style="text-align:center">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">V1.0.0</td>
+<td style="text-align:center">2018-07-12</td>
+<td style="text-align:center">All functions of official version</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Preparation" class="article-heading"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation<a class="article-anchor" href="#Preparation" aria-hidden="true"></a></h3><h4 id="Server-hardware" class="article-heading"><a href="#Server-hardware" class="headerlink" title="Server hardware"></a>Server hardware<a class="article-anchor" href="#Server-hardware" aria-hidden="true"></a></h4><p><strong>Server for creating NULS nodes shall be with configurations not lower than the following</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">CPU</th>
+<th style="text-align:center">Memory</th>
+<th style="text-align:center">Hard Disk</th>
+<th style="text-align:center">Broadband</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Quad-core 3.0GHz</td>
+<td style="text-align:center">16G</td>
+<td style="text-align:center">128G Hard Disk</td>
+<td style="text-align:center">20M Uplink</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">CPU</th>
+<th style="text-align:center">Memory</th>
+<th style="text-align:center">Hard Disk</th>
+<th style="text-align:center">Broadband</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">8-core 3.0GHz</td>
+<td style="text-align:center">32G</td>
+<td style="text-align:center">256G Hard Disk</td>
+<td style="text-align:center">100M Uplink</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Version-of-system-and-core" class="article-heading"><a href="#Version-of-system-and-core" class="headerlink" title="Version of system and core"></a>Version of system and core<a class="article-anchor" href="#Version-of-system-and-core" aria-hidden="true"></a></h4><p><strong>Linux system</strong></p>
+<ul>
+<li>CentOS (recommended)</li>
+</ul>
+<p>It is recommended to use core of version 2.6.32 or higher.</p>
+<h3 id="Start" class="article-heading"><a href="#Start" class="headerlink" title="Start"></a>Start<a class="article-anchor" href="#Start" aria-hidden="true"></a></h3><h4 id="Download" class="article-heading"><a href="#Download" class="headerlink" title="Download"></a>Download<a class="article-anchor" href="#Download" aria-hidden="true"></a></h4><ul>
+<li>NULS official website for downloading the latest full-node wallet:<a href="http://nuls.io/wallet" target="_blank" rel="noopener">http://nuls.io/wallet</a></li>
+<li><p>GitHub：<a href="https://github.com/nuls-io/nuls-wallet-release" target="_blank" rel="noopener">https://github.com/nuls-io/nuls-wallet-release</a></p>
+</li>
+<li><p>Enter <a href="http://nuls.io/wallet" target="_blank" rel="noopener">wallet download on NULS website</a>,and select Linux download. MEGA and Baidu Cloud Disk are available and optional for users. </p>
+<p>The following is for downloading wallet (v1.0.0) in Linux system:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://media.githubusercontent.com/media/nuls-io/nuls-wallet-release/master/NULS-Wallet-linux64-1.0.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p>Note: the downloading link for the subsequent versions is subject to change.</p>
+</li>
+</ul>
+<h4 id="Install" class="article-heading"><a href="#Install" class="headerlink" title="Install"></a>Install<a class="article-anchor" href="#Install" aria-hidden="true"></a></h4><ul>
+<li><p>Extract downloaded files in Linux system</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tar -zxf NULS-Wallet-linux64-1.0.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Operate" class="article-heading"><a href="#Operate" class="headerlink" title="Operate"></a>Operate<a class="article-anchor" href="#Operate" aria-hidden="true"></a></h4><ul>
+<li><p>Enter bin catalogue and run startup script to start full-node wallet</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> bin</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./start.sh</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Use-wallet" class="article-heading"><a href="#Use-wallet" class="headerlink" title="Use wallet"></a>Use wallet<a class="article-anchor" href="#Use-wallet" aria-hidden="true"></a></h3><h4 id="Quick-start" class="article-heading"><a href="#Quick-start" class="headerlink" title="Quick-start"></a>Quick-start<a class="article-anchor" href="#Quick-start" aria-hidden="true"></a></h4><ul>
+<li><p>Upon confirming the wallet is started, start the command line of wallet to run it.</p>
+<p>Enter bin catalogue to execute the following commands:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./cmd.sh</span></span><br></pre></td></tr></table></figure>
+<p>Display NULS naming prompt <code>nuls&gt;&gt;&gt;</code>, and then directly input NULS wallet operation command to run it.</p>
+<p>The following gives an example of account creating:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; create</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:*********</span><br><span class="line">Please confirm new password:*********</span><br><span class="line">[ "Nse9EtaRwgVgN42pxURgZjUR33LUx1j1" ]</span><br><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Command <code>create</code> is to create a single account, insert password, confirm the inserted password, and receive the account address if the account is created successfully.</p>
+</li>
+</ul>
+<h3 id="Conventions" class="article-heading"><a href="#Conventions" class="headerlink" title="Conventions"></a>Conventions<a class="article-anchor" href="#Conventions" aria-hidden="true"></a></h3><ul>
+<li>For password: it must be 8 to 20 digits, including letters and figures.</li>
+<li>Command parameter description means the required parameter; [parameter] means optional parameter. “|” means alternative parameter, that is, the front or later parameter is required.</li>
+</ul>
+<h3 id="Wallet-command" class="article-heading"><a href="#Wallet-command" class="headerlink" title="Wallet command"></a>Wallet command<a class="article-anchor" href="#Wallet-command" aria-hidden="true"></a></h3><h4 id="Help-command" class="article-heading"><a href="#Help-command" class="headerlink" title="Help command"></a>Help command<a class="article-anchor" href="#Help-command" aria-hidden="true"></a></h4><p>All commands for output and printing</p>
+<ul>
+<li><strong>Command: help [-a] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Parameter</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-a</td>
+<td style="text-align:left">Formatting printing command, optional</td>
+</tr>
+</tbody>
+</table>
+<p>Return message help </p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">getaccount &lt;address&gt; --get account information</span><br></pre></td></tr></table></figure>
+<p>Return message help -a</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">getaccount &lt;address&gt; --get account information</span><br><span class="line">	OPTIONS:</span><br><span class="line">	&lt;address&gt; the account address - Required</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; <span class="built_in">help</span></span></span><br><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; <span class="built_in">help</span> -a</span></span><br></pre></td></tr></table></figure>
+<h4 id="Create-account" class="article-heading"><a href="#Create-account" class="headerlink" title="Create account"></a>Create account<a class="article-anchor" href="#Create-account" aria-hidden="true"></a></h4><p>Create account and return to account addresses collection</p>
+<ul>
+<li><strong>Command: create [number] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Parameter</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[number]</td>
+<td style="text-align:left">Quantity of accounts created, optional</td>
+</tr>
+</tbody>
+</table>
+<p>Upon creating account, receive prompt of password inserting; if the account is not to have a password, ignore it and directly enter;</p>
+<p>Return accounts collection</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[ <span class="string">"NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2"</span>, <span class="string">"Nse6iqzBZsBtL5c46xaHhAhAqVDv3zQQ"</span> ]</span><br></pre></td></tr></table></figure>
+<p>Example, to create 2 accounts without password</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; create 2</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:</span><br><span class="line">[ "NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2", "Nse6iqzBZsBtL5c46xaHhAhAqVDv3zQQ" ]</span><br></pre></td></tr></table></figure>
+<h4 id="Backup-account" class="article-heading"><a href="#Backup-account" class="headerlink" title="Backup account"></a>Backup account<a class="article-anchor" href="#Backup-account" aria-hidden="true"></a></h4><p>For backup of account, generate a backup file, titled as account address, with .keystore file extension as and file as account</p>
+<ul>
+<li><strong>Command: backup &lt;address&gt; [path]</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+<tr>
+<td>[path]</td>
+<td>The target folder of backup files, defaults to be the current folder, optional</td>
+</tr>
+</tbody>
+</table>
+<p>Note: insert current password when backup the encrypted account, and use such password when importing the backup files to generate account. It is permitted but not recommended to backup an unencrypted account, because it is not safe.</p>
+<p>Return message</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">The path to the backup file is /nuls/bin/NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy.keystore</span><br></pre></td></tr></table></figure>
+<p>Example: backup of an account with password</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; backup NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">The path to the backup file is /nuls/bin/NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy.keystore</span><br></pre></td></tr></table></figure>
+<h4 id="Remove-account" class="article-heading"><a href="#Remove-account" class="headerlink" title="Remove account"></a>Remove account<a class="article-anchor" href="#Remove-account" aria-hidden="true"></a></h4><p>Remove local account according to account address; if the account is encrypted, insert password.</p>
+<ul>
+<li><strong>Command: remove &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Success</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; remove NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
+<h4 id="Set-account-password" class="article-heading"><a href="#Set-account-password" class="headerlink" title="Set account password"></a>Set account password<a class="article-anchor" href="#Set-account-password" aria-hidden="true"></a></h4><p>Set password for the unencrypted accounts based on account address. No password setting for the encrypted accounts.</p>
+<ul>
+<li><strong>Command: setpwd &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Success</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; setpwd Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">Please enter the new password(8-20 characters, the combination of letters and numbers).</span><br><span class="line">Enter your new password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
+<h4 id="Change-account-password" class="article-heading"><a href="#Change-account-password" class="headerlink" title="Change account password"></a>Change account password<a class="article-anchor" href="#Change-account-password" aria-hidden="true"></a></h4><p>Change password of the encrypted accounts based on account address. No password changing for the unencrypted accounts. Require original password when replacing it with a new one.</p>
+<ul>
+<li><strong>Command: resetpwd &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Success</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; resetpwd Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">Enter your old password:**********</span><br><span class="line">Please enter the new password(8-20 characters, the combination of letters and numbers).</span><br><span class="line">Enter your new password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
+<h4 id="Set-nickname" class="article-heading"><a href="#Set-nickname" class="headerlink" title="Set nickname"></a>Set nickname<a class="article-anchor" href="#Set-nickname" aria-hidden="true"></a></h4><p>Set a nickname for account. If the account is used to create nodes, the nickname will be displayed as node source.</p>
+<ul>
+<li><strong>Command：setalias &lt;address&gt; &lt;alias&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+<tr>
+<td>&lt;alias&gt;</td>
+<td>Nickname, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, transaction hash</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"0020f94f36aefd59f9cca9bff3c018fc287dc6c0bcd7fbeb047133cadb5747e7d98d"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; setalias Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT nuls_alias</span></span><br><span class="line">"0020f94f36aefd59f9cca9bff3c018fc287dc6c0bcd7fbeb047133cadb5747e7d98d"</span><br></pre></td></tr></table></figure>
+<h4 id="Imported-account-keystore" class="article-heading"><a href="#Imported-account-keystore" class="headerlink" title="Imported account keystore"></a>Imported account keystore<a class="article-anchor" href="#Imported-account-keystore" aria-hidden="true"></a></h4><p>Imported account keystore files, and create a local account. Receive failure to import if there is an existing local account.</p>
+<ul>
+<li><strong>Command: import keystore &lt;path&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;path&gt;</td>
+<td>Address of keystore files to be imported, required</td>
+</tr>
+</tbody>
+</table>
+<p>Note: when importing keystore files to create an account, if they are encrypted, the password for backup of keystore files is required.</p>
+<p>Return message, imported account address</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; importkeystore /home/charlie/bin/NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy.keystore</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span><br></pre></td></tr></table></figure>
+<h4 id="Imported-account’s-private-key" class="article-heading"><a href="#Imported-account’s-private-key" class="headerlink" title="Imported account’s private key"></a>Imported account’s private key<a class="article-anchor" href="#Imported-account’s-private-key" aria-hidden="true"></a></h4><p>Import account’s private key and create a local account. Receive failure to import if there is an existing local account.</p>
+<ul>
+<li><strong>Command：import &lt;privatekey&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;privatekey&gt;</td>
+<td>Account’s private key, required</td>
+</tr>
+</tbody>
+</table>
+<p>注意：Note: when importing such private key, set a new password. If the account does not need to be encrypted, users do not need to insert a new password.</p>
+<p>Return message, imported account address</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; import 00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span><br></pre></td></tr></table></figure>
+<h4 id="Imported-account’s-private-key-overwritten" class="article-heading"><a href="#Imported-account’s-private-key-overwritten" class="headerlink" title="Imported account’s private key (overwritten)"></a>Imported account’s private key (overwritten)<a class="article-anchor" href="#Imported-account’s-private-key-overwritten" aria-hidden="true"></a></h4><p>Import account’s private key and create a local account. Receive failure to realize overwritten import if there is an existing local account.</p>
+<ul>
+<li><strong>Command：import &lt;privatekey&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;privatekey&gt;</td>
+<td>Account’s private key, required</td>
+</tr>
+</tbody>
+</table>
+<p>Note: when importing account’s private key, set a new password. If the account does not need to be encrypted, users do not need to insert a new password.</p>
+<p>Overwritten import: if the account exists locally, the password before importing will be replaced with a new password after performing overwritten import; if the account is not encrypted after this import, the account will be unencrypted account (even though the account is encrypted before such import).</p>
+<p>Return message, imported account address</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; import 00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-account-information" class="article-heading"><a href="#Inquire-account-information" class="headerlink" title="Inquire account information"></a>Inquire account information<a class="article-anchor" href="#Inquire-account-information" aria-hidden="true"></a></h4><p>Inquire account information based on account address</p>
+<ul>
+<li><strong>Command：getaccount &lt;address&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td style="text-align:left">Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",//Account address</span><br><span class="line">  "alias" : null,//Nickname</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",//Public key</span><br><span class="line">  "priKey" : "",//Private key (unavailable if the account is encrypted)</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",//Private key after encryption (unavailable if the account is encrypted)</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",//Creation time</span><br><span class="line">  "encrypted" : true//Encrypted or not (set password or not)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getaccount NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">&#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",</span><br><span class="line">  "priKey" : "",</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",</span><br><span class="line">  "encrypted" : true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-list-of-accounts" class="article-heading"><a href="#Inquire-list-of-accounts" class="headerlink" title="Inquire list of accounts"></a>Inquire list of accounts<a class="article-anchor" href="#Inquire-list-of-accounts" aria-hidden="true"></a></h4><p>Inquire list of accounts as per paging parameter, and output all accounts in reverse sequence of creation time</p>
+<ul>
+<li><strong>Command：getaccounts &lt;pageNumber&gt; &lt;pageSize&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>Page, to get the data on which page, required</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>Number of data displayed on each page, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, output accounts collection</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[ &#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",//Account address</span><br><span class="line">  "alias" : null,//Nickname</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",// Public key</span><br><span class="line">  "priKey" : "",//Private key (unavailable if the account is encrypted)</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",// Private key after encryption (unavailable if the account is encrypted)</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",//Creation time</span><br><span class="line">  "encrypted" : true//Encrypted or not (set password or not)</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "address" : "NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "035f063012385032d19082a302ba774af4e02abe32e43120d3bfe82ec72dcdeafa",</span><br><span class="line">  "priKey" : "3ba27d6a53fb52f52443d8d895155ca113c632fd8a1bd6e7846933d1fb378ecb",</span><br><span class="line">  "encryptedPriKey" : "",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:02:23",</span><br><span class="line">  "encrypted" : false</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<p>Example: to get list of accounts, showing page 1, 2 items per page</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getaccounts 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",</span><br><span class="line">  "priKey" : "",</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",</span><br><span class="line">  "encrypted" : true</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "address" : "NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "035f063012385032d19082a302ba774af4e02abe32e43120d3bfe82ec72dcdeafa",</span><br><span class="line">  "priKey" : "3ba27d6a53fb52f52443d8d895155ca113c632fd8a1bd6e7846933d1fb378ecb",</span><br><span class="line">  "encryptedPriKey" : "",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:02:23",</span><br><span class="line">  "encrypted" : false</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-account’s-private-key" class="article-heading"><a href="#Inquire-account’s-private-key" class="headerlink" title="Inquire account’s private key"></a>Inquire account’s private key<a class="article-anchor" href="#Inquire-account’s-private-key" aria-hidden="true"></a></h4><p>Inquire account’s private key based on account address; if the account is encrypted, insert password.</p>
+<ul>
+<li><strong>Command：getprikey &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, imported account address</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getprikey NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655"</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-account-balance" class="article-heading"><a href="#Inquire-account-balance" class="headerlink" title="Inquire account balance"></a>Inquire account balance<a class="article-anchor" href="#Inquire-account-balance" aria-hidden="true"></a></h4><p>Inquire account balance based on account address</p>
+<ul>
+<li><strong>Command：getbalance &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, imported account address</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "balance" : "9999998.99",//Balance</span><br><span class="line">  "locked" : "0",//Locked balance</span><br><span class="line">  "usable" : "9999998.99"//Available balance</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getbalance Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">&#123;</span><br><span class="line">  "balance" : "9999998.99",</span><br><span class="line">  "locked" : "0",</span><br><span class="line">  "usable" : "9999998.99"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Transfer" class="article-heading"><a href="#Transfer" class="headerlink" title="Transfer"></a>Transfer<a class="article-anchor" href="#Transfer" aria-hidden="true"></a></h4><p>Transfer NULS into another account address based on account address. If such account has password, insert password; if it has no password, transfer out directly.</p>
+<ul>
+<li><strong>Command: transfer &lt;address&gt; &lt;toAddress&gt; &lt;amount&gt; [remark] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>transferring address, required</td>
+</tr>
+<tr>
+<td>&lt;toAddress&gt;</td>
+<td>receiving address, required</td>
+</tr>
+<tr>
+<td>&lt;amount&gt;</td>
+<td>transferred amount, round to 8 decimals in total (in NULS), required</td>
+</tr>
+<tr>
+<td>[remark]</td>
+<td>Remarks, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, transfer transaction hash</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; transfer Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 100 Transfer</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596"</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-transaction-details" class="article-heading"><a href="#Inquire-transaction-details" class="headerlink" title="Inquire transaction details"></a>Inquire transaction details<a class="article-anchor" href="#Inquire-transaction-details" aria-hidden="true"></a></h4><p>Inquire transaction details as per transaction hash</p>
+<ul>
+<li><strong>Command：gettx &lt;hash&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;hash&gt;</td>
+<td>Transaction hash, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, transaction details</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",//Transaction hash</span><br><span class="line">  "type" : "transfer",//Transaction type (transfer transaction as an example)</span><br><span class="line">  "time" : "2018-07-16 11:21:46",//Transaction time</span><br><span class="line">  "blockHeight" : 26269,//Block height of package transaction</span><br><span class="line">  "fee" : "0.001",//Transaction service charge</span><br><span class="line">  "value" : "100",//(Transfer) transaction amount</span><br><span class="line">  "remark" : "Transfer",//remarks</span><br><span class="line">  "scriptSig" : "2103f68aeb83f3a4fdf9b49259a6e8eae97cf73c7a0a1c52da8a1f9c09312a6d3c530046304402202932ea77976a603b832861c64f868a34e9ad59b728d3a8eeba27269f05b4267c0220217a6e1b97fb3f65e6711434e17e399f43e168f3699edb2aba8618bdd3f410e1",//Signature</span><br><span class="line">  "status" : "confirm",//Status of transaction confirmation (confirmed or unconfirmed)</span><br><span class="line">  "confirmCount" : 46,//Times of confirmation</span><br><span class="line">  "size" : 254,//Size of transaction</span><br><span class="line">  "inputs" : [ &#123;//Input of transaction</span><br><span class="line">    "fromHash" : "002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e",</span><br><span class="line">    "fromIndex" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">    "value" : "9979998.98",</span><br><span class="line">    "lockTime" : 0</span><br><span class="line">  &#125; ],</span><br><span class="line">  "outputs" : [ &#123;//Output of transaction</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">    "index" : 0,</span><br><span class="line">    "address" : "NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T"// Target address of transaction output (means to transfer 100 to the target address)</span><br><span class="line">    "value" : "100",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",//Transaction hash</span><br><span class="line">    "index" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",//Target address of transaction output (means to give users changes)</span><br><span class="line">    "value" : "9979898.979",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example, to inquire transfer transaction</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; gettx 00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">  "type" : "transfer",</span><br><span class="line">  "time" : "2018-07-16 11:21:46",</span><br><span class="line">  "blockHeight" : 26269,</span><br><span class="line">  "fee" : "0.001",</span><br><span class="line">  "value" : "100",</span><br><span class="line">  "remark" : "Transfer",</span><br><span class="line">  "scriptSig" : "2103f68aeb83f3a4fdf9b49259a6e8eae97cf73c7a0a1c52da8a1f9c09312a6d3c530046304402202932ea77976a603b832861c64f868a34e9ad59b728d3a8eeba27269f05b4267c0220217a6e1b97fb3f65e6711434e17e399f43e168f3699edb2aba8618bdd3f410e1",</span><br><span class="line">  "status" : "confirm",</span><br><span class="line">  "confirmCount" : 46,</span><br><span class="line">  "size" : 254,</span><br><span class="line">  "inputs" : [ &#123;</span><br><span class="line">    "fromHash" : "002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e",</span><br><span class="line">    "fromIndex" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">    "value" : "9979998.98",</span><br><span class="line">    "lockTime" : 0</span><br><span class="line">  &#125; ],</span><br><span class="line">  "outputs" : [ &#123;</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">    "index" : 0,</span><br><span class="line">    "address" : "NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T",</span><br><span class="line">    "value" : "100",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">    "index" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">    "value" : "9979898.979",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-list-of-transactions" class="article-heading"><a href="#Inquire-list-of-transactions" class="headerlink" title="Inquire list of transactions"></a>Inquire list of transactions<a class="article-anchor" href="#Inquire-list-of-transactions" aria-hidden="true"></a></h4><p>Inquire list of transactions in this account based on account address</p>
+<ul>
+<li><strong>Command：gettxlist &lt;address&gt; &lt;pageNumber&gt; &lt;pageSize&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>Page, to get the data on which page, required</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>Number of data displayed on each page, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, transaction details</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[ &#123;</span><br><span class="line">  "txHash" : "0020153f76bec3433676a96ef343d7e432b7de16b3175a9c5f4579338f604989996e",//Transaction hash</span><br><span class="line">  "blockHeight" : 26473,//Block height of transaction</span><br><span class="line">  "time" : "2018-07-16 11:55:43",//Transaction time</span><br><span class="line">  "txType" : "transfer",//Transaction type</span><br><span class="line">  "status" : 1,//Status of confirmation</span><br><span class="line">  "info" : "+100"//Message</span><br><span class="line">&#125;,&#123;</span><br><span class="line">  "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">  "blockHeight" : 26269,</span><br><span class="line">  "time" : "2018-07-16 11:21:46",</span><br><span class="line">  "txType" : "transfer",</span><br><span class="line">  "status" : 1,</span><br><span class="line">  "info" : "+100"</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; gettxlist NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 1 10</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "txHash" : "0020153f76bec3433676a96ef343d7e432b7de16b3175a9c5f4579338f604989996e",</span><br><span class="line">  "blockHeight" : 26473,</span><br><span class="line">  "time" : "2018-07-16 11:55:43",</span><br><span class="line">  "txType" : "transfer",</span><br><span class="line">  "status" : 1,</span><br><span class="line">  "info" : "+100"</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">  "blockHeight" : 26269,</span><br><span class="line">  "time" : "2018-07-16 11:21:46",</span><br><span class="line">  "txType" : "transfer",</span><br><span class="line">  "status" : 1,</span><br><span class="line">  "info" : "+100"</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="Create-node" class="article-heading"><a href="#Create-node" class="headerlink" title="Create node"></a>Create node<a class="article-anchor" href="#Create-node" aria-hidden="true"></a></h4><p>Create node based on account address. Need an account package address when creating node (package address shall have no password), and deposit of 2 at least.</p>
+<ul>
+<li><strong>Command：createagent &lt;agentAddress&gt; &lt;packingAddress&gt; &lt;commissionRate&gt; &lt;deposit&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;agentAddress&gt;</td>
+<td>Account address of nodes created, required</td>
+</tr>
+<tr>
+<td>&lt;packingAddress&gt;</td>
+<td>Node account package address, required (note: the account shall have no password, otherwise the node cannot package)</td>
+</tr>
+<tr>
+<td>&lt;commissionRate&gt;</td>
+<td>Agent commission proportion, with a range of 10~100, required</td>
+</tr>
+<tr>
+<td>&lt;deposit&gt;</td>
+<td>Node creating deposit of 2 at least, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, agent hash of return node</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e"</span></span><br></pre></td></tr></table></figure>
+<p>Example: to create a node, commission proportion of 10%, and deposit of 20000 NULS</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; createagent Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT NsdvAnqc8oEiNiGgcp6pEusfiRFZi4vt 10 20000</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e"</span><br></pre></td></tr></table></figure>
+<h4 id="Include-consensus-agency-node" class="article-heading"><a href="#Include-consensus-agency-node" class="headerlink" title="Include consensus (agency node)"></a>Include consensus (agency node)<a class="article-anchor" href="#Include-consensus-agency-node" aria-hidden="true"></a></h4><p>Include consensus of 2000NULS at least based on account address and node agent hash</p>
+<ul>
+<li><strong>Command：deposit &lt;address&gt; &lt;agentHash&gt; &lt;deposit&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+<tr>
+<td>&lt;agentHash&gt;</td>
+<td>Node agent hash, required</td>
+</tr>
+<tr>
+<td>&lt;deposit&gt;</td>
+<td>Include consensus deposit, not less than 2000NULS, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, transaction hash for including consensus; to exit the consensus, require such hash.</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"0020d349b7ad322ff958e3abfa799d9ac76341afa6e1fb4d3857353a5adc74ba3fd0"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; deposit NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e 5000</span></span><br><span class="line">"0020d349b7ad322ff958e3abfa799d9ac76341afa6e1fb4d3857353a5adc74ba3fd0"</span><br></pre></td></tr></table></figure>
+<h4 id="Exit-the-consensus-agency" class="article-heading"><a href="#Exit-the-consensus-agency" class="headerlink" title="Exit the consensus (agency)"></a>Exit the consensus (agency)<a class="article-anchor" href="#Exit-the-consensus-agency" aria-hidden="true"></a></h4><p>Exit the consensus (agency) based on account address and transaction hash for including consensus. When an account agents several nodes, each agent transaction is independent, so users shall exit the corresponding agent rather than all agents as per the transaction hash of an agent.</p>
+<ul>
+<li><strong>Command: withdraw &lt;address&gt; &lt;txHash&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+<tr>
+<td>&lt;txHash&gt;</td>
+<td>Transaction hash upon agency, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, transaction hash upon exiting the consensus</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"00201d70ac37b53d41c0e813ad245fc42e1d3a5d174d9148fbbbaed3c18d4d67bdbf"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; withdraw NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 0020d349b7ad322ff958e3abfa799d9ac76341afa6e1fb4d3857353a5adc74ba3fd0</span></span><br><span class="line">"00201d70ac37b53d41c0e813ad245fc42e1d3a5d174d9148fbbbaed3c18d4d67bdbf"</span><br></pre></td></tr></table></figure>
+<h4 id="Stop-node" class="article-heading"><a href="#Stop-node" class="headerlink" title="Stop node"></a>Stop node<a class="article-anchor" href="#Stop-node" aria-hidden="true"></a></h4><p>Stop node, all NULS agented to node will be returned, and the deposit in account of node creator will be locked for 72 hours.</p>
+<ul>
+<li><strong>Command：stopagent &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message, transaction hash of stop node</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"0020f15eecd7c85be76521ed6af4d58a3810f7df58e536481cff4a96af6d4fddec5f"</span></span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; stopagent Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"0020f15eecd7c85be76521ed6af4d58a3810f7df58e536481cff4a96af6d4fddec5f"</span><br></pre></td></tr></table></figure>
+<h4 id="Get-node-details" class="article-heading"><a href="#Get-node-details" class="headerlink" title="Get node details"></a>Get node details<a class="article-anchor" href="#Get-node-details" aria-hidden="true"></a></h4><p>Get node details as per agent hash of node</p>
+<ul>
+<li><strong>Command: getagent &lt;agentHash&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;agentHash&gt;</td>
+<td>Node agent hash, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"agentHash"</span> : <span class="string">"0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6"</span>,</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//Account address for creating node</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",//Node package (block) address</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//Bonus address (default to be address for creating node)</span><br><span class="line">  "deposit" : "20000",//Deposit for creating node</span><br><span class="line">  "commissionRate" : 60.0,//Agent commission proportion</span><br><span class="line">  "agentName" : null,//Node name (source)</span><br><span class="line">  "agentId" : "35024DE6",//Node ID</span><br><span class="line">  "time" : "2018-07-16 16:33:38",//Time for creating node</span><br><span class="line">  "blockHeight" : 28141,// Block height of node creating transaction</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",// Status</span><br><span class="line">  "creditVal" : 0.05,//Credit value</span><br><span class="line">  "totalDeposit" : "208000",//Current total agency amount of node</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5//Quantity of participants</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getagent 0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6</span></span><br><span class="line">&#123;</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 60.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "35024DE6",</span><br><span class="line">  "time" : "2018-07-16 16:33:38",</span><br><span class="line">  "blockHeight" : 28141,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : 0.05,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Get-list-of-nodes" class="article-heading"><a href="#Get-list-of-nodes" class="headerlink" title="Get list of nodes"></a>Get list of nodes<a class="article-anchor" href="#Get-list-of-nodes" aria-hidden="true"></a></h4><p>As per list of consensus nodes</p>
+<ul>
+<li><strong>Command：getagents &lt;pageNumber&gt; &lt;pageSize&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>Page, to get the data on which page, required</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>Number of data displayed on each page, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">  <span class="attr">"agentHash"</span> : <span class="string">"0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6"</span>,</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//Account address for creating node</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",//Node package (block) address</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//Bonus address (default to be address for creating node)</span><br><span class="line">  "deposit" : "20000",//Deposit for creating node</span><br><span class="line">  "commissionRate" : 60.0,//Agent commission proportion</span><br><span class="line">  "agentName" : null,//Node name (source)</span><br><span class="line">  "agentId" : "35024DE6",//Node ID</span><br><span class="line">  "time" : "2018-07-16 16:33:38",//Time for creating node</span><br><span class="line">  "blockHeight" : 28141,//Block height of node creating transaction</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",//Status</span><br><span class="line">  "creditVal" : 0.05,//Credit value</span><br><span class="line">  "totalDeposit" : "208000",//Current total agent amount of node</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5//Quantity of participants</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getagents 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 60.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "35024DE6",</span><br><span class="line">  "time" : "2018-07-16 16:33:38",</span><br><span class="line">  "blockHeight" : 28141,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : 0.18,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "agentHash" : "00202ef1977c1eea6fde8d1bf8d75b6f5650d62933e5fccc2d8d08023dea5ce291d8",</span><br><span class="line">  "agentAddress" : "NsdtEdrY4QWGa8VUGW83hXbZsbKhbrTN",</span><br><span class="line">  "packingAddress" : "NsdwhLzjCLJp9V7zULU9KBerqkW971K7",</span><br><span class="line">  "rewardAddress" : "NsdtEdrY4QWGa8VUGW83hXbZsbKhbrTN",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 10.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "5CE291D8",</span><br><span class="line">  "time" : "2018-07-16 16:31:12",</span><br><span class="line">  "blockHeight" : 28126,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : -0.16,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "00202ef1977c1eea6fde8d1bf8d75b6f5650d62933e5fccc2d8d08023dea5ce291d8",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="Get-total-information-of-network-consensuses" class="article-heading"><a href="#Get-total-information-of-network-consensuses" class="headerlink" title="Get total information of network consensuses"></a>Get total information of network consensuses<a class="article-anchor" href="#Get-total-information-of-network-consensuses" aria-hidden="true"></a></h4><p>Inquire total information of network consensuses</p>
+<ul>
+<li><strong>Command：getconsensus </strong></li>
+</ul>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "agentCount" : 6,//Quantity of nodes</span><br><span class="line">  "totalDeposit" : "1758000",//Total quantity of agents</span><br><span class="line">  "rewardOfDay" : "0",//Bonus</span><br><span class="line">  "consensusAccountNumber" : 6,//Quantity of consensus accounts</span><br><span class="line">  "packingAgentCount" : 6//Quantity of package addresses</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getconsensus</span></span><br><span class="line">&#123;</span><br><span class="line">  "agentCount" : 6,</span><br><span class="line">  "totalDeposit" : "1758000",</span><br><span class="line">  "rewardOfDay" : "0",</span><br><span class="line">  "consensusAccountNumber" : 6,</span><br><span class="line">  "packingAgentCount" : 6</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Get-general-of-agents-in-single-account" class="article-heading"><a href="#Get-general-of-agents-in-single-account" class="headerlink" title="Get general of agents in single account"></a>Get general of agents in single account<a class="article-anchor" href="#Get-general-of-agents-in-single-account" aria-hidden="true"></a></h4><p>Get the general of all agents (consensuses) information of the account based on account address</p>
+<ul>
+<li><strong>Command：getdepositedinfo &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "agentCount" : 1,//Quantity of nodes created</span><br><span class="line">  "totalDeposit" : "1600000",// Quantity of total agents</span><br><span class="line">  "joinAgentCount" : 6,//Quantity of nodes in agency</span><br><span class="line">  "usableBalance" : "8048998.869",//Available balance</span><br><span class="line">  "reward" : "219.65910271",//Total bonuses gained</span><br><span class="line">  "rewardOfDay" : "219.65910271",//Bonuses gained a day</span><br><span class="line">  "agentHash" : "00202794351e662e53f16fe04dd9217731463c3b24a6ee6cf80c9ba2d3e5e09eb7fd"//Node hash</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getdepositedinfo Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">&#123;</span><br><span class="line">  "agentCount" : 1,</span><br><span class="line">  "totalDeposit" : "1600000",</span><br><span class="line">  "joinAgentCount" : 6,</span><br><span class="line">  "usableBalance" : "8048998.869",</span><br><span class="line">  "reward" : "219.65910271",</span><br><span class="line">  "rewardOfDay" : "219.65910271",</span><br><span class="line">  "agentHash" : "00202794351e662e53f16fe04dd9217731463c3b24a6ee6cf80c9ba2d3e5e09eb7fd"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Get-list-of-agent-information-of-single-account" class="article-heading"><a href="#Get-list-of-agent-information-of-single-account" class="headerlink" title="Get list of agent information of single account"></a>Get list of agent information of single account<a class="article-anchor" href="#Get-list-of-agent-information-of-single-account" aria-hidden="true"></a></h4><p>Get list of agent information of the account as per address (return consensus information list), and review the list of agency information of the account under a node when following the agent hash.</p>
+<ul>
+<li><strong>Command：getdepositeds &lt;address&gt; &lt;pageNumber&gt; &lt;pageSize&gt; [agentHash] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>Page, to get the data on which page, required</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>Number of data displayed on each page, required</td>
+</tr>
+<tr>
+<td>[agentHash]</td>
+<td>Node hash, optional</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">  "deposit" : "2000",//Agency amount</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "address" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",//Address of agent</span><br><span class="line">  "time" : "2018-07-16 16:38:25",//Time</span><br><span class="line">  "txHash" : "0020c93d039b57361a141470b3630c3cf6fa304b1acaeabb7a26a772f434d24de221",//Agency transaction hash</span><br><span class="line">  "blockHeight" : 28148,//Block height of transaction</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",//Node status</span><br><span class="line">  "agentName" : "35024DE6",//Node name</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh"//Node address</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getdepositeds Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "deposit" : "2000",</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "address" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "time" : "2018-07-16 16:38:25",</span><br><span class="line">  "txHash" : "0020c93d039b57361a141470b3630c3cf6fa304b1acaeabb7a26a772f434d24de221",</span><br><span class="line">  "blockHeight" : 28148,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "agentName" : "35024DE6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh"</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "deposit" : "2000",</span><br><span class="line">  "agentHash" : "00202794351e662e53f16fe04dd9217731463c3b24a6ee6cf80c9ba2d3e5e09eb7fd",</span><br><span class="line">  "address" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "time" : "2018-07-16 16:38:43",</span><br><span class="line">  "txHash" : "00205278ce2eeaf9da7acc13ce81293a01a3f44a1de09e4e0b3ec078884a65700234",</span><br><span class="line">  "blockHeight" : 28149,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "agentName" : "E09EB7FD",</span><br><span class="line">  "agentAddress" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT"</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="Get-list-of-agency-nodes-of-single-account" class="article-heading"><a href="#Get-list-of-agency-nodes-of-single-account" class="headerlink" title="Get list of agency nodes of single account"></a>Get list of agency nodes of single account<a class="article-anchor" href="#Get-list-of-agency-nodes-of-single-account" aria-hidden="true"></a></h4><p>Inquire list of agency nodes asper address (return list of node information)</p>
+<ul>
+<li><strong>Command：getdepositedagents &lt;address&gt; &lt;pageNumber&gt; &lt;pageSize&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>Account address, required</td>
+</tr>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>Page, to get the data on which page, required</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>Number of data displayed on each page, required</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[ &#123;</span><br><span class="line">  "agentHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",//Node hash</span><br><span class="line">  "agentAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",//Account address for creating node</span><br><span class="line">  "packingAddress" : "Nse77VDHtiQ6WnkEhgCA7TbfNkoH9iyr",//Node package (block) address</span><br><span class="line">  "rewardAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",//Bonus address (default to be address for creating node)</span><br><span class="line">  "deposit" : "20000",//Deposit for creating node</span><br><span class="line">  "commissionRate" : 40.0,//Agent commission proportion</span><br><span class="line">  "agentName" : null,//Node name (source)</span><br><span class="line">  "agentId" : "0198ACAF",// Node ID</span><br><span class="line">  "time" : "2018-07-16 16:32:52",//Time for creating node</span><br><span class="line">  "blockHeight" : 28136,//Block height of node creating transaction</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",//Status</span><br><span class="line">  "creditVal" : -0.91,//Credit value</span><br><span class="line">  "totalDeposit" : "204000",//Current total agent amount of node</span><br><span class="line">  "txHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",</span><br><span class="line">  "memberCount" : 3// Quantity of participants</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>Example, to get page 1, display 2 items per page</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getdepositedagents Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "agentHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",</span><br><span class="line">  "agentAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "packingAddress" : "Nse77VDHtiQ6WnkEhgCA7TbfNkoH9iyr",</span><br><span class="line">  "rewardAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 40.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "0198ACAF",</span><br><span class="line">  "time" : "2018-07-16 16:32:52",</span><br><span class="line">  "blockHeight" : 28136,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : -0.91,</span><br><span class="line">  "totalDeposit" : "204000",</span><br><span class="line">  "txHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",</span><br><span class="line">  "memberCount" : 3</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 60.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "35024DE6",</span><br><span class="line">  "time" : "2018-07-16 16:33:38",</span><br><span class="line">  "blockHeight" : 28141,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : 0.91,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="Get-the-latest-block-head-information" class="article-heading"><a href="#Get-the-latest-block-head-information" class="headerlink" title="Get the latest block head information"></a>Get the latest block head information<a class="article-anchor" href="#Get-the-latest-block-head-information" aria-hidden="true"></a></h4><p>Get the latest block head information</p>
+<ul>
+<li><strong>Command：getbestblockheader</strong></li>
+</ul>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "00206c4ae1d90fdfd875ee3bf84e72615db8bc628f015db089f8a6304ed46a47db5e",//Block hash</span><br><span class="line">  "preHash" : "00207ec8c85a6844899806f55cd9223efa091b548e5cc093ee7833f1c0208254957d",//Former block hash</span><br><span class="line">  "merkleHash" : "002019aff9431c5b409df7af48a64a50e4e9a0af24cc309d6eefa84deada2a438877",//Merkle hash</span><br><span class="line">  "time" : "2018-07-17 10:25:40",//Block generation time</span><br><span class="line">  "height" : 33950,//Block height</span><br><span class="line">  "txCount" : 1,//Quantity of block package transactions</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",//Package address</span><br><span class="line">  "roundIndex" : 668413,//Rounds of consensuses </span><br><span class="line">  "consensusMemberCount" : 1,//Quantity of participants in consensus</span><br><span class="line">  "roundStartTime" : "2018-07-17 10:25:30",//Start time of current round</span><br><span class="line">  "packingIndexOfRound" : 1,//Rank of package and block in current round</span><br><span class="line">  "reward" : "0",//Consensus bonus </span><br><span class="line">  "fee" : "0",//Package service charge of block</span><br><span class="line">  "confirmCount" : 0,//Times of confirmation</span><br><span class="line">  "size" : 204,//Size of block</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100ece231eec6765c3d3cd7a4b74ef227eea05c3511e04ea46bc1b518a51a624e48022022208161b3064f261233bfa0c00308bf5b56421401ba7dd02232bac5077935b9"// Signature</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getbestblockheader</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "00206c4ae1d90fdfd875ee3bf84e72615db8bc628f015db089f8a6304ed46a47db5e",</span><br><span class="line">  "preHash" : "00207ec8c85a6844899806f55cd9223efa091b548e5cc093ee7833f1c0208254957d",</span><br><span class="line">  "merkleHash" : "002019aff9431c5b409df7af48a64a50e4e9a0af24cc309d6eefa84deada2a438877",</span><br><span class="line">  "time" : "2018-07-17 10:25:40",</span><br><span class="line">  "height" : 33950,</span><br><span class="line">  "txCount" : 1,</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">  "roundIndex" : 668413,</span><br><span class="line">  "consensusMemberCount" : 1,</span><br><span class="line">  "roundStartTime" : "2018-07-17 10:25:30",</span><br><span class="line">  "packingIndexOfRound" : 1,</span><br><span class="line">  "reward" : "0",</span><br><span class="line">  "fee" : "0",</span><br><span class="line">  "confirmCount" : 0,</span><br><span class="line">  "size" : 204,</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100ece231eec6765c3d3cd7a4b74ef227eea05c3511e04ea46bc1b518a51a624e48022022208161b3064f261233bfa0c00308bf5b56421401ba7dd02232bac5077935b9"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-block-information" class="article-heading"><a href="#Inquire-block-information" class="headerlink" title="Inquire block information"></a>Inquire block information<a class="article-anchor" href="#Inquire-block-information" aria-hidden="true"></a></h4><p>Inquire block head information as per block height or block hash. Do and only choose one parameter as inquiry condition.</p>
+<ul>
+<li><strong>Command：getblock &lt;hash&gt; | &lt;height&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;hash&gt;</td>
+<td>Block hash</td>
+</tr>
+<tr>
+<td>&lt;height&gt;</td>
+<td>Height of block</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",//Block hash</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",//Former block hash</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",//Merkle hash</span><br><span class="line">  "time" : "2018-07-16 16:29:30",//Block generation time</span><br><span class="line">  "height" : 28115,//Block height</span><br><span class="line">  "txCount" : 2,//Quantity of block package transactions</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",//Package address</span><br><span class="line">  "roundIndex" : 662578,//Rounds of consensuses </span><br><span class="line">  "consensusMemberCount" : 1,//Quantity of participants in consensus</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",//Start time of current round</span><br><span class="line">  "packingIndexOfRound" : 1,//Rank of package and block in current round</span><br><span class="line">  "reward" : "0.001",//Consensus bonus </span><br><span class="line">  "fee" : "0.001",//Package service charge of block</span><br><span class="line">  "confirmCount" : 6174,//Times of confirmation</span><br><span class="line">  "size" : 507,//Size of block</span><br><span class="line">  "txList" : [ &#123;//Transaction collection</span><br><span class="line">    "hash" : "0020648f1d25237ba3614237a52c2121e51608f3822ac57a0e67d6a53e84c867e841",//Transaction hash</span><br><span class="line">    "type" : "coinbase",//Transaction type</span><br><span class="line">    "time" : "2018-07-16 16:29:30",//Transaction time</span><br><span class="line">    "blockHeight" : 28115,//Block height of transaction</span><br><span class="line">    "fee" : "0",//Transaction service charge</span><br><span class="line">    "value" : null,</span><br><span class="line">    "remark" : null,</span><br><span class="line">    "scriptSig" : null,</span><br><span class="line">    "status" : "confirm",</span><br><span class="line">    "confirmCount" : 6174,</span><br><span class="line">    "size" : 54,</span><br><span class="line">    "inputs" : [ ],//Transaction input</span><br><span class="line">    "outputs" : [ //Transaction output</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"address"</span> : <span class="string">"NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw"</span>,</span><br><span class="line">          <span class="attr">"value"</span> : <span class="number">100000</span>,</span><br><span class="line">          <span class="attr">"lockTime"</span> : <span class="number">29115</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;],</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"//Signature</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example: to get block as per height</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getblock 28115</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",</span><br><span class="line">  "time" : "2018-07-16 16:29:30",</span><br><span class="line">  "height" : 28115,</span><br><span class="line">  "txCount" : 2,</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">  "roundIndex" : 662578,</span><br><span class="line">  "consensusMemberCount" : 1,</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",</span><br><span class="line">  "packingIndexOfRound" : 1,</span><br><span class="line">  "reward" : "0.001",</span><br><span class="line">  "fee" : "0.001",</span><br><span class="line">  "confirmCount" : 6174,</span><br><span class="line">  "size" : 507,</span><br><span class="line">  "txList" : [ &#123;</span><br><span class="line">    "hash" : "0020648f1d25237ba3614237a52c2121e51608f3822ac57a0e67d6a53e84c867e841",</span><br><span class="line">    "type" : "coinbase",</span><br><span class="line">    "time" : "2018-07-16 16:29:30",</span><br><span class="line">    "blockHeight" : 28115,</span><br><span class="line">    "fee" : "0",</span><br><span class="line">    "value" : null,</span><br><span class="line">    "remark" : null,</span><br><span class="line">    "scriptSig" : null,</span><br><span class="line">    "status" : "confirm",</span><br><span class="line">    "confirmCount" : 6174,</span><br><span class="line">    "size" : 54,</span><br><span class="line">    "inputs" : [ ],</span><br><span class="line">    "outputs" : [ &#123;</span><br><span class="line">      "address" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">      "value" : 100000,</span><br><span class="line">      "lockTime" : 29115</span><br><span class="line">    &#125; ]</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    "hash" : "0020217945b6804801e0860913d24bf1ca500f9b77518a2be190c1afe63334b3ee2b",</span><br><span class="line">    "type" : "transfer",</span><br><span class="line">    "time" : "2018-07-16 16:29:27",</span><br><span class="line">    "blockHeight" : 28115,</span><br><span class="line">    "fee" : "0.001",</span><br><span class="line">    "value" : null,</span><br><span class="line">    "remark" : null,</span><br><span class="line">    "scriptSig" : "2103f68aeb83f3a4fdf9b49259a6e8eae97cf73c7a0a1c52da8a1f9c09312a6d3c53004730450221008a78bd954ea2f0f5be72217f0858faaf408b2e70f8d4d5aebc9ead9eb6e3aa22022015305c46eab978b08fbc23608c064306ea150be6552bb51cc83badef68217663",</span><br><span class="line">    "status" : "confirm",</span><br><span class="line">    "confirmCount" : 6174,</span><br><span class="line">    "size" : 249,</span><br><span class="line">    "inputs" : [ &#123;</span><br><span class="line">      "fromHash" : "0020f98434eb71e62bfda9a2708689c2f44b58f5b22299490f5956c35d54f2d48459",</span><br><span class="line">      "fromIndex" : 1,</span><br><span class="line">      "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">      "value" : 972899896100000</span><br><span class="line">    &#125; ],</span><br><span class="line">    "outputs" : [ &#123;</span><br><span class="line">      "address" : "NsdxeBuwQBStXHQ6mcaHyDpnTKijD5ne",</span><br><span class="line">      "value" : 3000000000000,</span><br><span class="line">      "lockTime" : 0</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">      "value" : 969899896000000,</span><br><span class="line">      "lockTime" : 0</span><br><span class="line">    &#125; ]</span><br><span class="line">  &#125; ],</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-block-head-information" class="article-heading"><a href="#Inquire-block-head-information" class="headerlink" title="Inquire block head information"></a>Inquire block head information<a class="article-anchor" href="#Inquire-block-head-information" aria-hidden="true"></a></h4><p>Inquire block head information as per block height or block hash. Do and only choose one parameter as inquiry condition.</p>
+<ul>
+<li><strong>Command：getblockheader &lt;hash&gt; | &lt;height&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;hash&gt;</td>
+<td>Block hash</td>
+</tr>
+<tr>
+<td>&lt;height&gt;</td>
+<td>Block height</td>
+</tr>
+</tbody>
+</table>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",//Block hash</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",//Former block hash</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",//Merkle hash</span><br><span class="line">  "time" : "2018-07-16 16:29:30",//Block generation time</span><br><span class="line">  "height" : 28115,//Block height</span><br><span class="line">  "txCount" : 2,//Quantity of block package transactions</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",//Package address</span><br><span class="line">  "roundIndex" : 662578,//Rounds of consensuses</span><br><span class="line">  "consensusMemberCount" : 1,//Quantity of participants in consensus</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",//Start time of current round</span><br><span class="line">  "packingIndexOfRound" : 1,//Rank of package and block in current round</span><br><span class="line">  "reward" : "0.001",//Consensus bonus </span><br><span class="line">  "fee" : "0.001",//Package service charge of block</span><br><span class="line">  "confirmCount" : 6174,//Times of confirmation</span><br><span class="line">  "size" : 507,//Size of block</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"//Signature</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example: to get block as per height</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getblockheader 28115</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",</span><br><span class="line">  "time" : "2018-07-16 16:29:30",</span><br><span class="line">  "height" : 28115,</span><br><span class="line">  "txCount" : 2,</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">  "roundIndex" : 662578,</span><br><span class="line">  "consensusMemberCount" : 1,</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",</span><br><span class="line">  "packingIndexOfRound" : 1,</span><br><span class="line">  "reward" : "0.001",</span><br><span class="line">  "fee" : "0.001",</span><br><span class="line">  "confirmCount" : 6280,</span><br><span class="line">  "size" : 204,</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-network-information" class="article-heading"><a href="#Inquire-network-information" class="headerlink" title="Inquire network information"></a>Inquire network information<a class="article-anchor" href="#Inquire-network-information" aria-hidden="true"></a></h4><p>Inquire network basic information</p>
+<ul>
+<li><strong>Command：getnetinfo </strong></li>
+</ul>
+<p>Return message</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "localBestHeight" : 35317,//Height of local latest block</span><br><span class="line">  "netBestHeight" : 35317,//Height of latest block online</span><br><span class="line">  "timeOffset" : "0ms",//Offset of network time</span><br><span class="line">  "inCount" : 0,//Quantity of passive connecting nodes</span><br><span class="line">  "outCount" : 1//Quantity of active connecting nodes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getnetinfo</span></span><br><span class="line">&#123;</span><br><span class="line">  "localBestHeight" : 35317,</span><br><span class="line">  "netBestHeight" : 35317,</span><br><span class="line">  "timeOffset" : "0ms",</span><br><span class="line">  "inCount" : 0,</span><br><span class="line">  "outCount" : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-network-node-IP" class="article-heading"><a href="#Inquire-network-node-IP" class="headerlink" title="Inquire network node IP"></a>Inquire network node IP<a class="article-anchor" href="#Inquire-network-node-IP" aria-hidden="true"></a></h4><p>Inquire network node IP</p>
+<ul>
+<li><strong>Command: getnetnodes </strong></li>
+</ul>
+<p>Return message</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[ <span class="string">"192.168.1.223"</span> ]</span><br></pre></td></tr></table></figure>
+<p>Example: get block as per height</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getnetnodes</span></span><br><span class="line">[ "192.168.1.223" ]</span><br></pre></td></tr></table></figure>
+<h4 id="Inquire-current-version-information" class="article-heading"><a href="#Inquire-current-version-information" class="headerlink" title="Inquire current version information"></a>Inquire current version information<a class="article-anchor" href="#Inquire-current-version-information" aria-hidden="true"></a></h4><p>Inquire current version number</p>
+<ul>
+<li><strong>Command：version </strong></li>
+</ul>
+<p>Return message</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[ <span class="string">"192.168.1.223"</span> ]</span><br></pre></td></tr></table></figure>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; version</span></span><br><span class="line">&#123;</span><br><span class="line">  "myVersion" : "1.0.0",</span><br><span class="line">  "newestVersion" : "0.9.11",</span><br><span class="line">  "upgradable" : false,</span><br><span class="line">  "infromation" : " Address format modification, node finding logic optimizing, block downloading logic optimizing, property and stability optimizing"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Version-update" class="article-heading"><a href="#Version-update" class="headerlink" title="Version update"></a>Version update<a class="article-anchor" href="#Version-update" aria-hidden="true"></a></h4><p>Inquire current version number</p>
+<ul>
+<li><strong>Command：upgrade &lt;version&gt; </strong></li>
+</ul>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; version 1.0.0</span></span><br></pre></td></tr></table></figure>
+<h4 id="Exit-wallet-command-program" class="article-heading"><a href="#Exit-wallet-command-program" class="headerlink" title="Exit wallet command program"></a>Exit wallet command program<a class="article-anchor" href="#Exit-wallet-command-program" aria-hidden="true"></a></h4><p>Exiting from wallet command line program does not mean exiting from wallet node started.</p>
+<ul>
+<li><strong>Command：exit</strong></li>
+</ul>
+<p>Example</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.901Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="index.html" class="article-footer-prev" title="Guide"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="sdk.html" class="article-footer-next" title="SDK"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NULS-Wallet-Linux64-User-Manual"><span class="toc-text">NULS-Wallet-Linux64 User Manual</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version-Update-Records"><span class="toc-text">Version Update Records</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Preparation"><span class="toc-text">Preparation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Server-hardware"><span class="toc-text">Server hardware</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Version-of-system-and-core"><span class="toc-text">Version of system and core</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Start"><span class="toc-text">Start</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Download"><span class="toc-text">Download</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Install"><span class="toc-text">Install</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Operate"><span class="toc-text">Operate</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-wallet"><span class="toc-text">Use wallet</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Quick-start"><span class="toc-text">Quick-start</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conventions"><span class="toc-text">Conventions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wallet-command"><span class="toc-text">Wallet command</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Help-command"><span class="toc-text">Help command</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-account"><span class="toc-text">Create account</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Backup-account"><span class="toc-text">Backup account</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-account"><span class="toc-text">Remove account</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set-account-password"><span class="toc-text">Set account password</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-account-password"><span class="toc-text">Change account password</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set-nickname"><span class="toc-text">Set nickname</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Imported-account-keystore"><span class="toc-text">Imported account keystore</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Imported-account’s-private-key"><span class="toc-text">Imported account’s private key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Imported-account’s-private-key-overwritten"><span class="toc-text">Imported account’s private key (overwritten)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-account-information"><span class="toc-text">Inquire account information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-list-of-accounts"><span class="toc-text">Inquire list of accounts</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-account’s-private-key"><span class="toc-text">Inquire account’s private key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-account-balance"><span class="toc-text">Inquire account balance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Transfer"><span class="toc-text">Transfer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-transaction-details"><span class="toc-text">Inquire transaction details</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-list-of-transactions"><span class="toc-text">Inquire list of transactions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-node"><span class="toc-text">Create node</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Include-consensus-agency-node"><span class="toc-text">Include consensus (agency node)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exit-the-consensus-agency"><span class="toc-text">Exit the consensus (agency)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stop-node"><span class="toc-text">Stop node</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-node-details"><span class="toc-text">Get node details</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-list-of-nodes"><span class="toc-text">Get list of nodes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-total-information-of-network-consensuses"><span class="toc-text">Get total information of network consensuses</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-general-of-agents-in-single-account"><span class="toc-text">Get general of agents in single account</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-list-of-agent-information-of-single-account"><span class="toc-text">Get list of agent information of single account</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-list-of-agency-nodes-of-single-account"><span class="toc-text">Get list of agency nodes of single account</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Get-the-latest-block-head-information"><span class="toc-text">Get the latest block head information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-block-information"><span class="toc-text">Inquire block information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-block-head-information"><span class="toc-text">Inquire block head information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-network-information"><span class="toc-text">Inquire network information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-network-node-IP"><span class="toc-text">Inquire network node IP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inquire-current-version-information"><span class="toc-text">Inquire current version information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Version-update"><span class="toc-text">Version update</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exit-wallet-command-program"><span class="toc-text">Exit wallet command program</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Guide</a><a href="manual.html" class="sidebar-link current">Manual</a><a href="sdk.html" class="sidebar-link">SDK</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Guide</a><a href="manual.html" class="mobile-nav-link current">Manual</a><a href="sdk.html" class="mobile-nav-link">SDK</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/manual.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

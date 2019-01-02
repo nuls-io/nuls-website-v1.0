@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/manual/account.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/account.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/account.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="manual/account.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/manual/account.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="NULS-Account-Module-Resolution" class="article-heading"><a href="#NULS-Account-Module-Resolution" class="headerlink" title="NULS Account Module Resolution"></a>NULS Account Module Resolution<a class="article-anchor" href="#NULS-Account-Module-Resolution" aria-hidden="true"></a></h1><h2 id="1、Overview" class="article-heading"><a href="#1、Overview" class="headerlink" title="1、Overview"></a>1、Overview<a class="article-anchor" href="#1、Overview" aria-hidden="true"></a></h2><p>The NULS Account Module is the basic module for providing the NULS main chain with all the functions of the account. It mainly supports the functions of account generation, security and custody, and information acquisition. Other modules can use various functions of the account and obtain account information according to the interface provided by the account module. Users or other applications can be based on RPC. The interface makes the account more practical and personalized. The account is the basic module of NULS and the carrier of user data (display window). With the development of NULS, the account module will be more complete.</p>
+<h2 id="2、Feature" class="article-heading"><a href="#2、Feature" class="headerlink" title="2、Feature"></a>2、Feature<a class="article-anchor" href="#2、Feature" aria-hidden="true"></a></h2><p>The function of the account module is quite rich, and the same function will also provide overloading of multiple interfaces, which is convenient for use in different scenarios, mainly in the following aspects.</p>
+<h4 id="2-1-Account-generation" class="article-heading"><a href="#2-1-Account-generation" class="headerlink" title="2.1 Account generation"></a>2.1 Account generation<a class="article-anchor" href="#2-1-Account-generation" aria-hidden="true"></a></h4><p>The generation aspect of the account includes creating an account and importing an account; and importing the account is divided into importing a private key to generate an account, and importing a keystore backup file to generate an account.</p>
+<h4 id="2-2-Security-and-custody" class="article-heading"><a href="#2-2-Security-and-custody" class="headerlink" title="2.2 Security and custody"></a>2.2 Security and custody<a class="article-anchor" href="#2-2-Security-and-custody" aria-hidden="true"></a></h4><p>Account security features include account backup, setting account password, modifying account password, and removing account; backup account is divided into generating Keystore backup file and obtaining private key for backup.</p>
+<h4 id="2-3-Access-to-account-information" class="article-heading"><a href="#2-3-Access-to-account-information" class="headerlink" title="2.3 Access to account information"></a>2.3 Access to account information<a class="article-anchor" href="#2-3-Access-to-account-information" aria-hidden="true"></a></h4><p>The functions of obtaining account information mainly include querying individual account information, obtaining multiple account information, obtaining account address, checking account balance, and querying account aliases.</p>
+<h4 id="2-4-Practical-and-personalized-features" class="article-heading"><a href="#2-4-Practical-and-personalized-features" class="headerlink" title="2.4 Practical and personalized features"></a>2.4 Practical and personalized features<a class="article-anchor" href="#2-4-Practical-and-personalized-features" aria-hidden="true"></a></h4><p>The functions of the account also include some special tool functions and personalization functions, such as setting account aliases, setting account notes, verifying whether the account is encrypted, signing, verifying the signature, verifying the account address format, and verifying that the account password is correct.</p>
+<h4 id="2-5-Access-to-account-local-data" class="article-heading"><a href="#2-5-Access-to-account-local-data" class="headerlink" title="2.5 Access to account local data"></a>2.5 Access to account local data<a class="article-anchor" href="#2-5-Access-to-account-local-data" aria-hidden="true"></a></h4><p>In addition to the data of the account alias, the data of the account will be locally persisted, so the account module has the function of accessing the account data, and the final implementation of the function is implemented by calling the interface of the data storage module.</p>
+<h2 id="3、Interface" class="article-heading"><a href="#3、Interface" class="headerlink" title="3、Interface"></a>3、Interface<a class="article-anchor" href="#3、Interface" aria-hidden="true"></a></h2><ul>
+<li>Class that defines the interface: <code>io.nuls.account.service.AccountService</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create a specified number of accounts,and encrypt the accounts,</span></span><br><span class="line"><span class="comment"> * all the accounts are encrypted by the same password</span></span><br><span class="line"><span class="comment"> * if the password is NULL or "", the accounts will be unencrypted.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> count    the number of account you want to create.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password the password of the accounts.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account list created.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Result&lt;List&lt;Account&gt;&gt; createAccount(<span class="keyword">int</span> count, String password);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create unencrypted accounts.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> count the number of account you want to create.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account list created.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Result&lt;List&lt;Account&gt;&gt; createAccount(<span class="keyword">int</span> count);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create an account and encrypt it,</span></span><br><span class="line"><span class="comment"> * if the password is NULL or "", the accounts will be unencrypted.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password the password of the accounts(only one account in the list).</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account list created.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Result&lt;List&lt;Account&gt;&gt; createAccount(String password);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create an unencrypted account</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account list created(only one account in the list).</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Result&lt;List&lt;Account&gt;&gt; createAccount();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * delete an account by address.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address  the address of the account you want to delete.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password the password of the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Boolean&gt; <span class="title">removeAccount</span><span class="params">(String address, String password)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Reset password by keyStore.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> keyStore the keyStore of the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">updatePasswordByAccountKeyStore</span><span class="params">(AccountKeyStore keyStore, String password)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * import an account form account key store.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> keyStore the keyStore of the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">importAccountFormKeyStore</span><span class="params">(AccountKeyStore keyStore, String password)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * import an account form account key store.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> keyStore the keyStore of the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">importAccountFormKeyStore</span><span class="params">(AccountKeyStore keyStore)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * import an account from plant private key and encrypt the account.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">importAccount</span><span class="params">(String prikey, String password)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * import an unencrypted account by plant private key.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">importAccount</span><span class="params">(String prikey)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * export an account to an account key store.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address  the address of the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password the password of the account key store.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account key store object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;AccountKeyStore&gt; <span class="title">exportAccountToKeyStore</span><span class="params">(String address, String password)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query account information by address.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address the address of the account you want to query.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">getAccount</span><span class="params">(<span class="keyword">byte</span>[] address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *Query account by address.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address the address of the account you want to query.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">getAccount</span><span class="params">(String address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query account by account address.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address the address of the account you want to query;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Account&gt; <span class="title">getAccount</span><span class="params">(Address address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query account address by public key.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pubKey public key string.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account address.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Address&gt; <span class="title">getAddress</span><span class="params">(String pubKey)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *Gets the account address object from the account binary public key.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pubKey public key binary array.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the account address.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Address&gt; <span class="title">getAddress</span><span class="params">(<span class="keyword">byte</span>[] pubKey)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Verify weather the account is encrypted according to the account.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> account the account to be verified.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result <span class="title">isEncrypted</span><span class="params">(Account account)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Verify weather the account is encrypted according to the account's address object.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address The address of the account to be verified.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result <span class="title">isEncrypted</span><span class="params">(Address address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Verify weather the account is encrypted according to the account's address string.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address The address of the account to be verified.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result <span class="title">isEncrypted</span><span class="params">(String address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Verify the account password.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> account</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result <span class="title">validPassword</span><span class="params">(Account account, String password)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Verify the format of the address string.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address To verify the address string.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the operation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result <span class="title">verifyAddressFormat</span><span class="params">(String address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query all account collections.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> account list of all accounts.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Result&lt;Collection&lt;Account&gt;&gt; getAccountList();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sign data.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> data     Data to be signed.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> account  Signed account</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password Account password</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> The NulsSignData object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">NulsSignData <span class="title">signData</span><span class="params">(<span class="keyword">byte</span>[] data, Account account, String password)</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sign data.(no password)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> data    Data to be signed.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> account Signed account</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> The NulsSignData object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">NulsSignData <span class="title">signData</span><span class="params">(<span class="keyword">byte</span>[] data, Account account)</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sign data.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> data  Data to be signed.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ecKey eckey.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> The NulsSignData object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">NulsSignData <span class="title">signData</span><span class="params">(<span class="keyword">byte</span>[] data, ECKey ecKey)</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sign data.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> digest   data digest.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> account  account to sign.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> password password of account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the NulsSignData object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">NulsSignData <span class="title">signDigest</span><span class="params">(<span class="keyword">byte</span>[] digest, Account account, String password)</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sign data digest</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> digest to be signed.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ecKey  eckey</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> The NulsSignData object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">NulsSignData <span class="title">signDigest</span><span class="params">(<span class="keyword">byte</span>[] digest, ECKey ecKey)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Verify the signature.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> data     data to be validated.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> signData signature.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pubKey   dublic key of account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the result of the opration</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result <span class="title">verifySignData</span><span class="params">(<span class="keyword">byte</span>[] data, NulsSignData signData, <span class="keyword">byte</span>[] pubKey)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query the balance of all accounts.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> Balance object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Balance&gt; <span class="title">getBalance</span><span class="params">()</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query the balance of an account.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> account the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> Balance object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Balance&gt; <span class="title">getBalance</span><span class="params">(Account account)</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query the balance of an account.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address the address of the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> Balance object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Balance&gt; <span class="title">getBalance</span><span class="params">(Address address)</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Query the balance of an account.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address the address of the account.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> Balance object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Balance&gt; <span class="title">getBalance</span><span class="params">(String address)</span> <span class="keyword">throws</span> NulsException</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get an account alias based on the array of account address bytes</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> alias string</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;String&gt; <span class="title">getAlias</span><span class="params">(<span class="keyword">byte</span>[] address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get account alias according to account address</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> alias string</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;String&gt; <span class="title">getAlias</span><span class="params">(String address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Gets to set the alias transaction fee</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> address</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> aliasName</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result&lt;Na&gt; <span class="title">getAliasFee</span><span class="params">(String address, String aliasName)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="4、Architectures" class="article-heading"><a href="#4、Architectures" class="headerlink" title="4、Architectures"></a>4、Architectures<a class="article-anchor" href="#4、Architectures" aria-hidden="true"></a></h2><ul>
+<li>Module name：account</li>
+<li>Module ID：5</li>
+</ul>
+<p><img src="account/AccountArchitecture.png" alt="AccountArchitecture"></p>
+<h2 id="5、Protocol" class="article-heading"><a href="#5、Protocol" class="headerlink" title="5、Protocol"></a>5、Protocol<a class="article-anchor" href="#5、Protocol" aria-hidden="true"></a></h2><h5 id="5-1-General-transaction-data-structure" class="article-heading"><a href="#5-1-General-transaction-data-structure" class="headerlink" title="5.1 General transaction data structure"></a>5.1 General transaction data structure<a class="article-anchor" href="#5-1-General-transaction-data-structure" aria-hidden="true"></a></h5><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>Transaction type</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>Remark</td>
+</tr>
+<tr>
+<td>??</td>
+<td>txData</td>
+<td>??</td>
+<td>Transaction data</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>??</td>
+<td>Token data</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h5 id="5-2-Alias-transaction" class="article-heading"><a href="#5-2-Alias-transaction" class="headerlink" title="5.2 Alias transaction"></a>5.2 Alias transaction<a class="article-anchor" href="#5-2-Alias-transaction" aria-hidden="true"></a></h5><ul>
+<li>txData：Alias</li>
+</ul>
+<p><strong>Alias</strong></p>
+<table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>address</td>
+<td>VarByte</td>
+<td>Address of the account</td>
+</tr>
+<tr>
+<td>？？</td>
+<td>alias</td>
+<td>String</td>
+<td>Alias</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6、Core-Process" class="article-heading"><a href="#6、Core-Process" class="headerlink" title="6、Core Process"></a>6、Core Process<a class="article-anchor" href="#6、Core-Process" aria-hidden="true"></a></h2><h4 id="6-1-Account-generation" class="article-heading"><a href="#6-1-Account-generation" class="headerlink" title="6.1 Account generation"></a>6.1 Account generation<a class="article-anchor" href="#6-1-Account-generation" aria-hidden="true"></a></h4><h5 id="6-1-1-create-account" class="article-heading"><a href="#6-1-1-create-account" class="headerlink" title="6.1.1 create account"></a>6.1.1 create account<a class="article-anchor" href="#6-1-1-create-account" aria-hidden="true"></a></h5><p>The account address of NULS is generated by the combination of the default Chain ID of NULS, the default address type of NULS, and ECKey (elliptic curve encryption algorithm), and the fixed length is 23. The generated Byte array obtains the address string of the NULS account through the Base58 algorithm. When creating a new account, ECKey is an ECKey instance generated by a random seed. The public key and private key of the account and the account address are obtained by ECKey to generate a new account.</p>
+<h5 id="6-1-2-Backup" class="article-heading"><a href="#6-1-2-Backup" class="headerlink" title="6.1.2 Backup"></a>6.1.2 Backup<a class="article-anchor" href="#6-1-2-Backup" aria-hidden="true"></a></h5><p>After the account is generated, the clear key of the account can be obtained through the interface, so that the private key can be properly kept (ie, backed up), and a backup file can be generated by backing up the interface of the keystore file for backup. </p>
+<p>There are two situations when backing up the Keystore: </p>
+<p>1、Backup unencrypted account</p>
+<p>When the account has no password, the interface is directly called to generate a backup file. The file has been named with the account address and the file suffix is .keystore. And the private key in the keystore is a plaintext private key (prikey has a value, encryptedPrivateKey has no value).</p>
+<p>2、Backup encrypted account</p>
+<p>When backing up an encrypted account, you need to verify the current account password, and use this password to encrypt the private key in the keystore. The encrypted private key has a value in the generated file (encryptedPrivateKey has a value), and the plaintext private key has no value (prikey) No value).</p>
+<h5 id="6-1-3-Import-account-private-key-keystore-file" class="article-heading"><a href="#6-1-3-Import-account-private-key-keystore-file" class="headerlink" title="6.1.3 Import account (private key, keystore file)"></a>6.1.3 Import account (private key, keystore file)<a class="article-anchor" href="#6-1-3-Import-account-private-key-keystore-file" aria-hidden="true"></a></h5><p>Importing an account means that the user wants to regenerate his or her account information locally for some reason. The user needs to hold the private key of the corresponding account or the keystore backup file. The difference between a private key and a keystore is that the keystore (when the account is set with a password) can save the encrypted private key without saving the plaintext private key, so the security is higher. In this case, when the keystore file is imported, the password of the account at the time of generating the keystore file is verified. The password and the encrypted private key can be used to calculate the plaintext private key, and then the next import process is performed.</p>
+<p>Regardless of the way the user imports it, the corresponding ECKey instance is generated by the private key of the account, and then the account information is generated in the same way as the account creation. The way to create an account is different from the way the ECkey instance is obtained. The account generated by the same private key is consistent in the same information, and then the account transfer is used to obtain the account transfer, set the alias, create the node, commission and other transaction data from the blockchain to synchronize to the local, thus The function of importing accounts is implemented.</p>
+<p>Although the keystore file contains an alias for the account, since the Keystore file may be serially modified and forged, it is still necessary to restore the account’s alias information by obtaining the account setting alias transaction information from the blockchain when importing the account. It is a feature that makes use of blockchain information that cannot be tampered with.</p>
+<p><img src="account/AccountFlow.png" alt="accountflow"></p>
+<h5 id="6-1-4-Set-up-an-account-alias" class="article-heading"><a href="#6-1-4-Set-up-an-account-alias" class="headerlink" title="6.1.4 Set up an account alias"></a>6.1.4 Set up an account alias<a class="article-anchor" href="#6-1-4-Set-up-an-account-alias" aria-hidden="true"></a></h5><p>Setting an account alias will cost 1 NULS token. This 1 NULS will be burned to a fixed hole address, the account set alias will be saved in the blockchain, and the alias will be unique in the blockchain. A transaction will be initiated and sent to other nodes for verification, packaging, confirmation, and then setting the alias will be successful.</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.905Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="storage.html" class="article-footer-prev" title="Storage"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="ledger.html" class="article-footer-next" title="Ledger"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NULS-Account-Module-Resolution"><span class="toc-text">NULS Account Module Resolution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Overview"><span class="toc-text">1、Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Feature"><span class="toc-text">2、Feature</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Account-generation"><span class="toc-text">2.1 Account generation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Security-and-custody"><span class="toc-text">2.2 Security and custody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-Access-to-account-information"><span class="toc-text">2.3 Access to account information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-Practical-and-personalized-features"><span class="toc-text">2.4 Practical and personalized features</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-Access-to-account-local-data"><span class="toc-text">2.5 Access to account local data</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Interface"><span class="toc-text">3、Interface</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Architectures"><span class="toc-text">4、Architectures</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Protocol"><span class="toc-text">5、Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-General-transaction-data-structure"><span class="toc-text">5.1 General transaction data structure</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2-Alias-transaction"><span class="toc-text">5.2 Alias transaction</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#6、Core-Process"><span class="toc-text">6、Core Process</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-Account-generation"><span class="toc-text">6.1 Account generation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-1-create-account"><span class="toc-text">6.1.1 create account</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-2-Backup"><span class="toc-text">6.1.2 Backup</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-3-Import-account-private-key-keystore-file"><span class="toc-text">6.1.3 Import account (private key, keystore file)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1-4-Set-up-an-account-alias"><span class="toc-text">6.1.4 Set up an account alias</span></a></li></ol></li></ol></li>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Architecture</a><a href="modularity.html" class="sidebar-link">Modularity</a><a href="structure.html" class="sidebar-link">Structure</a><a href="modular_overview.html" class="sidebar-link">Modular Overview</a><a href="micro_kernel.html" class="sidebar-link">Micro Kernel</a><a href="message_bus.html" class="sidebar-link">Message Bus</a><strong class="sidebar-title">Module Overview</strong><a href="network_overview.html" class="sidebar-link">Network</a><a href="storage.html" class="sidebar-link">Storage</a><a href="account.html" class="sidebar-link current">Account</a><a href="ledger.html" class="sidebar-link">Ledger</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="consensus.html" class="sidebar-link">Consensus</a><a href="contract.html" class="sidebar-link">Smart Contract</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Architecture</a><a href="modularity.html" class="mobile-nav-link">Modularity</a><a href="structure.html" class="mobile-nav-link">Structure</a><a href="modular_overview.html" class="mobile-nav-link">Modular Overview</a><a href="micro_kernel.html" class="mobile-nav-link">Micro Kernel</a><a href="message_bus.html" class="mobile-nav-link">Message Bus</a><strong class="mobile-nav-title">Module Overview</strong><a href="network_overview.html" class="mobile-nav-link">Network</a><a href="storage.html" class="mobile-nav-link">Storage</a><a href="account.html" class="mobile-nav-link current">Account</a><a href="ledger.html" class="mobile-nav-link">Ledger</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="consensus.html" class="mobile-nav-link">Consensus</a><a href="contract.html" class="mobile-nav-link">Smart Contract</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/account.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

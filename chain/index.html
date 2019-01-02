@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Cross-chain Overall Design | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/chain/index.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/chain/index.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/chain/index.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="chain/index.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">Cross-chain Overall Design</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/chain/index.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="1-Industrial-Background" class="article-heading"><a href="#1-Industrial-Background" class="headerlink" title="1 Industrial Background"></a>1 Industrial Background<a class="article-anchor" href="#1-Industrial-Background" aria-hidden="true"></a></h2><p>Blockchain is a decentralized application operating system. Cross-chain technology is in need for linking multiple operating systems together, thus substantially developing the ecosystem to form the internet of blockchain. </p>
+<h2 id="2-Design-Objectives" class="article-heading"><a href="#2-Design-Objectives" class="headerlink" title="2 Design Objectives"></a>2 Design Objectives<a class="article-anchor" href="#2-Design-Objectives" aria-hidden="true"></a></h2><ul>
+<li>To define cross-chain standards and realize cross-chain communication. </li>
+<li>To build Satellite Chain to realize cross-chain asset transfer</li>
+</ul>
+<h2 id="3-Overall-Plan" class="article-heading"><a href="#3-Overall-Plan" class="headerlink" title="3 Overall Plan"></a>3 Overall Plan<a class="article-anchor" href="#3-Overall-Plan" aria-hidden="true"></a></h2><h3 id="3-1-Overall-Architecture" class="article-heading"><a href="#3-1-Overall-Architecture" class="headerlink" title="3.1 Overall Architecture"></a>3.1 Overall Architecture<a class="article-anchor" href="#3-1-Overall-Architecture" aria-hidden="true"></a></h3><p><img src="./image/3.1.png" alt="design"></p>
+<p>Clarification:</p>
+<p>​    An independent Satellite Chain is responsible for communication among all chains and realizing cross-chain communication in an open way. </p>
+<p>​    Blockchains (in the ecology) based on NULS module warehouse can communicate with Satellite Chain in the underlying level by adding cross-chain modules via selecting modules. </p>
+<p>​     For Ethereum and Bitcoin and other public chains free from influence by NULS, protocol conversion should be achieved by a special mechanism, in which the public chain protocol and NULS cross-chain protocol will be adapted to realize communication with a unified protocol.</p>
+<p>​     All blockchains can only communicate with the Satellite Chain, which is responsible for verifying transactions and all parallel chains trust the verification results. </p>
+<ul>
+<li><p>Linking Methods Between Chains </p>
+<p>All nodes in the blockchain will operate cross-chain modules and are connected to some nodes of the Satellite Chain. Corresponding random algorithm will decide specific nodes to be connected and try to guarantee diversion of the connection so as to safeguard the network security. </p>
+</li>
+<li><p>How to realize cross-chain transaction</p>
+<p>Suppose Account a1 of Chain A transfers its Asset a to Account b1 of Chain b, the procedures are as follows: </p>
+<ul>
+<li>Cross-chain transaction will be initiated in Chain A and is subject to the verification of Chain A first;</li>
+<li>When certain blocks are accumulated, cross-chain modules will push the transaction to nodes in Satellite Chain;</li>
+<li>After receipt, Satellite Chain will verify the transaction in the following two steps:<ul>
+<li>1 Inquire nodes in Chain A if the transaction is verified and if the transaction sent to Satellite Chain by cross-chain protocol is correct and authentic; </li>
+<li>2 Verify the transaction by Byzantine fault tolerant algorithm in Satellite Chain. The transaction will be regarded as invalid if a majority of nodes cannot agree.</li>
+</ul>
+</li>
+<li>The transaction will be packaged in blocks of Satellite Chain; </li>
+<li>Nodes will push this cross-chain transaction to Chain B;</li>
+<li>Nodes of Chain B will verify the transaction via nodes connected to Satellite Chain. If it cannot pass the verification, this transaction will be discarded;</li>
+<li>If it passes the verification, corresponding asset will be placed in target address;</li>
+<li>This transaction will be verified in Chain B consensus. </li>
+<li>The transaction is complete and corresponding asset is available in Chain B. </li>
+</ul>
+</li>
+<li><p>Adaptation of Multiple Algorithms </p>
+<p>Satellite Chain supports most of mathematical algorithms used at present, including digest algorithm, symmetric encryption and asymmetric encryption among others. These algorithms can be used via a unified interface provided by the algorithm library. </p>
+</li>
+<li><p>Community-based Governance </p>
+<p>Community governance mechanism is built in Satellite Chain. Its functions include modifying system operation parameters, upgrading protocols, handling malicious chains, using community asset among others.   </p>
+</li>
+</ul>
+<h2 id="4-Satellite-Chain-Design" class="article-heading"><a href="#4-Satellite-Chain-Design" class="headerlink" title="4 Satellite Chain Design"></a>4 Satellite Chain Design<a class="article-anchor" href="#4-Satellite-Chain-Design" aria-hidden="true"></a></h2><h3 id="4-1-Satellite-Chain-Architecture" class="article-heading"><a href="#4-1-Satellite-Chain-Architecture" class="headerlink" title="4.1 Satellite Chain Architecture"></a>4.1 Satellite Chain Architecture<a class="article-anchor" href="#4-1-Satellite-Chain-Architecture" aria-hidden="true"></a></h3><p> <img src="./image/4.1.jpg" alt="layer"></p>
+<ul>
+<li><p>Satellite Chain verifies and packages cross-chain transaction by POC consensus mechanism and Byzantine fault tolerant algorithm, which strikes a balance between decentralization and performance and security. </p>
+</li>
+<li><p>Protocols in Satellite Chain are NULS cross-chain protocols with unified definition. Every node will connect multiple nodes in multiple blockchains.  </p>
+</li>
+<li>Satellite Chain provides chain management mechanism to supervise all corresponding blockchains registered on it. Registration contents include chain information, asset information and cross-chain pledge among others. </li>
+<li>When one blockchain receives assets from other blockchains, corresponding assets will be in place in this chain. Tokens in different blockchains will be stored as assets in other blockchains. </li>
+<li>Details for asset transfer to one blockchain from other chains will be stored in Satellite Chain. It should be verified if the asset is to transfer out of this blockchain and illegal asset transfer from this chain is not allowed. Malicious blockchains will be dealt with by community mechanism, including cross-chain pausing, cross-chain suspending and forfeiture of deposit. </li>
+<li>Blockchain will provide an api user manual. Any developer can develop his/her own wallet, browser, light wallet among other tools. </li>
+<li>Smart contract will not be operated in Satellite Chain so as to reduce operation complexity of Satellite Chain. </li>
+<li>Satellite Chain provides protocol application extension. Developers can use this protocol to develop DApp and optimize cross-chain protocols.<h3 id="4-2-Satellite-Chain-Operation" class="article-heading"><a href="#4-2-Satellite-Chain-Operation" class="headerlink" title="4.2 Satellite Chain Operation"></a>4.2 Satellite Chain Operation<a class="article-anchor" href="#4-2-Satellite-Chain-Operation" aria-hidden="true"></a></h3></li>
+</ul>
+<p><img src="./image/4.2.png" alt=""></p>
+<ul>
+<li>Satellite Chain has a modular architecture.</li>
+<li>Every module can be an independently operating micro service. </li>
+<li>Micro services are directly linked by http protocol communication. </li>
+<li>Module development languages are not restrained. </li>
+<li>Satellite Chain provides micro kernel module to manage service, configuration and data sharing function. </li>
+<li>Modules of Satellite Chain can also be used by NULS main network to some extent, so modules in Satellite Chain will also be included in NULS module library as NULS modules do. There modules are available for direct use of Chain Factory. </li>
+<li>Every in-use module is subject to extension. If a module in the library can only meet partial operation needs, this module can be extended instead of re-developing. </li>
+</ul>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.844Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Industrial-Background"><span class="toc-text">1 Industrial Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Design-Objectives"><span class="toc-text">2 Design Objectives</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Overall-Plan"><span class="toc-text">3 Overall Plan</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Overall-Architecture"><span class="toc-text">3.1 Overall Architecture</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Satellite-Chain-Design"><span class="toc-text">4 Satellite Chain Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Satellite-Chain-Architecture"><span class="toc-text">4.1 Satellite Chain Architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Satellite-Chain-Operation"><span class="toc-text">4.2 Satellite Chain Operation</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link current">Overview</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link current">Overview</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="chain/index.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

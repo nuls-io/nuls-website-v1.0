@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>总体架构 | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/manual/index.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/index.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/index.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="manual/index.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">总体架构</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/manual/index.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="1、架构图" class="article-heading"><a href="#1、架构图" class="headerlink" title="1、架构图"></a>1、架构图<a class="article-anchor" href="#1、架构图" aria-hidden="true"></a></h2><p><img src="index/structure.png" alt="总体架构图"></p>
+<h3 id="1-1-存储和工具层" class="article-heading"><a href="#1-1-存储和工具层" class="headerlink" title="1.1 存储和工具层"></a>1.1 存储和工具层<a class="article-anchor" href="#1-1-存储和工具层" aria-hidden="true"></a></h3><h4 id="1-1-1-工具" class="article-heading"><a href="#1-1-1-工具" class="headerlink" title="1.1.1 工具"></a>1.1.1 工具<a class="article-anchor" href="#1-1-1-工具" aria-hidden="true"></a></h4><p>​    NULS底层代码中独立了tools-module模块，提供各种底层相关的工具代码，包括密码学工具、http工具、缓存工具、数学计算工具、配置文件操作工具、命令行工具等，便于上层模块使用</p>
+<h4 id="1-1-2-存储层" class="article-heading"><a href="#1-1-2-存储层" class="headerlink" title="1.1.2 存储层"></a>1.1.2 存储层<a class="article-anchor" href="#1-1-2-存储层" aria-hidden="true"></a></h4><p>​    db-module模块定义了数据存储服务的接口、用于存储各类型的数据，当前实现的版本基于LevelDB进行key-value式的存储，可以将任意序列化数据存入数据库中，高效、节省空间。</p>
+<h3 id="1-2-网络层" class="article-heading"><a href="#1-2-网络层" class="headerlink" title="1.2 网络层"></a>1.2 网络层<a class="article-anchor" href="#1-2-网络层" aria-hidden="true"></a></h3><p>​    network-module模块定义了网络服务的接口，用于与对等节点建立连接和互相通信。当前实现的版本基于Netty实现，定义了一系列通讯协议，实现节点和连接的管理。模块功能包括节点发现、数据传输、定时握手、节点管理等功能</p>
+<h3 id="1-3-共识层" class="article-heading"><a href="#1-3-共识层" class="headerlink" title="1.3 共识层"></a>1.3 共识层<a class="article-anchor" href="#1-3-共识层" aria-hidden="true"></a></h3><p>​    共识层定义了token，激励机制，区块打包机制，基础数据协议，和核心业务流程，当前实现采用POC共识实现。</p>
+<h3 id="1-4-接口层" class="article-heading"><a href="#1-4-接口层" class="headerlink" title="1.4 接口层"></a>1.4 接口层<a class="article-anchor" href="#1-4-接口层" aria-hidden="true"></a></h3><p>​    NULS的接口层分为两个部分，智能合约和RPC接口服务，智能合约基于NVM运行，支持Java语法。RPC由各个功能模块实现，每个模块可以提供自己的RPC接口，所有RPC接口汇总组成了NULS RPC接口服务。</p>
+<h3 id="1-5-应用层" class="article-heading"><a href="#1-5-应用层" class="headerlink" title="1.5 应用层"></a>1.5 应用层<a class="article-anchor" href="#1-5-应用层" aria-hidden="true"></a></h3><p>​    NULS生态中的业务应用。</p>
+<h2 id="2、-模块关系" class="article-heading"><a href="#2、-模块关系" class="headerlink" title="2、 模块关系"></a>2、 模块关系<a class="article-anchor" href="#2、-模块关系" aria-hidden="true"></a></h2><p><img src="index/relationship.png" alt="模块关系"></p>
+<h3 id="2-1-Tools模块" class="article-heading"><a href="#2-1-Tools模块" class="headerlink" title="2.1 Tools模块"></a>2.1 Tools模块<a class="article-anchor" href="#2-1-Tools模块" aria-hidden="true"></a></h3><p>​    工具模块，内置一些基础工具供其他模块使用。</p>
+<h3 id="2-2-Core模块" class="article-heading"><a href="#2-2-Core模块" class="headerlink" title="2.2 Core模块"></a>2.2 Core模块<a class="article-anchor" href="#2-2-Core模块" aria-hidden="true"></a></h3><p>​    微内核模块，负责模块的管理，线程的管理，上下文的管理，配置信息的管理。</p>
+<h3 id="2-3-Account模块" class="article-heading"><a href="#2-3-Account模块" class="headerlink" title="2.3 Account模块"></a>2.3 Account模块<a class="article-anchor" href="#2-3-Account模块" aria-hidden="true"></a></h3><p>​    账户模块负责地址、公私钥对、账户token余额的管理</p>
+<h3 id="2-4-Network模块" class="article-heading"><a href="#2-4-Network模块" class="headerlink" title="2.4 Network模块"></a>2.4 Network模块<a class="article-anchor" href="#2-4-Network模块" aria-hidden="true"></a></h3><p>​    网络模块负责接收和发送对等节点间的消息，其中业务消息会通过接口调用的方式发送给message-bus模块。</p>
+<h3 id="2-5-Message-Bus模块" class="article-heading"><a href="#2-5-Message-Bus模块" class="headerlink" title="2.5 Message-Bus模块"></a>2.5 Message-Bus模块<a class="article-anchor" href="#2-5-Message-Bus模块" aria-hidden="true"></a></h3><p>​    该模块当前实现使用Disruptor环形队列来进行数据的缓冲，并将消息分发给对应的订阅者（Handlers）。</p>
+<h3 id="2-6-Protocol模块" class="article-heading"><a href="#2-6-Protocol模块" class="headerlink" title="2.6 Protocol模块"></a>2.6 Protocol模块<a class="article-anchor" href="#2-6-Protocol模块" aria-hidden="true"></a></h3><p>​    当前实现的Protocol模块，定义了大部分通用业务的协议，并且实现了大部分协议的处理器，包括区块处理、交易处理，数据同步等内容。</p>
+<h3 id="2-7-consensus模块" class="article-heading"><a href="#2-7-consensus模块" class="headerlink" title="2.7 consensus模块"></a>2.7 consensus模块<a class="article-anchor" href="#2-7-consensus模块" aria-hidden="true"></a></h3><p>​    共识模块负责token的创建、管理，打包，数据验证，数据存储，区块打包的业务逻辑管理，节点惩罚等内容。</p>
+<h3 id="2-8-Ledger模块" class="article-heading"><a href="#2-8-Ledger模块" class="headerlink" title="2.8 Ledger模块"></a>2.8 Ledger模块<a class="article-anchor" href="#2-8-Ledger模块" aria-hidden="true"></a></h3><p>​    该模块负责存储交易及交易中的token数据记录，验证token使用是否合法。</p>
+<h3 id="2-9-Storage模块" class="article-heading"><a href="#2-9-Storage模块" class="headerlink" title="2.9 Storage模块"></a>2.9 Storage模块<a class="article-anchor" href="#2-9-Storage模块" aria-hidden="true"></a></h3><p>​    db-module存储模块支持所有类型的数据存储，当前采用LevelDB进行存储。</p>
+<h3 id="2-10-Contract模块" class="article-heading"><a href="#2-10-Contract模块" class="headerlink" title="2.10 Contract模块"></a>2.10 Contract模块<a class="article-anchor" href="#2-10-Contract模块" aria-hidden="true"></a></h3><p>​    合约模块主要用于与NVM(NULS虚拟机)通讯，可以进行智能合约相关业务的调用、查询操作。</p>
+<p>更详细模块介绍参见后续章节</p>
+<h2 id="3、核心业务关系" class="article-heading"><a href="#3、核心业务关系" class="headerlink" title="3、核心业务关系"></a>3、核心业务关系<a class="article-anchor" href="#3、核心业务关系" aria-hidden="true"></a></h2><p><img src="index/blockchain.png" alt="区块链"></p>
+<p>说明：</p>
+<ul>
+<li>系统启动后通过节点发现功能，寻找并连接对等节点，实现节点间通讯。</li>
+<li>接收到的外部消息统一进入ConnectionManager中处理，如果是网络模块自身的消息，则放入网络消息处理器中，否则统一通过Message-Bus的分发，传入对应消息的处理器中进行处理</li>
+<li>消息分为3个类型，区块、交易和其他业务消息，处理的方式各有不同</li>
+<li>交易放入缓冲池，然后进行校验，供共识模块进行打包</li>
+<li>区块验证后直接进行存储</li>
+<li>其他业务消息在handler中处理并调用网络返回处理结果</li>
+<li>应用通过调用RPC来实现数据交互，可以像网络广播一条交易，也可以从收到的区块中获取需要的数据。</li>
+<li>各个模块调用存储模块时，会把业务数据准备好，存储模块只负责增删改查操作，不进行任何业务处理。</li>
+</ul>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.075Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="modularity.html" class="article-footer-next" title="为什么模块化"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、架构图"><span class="toc-text">1、架构图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-存储和工具层"><span class="toc-text">1.1 存储和工具层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-工具"><span class="toc-text">1.1.1 工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-存储层"><span class="toc-text">1.1.2 存储层</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-网络层"><span class="toc-text">1.2 网络层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-共识层"><span class="toc-text">1.3 共识层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-接口层"><span class="toc-text">1.4 接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-应用层"><span class="toc-text">1.5 应用层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、-模块关系"><span class="toc-text">2、 模块关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Tools模块"><span class="toc-text">2.1 Tools模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Core模块"><span class="toc-text">2.2 Core模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Account模块"><span class="toc-text">2.3 Account模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Network模块"><span class="toc-text">2.4 Network模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-Message-Bus模块"><span class="toc-text">2.5 Message-Bus模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-Protocol模块"><span class="toc-text">2.6 Protocol模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-consensus模块"><span class="toc-text">2.7 consensus模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-Ledger模块"><span class="toc-text">2.8 Ledger模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9-Storage模块"><span class="toc-text">2.9 Storage模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10-Contract模块"><span class="toc-text">2.10 Contract模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、核心业务关系"><span class="toc-text">3、核心业务关系</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">基础</strong><a href="index.html" class="sidebar-link current">总体架构</a><a href="modularity.html" class="sidebar-link">为什么模块化</a><a href="structure.html" class="sidebar-link">源码结构</a><a href="modular_overview.html" class="sidebar-link">模块说明</a><a href="micro_kernel.html" class="sidebar-link">微内核</a><a href="message_bus.html" class="sidebar-link">消息总线</a><strong class="sidebar-title">模块说明</strong><a href="network_overview.html" class="sidebar-link">网络模块</a><a href="storage.html" class="sidebar-link">存储模块</a><a href="account.html" class="sidebar-link">账户模块</a><a href="ledger.html" class="sidebar-link">账本模块</a><a href="protocol.html" class="sidebar-link">通用协议</a><a href="consensus.html" class="sidebar-link">共识模块</a><a href="contract.html" class="sidebar-link">智能合约</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">基础</strong><a href="index.html" class="mobile-nav-link current">总体架构</a><a href="modularity.html" class="mobile-nav-link">为什么模块化</a><a href="structure.html" class="mobile-nav-link">源码结构</a><a href="modular_overview.html" class="mobile-nav-link">模块说明</a><a href="micro_kernel.html" class="mobile-nav-link">微内核</a><a href="message_bus.html" class="mobile-nav-link">消息总线</a><strong class="mobile-nav-title">模块说明</strong><a href="network_overview.html" class="mobile-nav-link">网络模块</a><a href="storage.html" class="mobile-nav-link">存储模块</a><a href="account.html" class="mobile-nav-link">账户模块</a><a href="ledger.html" class="mobile-nav-link">账本模块</a><a href="protocol.html" class="mobile-nav-link">通用协议</a><a href="consensus.html" class="mobile-nav-link">共识模块</a><a href="contract.html" class="mobile-nav-link">智能合约</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/index.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

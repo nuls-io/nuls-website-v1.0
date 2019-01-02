@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Transaction | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/protocol/transaction.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/protocol/transaction.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/protocol/transaction.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="protocol/transaction.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">Transaction</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/protocol/transaction.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="ID-定义" class="article-heading"><a href="#ID-定义" class="headerlink" title="ID 定义"></a>ID 定义<a class="article-anchor" href="#ID-定义" aria-hidden="true"></a></h2><table>
+<thead>
+<tr>
+<th>数字</th>
+<th>交易类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TX_TYPE_COINBASE</td>
+<td>Coinbase</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TX_TYPE_TRANSFER</td>
+<td>转账</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TX_TYPE_ACCOUNT_ALIAS</td>
+<td>设置账户别名</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TX_TYPE_REGISTER_AGENT</td>
+<td>创建共识节点</td>
+</tr>
+<tr>
+<td>5</td>
+<td>TX_TYPE_JOIN_CONSENSUS</td>
+<td>委托</td>
+</tr>
+<tr>
+<td>6</td>
+<td>TX_TYPE_CANCEL_DEPOSIT</td>
+<td>撤销委托</td>
+</tr>
+<tr>
+<td>7</td>
+<td>TX_TYPE_YELLOW_PUNISH</td>
+<td>黄牌警告</td>
+</tr>
+<tr>
+<td>8</td>
+<td>TX_TYPE_RED_PUNISH</td>
+<td>红牌警告</td>
+</tr>
+<tr>
+<td>9</td>
+<td>TX_TYPE_STOP_AGENT</td>
+<td>注销共识节点</td>
+</tr>
+</tbody>
+</table>
+<h2 id="载荷定义" class="article-heading"><a href="#载荷定义" class="headerlink" title="载荷定义"></a>载荷定义<a class="article-anchor" href="#载荷定义" aria-hidden="true"></a></h2><h3 id="TX-TYPE-COINBASE" class="article-heading"><a href="#TX-TYPE-COINBASE" class="headerlink" title="TX_TYPE_COINBASE"></a>TX_TYPE_COINBASE<a class="article-anchor" href="#TX-TYPE-COINBASE" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>txData</td>
+<td>byte[]</td>
+<td>0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-TRANSFER" class="article-heading"><a href="#TX-TYPE-TRANSFER" class="headerlink" title="TX_TYPE_TRANSFER"></a>TX_TYPE_TRANSFER<a class="article-anchor" href="#TX-TYPE-TRANSFER" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>txData</td>
+<td>byte[]</td>
+<td>0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-ACCOUNT-ALIAS" class="article-heading"><a href="#TX-TYPE-ACCOUNT-ALIAS" class="headerlink" title="TX_TYPE_ACCOUNT_ALIAS"></a>TX_TYPE_ACCOUNT_ALIAS<a class="article-anchor" href="#TX-TYPE-ACCOUNT-ALIAS" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>address</td>
+<td>VarByte</td>
+<td>账户地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>alias</td>
+<td>VarString</td>
+<td>昵称</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-REGISTER-AGENT" class="article-heading"><a href="#TX-TYPE-REGISTER-AGENT" class="headerlink" title="TX_TYPE_REGISTER_AGENT"></a>TX_TYPE_REGISTER_AGENT<a class="article-anchor" href="#TX-TYPE-REGISTER-AGENT" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>8</td>
+<td>deposit</td>
+<td>uint64</td>
+<td>抵押金额</td>
+</tr>
+<tr>
+<td>23</td>
+<td>agentAddress</td>
+<td>Address</td>
+<td>节点地址</td>
+</tr>
+<tr>
+<td>23</td>
+<td>packingAddress</td>
+<td>Address</td>
+<td>打包地址</td>
+</tr>
+<tr>
+<td>23</td>
+<td>rewardAddress</td>
+<td>Address</td>
+<td>奖励地址</td>
+</tr>
+<tr>
+<td>8</td>
+<td>commissionRate</td>
+<td>Double</td>
+<td>昵称</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-JOIN-CONSENSUS" class="article-heading"><a href="#TX-TYPE-JOIN-CONSENSUS" class="headerlink" title="TX_TYPE_JOIN_CONSENSUS"></a>TX_TYPE_JOIN_CONSENSUS<a class="article-anchor" href="#TX-TYPE-JOIN-CONSENSUS" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>8</td>
+<td>deposit</td>
+<td>byte[]</td>
+<td>委托金额</td>
+</tr>
+<tr>
+<td>23</td>
+<td>address</td>
+<td>byte[23]</td>
+<td>地址</td>
+</tr>
+<tr>
+<td>8</td>
+<td>agentHash</td>
+<td>NulsDigestData</td>
+<td>委托节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-CANCEL-DEPOSIT" class="article-heading"><a href="#TX-TYPE-CANCEL-DEPOSIT" class="headerlink" title="TX_TYPE_CANCEL_DEPOSIT"></a>TX_TYPE_CANCEL_DEPOSIT<a class="article-anchor" href="#TX-TYPE-CANCEL-DEPOSIT" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>agentHash</td>
+<td>NulsDigestData</td>
+<td>委托节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-YELLOW-PUNISH" class="article-heading"><a href="#TX-TYPE-YELLOW-PUNISH" class="headerlink" title="TX_TYPE_YELLOW_PUNISH"></a>TX_TYPE_YELLOW_PUNISH<a class="article-anchor" href="#TX-TYPE-YELLOW-PUNISH" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>count</td>
+<td>VarInt</td>
+<td>惩罚数量</td>
+</tr>
+<tr>
+<td>??</td>
+<td>addres</td>
+<td>Address[]</td>
+<td>被黄牌警告的节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-RED-PUNISH" class="article-heading"><a href="#TX-TYPE-RED-PUNISH" class="headerlink" title="TX_TYPE_RED_PUNISH"></a>TX_TYPE_RED_PUNISH<a class="article-anchor" href="#TX-TYPE-RED-PUNISH" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>23</td>
+<td>address</td>
+<td>byte[23]</td>
+<td>惩罚数量</td>
+</tr>
+<tr>
+<td>1</td>
+<td>reasonCode</td>
+<td>byte</td>
+<td>处罚代码</td>
+</tr>
+<tr>
+<td>??</td>
+<td>evidence</td>
+<td>VarByte</td>
+<td>证据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-STOP-AGENT" class="article-heading"><a href="#TX-TYPE-STOP-AGENT" class="headerlink" title="TX_TYPE_STOP_AGENT"></a>TX_TYPE_STOP_AGENT<a class="article-anchor" href="#TX-TYPE-STOP-AGENT" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>agentHash</td>
+<td>NulsDigestData</td>
+<td>停止节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.988Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="protocol.html" class="article-footer-prev" title="Protocol"><i class="fa fa-chevron-left"></i><span>Prev</span></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ID-定义"><span class="toc-text">ID 定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#载荷定义"><span class="toc-text">载荷定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-COINBASE"><span class="toc-text">TX_TYPE_COINBASE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-TRANSFER"><span class="toc-text">TX_TYPE_TRANSFER</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-ACCOUNT-ALIAS"><span class="toc-text">TX_TYPE_ACCOUNT_ALIAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-REGISTER-AGENT"><span class="toc-text">TX_TYPE_REGISTER_AGENT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-JOIN-CONSENSUS"><span class="toc-text">TX_TYPE_JOIN_CONSENSUS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-CANCEL-DEPOSIT"><span class="toc-text">TX_TYPE_CANCEL_DEPOSIT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-YELLOW-PUNISH"><span class="toc-text">TX_TYPE_YELLOW_PUNISH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-RED-PUNISH"><span class="toc-text">TX_TYPE_RED_PUNISH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-STOP-AGENT"><span class="toc-text">TX_TYPE_STOP_AGENT</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Protocol</strong><a href="index.html" class="sidebar-link">Overview</a><a href="network.html" class="sidebar-link">Network</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="transaction.html" class="sidebar-link current">Transaction</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Protocol</strong><a href="index.html" class="mobile-nav-link">Overview</a><a href="network.html" class="mobile-nav-link">Network</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="transaction.html" class="mobile-nav-link current">Transaction</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="protocol/transaction.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

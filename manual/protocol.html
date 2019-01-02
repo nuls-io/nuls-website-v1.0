@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/manual/protocol.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/protocol.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/protocol.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="manual/protocol.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/manual/protocol.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="General-protocol-module-resolution" class="article-heading"><a href="#General-protocol-module-resolution" class="headerlink" title="General protocol module resolution"></a>General protocol module resolution<a class="article-anchor" href="#General-protocol-module-resolution" aria-hidden="true"></a></h1><p>[TOC]</p>
+<h2 id="1、Module-overview" class="article-heading"><a href="#1、Module-overview" class="headerlink" title="1、Module overview"></a>1、Module overview<a class="article-anchor" href="#1、Module-overview" aria-hidden="true"></a></h2><p>​    The Protocol-module module was originally designed to define a common protocol format for all modules, and all modules can use these common protocols by relying on protocol modules. While defining these general-purpose protocols, the protocol module also provides a service interface for generic validators, general-purpose processors, and some important data structures associated with these protocols.</p>
+<h2 id="2、Module-function" class="article-heading"><a href="#2、Module-function" class="headerlink" title="2、Module function"></a>2、Module function<a class="article-anchor" href="#2、Module-function" aria-hidden="true"></a></h2><h3 id="2-1-Protocol-definition" class="article-heading"><a href="#2-1-Protocol-definition" class="headerlink" title="2.1 Protocol definition"></a>2.1 Protocol definition<a class="article-anchor" href="#2-1-Protocol-definition" aria-hidden="true"></a></h3><ul>
+<li>Trading Agreement: Consensus Reward Transaction, Transfer Transaction, Stored Transaction in Data Chain, and Transaction Verifier</li>
+<li>Network protocol and processor: The definition and implementation of sending and acquiring cell fast, block, transaction messages and processors between nodes.</li>
+</ul>
+<h3 id="2-2-Other-functions" class="article-heading"><a href="#2-2-Other-functions" class="headerlink" title="2.2 Other functions"></a>2.2 Other functions<a class="article-anchor" href="#2-2-Other-functions" aria-hidden="true"></a></h3><ul>
+<li>Block Synchronization: Get the current latest block height information from the network peer node, and download and store the block.</li>
+<li>Block management: Receive new block, storage block, rollback block, query block and block header information, broadcast block.</li>
+<li>Transaction management: receiving transactions, transaction confirmation, transaction rollback, query transactions, transaction conflict detection.</li>
+</ul>
+<h2 id="3、Module-interface" class="article-heading"><a href="#3、Module-interface" class="headerlink" title="3、Module interface"></a>3、Module interface<a class="article-anchor" href="#3、Module-interface" aria-hidden="true"></a></h2><h3 id="3-1-Block-interface" class="article-heading"><a href="#3-1-Block-interface" class="headerlink" title="3.1 Block interface"></a>3.1 Block interface<a class="article-anchor" href="#3-1-Block-interface" aria-hidden="true"></a></h3><p>Interface definition class:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">io.nuls.protocol.service.BlockService</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Get the creation block</p>
+<ul>
+<li>Method description:<br>Get the block with height 0 from the database, first get the block header from the database, then get the transaction in the block through LedgerService, and finally assemble the complete block and put it into the returned result.</li>
+<li>Parameter Description:<br>no</li>
+<li>Return value description:<br>Data: returns the complete block information, and returns the failed result when the data is not queried.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 获取创世块（从存储中）</span><br><span class="line"> * Get the creation block (from storage)</span><br><span class="line"> */</span><br><span class="line">Result&lt;Block&gt;  getGengsisBlock();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Get the latest block</p>
+<ul>
+<li>Method description:<br>Get the maximum height from the database, query the block header according to the height, and then get the transaction in the block through LedgerService, and finally assemble the complete block and put it into the returned result.</li>
+<li>Parameter Description:<br>no</li>
+<li>Return value description:<br>Data: returns the complete block information, and returns the failed result when the data is not queried.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 获取最新的区块（从存储中）</span><br><span class="line"> * Get the highest block (from storage)</span><br><span class="line"> */</span><br><span class="line">Result&lt;Block&gt; getBestBlock();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Get the latest block header</p>
+<ul>
+<li>Method description:<br>Get the maximum height from the database, query the block header according to the height and return.</li>
+<li>Parameter Description:<br>no</li>
+<li>Return value description:<br>Data: returns the block header information, and returns the failed result when the data is not queried.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 获取最新的区块头（从存储中）</span><br><span class="line"> * Get the highest block header (from storage)</span><br><span class="line"> */</span><br><span class="line">Result&lt;BlockHeader&gt; getBestBlockHeader();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Get block headers based on height</p>
+<ul>
+<li>Method description:<br>According to the height query block hash, and then get the block header information through hash</li>
+<li>Parameter Description:<br>Block height (long)</li>
+<li>Return value description:<br>Data: returns the block header information, and returns the failed result when the data is not queried.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 根据区块高度获取区块头（从存储中）</span><br><span class="line"> * Get the block head (from storage) according to the block height</span><br><span class="line"> *</span><br><span class="line"> * @param height 区块高度/block height</span><br><span class="line"> * @return 区块头</span><br><span class="line"> */</span><br><span class="line">Result&lt;BlockHeader&gt; getBlockHeader(long height);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Get the block header according to the block hash</p>
+<ul>
+<li>Method description:<br>According to the hash query block header, put in the returned result.</li>
+<li>Parameter Description:<br>Block hash (NulsDigestHash)</li>
+<li>Return value description:<br>Data: returns the block header information, and returns the failed result when the data is not queried.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 根据区块摘要获取区块头（从存储中）</span><br><span class="line"> * Get the block head (from storage) according to the block hash</span><br><span class="line"> *</span><br><span class="line"> * @param hash 区块摘要/block hash</span><br><span class="line"> * @return 区块头/block header</span><br><span class="line"> */</span><br><span class="line">Result&lt;BlockHeader&gt; getBlockHeader(NulsDigestData hash);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Get the block according to the height</p>
+<ul>
+<li>Method description:<br>According to the height query block hash, the block header information is obtained through hash, and then the transaction in the block is obtained through LedgerService, and finally the complete block is assembled and put into the returned result.</li>
+<li>Parameter Description:<br>Block height (long)</li>
+<li>Return value description:<br>Data: returns the complete block information, and returns the failed result when the data is not queried.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 根据区块高度获取区块（从存储中）</span><br><span class="line"> * Get the block (from storage) according to the block height</span><br><span class="line"> *</span><br><span class="line"> * @param height 区块高度/block height</span><br><span class="line"> * @return 区块/block</span><br><span class="line"> */</span><br><span class="line">Result&lt;Block&gt; getBlock(long height);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Get the block according to Hash</p>
+<ul>
+<li>Method description:<br>According to the hash, the block header information is obtained, and then the transaction in the block is obtained through the LedgerService, and finally the complete block is assembled and put into the returned result.</li>
+<li>Parameter Description:<br>Block hash (NulsDigestHash)</li>
+<li>Return value description:<br>Data: returns the complete block information, and returns the failed result when the data is not queried.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 根据区块摘要获取区块（从存储中）</span><br><span class="line"> * Get the block (from storage) according to the block hash</span><br><span class="line"> *</span><br><span class="line"> * @param hash 区块摘要/block hash</span><br><span class="line"> * @return 区块/block</span><br><span class="line"> */</span><br><span class="line">Result&lt;Block&gt; getBlock(NulsDigestData hash);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Save block</p>
+<ul>
+<li>Method description:<br>First confirm the transaction, then store the transaction, then store the block header, and finally process the local unconfirmed transaction. If any of the above steps fail, the previously processed steps will be rolled back.</li>
+<li>Parameter Description:<br>Block</li>
+<li>Return value description:<br>Success: Returns whether the block is successfully stored.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 保存区块到存储中</span><br><span class="line"> * Save the block to the store.</span><br><span class="line"> *</span><br><span class="line"> * @param block 完整区块/whole block</span><br><span class="line"> * @return 操作结果/operating result</span><br><span class="line"> * @throws NulsException 保存区块有可能出现异常，请捕获后谨慎处理</span><br><span class="line"> * There may be exceptions to the save block, please handle it carefully after capture.</span><br><span class="line"> */</span><br><span class="line">Result saveBlock(Block block) throws NulsException;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Rollback block</p>
+<ul>
+<li>Method description:<br>Roll back the transaction first, delete the block header, and finally process the local transaction. If any of the above steps fail, the previously processed steps will be reversed.</li>
+<li>Parameter Description:<br>Block</li>
+<li>Return value description:<br>Success: Returns whether the block is successfully rolled back.</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 回滚区块</span><br><span class="line"> * roll back the block to the store.</span><br><span class="line"> *</span><br><span class="line"> * @param block 完整区块/whole block</span><br><span class="line"> * @return 操作结果/operating result</span><br><span class="line"> * @throws NulsException 回滚区块有可能出现异常，请捕获后谨慎处理</span><br><span class="line"> * There may be exceptions to the roll back block, please handle it carefully after capture.</span><br><span class="line"> */</span><br><span class="line">Result rollbackBlock(Block block) throws NulsException;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Broadcast block</p>
+<ul>
+<li>Method description:<br>The cell block is placed in the block broadcast message, and the message is sent to the network by calling the interface of the MessageBus module.</li>
+<li>Parameter Description:<br>smallBlock: cell block (SmallBlock)</li>
+<li>Return value description:<br>Success: Returns whether the block is successfully broadcast.<br>  Data: list of node ids sent successfully</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 广播区块给连接的其他对等节点</span><br><span class="line"> * The broadcast block gives the connection to other peers.</span><br><span class="line"> *</span><br><span class="line"> * @param block 完整区块/the whole block</span><br><span class="line"> * @return 广播结果/Broadcast the results</span><br><span class="line"> */</span><br><span class="line">Result broadcastBlock(SmallBlock block);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Forwarding block</p>
+<ul>
+<li>Method description:<br>The cell block is assembled according to the block, and the cell block is placed in the forwarding message, and the message is sent to the network by calling the interface of the MessageBus module.</li>
+<li>Parameter Description:<br>Block: block (Block)<br>  excludeNode: Excluded node (Node)</li>
+<li>Return value description:<br>Success: Returns whether the block is successfully forwarded.<br>  Data: list of node ids sent successfully</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 转发区块给连接的其他对等节点，允许一个列外（不转发给它）</span><br><span class="line"> * Forward block to other peers of the connection, allowing one column (not forward to it)</span><br><span class="line"> *</span><br><span class="line"> * @param hash       区块摘要/the hash of block</span><br><span class="line"> * @param excludeNode 需要排除的节点，一般是因为从该节点处接收的本区块</span><br><span class="line"> *                    The nodes that need to be excluded are generally due to the block received from the node.</span><br><span class="line"> * @return 转发结果/forward results</span><br><span class="line"> */</span><br><span class="line">Result forwardBlock(NulsDigestData hash, Node excludeNode);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-2-trnasaction-interfaces" class="article-heading"><a href="#3-2-trnasaction-interfaces" class="headerlink" title="3.2 trnasaction interfaces"></a>3.2 trnasaction interfaces<a class="article-anchor" href="#3-2-trnasaction-interfaces" aria-hidden="true"></a></h3><p>Interface definition class:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">io.nuls.protocol.service.TransactionService</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Confirm transaction</p>
+<ul>
+<li>Method description:<br>According to the type of incoming transaction, the processor of the transaction is acquired, and the onCommit method of all processors is called. If any processor returns a failure, the successfully executed processor is rolled back.</li>
+<li>Parameter Description:<br>Tx: transaction (Transaction)<br>  secondaryData: auxiliary data (Object)</li>
+<li>Return value description:<br>Success: Returns whether the transaction confirms success</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 确认交易时调用的方法，对交易相关的业务进行提交操作</span><br><span class="line"> * Identify the method that is invoked during the transaction and submit the transaction related business.</span><br><span class="line"> *</span><br><span class="line"> * @param tx            操作的交易/The transaction of the operation</span><br><span class="line"> * @param secondaryData 辅助数据（可以为空）/Secondary data (available for null)</span><br><span class="line"> * @return 操作结果/operating results</span><br><span class="line"> */</span><br><span class="line">Result commitTx(Transaction tx, Object secondaryData);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Rollback transaction</p>
+<ul>
+<li>Method description:<br>According to the incoming transaction type, the processor of the transaction is acquired, the onRollback method of all processors is called, and finally the transaction is deleted. If any process returns a failure, the successful operation is rolled back.</li>
+<li>Parameter Description:<br>Tx: transaction (Transaction)<br>  secondaryData: auxiliary data (Object)</li>
+<li>Return value description:<br>Success: Returns whether the transaction was successfully rolled back</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 回滚交易时调用的方法，对交易相关的业务进行回退操作</span><br><span class="line"> * The method invoked when the transaction is rolled back and the transaction related business is returned.</span><br><span class="line"> *</span><br><span class="line"> * @param tx            操作的交易/The transaction of the operation</span><br><span class="line"> * @param secondaryData 辅助数据（可以为空）/Secondary data (available for null)</span><br><span class="line"> * @return 操作结果/operating results</span><br><span class="line"> */</span><br><span class="line">Result rollbackTx(Transaction tx, Object secondaryData);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Forwarding transaction</p>
+<ul>
+<li>Method description:<br>The incoming transaction is placed in the transaction forwarding message and the transaction is sent to the network by calling the Message-Bus module interface.</li>
+<li>Parameter Description:<br>Tx: transaction (Transaction)<br>  excludeNode: Node to be excluded (Node)</li>
+<li>Return value description:<br>Success: Returns whether the transaction was successfully forwarded<br>  Data: list of node ids successfully sent</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 转发交易给连接的其他对等节点，允许一个列外（不转发给它）</span><br><span class="line"> * Forward Transaction to other peers of the connection, allowing one column (not forward to it)</span><br><span class="line"> *</span><br><span class="line"> * @param tx          完整交易/the whole transaction</span><br><span class="line"> * @param excludeNode 需要排除的节点，一般是因为从该节点处接收的本交易/The nodes that need to be excluded are generally</span><br><span class="line"> *                    due to the transaction received from the node.</span><br><span class="line"> * @return 转发结果/forward results</span><br><span class="line"> */</span><br><span class="line">Result forwardTx(Transaction tx, Node excludeNode);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Broadcast transaction</p>
+<ul>
+<li>Method description:<br>The incoming transaction is placed in the transaction broadcast message and the transaction is sent to the network by calling the Message-Bus module interface.</li>
+<li>Parameter Description:<br>Tx: transaction (Transaction)</li>
+<li>Return value description:<br>Success: Returns whether the transaction was successfully forwarded<br>  Data: list of node ids successfully sent</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 广播交易给连接的其他对等节点</span><br><span class="line"> * The broadcast transaction gives the connection to other peers.</span><br><span class="line"> *</span><br><span class="line"> * @param tx 完整交易/the whole transaction</span><br><span class="line"> * @return 广播结果/Broadcast the results</span><br><span class="line"> */</span><br><span class="line">Result broadcastTx(Transaction tx);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Receive new transactions</p>
+<ul>
+<li>Method description:<br>Pass the incoming transaction into the consensus service.</li>
+<li>Parameter Description:<br>Tx: transaction (Transaction)</li>
+<li>Return value description:<br>Success: Whether the consensus module is successfully processed</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 将交易缓存到共识交易池</span><br><span class="line"> * cache the transaction for consensus</span><br><span class="line"> *</span><br><span class="line"> * @param tx transaction</span><br><span class="line"> * @return Result</span><br><span class="line"> */</span><br><span class="line">Result newTx(Transaction tx);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Conflict detection</p>
+<ul>
+<li>Method description:<br>Get all the transaction processors, call the conflictDetect method of all processors, if any processor returns a failure, it will directly return the failed result object.</li>
+<li>Parameter Description:<br>txList: transaction (List<transaction>)</transaction></li>
+<li>Return value description:<br>Success: Returns whether the transaction conflicts<br>  Data: the auxiliary data returned</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 冲突检测，检测如果传入的交易列表中有相冲突的交易，则返回失败，写明失败原因及所有的应该舍弃的交易列表</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Conflict detection, which detects conflicting transactions in the incoming transaction list, returns failure,</span><br><span class="line"> * indicating the cause of failure and all the list of trades that should be discarded.</span><br><span class="line"> *</span><br><span class="line"> * @param txList 需要检查的交易列表/A list of transactions to be checked.</span><br><span class="line"> * @return 操作结果：成功则返回successResult，失败时，data中返回丢弃列表，msg中返回冲突原因</span><br><span class="line"> * Operation result: success returns successResult. When failure, data returns the discard list,</span><br><span class="line"> * and MSG returns the cause of conflict.</span><br><span class="line"> */</span><br><span class="line">ValidateResult conflictDetect(List&lt;Transaction&gt; txList);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Get a transaction</p>
+<ul>
+<li>Method description:<br>According to the incoming transaction hash, the interface of the consensus service is called, and the transaction data in the memory is returned.</li>
+<li>Parameter Description:<br>Hash: transaction hash (NulsDigestData)</li>
+<li>Return value description:<br>Data: transaction data</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 根据交易hash获取交易信息</span><br><span class="line"> * get transaction by tx hash</span><br><span class="line"> * @param hash</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">Transaction getTx(NulsDigestData hash);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-3-Block-synchronization-service-interface" class="article-heading"><a href="#3-3-Block-synchronization-service-interface" class="headerlink" title="3.3 Block synchronization service interface"></a>3.3 Block synchronization service interface<a class="article-anchor" href="#3-3-Block-synchronization-service-interface" aria-hidden="true"></a></h3><p>Interface definition class:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">io.nuls.protocol.service.DownloadService</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Download block</p>
+<ul>
+<li>Method description:<br>Download a block from the specified node according to the block hash</li>
+<li>Parameter Description:<br>Hash: block hash (NulsDigestData)<br>  Node: node (Node)</li>
+<li>Return value description:<br>Success: Returns whether the download was successful.<br>  Data: the returned block data (Block)</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 从指定节点处根据hash下载一个区块，下载过程中线程是阻塞的</span><br><span class="line"> * Download a block according from the node to the hash, and the download process is blocked.</span><br><span class="line"> *</span><br><span class="line"> * @param hash 区块摘要/block hash</span><br><span class="line"> * @param node 指定的节点/Specified node</span><br><span class="line"> * @return 区块及结果/ block  results</span><br><span class="line"> */</span><br><span class="line">Result&lt;Block&gt; downloadBlock(NulsDigestData hash, Node node);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Whether the synchronization is successful</p>
+<ul>
+<li>Method description:<br>Get the current synchronization status and determine if the synchronization is successful.</li>
+<li>Parameter Description:<br>no</li>
+<li>Return value description:<br>Success: Returns whether the synchronization has been successful</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回下载是否完成的结果</span><br><span class="line"> * Returns the results of the download.</span><br><span class="line"> * @return Result</span><br><span class="line"> */</span><br><span class="line">Result isDownloadSuccess();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Reset block sync status</p>
+<ul>
+<li>Method description:<br>Check if the current status requires downloading the block and download it if necessary. This is done by changing the download status to waiting for the download.</li>
+<li>Parameter Description:<br>no</li>
+<li>Return value description:<br>Success: Returns whether the operation was successful</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 重新检查当前状态是否需要重新同步区块，如果需要则下载</span><br><span class="line"> * Recheck whether the current state needs to be resynchronized, and download if necessary.</span><br><span class="line"> * @return Result</span><br><span class="line"> */</span><br><span class="line">Result reset();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4、Module-architecture" class="article-heading"><a href="#4、Module-architecture" class="headerlink" title="4、Module architecture"></a>4、Module architecture<a class="article-anchor" href="#4、Module-architecture" aria-hidden="true"></a></h2><h3 id="4-1-Module-context" class="article-heading"><a href="#4-1-Module-context" class="headerlink" title="4.1 Module context"></a>4.1 Module context<a class="article-anchor" href="#4-1-Module-context" aria-hidden="true"></a></h3><p>a.The protocol module provides definitions of common protocols to other modules.</p>
+<p>b.The protocol module is responsible for receiving and synchronizing functions of blocks and transactions.</p>
+<p><img src="./protocol/context_en.png" alt="context"></p>
+<h3 id="4-2-Module-architecture-diagram" class="article-heading"><a href="#4-2-Module-architecture-diagram" class="headerlink" title="4.2 Module architecture diagram"></a>4.2 Module architecture diagram<a class="article-anchor" href="#4-2-Module-architecture-diagram" aria-hidden="true"></a></h3><p><img src="./protocol/design_en.png" alt="protocol"></p>
+<h2 id="5、Module-protocol" class="article-heading"><a href="#5、Module-protocol" class="headerlink" title="5、Module protocol"></a>5、Module protocol<a class="article-anchor" href="#5、Module-protocol" aria-hidden="true"></a></h2><h3 id="5-1-Transactions" class="article-heading"><a href="#5-1-Transactions" class="headerlink" title="5.1 Transactions"></a>5.1 Transactions<a class="article-anchor" href="#5-1-Transactions" aria-hidden="true"></a></h3><p> General transaction data structure</p>
+<ul>
+<li>Transfer transaction</li>
+<li>CoinBase transaction</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>交易类型</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注</td>
+</tr>
+<tr>
+<td>??</td>
+<td>txData</td>
+<td>??</td>
+<td>交易数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>??</td>
+<td>代币数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Data bearer transaction</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>交易类型</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注</td>
+</tr>
+<tr>
+<td>??</td>
+<td>txData</td>
+<td>VarByte</td>
+<td>交易数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>??</td>
+<td>代币数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-2-Message-of-module" class="article-heading"><a href="#5-2-Message-of-module" class="headerlink" title="5.2 Message of module"></a>5.2 Message of module<a class="article-anchor" href="#5-2-Message-of-module" aria-hidden="true"></a></h3><h4 id="PROTOCOL-NOT-FOUND" class="article-heading"><a href="#PROTOCOL-NOT-FOUND" class="headerlink" title="PROTOCOL_NOT_FOUND"></a>PROTOCOL_NOT_FOUND<a class="article-anchor" href="#PROTOCOL-NOT-FOUND" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>type</td>
+<td>NotFoundType</td>
+<td>未找到的类型</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Hash</td>
+<td>VarString</td>
+<td>请求但未找到的hash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-NEW-TX" class="article-heading"><a href="#PROTOCOL-NEW-TX" class="headerlink" title="PROTOCOL_NEW_TX"></a>PROTOCOL_NEW_TX<a class="article-anchor" href="#PROTOCOL-NEW-TX" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>transaction</td>
+<td>Transaction</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCK" class="article-heading"><a href="#PROTOCOL-GET-BLOCK" class="headerlink" title="PROTOCOL_GET_BLOCK"></a>PROTOCOL_GET_BLOCK<a class="article-anchor" href="#PROTOCOL-GET-BLOCK" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>blockHash</td>
+<td>NulsDigestData</td>
+<td>区块hash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-BLOCK" class="article-heading"><a href="#PROTOCOL-BLOCK" class="headerlink" title="PROTOCOL_BLOCK"></a>PROTOCOL_BLOCK<a class="article-anchor" href="#PROTOCOL-BLOCK" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>header</td>
+<td>BlockHeader</td>
+<td>块头</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Transaction[]</td>
+<td>Transaction[??]</td>
+<td>节点信息数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCKS-BY-HASH" class="article-heading"><a href="#PROTOCOL-GET-BLOCKS-BY-HASH" class="headerlink" title="PROTOCOL_GET_BLOCKS_BY_HASH"></a>PROTOCOL_GET_BLOCKS_BY_HASH<a class="article-anchor" href="#PROTOCOL-GET-BLOCKS-BY-HASH" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>startHeight</td>
+<td>NulsDigestData</td>
+<td>开始区块hash</td>
+</tr>
+<tr>
+<td>??</td>
+<td>endHeight</td>
+<td>NulsDigestData</td>
+<td>结束区块hash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCKS-BY-HEIGHT" class="article-heading"><a href="#PROTOCOL-GET-BLOCKS-BY-HEIGHT" class="headerlink" title="PROTOCOL_GET_BLOCKS_BY_HEIGHT"></a>PROTOCOL_GET_BLOCKS_BY_HEIGHT<a class="article-anchor" href="#PROTOCOL-GET-BLOCKS-BY-HEIGHT" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>startHash</td>
+<td>uint32</td>
+<td>开始区块高度</td>
+</tr>
+<tr>
+<td>4</td>
+<td>endHash</td>
+<td>uint32</td>
+<td>结束区块高度</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-BLOCK-HEADER" class="article-heading"><a href="#PROTOCOL-BLOCK-HEADER" class="headerlink" title="PROTOCOL_BLOCK_HEADER"></a>PROTOCOL_BLOCK_HEADER<a class="article-anchor" href="#PROTOCOL-BLOCK-HEADER" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>PreHash</td>
+<td>NulsDigestData</td>
+<td>上一个块摘要</td>
+</tr>
+<tr>
+<td>??</td>
+<td>MerkleHash</td>
+<td>NulsDigestData</td>
+<td>Merkle树根</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>4</td>
+<td>height</td>
+<td>uint32</td>
+<td>高度</td>
+</tr>
+<tr>
+<td>4</td>
+<td>txCount</td>
+<td>uint32</td>
+<td>交易数量</td>
+</tr>
+<tr>
+<td>??</td>
+<td>extend</td>
+<td>VarByte</td>
+<td>扩展数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>P2PKHScriptSig</td>
+<td>签名</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-TX-GROUP" class="article-heading"><a href="#PROTOCOL-GET-TX-GROUP" class="headerlink" title="PROTOCOL_GET_TX_GROUP"></a>PROTOCOL_GET_TX_GROUP<a class="article-anchor" href="#PROTOCOL-GET-TX-GROUP" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>TXHashCount</td>
+<td>VarInt</td>
+<td>交易摘要数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>NulsDigestData[]</td>
+<td>交易摘要数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-TX-GROUP" class="article-heading"><a href="#PROTOCOL-TX-GROUP" class="headerlink" title="PROTOCOL_TX_GROUP"></a>PROTOCOL_TX_GROUP<a class="article-anchor" href="#PROTOCOL-TX-GROUP" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>BlockHash</td>
+<td>NulsDigestData</td>
+<td>块摘要</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXCount</td>
+<td>VarInt</td>
+<td>交易数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>Transaction[]</td>
+<td>交易数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-NEW-BLOCK" class="article-heading"><a href="#PROTOCOL-NEW-BLOCK" class="headerlink" title="PROTOCOL_NEW_BLOCK"></a>PROTOCOL_NEW_BLOCK<a class="article-anchor" href="#PROTOCOL-NEW-BLOCK" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>header</td>
+<td>BlockHeader</td>
+<td>块头</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXCount</td>
+<td>VarInt</td>
+<td>交易数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>NulsDigestData[]</td>
+<td>交易摘要数组</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXCount</td>
+<td>VarInt</td>
+<td>交易数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>Transaction[]</td>
+<td>交易数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCKS-HASH" class="article-heading"><a href="#PROTOCOL-GET-BLOCKS-HASH" class="headerlink" title="PROTOCOL_GET_BLOCKS_HASH"></a>PROTOCOL_GET_BLOCKS_HASH<a class="article-anchor" href="#PROTOCOL-GET-BLOCKS-HASH" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>start</td>
+<td>uint32</td>
+<td>开始高度</td>
+</tr>
+<tr>
+<td>4</td>
+<td>end</td>
+<td>uint32</td>
+<td>结束高度</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-BLOCKS-HASH" class="article-heading"><a href="#PROTOCOL-BLOCKS-HASH" class="headerlink" title="PROTOCOL_BLOCKS_HASH"></a>PROTOCOL_BLOCKS_HASH<a class="article-anchor" href="#PROTOCOL-BLOCKS-HASH" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>requestEventHash</td>
+<td>NulsDigestData</td>
+<td>请求Hash</td>
+</tr>
+<tr>
+<td>??</td>
+<td>HeightListCount</td>
+<td>VarInt</td>
+<td>Hash列表数量</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Hash[]</td>
+<td>NulsDigestData[]</td>
+<td>Hash列表</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-STRING" class="article-heading"><a href="#PROTOCOL-STRING" class="headerlink" title="PROTOCOL_STRING"></a>PROTOCOL_STRING<a class="article-anchor" href="#PROTOCOL-STRING" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>Hash</td>
+<td>VarString</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-COMPLETE" class="article-heading"><a href="#PROTOCOL-COMPLETE" class="headerlink" title="PROTOCOL_COMPLETE"></a>PROTOCOL_COMPLETE<a class="article-anchor" href="#PROTOCOL-COMPLETE" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>requestEventHash</td>
+<td>NulsDigestData</td>
+<td>请求Hash</td>
+</tr>
+<tr>
+<td>1</td>
+<td>success</td>
+<td>boolean</td>
+<td>结果</td>
+</tr>
+</tbody>
+</table>
+<h4 id="REQUEST-REACT" class="article-heading"><a href="#REQUEST-REACT" class="headerlink" title="REQUEST_REACT"></a>REQUEST_REACT<a class="article-anchor" href="#REQUEST-REACT" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Field</th>
+<th>data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>requestEventHash</td>
+<td>NulsDigestData</td>
+<td>请求Hash</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6、Core-process" class="article-heading"><a href="#6、Core-process" class="headerlink" title="6、Core process"></a>6、Core process<a class="article-anchor" href="#6、Core-process" aria-hidden="true"></a></h2><h3 id="6-1-Block-synchronization" class="article-heading"><a href="#6-1-Block-synchronization" class="headerlink" title="6.1 Block synchronization"></a>6.1 Block synchronization<a class="article-anchor" href="#6-1-Block-synchronization" aria-hidden="true"></a></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1, start block synchronization thread, execute once every second</span><br><span class="line">2, the initialization of dependent services in the thread: block service, network services</span><br><span class="line">3. Determine the synchronization status, wait or fail (before 30 seconds), then synchronize</span><br><span class="line">4. Determine the network connection status. If there are too few nodes connected, the execution is terminated.</span><br><span class="line">5, modify the synchronization status is: Ready</span><br><span class="line">6, change the download status to: download</span><br><span class="line">7, initialize two FutureTask placed separately: download thread manager and download data processor</span><br><span class="line">8, waiting for the task to run: see 6.1.1, 6.1.2</span><br><span class="line">9, modify the download status according to the results</span><br></pre></td></tr></table></figure>
+<h4 id="6-1-1-Block-download" class="article-heading"><a href="#6-1-1-Block-download" class="headerlink" title="6.1.1 Block download"></a>6.1.1 Block download<a class="article-anchor" href="#6-1-1-Block-download" aria-hidden="true"></a></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. Check the current block height, whether it is the latest height, whether it needs to be rolled back, and roll back if necessary (return 10 blocks each time)</span><br><span class="line">2, the latest node corresponding to the height of the statistics, each node creates a download thread</span><br><span class="line">3. Download 10 blocks per node per round</span><br><span class="line">4, after the download fails, reorganize the node download</span><br><span class="line">5, put the downloaded block into the queue</span><br><span class="line">6, clean up the future, stop the thread pool running</span><br></pre></td></tr></table></figure>
+<h4 id="6-1-2-Downloaded-block-processing" class="article-heading"><a href="#6-1-2-Downloaded-block-processing" class="headerlink" title="6.1.2 Downloaded block processing"></a>6.1.2 Downloaded block processing<a class="article-anchor" href="#6-1-2-Downloaded-block-processing" aria-hidden="true"></a></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. Non-stop access to the block from the queue</span><br><span class="line">2, simple check block data</span><br><span class="line">3. Pass the block into the consensus module service.</span><br><span class="line">4. When there is no block header in the obtained block, the thread ends.</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-New-transaction-processing" class="article-heading"><a href="#6-2-New-transaction-processing" class="headerlink" title="6.2 New transaction processing"></a>6.2 New transaction processing<a class="article-anchor" href="#6-2-New-transaction-processing" aria-hidden="true"></a></h3><p><img src="./protocol/newTx_en.png" alt="newTx"></p>
+<h3 id="6-3-New-block-processing" class="article-heading"><a href="#6-3-New-block-processing" class="headerlink" title="6.3 New block processing"></a>6.3 New block processing<a class="article-anchor" href="#6-3-New-block-processing" aria-hidden="true"></a></h3><p><img src="./protocol/newBlock_en.png" alt="newBlock"></p>
+<h3 id="6-4-Confirm-transaction" class="article-heading"><a href="#6-4-Confirm-transaction" class="headerlink" title="6.4 Confirm transaction"></a>6.4 Confirm transaction<a class="article-anchor" href="#6-4-Confirm-transaction" aria-hidden="true"></a></h3><p><img src="./protocol/commitTx_en.png" alt="commitTx"></p>
+<h3 id="6-5-Rollback-transaction" class="article-heading"><a href="#6-5-Rollback-transaction" class="headerlink" title="6.5 Rollback transaction"></a>6.5 Rollback transaction<a class="article-anchor" href="#6-5-Rollback-transaction" aria-hidden="true"></a></h3><p><img src="./protocol/rollbackTx_en.png" alt="rollbackTx"></p>
+<h3 id="6-6-Transaction-conflict-check" class="article-heading"><a href="#6-6-Transaction-conflict-check" class="headerlink" title="6.6 Transaction conflict check"></a>6.6 Transaction conflict check<a class="article-anchor" href="#6-6-Transaction-conflict-check" aria-hidden="true"></a></h3><p><img src="./protocol/conflictDetect_en.png" alt="conflictDetect"></p>
+<h3 id="6-7-Save-block" class="article-heading"><a href="#6-7-Save-block" class="headerlink" title="6.7 Save block"></a>6.7 Save block<a class="article-anchor" href="#6-7-Save-block" aria-hidden="true"></a></h3><p><img src="./protocol/saveBlock_en.png" alt="saveBlock"></p>
+<h3 id="6-8-Rollback-block" class="article-heading"><a href="#6-8-Rollback-block" class="headerlink" title="6.8 Rollback block"></a>6.8 Rollback block<a class="article-anchor" href="#6-8-Rollback-block" aria-hidden="true"></a></h3><p><img src="./protocol/rollbackBlock_en.png" alt="rollbackBlock"></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.960Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="ledger.html" class="article-footer-prev" title="Ledger"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="consensus.html" class="article-footer-next" title="Consensus"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#General-protocol-module-resolution"><span class="toc-text">General protocol module resolution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Module-overview"><span class="toc-text">1、Module overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Module-function"><span class="toc-text">2、Module function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Protocol-definition"><span class="toc-text">2.1 Protocol definition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Other-functions"><span class="toc-text">2.2 Other functions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Module-interface"><span class="toc-text">3、Module interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Block-interface"><span class="toc-text">3.1 Block interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-trnasaction-interfaces"><span class="toc-text">3.2 trnasaction interfaces</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-Block-synchronization-service-interface"><span class="toc-text">3.3 Block synchronization service interface</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Module-architecture"><span class="toc-text">4、Module architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Module-context"><span class="toc-text">4.1 Module context</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Module-architecture-diagram"><span class="toc-text">4.2 Module architecture diagram</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Module-protocol"><span class="toc-text">5、Module protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Transactions"><span class="toc-text">5.1 Transactions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-Message-of-module"><span class="toc-text">5.2 Message of module</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-NOT-FOUND"><span class="toc-text">PROTOCOL_NOT_FOUND</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-NEW-TX"><span class="toc-text">PROTOCOL_NEW_TX</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCK"><span class="toc-text">PROTOCOL_GET_BLOCK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-BLOCK"><span class="toc-text">PROTOCOL_BLOCK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCKS-BY-HASH"><span class="toc-text">PROTOCOL_GET_BLOCKS_BY_HASH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCKS-BY-HEIGHT"><span class="toc-text">PROTOCOL_GET_BLOCKS_BY_HEIGHT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-BLOCK-HEADER"><span class="toc-text">PROTOCOL_BLOCK_HEADER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-TX-GROUP"><span class="toc-text">PROTOCOL_GET_TX_GROUP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-TX-GROUP"><span class="toc-text">PROTOCOL_TX_GROUP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-NEW-BLOCK"><span class="toc-text">PROTOCOL_NEW_BLOCK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCKS-HASH"><span class="toc-text">PROTOCOL_GET_BLOCKS_HASH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-BLOCKS-HASH"><span class="toc-text">PROTOCOL_BLOCKS_HASH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-STRING"><span class="toc-text">PROTOCOL_STRING</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-COMPLETE"><span class="toc-text">PROTOCOL_COMPLETE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#REQUEST-REACT"><span class="toc-text">REQUEST_REACT</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、Core-process"><span class="toc-text">6、Core process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-Block-synchronization"><span class="toc-text">6.1 Block synchronization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-1-Block-download"><span class="toc-text">6.1.1 Block download</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-2-Downloaded-block-processing"><span class="toc-text">6.1.2 Downloaded block processing</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-New-transaction-processing"><span class="toc-text">6.2 New transaction processing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-New-block-processing"><span class="toc-text">6.3 New block processing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-Confirm-transaction"><span class="toc-text">6.4 Confirm transaction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-Rollback-transaction"><span class="toc-text">6.5 Rollback transaction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-6-Transaction-conflict-check"><span class="toc-text">6.6 Transaction conflict check</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-7-Save-block"><span class="toc-text">6.7 Save block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-8-Rollback-block"><span class="toc-text">6.8 Rollback block</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Architecture</a><a href="modularity.html" class="sidebar-link">Modularity</a><a href="structure.html" class="sidebar-link">Structure</a><a href="modular_overview.html" class="sidebar-link">Modular Overview</a><a href="micro_kernel.html" class="sidebar-link">Micro Kernel</a><a href="message_bus.html" class="sidebar-link">Message Bus</a><strong class="sidebar-title">Module Overview</strong><a href="network_overview.html" class="sidebar-link">Network</a><a href="storage.html" class="sidebar-link">Storage</a><a href="account.html" class="sidebar-link">Account</a><a href="ledger.html" class="sidebar-link">Ledger</a><a href="protocol.html" class="sidebar-link current">Protocol</a><a href="consensus.html" class="sidebar-link">Consensus</a><a href="contract.html" class="sidebar-link">Smart Contract</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Architecture</a><a href="modularity.html" class="mobile-nav-link">Modularity</a><a href="structure.html" class="mobile-nav-link">Structure</a><a href="modular_overview.html" class="mobile-nav-link">Modular Overview</a><a href="micro_kernel.html" class="mobile-nav-link">Micro Kernel</a><a href="message_bus.html" class="mobile-nav-link">Message Bus</a><strong class="mobile-nav-title">Module Overview</strong><a href="network_overview.html" class="mobile-nav-link">Network</a><a href="storage.html" class="mobile-nav-link">Storage</a><a href="account.html" class="mobile-nav-link">Account</a><a href="ledger.html" class="mobile-nav-link">Ledger</a><a href="protocol.html" class="mobile-nav-link current">Protocol</a><a href="consensus.html" class="mobile-nav-link">Consensus</a><a href="contract.html" class="mobile-nav-link">Smart Contract</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/protocol.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

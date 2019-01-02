@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS-SDK | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/docs/sdk.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/docs/sdk.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/docs/sdk.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="docs/sdk.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">NULS-SDK</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/docs/sdk.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="介绍" class="article-heading"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a class="article-anchor" href="#介绍" aria-hidden="true"></a></h2><p>本文档是NULS Java SDK的用户指南，描述了NULS服务提供的账户、交易、区块等相关基础功能接口的使用说明。 </p>
+<h3 id="约定" class="article-heading"><a href="#约定" class="headerlink" title="约定"></a>约定<a class="article-anchor" href="#约定" aria-hidden="true"></a></h3><ul>
+<li>所有SDK接口统一返回Result(说明见文末附件数据解释)</li>
+<li>每个接口描述的返回对象是指Result中data属性的内容</li>
+<li>除特别注明外，本文档NULS都以Na为单位 1NULS = 100,000,000Na</li>
+<li>运行SDK前，需要确认NULS节点服务已经启动并工作正常</li>
+<li>推荐使用JDK1.8+</li>
+</ul>
+<h3 id="版本更新记录" class="article-heading"><a href="#版本更新记录" class="headerlink" title="版本更新记录"></a>版本更新记录<a class="article-anchor" href="#版本更新记录" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th style="text-align:center">版本</th>
+<th style="text-align:center">更新日期</th>
+<th style="text-align:center">更新内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">v0.9.11.0</td>
+<td style="text-align:center">2018-06-19</td>
+<td style="text-align:center">对接NULS服务各项基础功能的接口</td>
+</tr>
+<tr>
+<td style="text-align:center">v0.9.11.1</td>
+<td style="text-align:center">2018-06-22</td>
+<td style="text-align:center">新增获取最新区块的高度和hash的接口(3.6，3.7)，修改2.1</td>
+</tr>
+<tr>
+<td style="text-align:center">v0.9.14</td>
+<td style="text-align:center">2018-07-04</td>
+<td style="text-align:center">修改快速入门中SDK初始化方法改为init，以及SDK的使用方式, 修改返回封装对象名称（去掉Dto等）</td>
+</tr>
+<tr>
+<td style="text-align:center">v0.9.15</td>
+<td style="text-align:center">2018-07-07</td>
+<td style="text-align:center">新增4个共识接口，4.1——4.4</td>
+</tr>
+<tr>
+<td style="text-align:center">v0.9.16</td>
+<td style="text-align:center">2018-07-11</td>
+<td style="text-align:center">新增接口4.5</td>
+</tr>
+<tr>
+<td style="text-align:center">v1.0.1</td>
+<td style="text-align:center">2018-07-13</td>
+<td style="text-align:center">新增错误码</td>
+</tr>
+<tr>
+<td style="text-align:center">v1.1.0</td>
+<td style="text-align:center">2018-09-28</td>
+<td style="text-align:center">新增多账户转账接口</td>
+</tr>
+</tbody>
+</table>
+<h2 id="快速入门" class="article-heading"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门<a class="article-anchor" href="#快速入门" aria-hidden="true"></a></h2><h3 id="1-引入文件" class="article-heading"><a href="#1-引入文件" class="headerlink" title="1.引入文件"></a>1.引入文件<a class="article-anchor" href="#1-引入文件" aria-hidden="true"></a></h3><p>使用构建工具导入jar包  </p>
+<ul>
+<li>maven方式</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.nuls.sdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sdk-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-创建SDK实例" class="article-heading"><a href="#2-创建SDK实例" class="headerlink" title="2.创建SDK实例"></a>2.创建SDK实例<a class="article-anchor" href="#2-创建SDK实例" aria-hidden="true"></a></h3><p>首先添加SDK命名空间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//SDK启动类命名空间</span></span><br><span class="line"><span class="keyword">import</span> io.nuls.sdk.SDKBootstrap;</span><br><span class="line"><span class="keyword">import</span> io.nuls.sdk.model.Result;</span><br><span class="line"><span class="comment">//引入SDK调用工具的命名空间</span></span><br><span class="line"><span class="keyword">import</span> io.nuls.sdk.tool.NulsSDKTool;</span><br></pre></td></tr></table></figure>
+<p>引入后 使用下列代码生成一个实例client    </p>
+<ul>
+<li>初始化SDK</li>
+<li>初始化方法不传参数时，默认PRC ip和端口分别为<code>127.0.0.1</code>，<code>8001</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//默认 </span></span><br><span class="line">SDKBootstrap.init();</span><br><span class="line"><span class="comment">//传入NULS服务的ip，port</span></span><br><span class="line">SDKBootstrap.init(<span class="string">"192.168.1.88"</span>, <span class="string">"8001"</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用工具类调用接口方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Result result = NulsSDKTool.createAccount(<span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<p> <em>e.g 创建一个带密码的账户的完整示例</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> io.nuls.sdk.SDKBootstrap;</span><br><span class="line"><span class="keyword">import</span> io.nuls.sdk.model.Result;</span><br><span class="line"><span class="comment">//根据需求引入对应模块的命名空间</span></span><br><span class="line"><span class="keyword">import</span> io.nuls.sdk.tool.NulsSDKTool;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	SDKBootstrap.init();</span><br><span class="line">	Result result = NulsSDKTool.createAccount(<span class="string">"nuls123456"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>–</p>
+<h3 id="账户-AccountService" class="article-heading"><a href="#账户-AccountService" class="headerlink" title="账户 AccountService"></a>账户 AccountService<a class="article-anchor" href="#账户-AccountService" aria-hidden="true"></a></h3><h4 id="1-1-创建账户" class="article-heading"><a href="#1-1-创建账户" class="headerlink" title="1.1 创建账户"></a>1.1 创建账户<a class="article-anchor" href="#1-1-创建账户" aria-hidden="true"></a></h4><p>接口 </p>
+<p><strong><code>Result createAccount(int count, String password);</code></strong></p>
+<p>说明 </p>
+<blockquote>
+<p>创建账户可根据传入的参数创建单个或多个，有密码或没有密码的账户；<br>成功创建的账户信息将被持久化至NULS服务本地数据库中。</p>
+<p>返回成功创建的账户地址集合</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">count</td><br>        <td align="center">int</td><br>        <td align="center">非必填</td><br>        <td align="center">创建账户的数量（默认1）</td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">设置账户密码, 密码长度8~20，需同时包含字母和数字，不能输入空格</td><br>    </tr><br></table>   
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>:&#123;</span><br><span class="line">	    <span class="attr">"list"</span>: [ //返回创建账户的地址集合</span><br><span class="line">	        <span class="string">"2Cbkwxu34iCjsiHKBjqZDNjoVbLMcJv"</span>,</span><br><span class="line">	        <span class="string">"2Cbkwxu34iCjsiHKBjqZDNjoVbLMcJv"</span></span><br><span class="line">	    ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个没有密码的账户</span></span><br><span class="line">createAccount();</span><br><span class="line"><span class="comment">//创建一个有密码的账户</span></span><br><span class="line">createAccount(<span class="string">"nuls123456"</span>);</span><br><span class="line"><span class="comment">//创建3个没有密码的账户</span></span><br><span class="line">createAccount(<span class="number">3</span>);</span><br><span class="line"><span class="comment">//创建3个有密码的账户</span></span><br><span class="line">createAccount(<span class="number">3</span>, <span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-2-创建离线账户" class="article-heading"><a href="#1-2-创建离线账户" class="headerlink" title="1.2 创建离线账户"></a>1.2 创建离线账户<a class="article-anchor" href="#1-2-创建离线账户" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result createOfflineAccount(int count, String password)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>直接离线创建一个账户并完整返回, 不会和NULS底层交互,不会进行持久化操作<br>Create encrypted off-line accounts (Not saved to the database)</p>
+<p>Result.data <a href="#AccountInfo"><code>List&lt;AccountInfo&gt;</code></a> </p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">count</td><br>        <td align="center">int</td><br>        <td align="center">非必填</td><br>        <td align="center">创建账户的数量（默认1）</td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">设置账户密码, 密码长度8~20，需同时包含字母和数字，不能输入空格</td><br>    </tr><br></table>   
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"data"</span>: &#123;</span><br><span class="line">		<span class="attr">"list"</span>:[</span><br><span class="line">			&#123;</span><br><span class="line">				"address": String, 账户地址</span><br><span class="line">				"alias": String, 账户别名</span><br><span class="line">				"pubKey": String, 公钥</span><br><span class="line">				"extend": String, 扩展</span><br><span class="line">				"createTime": Long, 创建时间</span><br><span class="line">				"encrypted": boolean, 是否加密</span><br><span class="line">				"priKey": String, 私钥（创建无密码离线账户时才会有值）</span><br><span class="line">				"encryptedPriKey": String, 加密私钥（创建有密码离线账户时才会有值）</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="attr">"address"</span>: <span class="string">"2CiBQg72BCLmLqttRpPfp8ECRCBwbdD"</span>,</span><br><span class="line">				<span class="attr">"alias"</span>: <span class="literal">null</span>,</span><br><span class="line">				<span class="attr">"pubKey"</span>: <span class="string">"020159dc5cc74463f346b71c08dd934a823e9e6fe727d8d3c577e7d462e1a364bb"</span>,</span><br><span class="line">				<span class="attr">"extend"</span>: <span class="literal">null</span>,</span><br><span class="line">				<span class="attr">"createTime"</span>: <span class="number">1529314943624</span>,</span><br><span class="line">				<span class="attr">"encrypted"</span>: <span class="literal">true</span>,</span><br><span class="line">				<span class="attr">"priKey"</span>: <span class="string">""</span>,</span><br><span class="line">				<span class="attr">"encryptedPriKey"</span>: <span class="string">"5664f746654fb111e967bb3922910b16340f1e60ff1b281c7a333179d7b82d6220bb12d1c058d9cd06099d4f443a4cb0"</span></span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建一个没有密码的离线账户</span></span><br><span class="line">createOfflineAccount();</span><br><span class="line"><span class="comment">//创建一个有密码的离线账户</span></span><br><span class="line">createOfflineAccount(<span class="string">"nuls123456"</span>);</span><br><span class="line"><span class="comment">//创建3个没有密码的离线账户</span></span><br><span class="line">createOfflineAccount(<span class="number">3</span>);</span><br><span class="line"><span class="comment">//创建3个有密码的离线账户</span></span><br><span class="line">createOfflineAccount(<span class="number">3</span>, <span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-3-获取账户" class="article-heading"><a href="#1-3-获取账户" class="headerlink" title="1.3 获取账户"></a>1.3 获取账户<a class="article-anchor" href="#1-3-获取账户" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getAccount(String address)</code></strong>  </p>
+<p>说明</p>
+<blockquote>
+<p> 根据账户地址获取一个账户的信息</p>
+<p> Result.data <a href="#AccountInfo"><code>AccountInfo</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户的地址</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"data"</span>: &#123;</span><br><span class="line">		"address": String, 账户地址</span><br><span class="line">		"alias": String, 账户别名</span><br><span class="line">		"pubKey": String, 公钥</span><br><span class="line">		"extend": String, 扩展</span><br><span class="line">		"createTime": Long, 创建时间</span><br><span class="line">		"encrypted": boolean, 是否加密</span><br><span class="line">		"priKey": String, 私钥（创建无密码离线账户时才会有值）</span><br><span class="line">		"encryptedPriKey": String, 加密私钥（创建有密码离线账户时才会有值）</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getAccount(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-4-获取设置别名的手续费" class="article-heading"><a href="#1-4-获取设置别名的手续费" class="headerlink" title="1.4 获取设置别名的手续费"></a>1.4 获取设置别名的手续费<a class="article-anchor" href="#1-4-获取设置别名的手续费" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getAliasFee(String address, String alias)</code></strong>  </p>
+<p>说明</p>
+<blockquote>
+<p> 根据账户地址和待设置的别名名称获取设置该别名所需要的手续费(不包含设置别名固定1NULS的花费)</p>
+<p> Result.data <code>double</code>,  unit is <code>NULS</code></p>
+</blockquote>
+<p><strong>注意!</strong> 此接口返回的手续费单位为<code>NULS</code></p>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户的地址</td><br>    </tr><br>    <tr><br>        <td align="center">alias</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">待设置的别名名称</td><br>    </tr></table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"data"</span>:&#123;</span><br><span class="line">		<span class="attr">"value"</span>: <span class="number">0.01</span> //(单位为NULS)</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getAliasFee(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>,<span class="string">"factory666"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-5-获取账户列表" class="article-heading"><a href="#1-5-获取账户列表" class="headerlink" title="1.5 获取账户列表"></a>1.5 获取账户列表<a class="article-anchor" href="#1-5-获取账户列表" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getAccountList(int pageNumber, int pageSize)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据分页参数获取账户列表</p>
+<p>Result.data Page <a href="#AccountInfo"><code>List&lt;AccountInfo&gt;</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">pageNumber</td><br>        <td align="center">int</td><br>        <td align="center">必填</td><br>        <td align="center">页码，必须大于0 </td><br>    </tr><br>    <tr><br>        <td align="center">pageSize</td><br>        <td align="center">int</td><br>        <td align="center">必填</td><br>        <td align="center">每页返回数据记录数量, 取值范围1~100</td><br>    </tr></table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"data"</span>: &#123;</span><br><span class="line">		<span class="attr">"pageNumber"</span>: <span class="number">1</span>,</span><br><span class="line">    	<span class="attr">"pageSize"</span>: <span class="number">10</span>,</span><br><span class="line">    	<span class="attr">"total"</span>: <span class="number">100</span>,</span><br><span class="line">     	<span class="attr">"pages"</span>: <span class="number">10</span>,</span><br><span class="line">		<span class="attr">"list"</span>: [</span><br><span class="line">			&#123;</span><br><span class="line">				"address": String, 账户地址</span><br><span class="line">				"alias": String, 账户别名</span><br><span class="line">				"pubKey": String, 公钥</span><br><span class="line">				"extend": String, 扩展</span><br><span class="line">				"createTime": Long, 创建时间</span><br><span class="line">				"encrypted": boolean, 是否加密</span><br><span class="line">				"priKey": String, 私钥（创建无密码离线账户时才会有值）</span><br><span class="line">				"encryptedPriKey": String, 加密私钥（创建有密码离线账户时才会有值）</span><br><span class="line">			&#125;,</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="attr">"address"</span>: <span class="string">"2Cid96JrTGA2XaNG6zXrRKh18kLUbLP"</span>,</span><br><span class="line">				<span class="attr">"alias"</span>: <span class="literal">null</span>,</span><br><span class="line">				<span class="attr">"pubKey"</span>: <span class="string">"033da2433ef4ca111bfeefaadd9fe0f5874f3aac5186109f9de10a9eed6f48f184"</span>,</span><br><span class="line">				<span class="attr">"extend"</span>: <span class="literal">null</span>,</span><br><span class="line">				<span class="attr">"createTime"</span>: <span class="number">1529311250627</span>,</span><br><span class="line">				<span class="attr">"encrypted"</span>: <span class="literal">true</span>,</span><br><span class="line">				<span class="attr">"priKey"</span>: <span class="literal">null</span>,</span><br><span class="line">				<span class="attr">"encryptedPriKey"</span>: <span class="literal">null</span></span><br><span class="line">			&#125;</span><br><span class="line">			...</span><br><span class="line">			</span><br><span class="line">		]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getAccountList(<span class="number">1</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-6-根据账户别名获取账户地址" class="article-heading"><a href="#1-6-根据账户别名获取账户地址" class="headerlink" title="1.6 根据账户别名获取账户地址"></a>1.6 根据账户别名获取账户地址<a class="article-anchor" href="#1-6-根据账户别名获取账户地址" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getAddressByAlias(String alias)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据账户别名获取账户地址字符串</p>
+<p>Result.data <code>String</code>  </p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">alias</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户别名 </td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">    	<span class="attr">"value"</span>: <span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getAddressByAlias(<span class="string">"factory666"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-7-获取账户私钥" class="article-heading"><a href="#1-7-获取账户私钥" class="headerlink" title="1.7 获取账户私钥"></a>1.7 获取账户私钥<a class="article-anchor" href="#1-7-获取账户私钥" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getPrikey(String address, String password)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据账户地址和密码获取账户私钥，返回私钥字符串</p>
+<p>Result.data <code>String</code></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户地址</td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">账户密码，如果账户没有加密则不填</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">		<span class="attr">"value"</span>:<span class="string">"1f9d3ad044e0e1201e117b041f3d2ceedacb44688e57969620f3ad7a4d6e9d24"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em> </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//有密码的账户调用方式</span></span><br><span class="line">getPrikey(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="string">"nuls123456"</span>);</span><br><span class="line"><span class="comment">//无密码的账户调用方式</span></span><br><span class="line">getPrikey(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-8-验证别名是否可以使用" class="article-heading"><a href="#1-8-验证别名是否可以使用" class="headerlink" title="1.8 验证别名是否可以使用"></a>1.8 验证别名是否可以使用<a class="article-anchor" href="#1-8-验证别名是否可以使用" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result isAliasUsable(String alias)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据别名名称验证别名是否可用（是否没有被使用）</p>
+<p>Result</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">alias</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">别名名称</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示别名可以使用</span><br><span class="line">    "success": true,</span><br><span class="line">    "data": &#123;</span><br><span class="line">		"value":true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回 别名不可用的情况</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示别名不可以使用</span><br><span class="line">    "success": true,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "value": false</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回错误的情况,例如参数错误</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示错误的情况</span><br><span class="line">    "success": false,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "code": "ACT005",</span><br><span class="line">        "msg": "xxxxxx...."</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em> </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">isAliasUsable(<span class="string">"factory666"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-9-备份账户" class="article-heading"><a href="#1-9-备份账户" class="headerlink" title="1.9 备份账户"></a>1.9 备份账户<a class="article-anchor" href="#1-9-备份账户" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result backupAccount(String address, String path, String password)</code></strong>   </p>
+<p>说明</p>
+<blockquote>
+<p>根据账户地址,密码以及输出地址备份账户(导出.keystore文件)，如果账户是加密的则导出的keystore是由当前密码加密的，导入时需要验证此时账户的密码</p>
+<p>Result 返回生成的文件地址</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户的地址</td><br>    </tr><br>    <tr><br>        <td align="center">path</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">将要存放备份文件的文件夹，传null时，将备份到NULS服务的当前目录 </td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">账户密码，如果账户没有加密则不填</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">	    <span class="attr">"value"</span>: <span class="string">"/Users/lichao/Downloads/2ChDcC1nvki521xXhYAUzYXt4RLNULS.accountkeystore"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//备份一个没有密码的账户至当前目录</span></span><br><span class="line">backupAccount(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="keyword">null</span>);</span><br><span class="line"><span class="comment">//备份一个有密码的账户至/backup目录</span></span><br><span class="line">backupAccount(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="string">"/backup"</span>, <span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-10-导入账户" class="article-heading"><a href="#1-10-导入账户" class="headerlink" title="1.10 导入账户"></a>1.10 导入账户<a class="article-anchor" href="#1-10-导入账户" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result importAccountByKeystore</code></strong>  </p>
+<p>说明</p>
+<blockquote>
+<p>根据keystore文件导入账户, 如果keystore文件是由加密的account备份生成的，则需要验证备份时账户的密码。</p>
+<p>Result </p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">path/fileReader</td><br>        <td align="center">String/FileReader</td><br>        <td align="center">必填</td><br>        <td align="center">待导入的.keystore文件的url，或者由.keystore文件生成的FileReader对象</td><br>    </tr><br>    <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">.keystore文件对应的账户密码，如果导出.keystore时对应账户没有加密则不填</td><br>    </tr><br>     <tr><br>        <td align="center">overwrite</td><br>        <td align="center">boolean</td><br>        <td align="center">必填</td><br>        <td align="center">true: 执行覆盖导入; false: 如果该账户已经在钱包里存在，将不执行导入操作，并返回错误提示。</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">    	<span class="attr">"value"</span>:<span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导入一个有密码的账户</span></span><br><span class="line">importAccountByKeystore(<span class="string">"/backup/XXXXXX.keystore"</span>, <span class="string">"nuls123456"</span>, <span class="keyword">true</span>);</span><br><span class="line">importAccountByKeystore(fileReader, <span class="string">"nuls123456"</span>, <span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//导入一个没有密码的账户</span></span><br><span class="line">importAccountByKeystore(<span class="string">"/backup/XXXXXX.keystore"</span>, <span class="keyword">false</span>);</span><br><span class="line">importAccountByKeystore(fileReader, <span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-11-导入账户-私钥" class="article-heading"><a href="#1-11-导入账户-私钥" class="headerlink" title="1.11 导入账户(私钥)"></a>1.11 导入账户(私钥)<a class="article-anchor" href="#1-11-导入账户-私钥" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result importAccountByPriKey(String privateKey, String password, boolean overwrite)</code></strong>  </p>
+<p>说明</p>
+<blockquote>
+<p>根据私钥导入账户</p>
+<p>Result</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">privateKey</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户私钥 </td><br>    </tr><br>    <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">设置新密码, 密码长度8~20，需同时包含字母和数字，不能输入空格</td><br>    </tr><br>     <tr><br>        <td align="center">overwrite</td><br>        <td align="center">boolean</td><br>        <td align="center">必填</td><br>        <td align="center">true: 执行覆盖导入; false: 如果该账户已经在钱包里存在，将不执行导入操作，并返回错误提示。</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">    	<span class="attr">"value"</span>:<span class="string">"2CiU1CmB6c9jmSLDNBe6PouA7NgNULS"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导入账户时设置密码</span></span><br><span class="line">importAccountByPriKey(<span class="string">"1f9d3ad044e0e120......"</span>, <span class="string">"nuls123456"</span>, <span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//导入账户时不设置密码</span></span><br><span class="line">importAccountByPriKey(<span class="string">"1f9d3ad044e0e120......"</span>, <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-12-验证账户是否加密" class="article-heading"><a href="#1-12-验证账户是否加密" class="headerlink" title="1.12 验证账户是否加密"></a>1.12 验证账户是否加密<a class="article-anchor" href="#1-12-验证账户是否加密" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result isEncrypted(String address)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>验证账户是否加密</p>
+<p>Result</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户地址</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示已加密</span><br><span class="line">    "success": true,</span><br><span class="line">    "data": &#123;</span><br><span class="line">		"value":true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回 未加密</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "value": false</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回错误的情况,例如参数错误</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示错误的情况</span><br><span class="line">    "success": false,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "code": "ACT005",</span><br><span class="line">        "msg": "xxxxxx...."</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">isEncrypted(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-13-移除账户" class="article-heading"><a href="#1-13-移除账户" class="headerlink" title="1.13 移除账户"></a>1.13 移除账户<a class="article-anchor" href="#1-13-移除账户" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result removeAccount(String address, String password)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>移除账户</p>
+<p>Result</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户地址</td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">账户密码，如果账户没有加密则不填</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示成功</span><br><span class="line">    "success": true,</span><br><span class="line">    "data": &#123;</span><br><span class="line">		"value":true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回不成功 以及错误的情况,例如参数错误</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示错误的情况</span><br><span class="line">    "success": false,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "code": "ACT005",</span><br><span class="line">        "msg": "xxxxxx...."</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">removeAccount(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>);</span><br><span class="line">removeAccount(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-13-设置密码" class="article-heading"><a href="#1-13-设置密码" class="headerlink" title="1.13 设置密码"></a>1.13 设置密码<a class="article-anchor" href="#1-13-设置密码" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result setPassword(String address, String password）</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>为未加密的账户设置密码，已加密账户不能调用此接口</p>
+<p>Result</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户地址</td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">设置新密码, 密码长度8~20，需同时包含字母和数字，不能输入空格</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示成功</span><br><span class="line">    "success": true,</span><br><span class="line">    "data": &#123;</span><br><span class="line">		"value":true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回不成功 以及错误的情况,例如参数错误</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示错误的情况</span><br><span class="line">    "success": false,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "code": "ACT005",</span><br><span class="line">        "msg": "xxxxxx...."</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setPassword(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-14-修改密码" class="article-heading"><a href="#1-14-修改密码" class="headerlink" title="1.14 修改密码"></a>1.14 修改密码<a class="article-anchor" href="#1-14-修改密码" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result resetPassword(String address, String password, String newPassword)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>为已加密的账户修改密码，未加密账户不能调用此接口</p>
+<p>Result</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户地址</td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户当前密码</td><br>    </tr><br>     <tr><br>        <td align="center">newPassword</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">新密码, 密码长度8~20，需同时包含字母和数字，不能输入空格</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示成功</span><br><span class="line">    "success": true,</span><br><span class="line">    "data": &#123;</span><br><span class="line">		"value":true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回不成功 以及错误的情况,例如参数错误</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示错误的情况</span><br><span class="line">    "success": false,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "code": "ACT005",</span><br><span class="line">        "msg": "xxxxxx...."</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">resetPassword(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="string">"nuls123456"</span>, <span class="string">"NULS111111"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-15-设置别名" class="article-heading"><a href="#1-15-设置别名" class="headerlink" title="1.15 设置别名"></a>1.15 设置别名<a class="article-anchor" href="#1-15-设置别名" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result setAlias(String address, String alias, String password)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>为账户设置一个别名</p>
+<p>Result 返回设置别名的交易hash</p>
+</blockquote>
+<table><br>    <tr><br>       <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户的地址</td><br>    </tr><br>     <tr><br>        <td align="center">alias</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">待设置的别名名称</td><br>    </tr><br>        <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">密码</td><br>        <td align="center">账户密码，如果账户没有加密则不填</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>:&#123;		</span><br><span class="line">		<span class="attr">"value"</span>:<span class="string">"0020d7a69747778f6f02e2b0171640bc98aa19c53700988b7765c195ae691f3202c6"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>错误示例</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">false</span>,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "code": "ACT007",</span><br><span class="line">        "msg": "The account already set an alias"</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setAlias(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="string">"factory666"</span>, <span class="string">"NULS111111"</span>);</span><br><span class="line">setAlias(<span class="string">"2ChqBTvFXttQsghj8zQpcdv76TQU8G5"</span>, <span class="string">"factory666"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-16-设置离线账户密码" class="article-heading"><a href="#1-16-设置离线账户密码" class="headerlink" title="1.16 设置离线账户密码"></a>1.16 设置离线账户密码<a class="article-anchor" href="#1-16-设置离线账户密码" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result setPasswordOffline(String address, String priKey, String password)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>设置离线账户密码, sdk中独立加密,不与NULS服务交互</p>
+<p>Result 返回加密后的私钥（encryptedPriKey）</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户地址</td><br>    </tr><br>     <tr><br>        <td align="center">priKey</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户的私钥</td><br>    </tr><br>        <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">新密码, 密码长度8~20，需同时包含字母和数字，不能输入空格</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">    	<span class="attr">"value"</span>:<span class="string">"a770c1886f566c973b6eb99543ef03825a89ed16e20d8dbe320aed64a85d5863ca23df43ef16ce0475424a49e192b6f9"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setPasswordOffline(<span class="string">"2CacFwqMwcJiGNNBwiwV7bCL7bjwNBr"</span>,<span class="string">"00e4bfd347351ea899b5f0ae2c0a3e7a6951b202eaf72432d1a63a2dc85c59c82a"</span>,<span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="1-17-修改离线账户密码" class="article-heading"><a href="#1-17-修改离线账户密码" class="headerlink" title="1.17 修改离线账户密码"></a>1.17 修改离线账户密码<a class="article-anchor" href="#1-17-修改离线账户密码" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result resetPasswordOffline(String address, String encryptedPriKey, String password, String newPassword)</code></strong></p>
+<p>接口</p>
+<blockquote>
+<p>修改离线账户密码, sdk中独立修改, 不与NULS服务交互</p>
+<p>Result 返回新密码生成的加密后的私钥（encryptedPriKey）</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户的地址 </td><br>    </tr><br>     <tr><br>        <td align="center">encryptedPriKey</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">加密后的私钥</td><br>    </tr><br>        <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">原密码</td><br>    </tr><br>     <tr><br>        <td align="center">newPassword</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">新密码, 密码长度8~20，需同时包含字母和数字，不能输入空格</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">    	<span class="attr">"value"</span>:<span class="string">"a770c1886f566c973b6eb99543ef03825a89ed16e20d8dbe320aed64a85d5863ca23df43ef16ce0475424a49e192b6f9"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">resetPasswordOffline(<span class="string">"2CacFwqMwcJiGNNBwiwV7bCL7bjwNBr"</span>,<span class="string">"25368dbc0ff7eea4fc6da22bc37e85d7976a3846f8b58d4dc0cf484e740ba1b61f96395fbe1ddf70ece9fd21fcd95e7a"</span>,<span class="string">"NULS111111"</span>, <span class="string">"nuls123456"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="交易-AccountLedgerService" class="article-heading"><a href="#交易-AccountLedgerService" class="headerlink" title="交易 AccountLedgerService"></a>交易 AccountLedgerService<a class="article-anchor" href="#交易-AccountLedgerService" aria-hidden="true"></a></h3><h4 id="2-1-创建转账交易" class="article-heading"><a href="#2-1-创建转账交易" class="headerlink" title="2.1 创建转账交易"></a>2.1 创建转账交易<a class="article-anchor" href="#2-1-创建转账交易" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result createTransaction(List&lt;Input&gt; inputs, List&lt;Output&gt; outputs, String remark)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>通过用户传入的交易输入\输出，组装交易。传入的参数为json对象，详见e.g示例。<strong>示例中input和output的属性都为必填项</strong>。交易手续费为inputs和outputs总额的差值，手续费会根据交易大小存在一个最小值，低于最小值时，交易不会被打包。<strong>有关手续费的计算会在后面详细说明</strong></p>
+<p>Result.data <code>String</code> 16进制后的交易序列化字符串</p>
+</blockquote>
+<table><br>  <tr><br>      <th align="center">参数</th><br>    <th align="center">类型</th><br>    <th align="center">是否必填</th><br>    <th align="center">说明</th><br>  </tr><br>  <tr><br>  <td align="center">inputs</td><br>  <td align="center">List&lt;Input&gt;</td><br>  <td align="center">必填</td><br>  <td align="center">交易引用的未花费输出</td><br>  </tr><br>   <tr><br>  <td align="center">outputs</td><br>  <td align="center">List&lt;Output&gt;</td><br>  <td align="center">必填</td><br>  <td align="center">交易新生成的未花费输出</td><br>  </tr><br>  <tr><br>  <td align="center">remark</td><br>  <td align="center">String</td><br>  <td align="center">非必填</td><br>  <td align="center">交易备注</td><br>  </tr><br></table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String remark = <span class="string">"create transaction demo"</span>;</span><br><span class="line"><span class="keyword">long</span> fee = <span class="number">100000</span>;</span><br><span class="line">List&lt;Input&gt; inputs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">List&lt;Output&gt; outputs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//组装交易的inputs,示例中的input属性均必填</span></span><br><span class="line">Input input = <span class="keyword">new</span> Input();</span><br><span class="line">input.setFromHash(<span class="string">"002023c66d10cf9047dbcca12aee3db3c921a2ec22e0dd63331cb85"</span>); </span><br><span class="line">input.setFromIndex(<span class="number">1</span>);</span><br><span class="line">input.setAddress(<span class="string">"2ejPVMKST7h4Qsd5Dqa8Q9Psr47mj5"</span>)</span><br><span class="line">input.setValue(<span class="number">1000000000L</span>);      </span><br><span class="line">input.setLockTime(<span class="number">0</span>);</span><br><span class="line">inputs.add(input);</span><br><span class="line"></span><br><span class="line"><span class="comment">//组装交易的outputs,示例中的output属性均必填</span></span><br><span class="line">Output output = <span class="keyword">new</span> Output();</span><br><span class="line">output.setAddress(<span class="string">"2CjPVMKST7h4Q5Dqa8Q9P9CwYSmN7mG"</span>);</span><br><span class="line">output.setValue(<span class="number">1000000L</span>);</span><br><span class="line">output.setLockTime(<span class="number">0L</span>);</span><br><span class="line">outputs.add(output);</span><br><span class="line"></span><br><span class="line">output = <span class="keyword">new</span> Output();</span><br><span class="line">output.setAddress(<span class="string">"2CXJEuoXZMajeTEgL6TgiSxTRRMwiMM"</span>);</span><br><span class="line">output.setValue(<span class="number">1000000000L</span> - <span class="number">1000000</span> - fee);</span><br><span class="line">output.setLockTime(<span class="number">0L</span>);</span><br><span class="line">outputs.add(output);</span><br><span class="line"></span><br><span class="line">Result result = NulsSDKTool.createTransaction(inputs, outputs, remark);</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p><strong>交易手续费的计算</strong>：手续费单价 * 交易大小</p>
+<p><strong>手续费单价(min)</strong>：100000 NA/1KB</p>
+<p><strong>交易大小的计算</strong>：（124 + 50  <em> inputs.length + 38 </em> outputs.length + remark.bytes.length ）/1024<br>124为基本信息的固定长度，50为单条input的长度，38为单条output的长度，remark为非必填字段，有需要传入时，按照UTF-8字符编码计算字节长度。交易大小用KB作为单位，最大值为300KB，不足1KB的部分，记为1KB。<br>出块节点在验证每笔交易时，将输入与输出的差值视为用户发送此交易时所支付的手续费，再根据交易的大小计算出手续费的最小值。如果用户的手续费小于最小值，则视为不合法交易，不予打包。因此，在创建交易的时候，手续费的计算应谨慎处理，避免交易失败。</p>
+</blockquote>
+<h4 id="2-2-交易签名" class="article-heading"><a href="#2-2-交易签名" class="headerlink" title="2.2 交易签名"></a>2.2 交易签名<a class="article-anchor" href="#2-2-交易签名" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result signTransaction(String txHex, String priKey, String address, String password)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>通过私钥，给交易签名</p>
+<p>Result.data <code>String</code> 签名后的交易，16进制后的序列化字符串</p>
+</blockquote>
+<table><br>  <tr><br>      <th align="center">参数</th><br>    <th align="center">类型</th><br>    <th align="center">是否必填</th><br>    <th align="center">说明</th><br>  </tr><br>  <tr><br>  <td align="center">txHex</td><br>  <td align="center">String</td><br>  <td align="center">必填</td><br>  <td align="center">十六进制的交易序列化数据</td><br>  </tr><br>   <tr><br>  <td align="center">priKey</td><br>  <td align="center">String</td><br>  <td align="center">必填</td><br>  <td align="center">交易的私钥</td><br>  </tr><br>   <tr><br>  <td align="center">address</td><br>  <td align="center">String</td><br>  <td align="center">必填</td><br>  <td align="center">私钥对应的地址，用于验证私钥合法性</td><br>  </tr><br>   <tr><br>  <td align="center">password</td><br>  <td align="center">String</td><br>  <td align="center">非必填</td><br>  <td align="center">私钥的密码，如果私钥未加密可不传</td><br>  </tr><br>  </table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String txHex =<span class="string">"020197320f96301001a78cb7fb8bb7b1710b4afa390d8341080fba7a47e8d030000000000000000"</span>;</span><br><span class="line">String priKey =<span class="string">"252f6d9d55b7ef539ea58df99ebaf71c9929bd9d0054338baf7a59c9b85b4fa631f816907c8"</span>;</span><br><span class="line">String address = <span class="string">"2CXJEuoXZMajeTEgL6TgiSxTRRMwiMM"</span>;</span><br><span class="line">String password = <span class="string">"NULS6352s!f"</span>;</span><br><span class="line">Result result = NulsSDKTool.signTransaction(txHex, priKey, address, password);</span><br></pre></td></tr></table></figure>
+<blockquote>
+</blockquote>
+<hr>
+<h4 id="2-3-根据交易hash查询交易详情" class="article-heading"><a href="#2-3-根据交易hash查询交易详情" class="headerlink" title="2.3 根据交易hash查询交易详情"></a>2.3 根据交易hash查询交易详情<a class="article-anchor" href="#2-3-根据交易hash查询交易详情" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getTxByHash(String hash)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据交易hash查询交易详情</p>
+<p>Result.data <a href="#Transaction"><code>Transaction</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">hash</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">交易的hash值</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"hash"</span>: <span class="string">"00203a169b42e5e142e20b273ac925e55f773b5a38c5f5c907efdbc43abb7d7a67b2"</span>,</span><br><span class="line">        <span class="attr">"type"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"time"</span>: <span class="number">1529323198461</span>,</span><br><span class="line">        <span class="attr">"blockHeight"</span>: <span class="number">1884</span>,</span><br><span class="line">        <span class="attr">"fee"</span>: <span class="number">100000</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="number">99900000000</span>,</span><br><span class="line">        <span class="attr">"remark"</span>: <span class="string">"转账"</span>,</span><br><span class="line">        <span class="attr">"scriptSig"</span>: <span class="string">"21036dd27c9fa786a1e83df204e9b31ddc24745c378f1f6b42731d07f05347167c0000473045022100ff3372711d78eb554be331aa40cd7af246641ecd3bc06f2fdca7faefb25f74e50220743a2f2d9d01b5a77a878349b996cbe4953af5d1a946519a5ce4d1129cf99848"</span>,</span><br><span class="line">        <span class="attr">"status"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"confirmCount"</span>: <span class="number">14</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">255</span>,</span><br><span class="line">        <span class="attr">"inputs"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"fromHash"</span>: <span class="string">"0020ab020707282932e6ec701f0b64e22e937fdd03ce9b37aab498aed2e00b6fa8e7"</span>,</span><br><span class="line">                <span class="attr">"fromIndex"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"address"</span>: <span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">9999899000000</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"outputs"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"txHash"</span>: <span class="string">"00203a169b42e5e142e20b273ac925e55f773b5a38c5f5c907efdbc43abb7d7a67b2"</span>,</span><br><span class="line">                <span class="attr">"index"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"address"</span>: <span class="string">"2CiVA3n1VoNQobAax4d7qNEBZAfehLN"</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">99900000000</span>,</span><br><span class="line">                <span class="attr">"lockTime"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"txHash"</span>: <span class="string">"00203a169b42e5e142e20b273ac925e55f773b5a38c5f5c907efdbc43abb7d7a67b2"</span>,</span><br><span class="line">                <span class="attr">"index"</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">"address"</span>: <span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">9899998900000</span>,</span><br><span class="line">                <span class="attr">"lockTime"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getTxByHash(<span class="string">"041f3d2ceed........"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-4-转账" class="article-heading"><a href="#2-4-转账" class="headerlink" title="2.4 转账"></a>2.4 转账<a class="article-anchor" href="#2-4-转账" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result transfer(String address, String toAddress, String password, long amount, String remark)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>发起转账交易</p>
+<p>Result 返回交易hash</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">转出者账户的地址</td><br>    </tr><br>     <tr><br>        <td align="center">toAddress</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">接收者账户的地址</td><br>    </tr><br>     <tr><br>        <td align="center">password</td><br>        <td align="center">String</td><br>        <td align="center">非必填</td><br>        <td align="center">转出者账户的密码，如果账户没有加密则不填</td><br>    </tr><br>     <tr><br>        <td align="center">amount</td><br>        <td align="center">long</td><br>        <td align="center">必填</td><br>        <td align="center">转账金额(单位:Na)</td><br>    </tr><br>     <tr><br>        <td align="center">remark</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">备注</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">    	<span class="attr">"value"</span>:<span class="string">"00203a169b42e5e142e20b273ac925e55f773b5a38c5f5c907efdbc43abb7d7a67b2"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//账户有密码</span></span><br><span class="line">transfer(<span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span>, <span class="string">"2CiU1CmB6c9jmSLDNBe6PouA7NgXXXX"</span>, <span class="string">"nuls123456"</span>, <span class="number">8888800000000</span>, <span class="string">"备注1NULS=10000000Na"</span>);</span><br><span class="line"><span class="comment">//账户没有密码</span></span><br><span class="line">transfer(<span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span>, <span class="string">"2CiU1CmB6c9jmSLDNBe6PouA7NgNULS"</span>, <span class="number">8888800000000</span>, <span class="string">"备注1NULS=10000000Na"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-5-查询账户余额" class="article-heading"><a href="#2-5-查询账户余额" class="headerlink" title="2.5 查询账户余额"></a>2.5 查询账户余额<a class="article-anchor" href="#2-5-查询账户余额" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getBalance(String address)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>获取账户余额</p>
+<p>Result.data <a href="#BalanceInfo"><code>BalanceInfo</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">address</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">账户地址</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"balance"</span>: <span class="number">1009899998900000</span>,</span><br><span class="line">        <span class="attr">"usable"</span>: <span class="number">1009899998900000</span>,</span><br><span class="line">        <span class="attr">"locked"</span>: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getBalance(<span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-6-广播交易" class="article-heading"><a href="#2-6-广播交易" class="headerlink" title="2.6 广播交易"></a>2.6 广播交易<a class="article-anchor" href="#2-6-广播交易" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result broadcastTransaction(String txHex);</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>广播交易</p>
+<p>Result.data String 返回交易hash</p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">txHex</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">十六进制交易序列化数据</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">    	<span class="attr">"value"</span>: <span class="string">"002023c66d10cf9047dbcca12aee2235ff9dfe0f13db3c921a2ec22e0dd63331cb85"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String txHex = <span class="string">"1f9d3ad044e0e1201e117b041f3d2ceedacb44688e57969620f3ad7a4d6e9d241f9d3ad044e0e1201e117b041f3d2ceedacb44688e57969620f3ad7a4d6e9d24"</span>;</span><br><span class="line">Result result = service.broadcastTransaction(txHex);</span><br><span class="line"><span class="keyword">if</span>(result.isSuccess()) &#123;</span><br><span class="line">   String txHash = (String)result.getData();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-7-创建多地址转账交易" class="article-heading"><a href="#2-7-创建多地址转账交易" class="headerlink" title="2.7 创建多地址转账交易"></a>2.7 创建多地址转账交易<a class="article-anchor" href="#2-7-创建多地址转账交易" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result createMultipleInputAddressTransaction(List&lt;Input&gt; inputs, List&lt;Output&gt; outputs, String remark)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>通过用户传入的交易输入\输出，组装交易。传入的参数为json对象，详见e.g示例。<strong>示例中input和output的属性都为必填项</strong>。交易手续费为inputs和outputs总额的差值，手续费会根据交易大小存在一个最小值，低于最小值时，交易不会被打包。<strong>有关手续费的计算会在后面详细说明</strong></p>
+<p>Result.data <code>String</code> 16进制后的交易序列化字符串</p>
+</blockquote>
+<table><br>  <tr><br>      <th align="center">参数</th><br>    <th align="center">类型</th><br>    <th align="center">是否必填</th><br>    <th align="center">说明</th><br>  </tr><br>  <tr><br>  <td align="center">inputs</td><br>  <td align="center">List&lt;Input&gt;</td><br>  <td align="center">必填</td><br>  <td align="center">交易引用的未花费输出</td><br>  </tr><br>   <tr><br>  <td align="center">outputs</td><br>  <td align="center">List&lt;Output&gt;</td><br>  <td align="center">必填</td><br>  <td align="center">交易新生成的未花费输出</td><br>  </tr><br>   <tr><br>  <td align="center">nInputAccount</td><br>  <td align="center">int</td><br>  <td align="center">必填</td><br>  <td align="center">输入账户数</td><br>  </tr><br>  <tr><br>  <td align="center">remark</td><br>  <td align="center">String</td><br>  <td align="center">非必填</td><br>  <td align="center">交易备注</td><br>  </tr><br></table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String remark = <span class="string">"create transaction demo"</span>;</span><br><span class="line"><span class="keyword">long</span> fee = <span class="number">100000</span>;</span><br><span class="line">List&lt;Input&gt; inputs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">List&lt;Output&gt; outputs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">int</span> nInputAccount = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//组装交易的inputs,示例中的input属性均必填</span></span><br><span class="line">Input input = <span class="keyword">new</span> Input();</span><br><span class="line">input.setFromHash(<span class="string">"002023c66d10cf9047dbcca12aee3db3c921a2ec22e0dd63331cb85"</span>); </span><br><span class="line">input.setFromIndex(<span class="number">1</span>);</span><br><span class="line">input.setAddress(<span class="string">"2ejPVMKST7h4Qsd5Dqa8Q9Psr47mj5"</span>)</span><br><span class="line">input.setValue(<span class="number">1000000000L</span>);      </span><br><span class="line">input.setLockTime(<span class="number">0</span>);</span><br><span class="line">inputs.add(input);</span><br><span class="line"></span><br><span class="line"><span class="comment">//组装交易的outputs,示例中的output属性均必填</span></span><br><span class="line">Output output = <span class="keyword">new</span> Output();</span><br><span class="line">output.setAddress(<span class="string">"2CjPVMKST7h4Q5Dqa8Q9P9CwYSmN7mG"</span>);</span><br><span class="line">output.setValue(<span class="number">1000000L</span>);</span><br><span class="line">output.setLockTime(<span class="number">0L</span>);</span><br><span class="line">outputs.add(output);</span><br><span class="line"></span><br><span class="line">output = <span class="keyword">new</span> Output();</span><br><span class="line">output.setAddress(<span class="string">"2CXJEuoXZMajeTEgL6TgiSxTRRMwiMM"</span>);</span><br><span class="line">output.setValue(<span class="number">1000000000L</span> - <span class="number">1000000</span> - fee);</span><br><span class="line">output.setLockTime(<span class="number">0L</span>);</span><br><span class="line">outputs.add(output);</span><br><span class="line"></span><br><span class="line">Result result = NulsSDKTool.createMultipleInputAddressTransaction(inputs,nInputAccount, outputs, remark);</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p><strong>交易手续费的计算</strong>：手续费单价 * 交易大小</p>
+<p><strong>手续费单价(min)</strong>：100000 NA/1KB</p>
+<p><strong>交易大小的计算</strong>：（124<em>nInputAccount + 50  </em> inputs.length + 38 * outputs.length + remark.bytes.length ）/1024<br>124为基本信息的固定长度，50为单条input的长度，38为单条output的长度，remark为非必填字段，有需要传入时，按照UTF-8字符编码计算字节长度。交易大小用KB作为单位，最大值为300KB，不足1KB的部分，记为1KB。<br>出块节点在验证每笔交易时，将输入与输出的差值视为用户发送此交易时所支付的手续费，再根据交易的大小计算出手续费的最小值。如果用户的手续费小于最小值，则视为不合法交易，不予打包。因此，在创建交易的时候，手续费的计算应谨慎处理，避免交易失败。</p>
+</blockquote>
+<h4 id="2-8-多地址转账交易签名" class="article-heading"><a href="#2-8-多地址转账交易签名" class="headerlink" title="2.8 多地址转账交易签名"></a>2.8 多地址转账交易签名<a class="article-anchor" href="#2-8-多地址转账交易签名" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result signMultipleAddressTransaction(String txHex, List&lt;String&gt; privKeys, List&lt;String&gt; passwords)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>通过私钥，给交易签名</p>
+<p>Result.data <code>String</code> 签名后的交易，16进制后的序列化字符串</p>
+</blockquote>
+<table><br>  <tr><br>      <th align="center">参数</th><br>    <th align="center">类型</th><br>    <th align="center">是否必填</th><br>    <th align="center">说明</th><br>  </tr><br>  <tr><br>  <td align="center">txHex</td><br>  <td align="center">String</td><br>  <td align="center">必填</td><br>  <td align="center">十六进制的交易序列化数据</td><br>  </tr><br>   <tr><br>  <td align="center">privKeys</td><br>  <td align="center">List<string></string></td><br>  <td align="center">必填</td><br>  <td align="center">交易的私钥</td><br>  </tr><br>   <tr><br>  <td align="center">passwords</td><br>  <td align="center">List<string></string></td><br>  <td align="center">必填</td><br>  <td align="center">私钥对应的密码（多个账户密码必须一样）</td><br>  </tr><br>  </table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String txHex =<span class="string">"020197320f96301001a78cb7fb8bb7b1710b4afa390d8341080fba7a47e8d030000000000000000"</span>;</span><br><span class="line">List&lt;String&gt; priKeys = Arrays.asList(<span class="string">"08a605b754bd1be1ba765fabd5cd218a545eb38b54ad26a7eb8a3378f724e5be"</span>, <span class="string">"00a710f9679fb6b5953bcfbea67a198e9c0d8888c43bad78a7241258e36aeaf65d"</span>);</span><br><span class="line">List&lt;String&gt; passwords = Arrays.asList(<span class="string">"123456"</span>,<span class="string">"123456"</span>);</span><br><span class="line">Result result = NulsSDKTool.signMultiTransaction(txHex, priKeys, passwords);</span><br></pre></td></tr></table></figure>
+<blockquote>
+</blockquote>
+<h3 id="区块-BlockService" class="article-heading"><a href="#区块-BlockService" class="headerlink" title="区块 BlockService"></a>区块 BlockService<a class="article-anchor" href="#区块-BlockService" aria-hidden="true"></a></h3><h4 id="3-1-根据区块高度获取区块头" class="article-heading"><a href="#3-1-根据区块高度获取区块头" class="headerlink" title="3.1 根据区块高度获取区块头"></a>3.1 根据区块高度获取区块头<a class="article-anchor" href="#3-1-根据区块高度获取区块头" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getblockHeader(int height)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据区块高度获取区块头信息</p>
+<p>Result.data <a href="#BlockHeader"><code>BlockHeader</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">height</td><br>        <td align="center">int</td><br>        <td align="center">必填</td><br>        <td align="center">区块高度</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"hash"</span>: <span class="string">"002078656b6e32f4f1e9e881e7b6c4c5de036ae81ec5bf78861bde9480f5ff3a1b33"</span>,</span><br><span class="line">        <span class="attr">"preHash"</span>: <span class="string">"0020ee5d28fde669adb0ad16f3ed426f1ee8df40560bed0ab30bb99cbf95df276d64"</span>,</span><br><span class="line">        <span class="attr">"merkleHash"</span>: <span class="string">"0020cc37658e2d110c1d42f64c7fd3dcb56d9653d4edc4d3a8406cb263a41f9f5488"</span>,</span><br><span class="line">        <span class="attr">"time"</span>: <span class="number">1529299160000</span>,</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"txCount"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"packingAddress"</span>: <span class="string">"2CWsZb9w8XXTE58TUhBGczxf4U6NULS"</span>,</span><br><span class="line">        <span class="attr">"scriptSig"</span>: <span class="string">"2102e18d02154e0f68900898efea7ba72d6d14e37d7d173a62146df2871f40996d7300473045022100d4d92a9518ffd855441c7712f4b31bd003291dc108fa2b455fe26d51e54625f102202ae8375bd69bf1928f9967edac82619ff78f30550c17797cc489d5effd3202bf"</span>,</span><br><span class="line">        <span class="attr">"roundIndex"</span>: <span class="number">419517</span>,</span><br><span class="line">        <span class="attr">"consensusMemberCount"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"roundStartTime"</span>: <span class="number">1529299150000</span>,</span><br><span class="line">        <span class="attr">"packingIndexOfRound"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"confirmCount"</span>: <span class="number">1909</span>,</span><br><span class="line">        <span class="attr">"reward"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"fee"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getblockHeader(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-2-根据区块hash获取区块头" class="article-heading"><a href="#3-2-根据区块hash获取区块头" class="headerlink" title="3.2 根据区块hash获取区块头"></a>3.2 根据区块hash获取区块头<a class="article-anchor" href="#3-2-根据区块hash获取区块头" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getblockHeader(String hash)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据区块hash获取区块头 </p>
+<p>Result.data <a href="#BlockHeader"><code>BlockHeader</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">hash</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">区块hash值</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"hash"</span>: <span class="string">"002078656b6e32f4f1e9e881e7b6c4c5de036ae81ec5bf78861bde9480f5ff3a1b33"</span>,</span><br><span class="line">        <span class="attr">"preHash"</span>: <span class="string">"0020ee5d28fde669adb0ad16f3ed426f1ee8df40560bed0ab30bb99cbf95df276d64"</span>,</span><br><span class="line">        <span class="attr">"merkleHash"</span>: <span class="string">"0020cc37658e2d110c1d42f64c7fd3dcb56d9653d4edc4d3a8406cb263a41f9f5488"</span>,</span><br><span class="line">        <span class="attr">"time"</span>: <span class="number">1529299160000</span>,</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"txCount"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"packingAddress"</span>: <span class="string">"2CWsZb9w8XXTE58TUhBGczxf4U6NULS"</span>,</span><br><span class="line">        <span class="attr">"scriptSig"</span>: <span class="string">"2102e18d02154e0f68900898efea7ba72d6d14e37d7d173a62146df2871f40996d7300473045022100d4d92a9518ffd855441c7712f4b31bd003291dc108fa2b455fe26d51e54625f102202ae8375bd69bf1928f9967edac82619ff78f30550c17797cc489d5effd3202bf"</span>,</span><br><span class="line">        <span class="attr">"roundIndex"</span>: <span class="number">419517</span>,</span><br><span class="line">        <span class="attr">"consensusMemberCount"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"roundStartTime"</span>: <span class="number">1529299150000</span>,</span><br><span class="line">        <span class="attr">"packingIndexOfRound"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"confirmCount"</span>: <span class="number">1909</span>,</span><br><span class="line">        <span class="attr">"reward"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"fee"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getblockHeader(<span class="string">"041f3d2ceed........"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-3-根据区块高度获取区块" class="article-heading"><a href="#3-3-根据区块高度获取区块" class="headerlink" title="3.3 根据区块高度获取区块"></a>3.3 根据区块高度获取区块<a class="article-anchor" href="#3-3-根据区块高度获取区块" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getBlock(int height)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据区块高度获取区块</p>
+<p>Result.data <a href="#Block"><code>Block</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">height</td><br>        <td align="center">int</td><br>        <td align="center">必填</td><br>        <td align="center">区块高度</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"hash"</span>: <span class="string">"00209bbcd98110b57f1ecd66c9d94d1a2381e6c03c3b9aa77db25b6eb5955bb658d3"</span>,</span><br><span class="line">        <span class="attr">"preHash"</span>: <span class="string">"00201c0fa53c98595c7f9ba817fca6367aa2da1c1e480f801766b7a4a16b39c54b67"</span>,</span><br><span class="line">        <span class="attr">"merkleHash"</span>: <span class="string">"00200c2dfa0560229ef728cd6bdc858334ef4072d8e25c3b0831c8366f4d4cb0c168"</span>,</span><br><span class="line">        <span class="attr">"time"</span>: <span class="number">1529323210000</span>,</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">1884</span>,</span><br><span class="line">        <span class="attr">"txCount"</span>: <span class="number">1884</span>,</span><br><span class="line">        <span class="attr">"packingAddress"</span>: <span class="string">"2CWsZb9w8XXTE58TUhBGczxf4U6NULS"</span>,</span><br><span class="line">        <span class="attr">"scriptSig"</span>: <span class="string">"2102e18d02154e0f68900898efea7ba72d6d14e37d7d173a62146df2871f40996d73004730450221009d1015b7cab19ac8099245390ae41ca14da9f47d5c28b3b7780a53bd8adcccd802202bf74bb764f9de248dfb892d98e9ff91bad25daa107cfdf4effd3fb1c266e5ae"</span>,</span><br><span class="line">        <span class="attr">"roundIndex"</span>: <span class="number">420416</span>,</span><br><span class="line">        <span class="attr">"consensusMemberCount"</span>: <span class="number">5</span>,</span><br><span class="line">        <span class="attr">"roundStartTime"</span>: <span class="number">1529323170000</span>,</span><br><span class="line">        <span class="attr">"packingIndexOfRound"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">        <span class="attr">"reward"</span>: <span class="number">100000</span>,</span><br><span class="line">        <span class="attr">"fee"</span>: <span class="number">100000</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">5</span>,</span><br><span class="line">        <span class="attr">"txList"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"hash"</span>: <span class="string">"00202b9737b15bf7e4ebc74a58554e461fbed6fedf3e289c6ef41afa80d83f67babc"</span>,</span><br><span class="line">                <span class="attr">"type"</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">"time"</span>: <span class="number">1529323210000</span>,</span><br><span class="line">                <span class="attr">"blockHeight"</span>: <span class="number">1884</span>,</span><br><span class="line">                <span class="attr">"fee"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"remark"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"scriptSig"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">                <span class="attr">"size"</span>: <span class="number">54</span>,</span><br><span class="line">                <span class="attr">"inputs"</span>: [],</span><br><span class="line">                <span class="attr">"outputs"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="string">"2CWsZb9w8XXTE58TUhBGczxf4U6NULS"</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">100000</span>,</span><br><span class="line">                        <span class="attr">"lockTime"</span>: <span class="number">2884</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"hash"</span>: <span class="string">"00203a169b42e5e142e20b273ac925e55f773b5a38c5f5c907efdbc43abb7d7a67b2"</span>,</span><br><span class="line">                <span class="attr">"type"</span>: <span class="number">2</span>,</span><br><span class="line">                <span class="attr">"time"</span>: <span class="number">1529323198461</span>,</span><br><span class="line">                <span class="attr">"blockHeight"</span>: <span class="number">1884</span>,</span><br><span class="line">                <span class="attr">"fee"</span>: <span class="number">100000</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"remark"</span>: <span class="string">"转账"</span>,</span><br><span class="line">                <span class="attr">"scriptSig"</span>: <span class="string">"21036dd27c9fa786a1e83df204e9b31ddc24745c378f1f6b42731d07f05347167c0000473045022100ff3372711d78eb554be331aa40cd7af246641ecd3bc06f2fdca7faefb25f74e50220743a2f2d9d01b5a77a878349b996cbe4953af5d1a946519a5ce4d1129cf99848"</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">                <span class="attr">"size"</span>: <span class="number">255</span>,</span><br><span class="line">                <span class="attr">"inputs"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"fromHash"</span>: <span class="string">"0020ab020707282932e6ec701f0b64e22e937fdd03ce9b37aab498aed2e00b6fa8e7"</span>,</span><br><span class="line">                        <span class="attr">"fromIndex"</span>: <span class="number">0</span>,</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="literal">null</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">9999899000000</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ],</span><br><span class="line">                <span class="attr">"outputs"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="string">"2CiVA3n1VoNQobAax4d7qNEBZAfehLN"</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">99900000000</span>,</span><br><span class="line">                        <span class="attr">"lockTime"</span>: <span class="number">0</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">9899998900000</span>,</span><br><span class="line">                        <span class="attr">"lockTime"</span>: <span class="number">0</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"hash"</span>: <span class="string">"002040370fcb2ad080abdcd2d91f952826c8f6e55bda7231c1c15f25d9d74dc8ad7f"</span>,</span><br><span class="line">                <span class="attr">"type"</span>: <span class="number">7</span>,</span><br><span class="line">                <span class="attr">"time"</span>: <span class="number">1529323210000</span>,</span><br><span class="line">                <span class="attr">"blockHeight"</span>: <span class="number">1884</span>,</span><br><span class="line">                <span class="attr">"fee"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"remark"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"scriptSig"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">                <span class="attr">"size"</span>: <span class="number">38</span>,</span><br><span class="line">                <span class="attr">"inputs"</span>: [],</span><br><span class="line">                <span class="attr">"outputs"</span>: []</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getBlock(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-4-根据区块hash获取区块" class="article-heading"><a href="#3-4-根据区块hash获取区块" class="headerlink" title="3.4 根据区块hash获取区块"></a>3.4 根据区块hash获取区块<a class="article-anchor" href="#3-4-根据区块hash获取区块" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getBlock(String hash)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>根据区块hash获取区块</p>
+<p>Result.data <a href="#Block"><code>Block</code></a></p>
+</blockquote>
+<table><br>    <tr><br>        <th align="center">参数</th><br>        <th align="center">类型</th><br>        <th align="center">是否必填</th><br>        <th align="center">说明</th><br>    </tr><br>    <tr><br>        <td align="center">hash</td><br>        <td align="center">String</td><br>        <td align="center">必填</td><br>        <td align="center">区块hash值</td><br>    </tr><br>    </table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"hash"</span>: <span class="string">"00209bbcd98110b57f1ecd66c9d94d1a2381e6c03c3b9aa77db25b6eb5955bb658d3"</span>,</span><br><span class="line">        <span class="attr">"preHash"</span>: <span class="string">"00201c0fa53c98595c7f9ba817fca6367aa2da1c1e480f801766b7a4a16b39c54b67"</span>,</span><br><span class="line">        <span class="attr">"merkleHash"</span>: <span class="string">"00200c2dfa0560229ef728cd6bdc858334ef4072d8e25c3b0831c8366f4d4cb0c168"</span>,</span><br><span class="line">        <span class="attr">"time"</span>: <span class="number">1529323210000</span>,</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">1884</span>,</span><br><span class="line">        <span class="attr">"txCount"</span>: <span class="number">1884</span>,</span><br><span class="line">        <span class="attr">"packingAddress"</span>: <span class="string">"2CWsZb9w8XXTE58TUhBGczxf4U6NULS"</span>,</span><br><span class="line">        <span class="attr">"scriptSig"</span>: <span class="string">"2102e18d02154e0f68900898efea7ba72d6d14e37d7d173a62146df2871f40996d73004730450221009d1015b7cab19ac8099245390ae41ca14da9f47d5c28b3b7780a53bd8adcccd802202bf74bb764f9de248dfb892d98e9ff91bad25daa107cfdf4effd3fb1c266e5ae"</span>,</span><br><span class="line">        <span class="attr">"roundIndex"</span>: <span class="number">420416</span>,</span><br><span class="line">        <span class="attr">"consensusMemberCount"</span>: <span class="number">5</span>,</span><br><span class="line">        <span class="attr">"roundStartTime"</span>: <span class="number">1529323170000</span>,</span><br><span class="line">        <span class="attr">"packingIndexOfRound"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">        <span class="attr">"reward"</span>: <span class="number">100000</span>,</span><br><span class="line">        <span class="attr">"fee"</span>: <span class="number">100000</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">5</span>,</span><br><span class="line">        <span class="attr">"txList"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"hash"</span>: <span class="string">"00202b9737b15bf7e4ebc74a58554e461fbed6fedf3e289c6ef41afa80d83f67babc"</span>,</span><br><span class="line">                <span class="attr">"type"</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">"time"</span>: <span class="number">1529323210000</span>,</span><br><span class="line">                <span class="attr">"blockHeight"</span>: <span class="number">1884</span>,</span><br><span class="line">                <span class="attr">"fee"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"remark"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"scriptSig"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">                <span class="attr">"size"</span>: <span class="number">54</span>,</span><br><span class="line">                <span class="attr">"inputs"</span>: [],</span><br><span class="line">                <span class="attr">"outputs"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="string">"2CWsZb9w8XXTE58TUhBGczxf4U6NULS"</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">100000</span>,</span><br><span class="line">                        <span class="attr">"lockTime"</span>: <span class="number">2884</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"hash"</span>: <span class="string">"00203a169b42e5e142e20b273ac925e55f773b5a38c5f5c907efdbc43abb7d7a67b2"</span>,</span><br><span class="line">                <span class="attr">"type"</span>: <span class="number">2</span>,</span><br><span class="line">                <span class="attr">"time"</span>: <span class="number">1529323198461</span>,</span><br><span class="line">                <span class="attr">"blockHeight"</span>: <span class="number">1884</span>,</span><br><span class="line">                <span class="attr">"fee"</span>: <span class="number">100000</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"remark"</span>: <span class="string">"转账"</span>,</span><br><span class="line">                <span class="attr">"scriptSig"</span>: <span class="string">"21036dd27c9fa786a1e83df204e9b31ddc24745c378f1f6b42731d07f05347167c0000473045022100ff3372711d78eb554be331aa40cd7af246641ecd3bc06f2fdca7faefb25f74e50220743a2f2d9d01b5a77a878349b996cbe4953af5d1a946519a5ce4d1129cf99848"</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">                <span class="attr">"size"</span>: <span class="number">255</span>,</span><br><span class="line">                <span class="attr">"inputs"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"fromHash"</span>: <span class="string">"0020ab020707282932e6ec701f0b64e22e937fdd03ce9b37aab498aed2e00b6fa8e7"</span>,</span><br><span class="line">                        <span class="attr">"fromIndex"</span>: <span class="number">0</span>,</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="literal">null</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">9999899000000</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ],</span><br><span class="line">                <span class="attr">"outputs"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="string">"2CiVA3n1VoNQobAax4d7qNEBZAfehLN"</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">99900000000</span>,</span><br><span class="line">                        <span class="attr">"lockTime"</span>: <span class="number">0</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">"address"</span>: <span class="string">"2ChDcC1nvki521xXhYAUzYXt4RLNULS"</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">9899998900000</span>,</span><br><span class="line">                        <span class="attr">"lockTime"</span>: <span class="number">0</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"hash"</span>: <span class="string">"002040370fcb2ad080abdcd2d91f952826c8f6e55bda7231c1c15f25d9d74dc8ad7f"</span>,</span><br><span class="line">                <span class="attr">"type"</span>: <span class="number">7</span>,</span><br><span class="line">                <span class="attr">"time"</span>: <span class="number">1529323210000</span>,</span><br><span class="line">                <span class="attr">"blockHeight"</span>: <span class="number">1884</span>,</span><br><span class="line">                <span class="attr">"fee"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"value"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"remark"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"scriptSig"</span>: <span class="literal">null</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"confirmCount"</span>: <span class="number">33</span>,</span><br><span class="line">                <span class="attr">"size"</span>: <span class="number">38</span>,</span><br><span class="line">                <span class="attr">"inputs"</span>: [],</span><br><span class="line">                <span class="attr">"outputs"</span>: []</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getBlock(<span class="string">"041f3d2ceed........"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-5-获取最新区块头" class="article-heading"><a href="#3-5-获取最新区块头" class="headerlink" title="3.5 获取最新区块头"></a>3.5 获取最新区块头<a class="article-anchor" href="#3-5-获取最新区块头" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getNewestBlockHash()</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>获取最新的区块头</p>
+<p>Result.data <a href="#BlockHeader"><code>BlockHeader</code></a></p>
+</blockquote>
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"hash"</span>: <span class="string">"002078656b6e32f4f1e9e881e7b6c4c5de036ae81ec5bf78861bde9480f5ff3a1b33"</span>,</span><br><span class="line">        <span class="attr">"preHash"</span>: <span class="string">"0020ee5d28fde669adb0ad16f3ed426f1ee8df40560bed0ab30bb99cbf95df276d64"</span>,</span><br><span class="line">        <span class="attr">"merkleHash"</span>: <span class="string">"0020cc37658e2d110c1d42f64c7fd3dcb56d9653d4edc4d3a8406cb263a41f9f5488"</span>,</span><br><span class="line">        <span class="attr">"time"</span>: <span class="number">1529299160000</span>,</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"txCount"</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">"packingAddress"</span>: <span class="string">"2CWsZb9w8XXTE58TUhBGczxf4U6NULS"</span>,</span><br><span class="line">        <span class="attr">"scriptSig"</span>: <span class="string">"2102e18d02154e0f68900898efea7ba72d6d14e37d7d173a62146df2871f40996d7300473045022100d4d92a9518ffd855441c7712f4b31bd003291dc108fa2b455fe26d51e54625f102202ae8375bd69bf1928f9967edac82619ff78f30550c17797cc489d5effd3202bf"</span>,</span><br><span class="line">        <span class="attr">"roundIndex"</span>: <span class="number">419517</span>,</span><br><span class="line">        <span class="attr">"consensusMemberCount"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"roundStartTime"</span>: <span class="number">1529299150000</span>,</span><br><span class="line">        <span class="attr">"packingIndexOfRound"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"confirmCount"</span>: <span class="number">1909</span>,</span><br><span class="line">        <span class="attr">"reward"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"fee"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getNewestBlockHash();</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-6-获取最新区块的高度" class="article-heading"><a href="#3-6-获取最新区块的高度" class="headerlink" title="3.6 获取最新区块的高度"></a>3.6 获取最新区块的高度<a class="article-anchor" href="#3-6-获取最新区块的高度" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getNewestBlockHight()</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>获取最新区块的高度</p>
+<p>Result.data 高度(Long)</p>
+</blockquote>
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"value"</span>: <span class="number">5210</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getNewestBlockHight();</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-7-获取最新区块的块Hash" class="article-heading"><a href="#3-7-获取最新区块的块Hash" class="headerlink" title="3.7 获取最新区块的块Hash"></a>3.7 获取最新区块的块Hash<a class="article-anchor" href="#3-7-获取最新区块的块Hash" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getNewestBlockHash()</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>获取最新区块的块Hash</p>
+<p>Result.data Hash值(String)</p>
+</blockquote>
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"0020a2e1c99951184700927472c431a5a65847c7974cac0bbb97b242c7adf56ad27b"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getNewestBlockHash();</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="共识-ConsensusService" class="article-heading"><a href="#共识-ConsensusService" class="headerlink" title="共识 ConsensusService"></a>共识 ConsensusService<a class="article-anchor" href="#共识-ConsensusService" aria-hidden="true"></a></h3><h4 id="4-1-离线组装创建节点交易" class="article-heading"><a href="#4-1-离线组装创建节点交易" class="headerlink" title="4.1 离线组装创建节点交易"></a>4.1 离线组装创建节点交易<a class="article-anchor" href="#4-1-离线组装创建节点交易" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result createAgentTransaction(AgentInfo agentInfo, List&lt;Input&gt; inputs, Na fee)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>离线组装创建节点交易</p>
+<p>Result.data <code>String</code> 16进制后的交易序列化字符串</p>
+</blockquote>
+<table><br><tr><br><th align="center">参数</th><br><th align="center">类型</th><br><th align="center">是否必填</th><br><th align="center">说明</th><br></tr><br><tr><br><td align="center">agentInfo</td><br><td align="center">Object</td><br><td align="center">必填</td><br><td align="center">创建节点信息</td><br></tr><br><tr><br><td align="center">inputs</td><br><td align="center">List</td><br><td align="center">必填</td><br><td align="center">输入信息</td><br></tr><br><tr><br><td align="center">fee</td><br><td align="center">Object</td><br><td align="center">必填</td><br><td align="center">交易手续费</td><br></tr><br></table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//组装交易的inputs,示例中的input属性均必填</span></span><br><span class="line">List&lt;Input&gt; inputs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">Input input = <span class="keyword">new</span> Input();</span><br><span class="line">input.setFromHash(<span class="string">"0020b0a75a26caad17b4ea6cec7f059ac0e426d71696a6096f75bb2e9f30c11c60d6"</span>);</span><br><span class="line">input.setFromIndex(<span class="number">1</span>);</span><br><span class="line">input.setAddress(<span class="string">"Nse5x9foSzFjuwkwZLSvSjAHHLVf3MKJ"</span>);</span><br><span class="line">input.setValue(<span class="number">999998760000000L</span>);</span><br><span class="line">inputs.add(input);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建节点信息，示例总AgentInfo的属性均必填</span></span><br><span class="line">AgentInfo info = <span class="keyword">new</span> AgentInfo();</span><br><span class="line">info.setAgentAddress(<span class="string">"Nse5x9foSzFjuwkwZLSvSjAHHLVf3MKJ"</span>);       <span class="comment">//申请共识节点的地址</span></span><br><span class="line">info.setPackingAddress(<span class="string">"NsdwUo8XU52DtB9Zqjo2YkuLBW8VhGaQ"</span>);     <span class="comment">//实际打包区块的地址</span></span><br><span class="line">info.setDeposit(<span class="number">200000</span> * <span class="number">100000000L</span>);<span class="comment">//创建节点的保证金， 最低20000NULS，最高200000NULS     </span></span><br><span class="line">info.setCommissionRate(<span class="number">10.0</span>); <span class="comment">//佣金比例 1-100</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建节点的手续费</span></span><br><span class="line">Na fee = Na.valueOf(<span class="number">1000000L</span>);</span><br><span class="line"></span><br><span class="line">Result result = NulsSDKTool.createAgentTransaction(info, inputs, fee);</span><br><span class="line">Map&lt;String, Object&gt; map = (Map&lt;String, Object&gt;) result.getData();</span><br><span class="line">String txHex = (String) map.get(<span class="string">"value"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p><strong>创建共识节点交易手续费的计算</strong>：手续费单价 * 交易大小</p>
+<p><strong>手续费单价(min)</strong>：1000000 NA/1KB</p>
+<p><strong>交易大小的计算</strong>：（288 + 50  * inputs.length）/1024 ，<br>其中210为基本信息的固定长度，50为单条input的长度，38为单条output的长度，remark为非必填字段，有需要传入时，按照UTF-8字符编码计算字节长度。交易大小用KB作为单位，最大值为300KB，不足1KB的部分，记为1KB。<br>出块节点在验证每笔交易时，将输入与输出的差值视为用户发送此交易时所支付的手续费，再根据交易的大小计算出手续费的最小值。如果用户的手续费小于最小值，则视为不合法交易，不予打包。因此，在创建交易的时候，手续费的计算应谨慎处理，避免交易失败。</p>
+</blockquote>
+<h4 id="4-2-离线组装委托共识交易" class="article-heading"><a href="#4-2-离线组装委托共识交易" class="headerlink" title="4.2 离线组装委托共识交易"></a>4.2 离线组装委托共识交易<a class="article-anchor" href="#4-2-离线组装委托共识交易" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result createDepositTransaction(DepositInfo depositInfo, List&lt;Input&gt; inputs, Na fee)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>离线组装委托共识交易</p>
+<p>Result.data <code>String</code> 16进制后的交易序列化字符串</p>
+</blockquote>
+<table><br><tr><br><th align="center">参数</th><br><th align="center">类型</th><br><th align="center">是否必填</th><br><th align="center">说明</th><br></tr><br><tr><br><td align="center">depositInfo</td><br><td align="center">Object</td><br><td align="center">必填</td><br><td align="center">创建节点信息</td><br></tr><br><tr><br><td align="center">inputs</td><br><td align="center">List</td><br><td align="center">必填</td><br><td align="center">输入信息</td><br></tr><br><tr><br><td align="center">fee</td><br><td align="center">Object</td><br><td align="center">必填</td><br><td align="center">交易手续费</td><br></tr><br></table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//组装交易的inputs,示例中的input属性均必填</span></span><br><span class="line">List&lt;Input&gt; inputs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">Input input = <span class="keyword">new</span> Input();</span><br><span class="line">input.setFromHash(<span class="string">"0020b0a75a26caad17b4ea6cec7f059ac0e426d71696a6096f75bb2e9f30c11c60d6"</span>);</span><br><span class="line">input.setFromIndex(<span class="number">1</span>);</span><br><span class="line">input.setAddress(<span class="string">"Nse5x9foSzFjuwkwZLSvSjAHHLVf3MKJ"</span>);</span><br><span class="line">input.setValue(<span class="number">999998760000000L</span>);</span><br><span class="line">inputs.add(input);</span><br><span class="line"></span><br><span class="line"><span class="comment">//委托共识信息，示例中DepositInfo的属性均必填</span></span><br><span class="line">DepositInfo info = <span class="keyword">new</span> DepositInfo();</span><br><span class="line">info.setAddress(<span class="string">"Nse5x9foSzFjuwkwZLSvSjAHHLVf3MKJ"</span>);            <span class="comment">//委托共识的地址</span></span><br><span class="line">info.setDeposit(<span class="number">300000</span> * <span class="number">100000000L</span>);<span class="comment">//委托代币数量:2000NULS —— 500000NULS</span></span><br><span class="line">info.setAgentHash(<span class="string">"0020a467827d5f06feb3e78b4603eb03677711219cb5232d145b3e9d4ab48a3eb366"</span>);<span class="comment">//创建共识节点的交易id</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建节点的手续费</span></span><br><span class="line">Na fee = Na.valueOf(<span class="number">1000000L</span>);</span><br><span class="line"></span><br><span class="line">Result result = NulsSDKTool.createDepositTransaction(info, inputs, fee);</span><br><span class="line">Map&lt;String, Object&gt; map = (Map&lt;String, Object&gt;) result.getData();</span><br><span class="line">String txHex = (String) map.get(<span class="string">"value"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p><strong>创建委托交易手续费的计算</strong>：手续费单价 * 交易大小</p>
+<p><strong>手续费单价(min)</strong>：1000000 NA/1KB</p>
+<p><strong>交易大小的计算</strong>：（288 + 50  * inputs.length）/1024 ，<br>其中210为基本信息的固定长度，50为单条input的长度，38为单条output的长度，remark为非必填字段，有需要传入时，按照UTF-8字符编码计算字节长度。交易大小用KB作为单位，最大值为300KB，不足1KB的部分，记为1KB。<br>出块节点在验证每笔交易时，将输入与输出的差值视为用户发送此交易时所支付的手续费，再根据交易的大小计算出手续费的最小值。如果用户的手续费小于最小值，则视为不合法交易，不予打包。因此，在创建交易的时候，手续费的计算应谨慎处理，避免交易失败。</p>
+</blockquote>
+<h4 id="4-3-离线组装退出委托共识交易" class="article-heading"><a href="#4-3-离线组装退出委托共识交易" class="headerlink" title="4.3 离线组装退出委托共识交易"></a>4.3 离线组装退出委托共识交易<a class="article-anchor" href="#4-3-离线组装退出委托共识交易" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result createCancelDepositTransaction(Output output)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>离线组装退出委托共识交易</p>
+<p>Result.data <code>String</code> 16进制后的交易序列化字符串</p>
+</blockquote>
+<table><br><tr><br><th align="center">参数</th><br><th align="center">类型</th><br><th align="center">是否必填</th><br><th align="center">说明</th><br></tr><br><tr><br><td align="center">output</td><br><td align="center">Object</td><br><td align="center">必填</td><br><td align="center">参与共识时被锁定的那条output</td><br></tr><br></table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//参与委托共识交易被打包后，有一条lockTime = -1的output记录，就是用户委托共识后被锁定的委托金额，</span></span><br><span class="line"><span class="comment">//将output作为参数，生成退出委托共识交易</span></span><br><span class="line">Output output = <span class="keyword">new</span> Output();</span><br><span class="line">output.setTxHash(<span class="string">"0020b0a75a26caad17b4ea6cec7f059ac0e426d71696a6096f75bb2e9f30c11c60d6"</span>);</span><br><span class="line">output.setIndex(<span class="number">0</span>);</span><br><span class="line">output.setAddress(<span class="string">"Nse5x9foSzFjuwkwZLSvSjAHHLVf3MKJ"</span>);</span><br><span class="line">output.setValue(<span class="number">20000000000000L</span>);</span><br><span class="line">output.setLockTime(-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">Result result = NulsSDKTool.createCancelDepositTransaction(output);</span><br><span class="line">Map&lt;String, Object&gt; map = (Map&lt;String, Object&gt;) result.getData();</span><br><span class="line">String txHex = (String) map.get(<span class="string">"value"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="4-4-离线组装删除共识节点交易" class="article-heading"><a href="#4-4-离线组装删除共识节点交易" class="headerlink" title="4.4 离线组装删除共识节点交易"></a>4.4 离线组装删除共识节点交易<a class="article-anchor" href="#4-4-离线组装删除共识节点交易" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result createStopAgentTransaction(Output output)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>离线组装删除共识节点交易</p>
+<p>Result.data <code>String</code> 16进制后的交易序列化字符串</p>
+</blockquote>
+<table><br><tr><br><th align="center">参数</th><br><th align="center">类型</th><br><th align="center">是否必填</th><br><th align="center">说明</th><br></tr><br><tr><br><td align="center">output</td><br><td align="center">Object</td><br><td align="center">必填</td><br><td align="center">创建节点时被锁定的那条output</td><br></tr><br></table>
+
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建节点交易被打包后，有一条lockTime = -1的output记录，就是用户创建节点被锁定的保证金，</span></span><br><span class="line"><span class="comment">//将output作为参数，生成退出委托共识交易</span></span><br><span class="line">Output output = <span class="keyword">new</span> Output();</span><br><span class="line">output.setTxHash(<span class="string">"0020b0a75a26caad17b4ea6cec7f059ac0e426d71696a6096f75bb2e9f30c11c60d6"</span>);</span><br><span class="line">output.setIndex(<span class="number">0</span>);</span><br><span class="line">output.setValue(<span class="number">20000000000000L</span>);</span><br><span class="line">output.setAddress(<span class="string">"Nse5x9foSzFjuwkwZLSvSjAHHLVf3MKJ"</span>);</span><br><span class="line">output.setLockTime(-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">Result result = NulsSDKTool.createStopAgentTransaction(output);</span><br><span class="line">Map&lt;String, Object&gt; map = (Map&lt;String, Object&gt;) result.getData();</span><br><span class="line">String txHex = (String) map.get(<span class="string">"value"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="4-5-获取委托共识列表" class="article-heading"><a href="#4-5-获取委托共识列表" class="headerlink" title="4.5 获取委托共识列表"></a>4.5 获取委托共识列表<a class="article-anchor" href="#4-5-获取委托共识列表" aria-hidden="true"></a></h4><p>接口</p>
+<p><strong><code>Result getDeposits(String address, int pageNumber, int pageSize)</code></strong></p>
+<p>说明</p>
+<blockquote>
+<p>获取地址的委托共识列表</p>
+<p>Result.data List委托列表信息</p>
+</blockquote>
+<table><br><tr><br><th align="center">参数</th><br><th align="center">类型</th><br><th align="center">是否必填</th><br><th align="center">说明</th><br></tr><br><tr><br><td align="center">address</td><br><td align="center">String</td><br><td align="center">必填</td><br><td align="center">委托地址</td><br></tr><br><tr><br><td align="center">pageNumber</td><br><td align="center">Int</td><br><td align="center">必填</td><br><td align="center">页码</td><br></tr><br><tr><br><td align="center">pageSize</td><br><td align="center">Int</td><br><td align="center">必填</td><br><td align="center">每页显示条数，1-100之间</td><br></tr><br></table>
+
+<p>返回结果  </p>
+<ul>
+<li>返回结果为<code>Result</code>对象，格式如下：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>:<span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"data"</span>:&#123;</span><br><span class="line">    <span class="attr">"pageNumber"</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="attr">"pageSize"</span>:<span class="number">10</span>,</span><br><span class="line">    <span class="attr">"total"</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="attr">"pages"</span>:<span class="number">1</span>,</span><br><span class="line">      <span class="attr">"list"</span>:[</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="attr">"deposit"</span>:<span class="number">20000010000000</span>,</span><br><span class="line">        <span class="attr">"agentHash"</span>:<span class="string">"00207654b3371e9c99295a4b3d0371a6cfec48ee31684825dabc04dc5ea314da0a0c"</span>,</span><br><span class="line">        <span class="attr">"address"</span>:<span class="string">"NsdyD94pXWpxZudbtJ4zpkBHhh8XmBQA"</span>,</span><br><span class="line">        <span class="attr">"txHash"</span>:<span class="string">"002029411a2e6797e2d3bec54c48008f73275c8208a240b4835be534a137452bc29e"</span>,</span><br><span class="line">        <span class="attr">"blockHeight"</span>:<span class="number">98</span>,</span><br><span class="line">        <span class="attr">"agentAddress"</span>:<span class="string">"NsdyD94pXWpxZudbtJ4zpkBHhh8XmBQA"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>e.g 示例代码</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Result result = NulsSDKTool.getDeposits(address, <span class="number">1</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="附录" class="article-heading"><a href="#附录" class="headerlink" title="附录"></a>附录<a class="article-anchor" href="#附录" aria-hidden="true"></a></h3><h4 id="接口返回Result示例" class="article-heading"><a href="#接口返回Result示例" class="headerlink" title="接口返回Result示例"></a>接口返回Result示例<a class="article-anchor" href="#接口返回Result示例" aria-hidden="true"></a></h4><h5 id="Result" class="article-heading"><a href="#Result" class="headerlink" title="Result"></a>Result<a class="article-anchor" href="#Result" aria-hidden="true"></a></h5><ul>
+<li>表示接口访问正常，业务返回具体的数据</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	</span><br><span class="line">    "success": true,//接口执行的正确性</span><br><span class="line">    "data": data</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>表示接口访问正常，业务返回true</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示接口访问正常，业务返回true</span><br><span class="line">    "success": true,//接口执行的正确性</span><br><span class="line">    "data": &#123;</span><br><span class="line">		"value":true //接口业务功能的返回结果</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>表示接口访问正常，业务返回false</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	</span><br><span class="line">    "success": true, //接口执行的正确性</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "value": false //接口业务功能的返回结果</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回错误的情况,例如参数错误，异常等</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;	//表示错误的情况</span><br><span class="line">    "success": false,</span><br><span class="line">     "data"：&#123;</span><br><span class="line">        "code": "ACT005",</span><br><span class="line">        "msg": "xxxxxx...."</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这是创建一个带密码的离线账户的完整返回结果</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    //data为List&lt;account&gt;</span><br><span class="line">    "data": &#123;</span><br><span class="line">    	"list":[</span><br><span class="line">        	&#123;</span><br><span class="line">	           <span class="attr">"address"</span>: <span class="string">"2CacFwqMwcJiGNNBwiwV7bCL7bjwNBr"</span>,</span><br><span class="line">	            <span class="attr">"alias"</span>: <span class="literal">null</span>,</span><br><span class="line">	            <span class="attr">"pubKey"</span>: <span class="string">"030d4e752b5aa5d784f19a1fcc73b02afb6f756752fd00ebc2fcaabc8d0979c4f0"</span>,</span><br><span class="line">	            <span class="attr">"extend"</span>: <span class="literal">null</span>,</span><br><span class="line">	            <span class="attr">"createTime"</span>: <span class="number">1529041525794</span>,</span><br><span class="line">	            <span class="attr">"encrypted"</span>: <span class="literal">false</span>,</span><br><span class="line">	            <span class="attr">"priKey"</span>: <span class="string">"00e4bfd347351ea899b5f0ae2c0a3e7a6951b202eaf72432d1a63a2dc85c59c82a"</span>,</span><br><span class="line">	            <span class="attr">"encryptedPriKey"</span>: <span class="string">""</span></span><br><span class="line">	    	&#125;</span><br><span class="line">	    ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Account" class="article-heading"><a href="#Account" class="headerlink" title=" Account "></a><a name="Account"> Account </a><a class="article-anchor" href="#Account" aria-hidden="true"></a></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"address": String, 账户地址</span><br><span class="line">	"alias": String, 账户别名</span><br><span class="line">	"pubKey": String, 公钥</span><br><span class="line">	"extend": String, 扩展</span><br><span class="line">	"createTime": Long, 创建时间</span><br><span class="line">	"encrypted": boolean, 是否加密</span><br><span class="line">	"priKey": String, 私钥（创建无密码离线账户时才会有值）</span><br><span class="line">	"encryptedPriKey": String, 加密私钥（创建有密码离线账户时才会有值）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Input" class="article-heading"><a href="#Input" class="headerlink" title=" Input "></a><a name="Input"> Input </a><a class="article-anchor" href="#Input" aria-hidden="true"></a></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">	"fromHash": String, 来源output的txHash         </span><br><span class="line">	"fromIndex": Integer, 来源output的outIndex</span><br><span class="line">	"address": String, 转入地址                   </span><br><span class="line">	"value": Long 转入金额</span><br><span class="line">    "lockTime": Long 锁定时间</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Output" class="article-heading"><a href="#Output" class="headerlink" title=" Output "></a><a name="Output"> Output </a><a class="article-anchor" href="#Output" aria-hidden="true"></a></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">	"txHash": String, 交易hash</span><br><span class="line">	"index": Integer, 索引</span><br><span class="line">	"address": String, 地址</span><br><span class="line">	"value": Long, 数量</span><br><span class="line">	"lockTime": Long, 锁定时间</span><br><span class="line">	"status": Integer 状态 0:usable(未花费), 1:timeLock(高度锁定), 2:consensusLock(参与共识锁定), 3:spent(已花费)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Transaction" class="article-heading"><a href="#Transaction" class="headerlink" title=" Transaction "></a><a name="Transaction"> Transaction </a><a class="article-anchor" href="#Transaction" aria-hidden="true"></a></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"hash": String, 交易的hash值</span><br><span class="line">	"type": Integer, 交易类型</span><br><span class="line">	"time": Long, 交易发起时间</span><br><span class="line">	"blockHeight": Long, 区块高度</span><br><span class="line">	"fee": Long, 交易手续费</span><br><span class="line">	"value": Long, 交易金额</span><br><span class="line">	"remark": String, 备注</span><br><span class="line">	"scriptSig": String, 签名</span><br><span class="line">	"status": Integer, 交易状态 0:unConfirm(待确认), 1:confirm(已确认)</span><br><span class="line">	"confirmCount": Long, 确认次数</span><br><span class="line">	"size": int, 大小</span><br><span class="line">	"inputs": [</span><br><span class="line">		&#123;</span><br><span class="line">			"fromHash": String, 来源output的txHash</span><br><span class="line">			"fromIndex": Integer, 来源output的outIndex</span><br><span class="line">			"address": String, 转入地址</span><br><span class="line">			"value": Long 转入金额</span><br><span class="line">		&#125;</span><br><span class="line">		],</span><br><span class="line">	"outputs": [</span><br><span class="line">		&#123;</span><br><span class="line">			"txHash": String, 交易hash</span><br><span class="line">			"index": Integer, 索引</span><br><span class="line">			"address": String, 地址</span><br><span class="line">			"value": Long, 数量</span><br><span class="line">			"lockTime": Long, 锁定时间</span><br><span class="line">			"status": Integer 状态 0:usable(未花费), 1:timeLock(高度锁定), 2:consensusLock(参与共识锁定), 3:spent(已花费)</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="BalanceInfo" class="article-heading"><a href="#BalanceInfo" class="headerlink" title=" BalanceInfo "></a><a name="BalanceInfo"> BalanceInfo </a><a class="article-anchor" href="#BalanceInfo" aria-hidden="true"></a></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"balance": long, 余额</span><br><span class="line">	"usable": long, 可用余额</span><br><span class="line">	locked": long 锁定余额</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="BlockHeader" class="article-heading"><a href="#BlockHeader" class="headerlink" title=" BlockHeader"></a><a name="BlockHeader"> BlockHeader</a><a class="article-anchor" href="#BlockHeader" aria-hidden="true"></a></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"hash": String, 区块的hash值</span><br><span class="line">	"preHash": String, 上一个区块的hash值</span><br><span class="line">	"merkleHash": String, 梅克尔hash</span><br><span class="line">	"time": Long, 区块生成时间</span><br><span class="line">	"height": Long, 区块高度</span><br><span class="line">	"txCount": Long, 区块打包交易数量</span><br><span class="line">	"packingAddress": String, 打包地址</span><br><span class="line">	"scriptSig": String, 签名</span><br><span class="line">	"roundIndex": Long, 共识轮次</span><br><span class="line">	"consensusMemberCount": Integer, 参与共识成员数量</span><br><span class="line">	"roundStartTime": Long, 当前共识轮开始时间</span><br><span class="line">	"packingIndexOfRound": Integer, 当前轮次打包出块的名次</span><br><span class="line">	"confirmCount": Long, 确认次数</span><br><span class="line">	"reward": Long, 共识奖励</span><br><span class="line">	"fee": Long, 获取的打包手续费</span><br><span class="line">	"size": int, 大小</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Block" class="article-heading"><a href="#Block" class="headerlink" title=" Block"></a><a name="Block"> Block</a><a class="article-anchor" href="#Block" aria-hidden="true"></a></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"hash": String, 区块的hash值</span><br><span class="line">	"preHash": String, 上一个区块的hash值</span><br><span class="line">	"merkleHash": String, 梅克尔hash</span><br><span class="line">	"time": Long, 区块生成时间</span><br><span class="line">	"height": Long, 区块高度</span><br><span class="line">	"txCount": Long, 区块打包交易数量</span><br><span class="line">	"packingAddress": String, 打包地址</span><br><span class="line">	"scriptSig": String, 签名</span><br><span class="line">	"roundIndex": Long, 共识轮次</span><br><span class="line">	"consensusMemberCount": Integer, 参与共识成员数量</span><br><span class="line">	"roundStartTime": Long, 当前共识轮开始时间</span><br><span class="line">	"packingIndexOfRound": Integer, 当前轮次打包出块的名次</span><br><span class="line">	"confirmCount": Long, 确认次数</span><br><span class="line">	"reward": Long, 共识奖励</span><br><span class="line">	"fee": Long, 获取的打包手续费</span><br><span class="line">	"size": int, 大小</span><br><span class="line">	"txList": [</span><br><span class="line">		&#123;</span><br><span class="line">			"hash": String, 交易的hash值</span><br><span class="line">			"type": Integer, 交易类型</span><br><span class="line">			"time": Long, 交易发起时间</span><br><span class="line">			"blockHeight": Long, 区块高度</span><br><span class="line">			"fee": Long, 交易手续费</span><br><span class="line">			"value": Long, 交易金额</span><br><span class="line">			"remark": String, 备注</span><br><span class="line">			"scriptSig": String, 签名</span><br><span class="line">			"status": Integer, 交易状态 0:unConfirm(待确认), 1:confirm(已确认)</span><br><span class="line">			"confirmCount": Long, 确认次数</span><br><span class="line">			"size": int, 大小</span><br><span class="line">			"inputs": [ 输入</span><br><span class="line">				&#123;</span><br><span class="line">					"fromHash": String, 来源output的txHash</span><br><span class="line">					"fromIndex": Integer, 来源output的outIndex</span><br><span class="line">					"address": String, 转入地址</span><br><span class="line">					"value": Long 转入金额</span><br><span class="line">				&#125;</span><br><span class="line">			],</span><br><span class="line">			"outputs": [ 输出</span><br><span class="line">				&#123;</span><br><span class="line">					"address": String, 地址</span><br><span class="line">					"value": Long, 数量</span><br><span class="line">					"lockTime": Long, 锁定时间</span><br><span class="line">				&#125;</span><br><span class="line">			]</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.052Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="manual.html" class="article-footer-prev" title="手册"><i class="fa fa-chevron-left"></i><span>上一页</span></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#约定"><span class="toc-text">约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本更新记录"><span class="toc-text">版本更新记录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速入门"><span class="toc-text">快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-引入文件"><span class="toc-text">1.引入文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-创建SDK实例"><span class="toc-text">2.创建SDK实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#账户-AccountService"><span class="toc-text">账户 AccountService</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-创建账户"><span class="toc-text">1.1 创建账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-创建离线账户"><span class="toc-text">1.2 创建离线账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-获取账户"><span class="toc-text">1.3 获取账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-获取设置别名的手续费"><span class="toc-text">1.4 获取设置别名的手续费</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-获取账户列表"><span class="toc-text">1.5 获取账户列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-根据账户别名获取账户地址"><span class="toc-text">1.6 根据账户别名获取账户地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-7-获取账户私钥"><span class="toc-text">1.7 获取账户私钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-8-验证别名是否可以使用"><span class="toc-text">1.8 验证别名是否可以使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-9-备份账户"><span class="toc-text">1.9 备份账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-10-导入账户"><span class="toc-text">1.10 导入账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-11-导入账户-私钥"><span class="toc-text">1.11 导入账户(私钥)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-12-验证账户是否加密"><span class="toc-text">1.12 验证账户是否加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-13-移除账户"><span class="toc-text">1.13 移除账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-13-设置密码"><span class="toc-text">1.13 设置密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-14-修改密码"><span class="toc-text">1.14 修改密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-15-设置别名"><span class="toc-text">1.15 设置别名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-16-设置离线账户密码"><span class="toc-text">1.16 设置离线账户密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-17-修改离线账户密码"><span class="toc-text">1.17 修改离线账户密码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交易-AccountLedgerService"><span class="toc-text">交易 AccountLedgerService</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-创建转账交易"><span class="toc-text">2.1 创建转账交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-交易签名"><span class="toc-text">2.2 交易签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-根据交易hash查询交易详情"><span class="toc-text">2.3 根据交易hash查询交易详情</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-转账"><span class="toc-text">2.4 转账</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-查询账户余额"><span class="toc-text">2.5 查询账户余额</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-广播交易"><span class="toc-text">2.6 广播交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7-创建多地址转账交易"><span class="toc-text">2.7 创建多地址转账交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-多地址转账交易签名"><span class="toc-text">2.8 多地址转账交易签名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区块-BlockService"><span class="toc-text">区块 BlockService</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-根据区块高度获取区块头"><span class="toc-text">3.1 根据区块高度获取区块头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-根据区块hash获取区块头"><span class="toc-text">3.2 根据区块hash获取区块头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-根据区块高度获取区块"><span class="toc-text">3.3 根据区块高度获取区块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-根据区块hash获取区块"><span class="toc-text">3.4 根据区块hash获取区块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-获取最新区块头"><span class="toc-text">3.5 获取最新区块头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-获取最新区块的高度"><span class="toc-text">3.6 获取最新区块的高度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-获取最新区块的块Hash"><span class="toc-text">3.7 获取最新区块的块Hash</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共识-ConsensusService"><span class="toc-text">共识 ConsensusService</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-离线组装创建节点交易"><span class="toc-text">4.1 离线组装创建节点交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-离线组装委托共识交易"><span class="toc-text">4.2 离线组装委托共识交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-离线组装退出委托共识交易"><span class="toc-text">4.3 离线组装退出委托共识交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-离线组装删除共识节点交易"><span class="toc-text">4.4 离线组装删除共识节点交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-获取委托共识列表"><span class="toc-text">4.5 获取委托共识列表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#接口返回Result示例"><span class="toc-text">接口返回Result示例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Result"><span class="toc-text">Result</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Account"><span class="toc-text"> Account </span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Input"><span class="toc-text"> Input </span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Output"><span class="toc-text"> Output </span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Transaction"><span class="toc-text"> Transaction </span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#BalanceInfo"><span class="toc-text"> BalanceInfo </span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#BlockHeader"><span class="toc-text"> BlockHeader</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Block"><span class="toc-text"> Block</span></a></li></ol></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">预览</a><a href="manual.html" class="sidebar-link">手册</a><a href="sdk.html" class="sidebar-link current">SDK</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">预览</a><a href="manual.html" class="mobile-nav-link">手册</a><a href="sdk.html" class="mobile-nav-link current">SDK</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/sdk.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/manual/micro_kernel.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/micro_kernel.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/micro_kernel.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="manual/micro_kernel.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/manual/micro_kernel.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="第三章-微内核模块解析" class="article-heading"><a href="#第三章-微内核模块解析" class="headerlink" title="第三章 微内核模块解析"></a>第三章 微内核模块解析<a class="article-anchor" href="#第三章-微内核模块解析" aria-hidden="true"></a></h1><p>[TOC]</p>
+<h2 id="1、模块概述" class="article-heading"><a href="#1、模块概述" class="headerlink" title="1、模块概述"></a>1、模块概述<a class="article-anchor" href="#1、模块概述" aria-hidden="true"></a></h2><p>微内核模块是NULS的核心模块，负责系统的模块管理、对象管理、线程管理、服务管理、配置管理等核心功能，</p>
+<h2 id="2、模块功能" class="article-heading"><a href="#2、模块功能" class="headerlink" title="2、模块功能"></a>2、模块功能<a class="article-anchor" href="#2、模块功能" aria-hidden="true"></a></h2><h3 id="2-1-配置管理" class="article-heading"><a href="#2-1-配置管理" class="headerlink" title="2.1 配置管理"></a>2.1 配置管理<a class="article-anchor" href="#2-1-配置管理" aria-hidden="true"></a></h3><p>微内核模块负责系统配置文件的读取和存储，各个模块需要使用时，只需要调用配置管理器来获取需要的配置项信息。</p>
+<p>配置支持properties和ini两种格式。</p>
+<h3 id="2-2-上下文管理" class="article-heading"><a href="#2-2-上下文管理" class="headerlink" title="2.2 上下文管理"></a>2.2 上下文管理<a class="article-anchor" href="#2-2-上下文管理" aria-hidden="true"></a></h3><p>微内核模块提供了系统的上下文容器NulsContext，通过上下文容器可以获取到最新区块、创世块、网络高度、链id、默认地址类型，上下文中还提供了服务管理器的获取服务对象的快捷访问方式。</p>
+<h3 id="2-3-模块管理" class="article-heading"><a href="#2-3-模块管理" class="headerlink" title="2.3 模块管理"></a>2.3 模块管理<a class="article-anchor" href="#2-3-模块管理" aria-hidden="true"></a></h3><p>微内核模块定义了模块启动器的抽象类BaseModuleBootstrap，模块需要继承该抽象类才能把模块加入到管理中。模块管理器管理所有模块的生命周期，包括加载、初始化、运行、停止、销毁。微内核模块还要维护模块的依赖关系，控制模块的启动顺序。</p>
+<h3 id="2-4-对象管理" class="article-heading"><a href="#2-4-对象管理" class="headerlink" title="2.4 对象管理"></a>2.4 对象管理<a class="article-anchor" href="#2-4-对象管理" aria-hidden="true"></a></h3><p>类似spring-framework的IOC容器，通过注解的方式实现对象的实例化，并对对象进行管理。对对应的方法进行拦截验证，如果调用的对象所在的模块尚未运行，则不允许执行。</p>
+<h3 id="2-5-线程管理" class="article-heading"><a href="#2-5-线程管理" class="headerlink" title="2.5 线程管理"></a>2.5 线程管理<a class="article-anchor" href="#2-5-线程管理" aria-hidden="true"></a></h3><p>微内核模块提供线程管理器TaskManager，可以创建并允许线程或线程池。提供默认的线程创建工厂NulsThreadFactory，所有线程都应该用该工厂进行创建。</p>
+<h3 id="2-6-服务管理" class="article-heading"><a href="#2-6-服务管理" class="headerlink" title="2.6 服务管理"></a>2.6 服务管理<a class="article-anchor" href="#2-6-服务管理" aria-hidden="true"></a></h3><p>NULS中的所有的服务，都注册到服务管理器中，服务间相互依赖可以通过注解的方式进行引用，也可以通过NulsContext上下文管理器来获取。</p>
+<h3 id="2-7-国际化" class="article-heading"><a href="#2-7-国际化" class="headerlink" title="2.7 国际化"></a>2.7 国际化<a class="article-anchor" href="#2-7-国际化" aria-hidden="true"></a></h3><p>微内核模块提供了基础的国际化方案，通过不同的配置文件（zh-CN.properties,en.properties)实现语言的切换，任意语言都可以通过配置文件的方式加入nuls系统中。</p>
+<h2 id="3、模块接口" class="article-heading"><a href="#3、模块接口" class="headerlink" title="3、模块接口"></a>3、模块接口<a class="article-anchor" href="#3、模块接口" aria-hidden="true"></a></h2><h3 id="3-1-设置语言" class="article-heading"><a href="#3-1-设置语言" class="headerlink" title="3.1 设置语言"></a>3.1 设置语言<a class="article-anchor" href="#3-1-设置语言" aria-hidden="true"></a></h3><p>接口定义类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">io.nuls.kernel.service.KernelService</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>获取创世块</p>
+<ul>
+<li><p>方法说明:</p>
+<p>设置系统语言，</p>
+</li>
+<li><p>参数说明:</p>
+<p>lang(String):国际化配置文件的前缀，如英文en.properties配置的key就是”en”</p>
+</li>
+<li><p>返回值说明:</p>
+<p>success(boolean):操作是否成功</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">   * 设置系统语言</span><br><span class="line">   * set language of system</span><br><span class="line">   *</span><br><span class="line">   * @param lang zhe name of the language properties file</span><br><span class="line">   * @return success or not</span><br><span class="line">   */</span><br><span class="line">  public Result setLanguage(String lang);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-线程接口" class="article-heading"><a href="#3-2-线程接口" class="headerlink" title="3.2 线程接口"></a>3.2 线程接口<a class="article-anchor" href="#3-2-线程接口" aria-hidden="true"></a></h3><p>接口定义类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">io.nuls.kernel.thread.manager.TaskManager</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>创建线程池</p>
+<ul>
+<li><p>方法说明:</p>
+<p>根据传入的参数创建一个线程池，并返回</p>
+</li>
+<li><p>参数说明:</p>
+<p>threadCount（int）：线程数量</p>
+<p>queueSize（int）：队列数量</p>
+<p>factory（NulsThreadFactory）：线程创建工厂对象</p>
+</li>
+<li><p>返回值说明:</p>
+<p>data:返回创建的线程池对象</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">     * 创建一个线程池，并返回</span><br><span class="line">     * create a thread pool and return it;</span><br><span class="line">     * @param threadCount the max count of thread </span><br><span class="line">     * @param queueSize the max size of the queue</span><br><span class="line">     * @param factory which create all the threads</span><br><span class="line">     * @return the thread pool</span><br><span class="line">     */</span><br><span class="line">    public static final ThreadPoolExecutor createThreadPool(int threadCount, int queueSize, NulsThreadFactory factory)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>创建定时任务线程池</p>
+<ul>
+<li><p>方法说明:</p>
+<p>根据传入的参数创建一个定时任务线程池，并返回</p>
+</li>
+<li><p>参数说明:</p>
+<p>threadCount（int）：线程数量</p>
+<p>factory（NulsThreadFactory）：线程创建工厂对象</p>
+</li>
+<li><p>返回值说明:</p>
+<p>data:返回创建的线程池对象</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">     * 创建一个定时执行的线程池，并返回</span><br><span class="line">     * create a scheduled thread pool and return it;</span><br><span class="line">     * @param threadCount the max count of thread</span><br><span class="line">     * @param factory which create all the threads</span><br><span class="line">     * @return the thread pool</span><br><span class="line">     */</span><br><span class="line">    public static final ScheduledThreadPoolExecutor createScheduledThreadPool(int threadCount, NulsThreadFactory factory) ;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>异步方法执行</p>
+<ul>
+<li><p>方法说明:</p>
+<p>异步的方式调用一个run方法，所有以这种方式调用的方法共用同一个线程池。</p>
+</li>
+<li><p>参数说明:</p>
+<p>runnable（Runnable）：run</p>
+</li>
+<li><p>返回值说明:</p>
+<p>void</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">    * 异步执行一个方法，该方法会在系统中一个特定的线程池中异步执行，</span><br><span class="line">    * 该线程池为系统中所有该类的调用者共享。</span><br><span class="line">    * A method is executed asynchronously, which is executed asynchronously in a specific </span><br><span class="line">    * thread pool in the system, which is shared by all callers of this class in the system.</span><br><span class="line">    * @param runnable 可以行的run方法对象，Run method object</span><br><span class="line">    */</span><br><span class="line">   public static final void asynExecuteRunnable(Runnable runnable)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>创建独立线程并运行</p>
+<ul>
+<li><p>方法说明:</p>
+<p>根据传入的参数创建一个线程，</p>
+</li>
+<li><p>参数说明:</p>
+<p>moduleId（short）：模块id</p>
+<p>threadName（String）：线程名称</p>
+<p>runnable（Runnable）：执行方法对象</p>
+<p>deamon（boolean）：是否创建守护进程</p>
+</li>
+<li><p>返回值说明:</p>
+<p>void</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">    * 创建一个独立的线程，并执行runnable的run方法</span><br><span class="line">    * Create a separate thread and execute the runnable run method</span><br><span class="line">    * @param moduleId 模块id</span><br><span class="line">    * @param threadName 线程名称</span><br><span class="line">    * @param runnable 方法对象</span><br><span class="line">    * @param deamon     是否是守护线程</span><br><span class="line">    */</span><br><span class="line">   public static final void createAndRunThread(short moduleId, String threadName, Runnable runnable, boolean deamon)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>停止一个模块的所有线程</p>
+<ul>
+<li><p>方法说明:</p>
+<p>根据传入的模块id停止该模块的所有线程</p>
+</li>
+<li><p>参数说明:</p>
+<p>moduleId（short）：模块id</p>
+</li>
+<li><p>返回值说明:</p>
+<p>void</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 停止一个模块的所有线程</span><br><span class="line"> * stop all the threads of the module</span><br><span class="line"> * @param moduleId 模块id</span><br><span class="line"> */</span><br><span class="line">public static void shutdownByModuleId(short moduleId)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4、模块架构" class="article-heading"><a href="#4、模块架构" class="headerlink" title="4、模块架构"></a>4、模块架构<a class="article-anchor" href="#4、模块架构" aria-hidden="true"></a></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、微内核模块是整个NULS系统的“主板”，所有模块都是插在主板上的</span><br><span class="line">2、模块间通信、功能调用都依赖于“主板”</span><br><span class="line">3、“主板”提供管理和协同的作用</span><br></pre></td></tr></table></figure>
+<h2 id="5、模块协议" class="article-heading"><a href="#5、模块协议" class="headerlink" title="5、模块协议"></a>5、模块协议<a class="article-anchor" href="#5、模块协议" aria-hidden="true"></a></h2><p>略</p>
+<h2 id="6、核心流程" class="article-heading"><a href="#6、核心流程" class="headerlink" title="6、核心流程"></a>6、核心流程<a class="article-anchor" href="#6、核心流程" aria-hidden="true"></a></h2><h3 id="6-1-系统启动" class="article-heading"><a href="#6-1-系统启动" class="headerlink" title="6.1 系统启动"></a>6.1 系统启动<a class="article-anchor" href="#6-1-系统启动" aria-hidden="true"></a></h3><p><img src="./kernel/bootstrap.png" alt=""></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.102Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="modular_overview.html" class="article-footer-prev" title="模块说明"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="message_bus.html" class="article-footer-next" title="消息总线"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-微内核模块解析"><span class="toc-text">第三章 微内核模块解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、模块概述"><span class="toc-text">1、模块概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、模块功能"><span class="toc-text">2、模块功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-配置管理"><span class="toc-text">2.1 配置管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-上下文管理"><span class="toc-text">2.2 上下文管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-模块管理"><span class="toc-text">2.3 模块管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-对象管理"><span class="toc-text">2.4 对象管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-线程管理"><span class="toc-text">2.5 线程管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-服务管理"><span class="toc-text">2.6 服务管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-国际化"><span class="toc-text">2.7 国际化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、模块接口"><span class="toc-text">3、模块接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-设置语言"><span class="toc-text">3.1 设置语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-线程接口"><span class="toc-text">3.2 线程接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、模块架构"><span class="toc-text">4、模块架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、模块协议"><span class="toc-text">5、模块协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、核心流程"><span class="toc-text">6、核心流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-系统启动"><span class="toc-text">6.1 系统启动</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">基础</strong><a href="index.html" class="sidebar-link">总体架构</a><a href="modularity.html" class="sidebar-link">为什么模块化</a><a href="structure.html" class="sidebar-link">源码结构</a><a href="modular_overview.html" class="sidebar-link">模块说明</a><a href="micro_kernel.html" class="sidebar-link current">微内核</a><a href="message_bus.html" class="sidebar-link">消息总线</a><strong class="sidebar-title">模块说明</strong><a href="network_overview.html" class="sidebar-link">网络模块</a><a href="storage.html" class="sidebar-link">存储模块</a><a href="account.html" class="sidebar-link">账户模块</a><a href="ledger.html" class="sidebar-link">账本模块</a><a href="protocol.html" class="sidebar-link">通用协议</a><a href="consensus.html" class="sidebar-link">共识模块</a><a href="contract.html" class="sidebar-link">智能合约</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">基础</strong><a href="index.html" class="mobile-nav-link">总体架构</a><a href="modularity.html" class="mobile-nav-link">为什么模块化</a><a href="structure.html" class="mobile-nav-link">源码结构</a><a href="modular_overview.html" class="mobile-nav-link">模块说明</a><a href="micro_kernel.html" class="mobile-nav-link current">微内核</a><a href="message_bus.html" class="mobile-nav-link">消息总线</a><strong class="mobile-nav-title">模块说明</strong><a href="network_overview.html" class="mobile-nav-link">网络模块</a><a href="storage.html" class="mobile-nav-link">存储模块</a><a href="account.html" class="mobile-nav-link">账户模块</a><a href="ledger.html" class="mobile-nav-link">账本模块</a><a href="protocol.html" class="mobile-nav-link">通用协议</a><a href="consensus.html" class="mobile-nav-link">共识模块</a><a href="contract.html" class="mobile-nav-link">智能合约</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/micro_kernel.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

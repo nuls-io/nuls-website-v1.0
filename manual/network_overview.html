@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/manual/network_overview.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/network_overview.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/network_overview.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="manual/network_overview.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/manual/network_overview.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="NULS-network-module-analysis" class="article-heading"><a href="#NULS-network-module-analysis" class="headerlink" title="NULS network module analysis"></a>NULS network module analysis<a class="article-anchor" href="#NULS-network-module-analysis" aria-hidden="true"></a></h1><h2 id="Module-overview" class="article-heading"><a href="#Module-overview" class="headerlink" title="Module overview"></a>Module overview<a class="article-anchor" href="#Module-overview" aria-hidden="true"></a></h2><p>The network module is one of the eight basic modules of NULS, providing the lowest level of network communication, node discovery and other services. The network foundation of the blockchain is Peer to Peer, or P2P. All participants in the P2P network can be either a server or a client. Features of P2P networks: decentralized, scalable, robust, cost-effective, privacy-protected, and load-balanced.</p>
+<p>According to the structural relationship, the P2P system can be subdivided into four topological forms:</p>
+<ul>
+<li><p><strong>Centralized Topology:</strong> There is a central node that stores index information of all other nodes. The index information generally includes the node IP address, port, node resources, and so on.</p>
+<p><img src="network/p-t1.png" alt=""></p>
+</li>
+<li><p><strong>Decentralized Unstructured Topology:</strong> The central node is removed, and a random network is established between the P2P nodes, that is, a connection node is randomly established between a newly joined node and a node in the P2P network, thereby forming a random topology. Bitcoin uses the network structure.</p>
+<p><img src="network/p-t2.png" alt=""></p>
+</li>
+<li><p><strong>Decentralized Structured Topology(also known as DHT network):</strong> All nodes are organized in an orderly structure, such as forming a ring network or a tree network. The specific implementation of structured networks is generally based on the DHT (Distributed Hash Table) algorithm. For example, the implementation algorithm of the Ethereum network Kademlia.</p>
+</li>
+</ul>
+<p><img src="network/p2p-t3.png" alt=""></p>
+<ul>
+<li><strong>Partially Decentralized Topology:</strong> Take advantage of the centralized structure and fully distributed unstructured topology, and select nodes with higher performance (processing, storage, bandwidth, etc.) as super nodes (expressed as SuperNodes or Hubs in English) ), the information of other parts of the system is stored on each super node, and it is found that the algorithm only forwards between the super nodes, and the super node forwards the query request to the appropriate leaf node. The semi-distributed structure is also a hierarchical structure. The super-nodes form a high-speed forwarding layer, and the super-nodes and the common nodes responsible are composed of several levels. The EOS uses this network structure.</li>
+</ul>
+<p><img src="network/p2p-t4.png" alt=""></p>
+<p>The NULS 1.0 version is similar to Bitcoin in the second, fully distributed unstructured topology. The nodes in the network have functions: routing, wallet, mining, blockchain database. All nodes have routing capabilities, participate in checksum broadcast transactions and block information, and discover and maintain connections with other nodes.</p>
+<p><strong>Module information</strong></p>
+<p><strong>Module name</strong>: network-module</p>
+<p><strong>Module structure</strong>: module top-level directory network-module, consesnus project for module interface definition, base directory for the network module’s default implementation, implementation of the project network-base, network-protocol to achieve the relevant network protocol, network-storage network storage interface and implementation.</p>
+<p><strong>Interface definition dependent modules</strong>: protocol-module, network-module</p>
+<p><strong>Implement additional dependency modules</strong>: core-module, ledger-module, account-module, account-ledger-module</p>
+<h2 id="Module-function" class="article-heading"><a href="#Module-function" class="headerlink" title="Module function"></a>Module function<a class="article-anchor" href="#Module-function" aria-hidden="true"></a></h2><p>This section details the functional requirements of the network module and each of the functional point constraints, as well as the default implementation of the NULS version 1.0.</p>
+<h3 id="Node-discovery" class="article-heading"><a href="#Node-discovery" class="headerlink" title="Node discovery"></a>Node discovery<a class="article-anchor" href="#Node-discovery" aria-hidden="true"></a></h3><p><strong>Functional requirements: </strong>Each node of NULS is both a server and accepts connections from other nodes. It is also a client that actively initiates connections to other nodes. Nodes ask each other more nodes and try to connect. Each node tries to ensure that it connects to more nodes and communicates with each other.</p>
+<p><strong>Implementationmode :</strong> NULS version 1.0 is implemented by default using the Netty framework. When the node is running, the network module starts the network service (NettySever), waits for the connection of other nodes, and also actively connects to other nodes (NettyClient). Actively connected nodes, we call active nodes, the same IP address can not be repeated to initiate active connections; the new nodes received by the network services, we call passive nodes, taking into account the public network IP exposed by the nodes in the LAN is consistent, so passive A node running a unified IP address has up to 10 connections.</p>
+<p>After the active node is successfully connected, the other party will return more information about the connectable nodes. After receiving the node information, it will try to connect to these nodes in turn. Until the configured active connection maximum is reached.</p>
+<p>The NULS version 1.0 provides seven seed nodes, and the new node will connect seven seed nodes when it is first run. The seed node will return the external network IP address of the new node. The new node will attempt to actively connect to its own server through the external network IP. If the connection is successful, it will automatically send a new node message to the network. After receiving the message, other nodes will Try to connect to a new node.</p>
+<h3 id="Message-reception-and-processing" class="article-heading"><a href="#Message-reception-and-processing" class="headerlink" title="Message reception and processing"></a>Message reception and processing<a class="article-anchor" href="#Message-reception-and-processing" aria-hidden="true"></a></h3><p><strong>Functional requirements:</strong> The node will receive messages sent by other nodes. The received message is first filtered by the network protocol of NULS, and the filtered message is then processed by each module.</p>
+<p><strong>Implementation mode:</strong> The message sent by NULS includes a message header (MessageHeader) and a message body (MessageBody). The message header contains a magic parameter, a module ID corresponding to the message, and a message type. After receiving the message sent by other nodes, first determine whether the magic parameters are consistent, and then determine whether the module ID and the message type exist, and the inconsistent message is directly filtered.</p>
+<p>The filtered message, with the protocol of the network module, is processed by the network module itself. The non-network module protocol is uniformly distributed to the distributor, distributed to other modules by the distributor, and the MessageBody is converted into business data by a custom deserialization method and then processed accordingly.</p>
+<h3 id="Message-broadcast" class="article-heading"><a href="#Message-broadcast" class="headerlink" title="Message broadcast"></a>Message broadcast<a class="article-anchor" href="#Message-broadcast" aria-hidden="true"></a></h3><p><strong>Functional requirements:</strong> The protocols (blocks, transactions, etc.) generated by the nodes are sent by the network module to other nodes that have been connected and successfully handshake.</p>
+<p><strong>Implementation mode:</strong> The network module provides an interface for broadcasting messages. The interface adds all messages to the header of the corresponding module, and then converts it into network information through a customized serialization method and sends it to other nodes.</p>
+<h3 id="Node-grouping" class="article-heading"><a href="#Node-grouping" class="headerlink" title="Node grouping"></a>Node grouping<a class="article-anchor" href="#Node-grouping" aria-hidden="true"></a></h3><p><strong>Functional requirements:</strong> Connected peer nodes can be stored in different node groups for easy management according to different attributes and functions. For example, according to the connection situation, it can be divided into an active connection group and a passive connection group, and can be divided into a consensus node group and a common node group according to functions.</p>
+<p><strong>Implementation mode:</strong>The network module provides node grouping functions, and provides interfaces for creating node groups, adding nodes to node groups, and acquiring node groups. The current network module creates active connection groups and passive connection groups by default.</p>
+<h2 id="Module-interface" class="article-heading"><a href="#Module-interface" class="headerlink" title="Module interface"></a>Module interface<a class="article-anchor" href="#Module-interface" aria-hidden="true"></a></h2><p>io.nuls.network.service.NetworkService</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 断开一个已连接的节点</span><br><span class="line"> * Disconnect the connection with the node</span><br><span class="line"> *</span><br><span class="line"> * @param nodeId the id of node</span><br><span class="line"> */</span><br><span class="line">void removeNode(String nodeId);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取一个节点</span><br><span class="line"> * get node by id</span><br><span class="line"> *</span><br><span class="line"> * @param nodeId the id of node</span><br><span class="line"> * @return Node</span><br><span class="line"> */</span><br><span class="line">Node getNode(String nodeId);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取所有节点</span><br><span class="line"> * get all nodes</span><br><span class="line"> *</span><br><span class="line"> * @return Map</span><br><span class="line"> */</span><br><span class="line">Map&lt;String, Node&gt; getNodes();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取已连接的节点</span><br><span class="line"> * get connected nodes</span><br><span class="line"> *</span><br><span class="line"> * @return Collection</span><br><span class="line"> */</span><br><span class="line">Collection&lt;Node&gt; getAvailableNodes();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取可连接的节点</span><br><span class="line"> * get connectable nodes</span><br><span class="line"> *</span><br><span class="line"> * @return List</span><br><span class="line"> */</span><br><span class="line">List&lt;Node&gt; getCanConnectNodes();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 根据名字获取节点组</span><br><span class="line"> * get NodeGroup by name</span><br><span class="line"> *</span><br><span class="line"> * @param  groupName groupName</span><br><span class="line"> * @return NodeGroup</span><br><span class="line"> */</span><br><span class="line">NodeGroup getNodeGroup(String groupName);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 发送消息</span><br><span class="line"> * Send message to all connected nodes</span><br><span class="line"> *</span><br><span class="line"> * @param nulsData message</span><br><span class="line"> * @param asyn     Whether or not asynchronous</span><br><span class="line"> * @return BroadcastResult</span><br><span class="line"> */</span><br><span class="line">BroadcastResult sendToAllNode(BaseNulsData nulsData, boolean asyn, int percent);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 发送消息</span><br><span class="line"> * Send message to all connected nodes</span><br><span class="line"> *</span><br><span class="line"> * @param event event</span><br><span class="line"> * @param excludeNode node that does not need to be send</span><br><span class="line"> * @param asyn        Whether or not asynchronous</span><br><span class="line"> * @return BroadcastResult</span><br><span class="line"> */</span><br><span class="line">BroadcastResult sendToAllNode(BaseNulsData event, Node excludeNode, boolean asyn, int percent);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * send message to node</span><br><span class="line"> *</span><br><span class="line"> * @param event event</span><br><span class="line"> * @param node node</span><br><span class="line"> * @param asyn  Whether or not asynchronous</span><br><span class="line"> * @return BroadcastResult</span><br><span class="line"> */</span><br><span class="line">BroadcastResult sendToNode(BaseNulsData event, Node node, boolean asyn);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 发送消息给节点组</span><br><span class="line"> * send message to nodeGroup</span><br><span class="line"> *</span><br><span class="line"> * @param  event event</span><br><span class="line"> * @param groupName groupName</span><br><span class="line"> * @param asyn asyn</span><br><span class="line"> * @return BroadcastResult</span><br><span class="line"> */</span><br><span class="line">BroadcastResult sendToGroup(BaseNulsData event, String groupName, boolean asyn);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 发送消息给节点组</span><br><span class="line"> * send message to nodeGroup</span><br><span class="line"> *</span><br><span class="line"> * @param event event</span><br><span class="line"> * @param groupName groupName</span><br><span class="line"> * @param excludeNode node that does not need to be send</span><br><span class="line"> * @param asyn asyn</span><br><span class="line"> * @return BroadcastResult</span><br><span class="line"> */</span><br><span class="line">BroadcastResult sendToGroup(BaseNulsData event, String groupName, Node excludeNode, boolean asyn);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 重置网络</span><br><span class="line"> * reset network module</span><br><span class="line"> */</span><br><span class="line">void reset();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取网络配置信息</span><br><span class="line"> * Get network configuration information</span><br><span class="line"> *</span><br><span class="line"> * @return NetworkParam</span><br><span class="line"> */</span><br><span class="line">NetworkParam getNetworkParam();</span><br></pre></td></tr></table></figure>
+<h2 id="Module-protocol" class="article-heading"><a href="#Module-protocol" class="headerlink" title="Module protocol"></a>Module protocol<a class="article-anchor" href="#Module-protocol" aria-hidden="true"></a></h2><p>Network module, protocol module ID = 4</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">short NETWORK_MODULE_ID = 4;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Node            p2p Node information </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>size</th>
+<th>field</th>
+<th>field type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>magicNumber</td>
+<td>uint32</td>
+<td>message filtering parameters</td>
+</tr>
+<tr>
+<td>2</td>
+<td>port</td>
+<td>uint16</td>
+<td>port</td>
+</tr>
+<tr>
+<td>??</td>
+<td>IP</td>
+<td>VarString</td>
+<td>IP</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>HandshakeMessage                Node handshake message</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>size</th>
+<th>field</th>
+<th>field type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>handshakeType</td>
+<td>uint16</td>
+<td>1. request   2. response</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ServerPort</td>
+<td>uint16</td>
+<td>node server port</td>
+</tr>
+<tr>
+<td>4</td>
+<td>BestBlockHeight</td>
+<td>uint32</td>
+<td>latest block height of the node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>BestBlockHash</td>
+<td>VarString</td>
+<td>latest block hash of the node</td>
+</tr>
+<tr>
+<td>6</td>
+<td>networkTime</td>
+<td>uint48</td>
+<td>time of node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>nodeIp</td>
+<td>VarString</td>
+<td>ip of node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Version</td>
+<td>VarString</td>
+<td>version of node</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>P2PNodeMessage                 message of node infomation</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>size</th>
+<th>field</th>
+<th>field type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>Port</td>
+<td>uint16</td>
+<td>port</td>
+</tr>
+<tr>
+<td>??</td>
+<td>IP</td>
+<td>VarString</td>
+<td>IP</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>NodesMessage                     message of many nodes</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>size</th>
+<th>field</th>
+<th>field type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>NodeCount</td>
+<td>VarInt</td>
+<td>count of node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Node[]</td>
+<td>Node[NodeCount]</td>
+<td>nodes</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>GetVersionMessage             get node version message</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>size</th>
+<th>field</th>
+<th>field type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>handshakeType</td>
+<td>uint16</td>
+<td>1. request 2. response</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ServerPort</td>
+<td>uint16</td>
+<td>node server port</td>
+</tr>
+<tr>
+<td>4</td>
+<td>BestBlockHeight</td>
+<td>uint32</td>
+<td>latest block height of the node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>BestBlockHash</td>
+<td>VarString</td>
+<td>latest block hash of the node</td>
+</tr>
+<tr>
+<td>6</td>
+<td>networkTime</td>
+<td>uint48</td>
+<td>time of node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>nodeIp</td>
+<td>VarString</td>
+<td>ip of node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Version</td>
+<td>VarString</td>
+<td>version of node</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>NETWORK_VERSION             message of node</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>size</th>
+<th>field</th>
+<th>field type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>handshakeType</td>
+<td>uint16</td>
+<td>1. request 2. response</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ServerPort</td>
+<td>uint16</td>
+<td>node server port</td>
+</tr>
+<tr>
+<td>4</td>
+<td>BestBlockHeight</td>
+<td>uint32</td>
+<td>latest block height of the node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>BestBlockHash</td>
+<td>VarString</td>
+<td>latest block hash of the node</td>
+</tr>
+<tr>
+<td>6</td>
+<td>networkTime</td>
+<td>uint48</td>
+<td>time of node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>nodeIp</td>
+<td>VarString</td>
+<td>ip of node</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Version</td>
+<td>VarString</td>
+<td>version of node</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Module-architecture" class="article-heading"><a href="#Module-architecture" class="headerlink" title="Module architecture"></a>Module architecture<a class="article-anchor" href="#Module-architecture" aria-hidden="true"></a></h2><p><img src="network/network架构图.png" alt=""></p>
+<h2 id="Core-process" class="article-heading"><a href="#Core-process" class="headerlink" title="Core process"></a>Core process<a class="article-anchor" href="#Core-process" aria-hidden="true"></a></h2><h3 id="Discovery-node" class="article-heading"><a href="#Discovery-node" class="headerlink" title="Discovery node"></a>Discovery node<a class="article-anchor" href="#Discovery-node" aria-hidden="true"></a></h3><p>Each node of NULS is both a client and a server. Therefore, discovering a node and establishing a connection need to describe the server from actively initiating a connection to access other nodes, and passively waiting for others to connect to their own server.</p>
+<p><img src="network/m1.png" alt=""></p>
+<p><img src="network/m2.png" alt=""></p>
+<h3 id="Message-reception-and-processing-1" class="article-heading"><a href="#Message-reception-and-processing-1" class="headerlink" title="Message reception and processing"></a>Message reception and processing<a class="article-anchor" href="#Message-reception-and-processing-1" aria-hidden="true"></a></h3><p><img src="network/m3.png" alt=""></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.959Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="message_bus.html" class="article-footer-prev" title="Message Bus"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="storage.html" class="article-footer-next" title="Storage"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NULS-network-module-analysis"><span class="toc-text">NULS network module analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Module-overview"><span class="toc-text">Module overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module-function"><span class="toc-text">Module function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-discovery"><span class="toc-text">Node discovery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Message-reception-and-processing"><span class="toc-text">Message reception and processing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Message-broadcast"><span class="toc-text">Message broadcast</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-grouping"><span class="toc-text">Node grouping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module-interface"><span class="toc-text">Module interface</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module-protocol"><span class="toc-text">Module protocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module-architecture"><span class="toc-text">Module architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-process"><span class="toc-text">Core process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Discovery-node"><span class="toc-text">Discovery node</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Message-reception-and-processing-1"><span class="toc-text">Message reception and processing</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Architecture</a><a href="modularity.html" class="sidebar-link">Modularity</a><a href="structure.html" class="sidebar-link">Structure</a><a href="modular_overview.html" class="sidebar-link">Modular Overview</a><a href="micro_kernel.html" class="sidebar-link">Micro Kernel</a><a href="message_bus.html" class="sidebar-link">Message Bus</a><strong class="sidebar-title">Module Overview</strong><a href="network_overview.html" class="sidebar-link current">Network</a><a href="storage.html" class="sidebar-link">Storage</a><a href="account.html" class="sidebar-link">Account</a><a href="ledger.html" class="sidebar-link">Ledger</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="consensus.html" class="sidebar-link">Consensus</a><a href="contract.html" class="sidebar-link">Smart Contract</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Architecture</a><a href="modularity.html" class="mobile-nav-link">Modularity</a><a href="structure.html" class="mobile-nav-link">Structure</a><a href="modular_overview.html" class="mobile-nav-link">Modular Overview</a><a href="micro_kernel.html" class="mobile-nav-link">Micro Kernel</a><a href="message_bus.html" class="mobile-nav-link">Message Bus</a><strong class="mobile-nav-title">Module Overview</strong><a href="network_overview.html" class="mobile-nav-link current">Network</a><a href="storage.html" class="mobile-nav-link">Storage</a><a href="account.html" class="mobile-nav-link">Account</a><a href="ledger.html" class="mobile-nav-link">Ledger</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="consensus.html" class="mobile-nav-link">Consensus</a><a href="contract.html" class="mobile-nav-link">Smart Contract</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/network_overview.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

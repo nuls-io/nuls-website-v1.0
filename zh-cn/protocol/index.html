@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>总览 | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/protocol/index.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/protocol/index.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/protocol/index.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="protocol/index.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">总览</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/protocol/index.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="概述" class="article-heading"><a href="#概述" class="headerlink" title="概述"></a>概述<a class="article-anchor" href="#概述" aria-hidden="true"></a></h2><p>NULS 通过 TCP 协议，使用自定义报文通讯。</p>
+<ul>
+<li>数字二进制流使用小端序。</li>
+<li>浮点数移位为整数并遵循小端序传输</li>
+</ul>
+<h2 id="报文结构" class="article-heading"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构<a class="article-anchor" href="#报文结构" aria-hidden="true"></a></h2><p>报文由10字节的包头与载荷组成。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*---------------------------------------------------------------*</span><br><span class="line">|       Header(10 Byte)         |            Payload            |</span><br><span class="line">*---------------------------------------------------------------*</span><br></pre></td></tr></table></figure>
+<h2 id="包头" class="article-heading"><a href="#包头" class="headerlink" title="包头"></a>包头<a class="article-anchor" href="#包头" aria-hidden="true"></a></h2><p>包头主要作用是指出有效载荷长度，校验数据完整性，解决 TCP 粘包等问题。</p>
+<table>
+<thead>
+<tr>
+<th>字节</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>MagicNumber</td>
+<td>uint32</td>
+<td>魔法参数，报文有效标志</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PayloadLength</td>
+<td>uint32</td>
+<td>有效载荷长度</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Xor</td>
+<td>uint8</td>
+<td>载荷奇偶校验位</td>
+</tr>
+<tr>
+<td>1</td>
+<td>EncryptType</td>
+<td>uint8</td>
+<td>加密方式，网络层数据加密扩展</td>
+</tr>
+</tbody>
+</table>
+<p>Remark:</p>
+<blockquote>
+<ul>
+<li>MagicNumber 除了作为报文有效校验外，还用于主网与测试的划分</li>
+<li>EncryptType 当前为保留字段，用于扩展加密方式</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>已知 MagicNumber</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th>网络</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0x0133EEE8</td>
+<td>主网</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0133EEFA</td>
+<td>测试网</td>
+</tr>
+</tbody>
+</table>
+<h2 id="载荷" class="article-heading"><a href="#载荷" class="headerlink" title="载荷"></a>载荷<a class="article-anchor" href="#载荷" aria-hidden="true"></a></h2><p>载荷是不定长二进制流，包头中的 PayloadLength 描述了本次载荷长度。</p>
+<p>有效载荷前8个字节为固定格式</p>
+<table>
+<thead>
+<tr>
+<th>字节</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>ModuleID</td>
+<td>uint32</td>
+<td>模块ID</td>
+</tr>
+<tr>
+<td>4</td>
+<td>EventType</td>
+<td>uint32</td>
+<td>事件ID</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>ModuleID 指出本次载荷由哪个模块发出</li>
+<li>EventType 是模块自定义的事件类型</li>
+</ul>
+<p>网络层将该载荷转发给 ModuleID 指定的模块，模块根据 EventType 查找具体的消息处理器做进一步的处理。<br>当前只有两个模块数据会通过 P2P 网络广播发送。</p>
+<ul>
+<li>Network = 4</li>
+<li>Protocol = 10</li>
+</ul>
+<h2 id="公共结构体" class="article-heading"><a href="#公共结构体" class="headerlink" title="公共结构体"></a>公共结构体<a class="article-anchor" href="#公共结构体" aria-hidden="true"></a></h2><h3 id="VarInt" class="article-heading"><a href="#VarInt" class="headerlink" title="VarInt"></a>VarInt<a class="article-anchor" href="#VarInt" aria-hidden="true"></a></h3><p>变长整数，可以根据表达的值进行编码以节省空间。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>长度</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 0xfd</td>
+<td>1</td>
+<td>uint8</td>
+</tr>
+<tr>
+<td>&lt;= 0xffff</td>
+<td>3</td>
+<td>0xfd + uint16</td>
+</tr>
+<tr>
+<td>&lt;= 0xffffffff</td>
+<td>5</td>
+<td>0xfe + uint32</td>
+</tr>
+<tr>
+<td>&gt; 0xffffffff</td>
+<td>9</td>
+<td>0xff + uint64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="VarString" class="article-heading"><a href="#VarString" class="headerlink" title="VarString"></a>VarString<a class="article-anchor" href="#VarString" aria-hidden="true"></a></h3><p>变长字节流，由一个变长缓冲区构成。字符串采用UTF8编码。</p>
+<table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>length</td>
+<td>VarInt</td>
+<td>字符串的长度，以字节为单位</td>
+</tr>
+<tr>
+<td>length</td>
+<td>value</td>
+<td>uint8[length]</td>
+<td>字符串本身</td>
+</tr>
+</tbody>
+</table>
+<h3 id="VarByte" class="article-heading"><a href="#VarByte" class="headerlink" title="VarByte"></a>VarByte<a class="article-anchor" href="#VarByte" aria-hidden="true"></a></h3><p>变长缓冲区，与VarString实现一致。</p>
+<table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>length</td>
+<td>VarInt</td>
+<td>字符串的长度，以字节为单位</td>
+</tr>
+<tr>
+<td>length</td>
+<td>data</td>
+<td>byte[length]</td>
+<td>字符串本身</td>
+</tr>
+</tbody>
+</table>
+<h3 id="NulsDigestData" class="article-heading"><a href="#NulsDigestData" class="headerlink" title="NulsDigestData"></a>NulsDigestData<a class="article-anchor" href="#NulsDigestData" aria-hidden="true"></a></h3><p>摘要结构体</p>
+<table>
+<thead>
+<tr>
+<th>字节</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>digestAlgType</td>
+<td>Byte</td>
+<td>算法ID</td>
+</tr>
+<tr>
+<td>??</td>
+<td>digest</td>
+<td>VarString</td>
+<td>摘要</td>
+</tr>
+</tbody>
+</table>
+<h3 id="NulsSignData" class="article-heading"><a href="#NulsSignData" class="headerlink" title="NulsSignData"></a>NulsSignData<a class="article-anchor" href="#NulsSignData" aria-hidden="true"></a></h3><p>签名结构体</p>
+<table>
+<thead>
+<tr>
+<th>字节</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>signAlgType</td>
+<td>Byte</td>
+<td>算法ID</td>
+</tr>
+<tr>
+<td>??</td>
+<td>signature</td>
+<td>VarString</td>
+<td>签名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="P2PKHScriptSig" class="article-heading"><a href="#P2PKHScriptSig" class="headerlink" title="P2PKHScriptSig"></a>P2PKHScriptSig<a class="article-anchor" href="#P2PKHScriptSig" aria-hidden="true"></a></h3><p>交易签名结构体</p>
+<table>
+<thead>
+<tr>
+<th>字节</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>publicKey</td>
+<td>VarString</td>
+<td>公钥</td>
+</tr>
+<tr>
+<td>??</td>
+<td>NulsSignData</td>
+<td>NulsSignData</td>
+<td>签名结构</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Int48" class="article-heading"><a href="#Int48" class="headerlink" title="Int48"></a>Int48<a class="article-anchor" href="#Int48" aria-hidden="true"></a></h3><p>6字节时间戳。</p>
+<h3 id="Transaction" class="article-heading"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction<a class="article-anchor" href="#Transaction" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>交易类型</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注</td>
+</tr>
+<tr>
+<td>??</td>
+<td>txData</td>
+<td>??</td>
+<td>交易数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>??</td>
+<td>代币数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Node" class="article-heading"><a href="#Node" class="headerlink" title="Node"></a>Node<a class="article-anchor" href="#Node" aria-hidden="true"></a></h3><p>节点信息</p>
+<table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>magicNumber</td>
+<td>uint32</td>
+<td>魔法数</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Port</td>
+<td>uint16</td>
+<td>服务监听端口</td>
+</tr>
+<tr>
+<td>??</td>
+<td>IP</td>
+<td>VarString</td>
+<td>节点IP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="NotFoundType" class="article-heading"><a href="#NotFoundType" class="headerlink" title="NotFoundType"></a>NotFoundType<a class="article-anchor" href="#NotFoundType" aria-hidden="true"></a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">short</span> BLOCK = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">short</span> BLOCKS = <span class="number">2</span></span><br><span class="line"><span class="keyword">short</span> TRANSACTION = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">short</span> HASHES = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.139Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="network.html" class="article-footer-next" title="网络"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#报文结构"><span class="toc-text">报文结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#包头"><span class="toc-text">包头</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#载荷"><span class="toc-text">载荷</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共结构体"><span class="toc-text">公共结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VarInt"><span class="toc-text">VarInt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VarString"><span class="toc-text">VarString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VarByte"><span class="toc-text">VarByte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NulsDigestData"><span class="toc-text">NulsDigestData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NulsSignData"><span class="toc-text">NulsSignData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P2PKHScriptSig"><span class="toc-text">P2PKHScriptSig</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Int48"><span class="toc-text">Int48</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transaction"><span class="toc-text">Transaction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node"><span class="toc-text">Node</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NotFoundType"><span class="toc-text">NotFoundType</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">概述</strong><a href="index.html" class="sidebar-link current">模块说明</a><a href="network.html" class="sidebar-link">网络</a><a href="protocol.html" class="sidebar-link">协议</a><a href="transaction.html" class="sidebar-link">交易</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">概述</strong><a href="index.html" class="mobile-nav-link current">模块说明</a><a href="network.html" class="mobile-nav-link">网络</a><a href="protocol.html" class="mobile-nav-link">协议</a><a href="transaction.html" class="mobile-nav-link">交易</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="protocol/index.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

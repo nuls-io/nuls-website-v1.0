@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/contract/NRC-20_Token_Standard.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/contract/NRC-20_Token_Standard.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/contract/NRC-20_Token_Standard.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="contract/NRC-20_Token_Standard.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/contract/NRC-20_Token_Standard.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="NRC-20-Token-标准" class="article-heading"><a href="#NRC-20-Token-标准" class="headerlink" title="NRC-20 Token 标准"></a>NRC-20 Token 标准<a class="article-anchor" href="#NRC-20-Token-标准" aria-hidden="true"></a></h1><h2 id="简述" class="article-heading"><a href="#简述" class="headerlink" title="简述"></a>简述<a class="article-anchor" href="#简述" aria-hidden="true"></a></h2><p>token的接口标准</p>
+<h2 id="摘要" class="article-heading"><a href="#摘要" class="headerlink" title="摘要"></a>摘要<a class="article-anchor" href="#摘要" aria-hidden="true"></a></h2><p>以下标准允许在智能合约中实施标记的标记API。 该标准提供了转移token的基本功能，并允许token被批准，以便他们可以由另一个在线第三方使用。</p>
+<h2 id="动机" class="article-heading"><a href="#动机" class="headerlink" title="动机"></a>动机<a class="article-anchor" href="#动机" aria-hidden="true"></a></h2><p>标准接口可以让Nuls上的任何令牌被其他应用程序重新使用：从钱包到分散式交换。</p>
+<h2 id="规则" class="article-heading"><a href="#规则" class="headerlink" title="规则"></a>规则<a class="article-anchor" href="#规则" aria-hidden="true"></a></h2><h2 id="Token" class="article-heading"><a href="#Token" class="headerlink" title="Token"></a>Token<a class="article-anchor" href="#Token" aria-hidden="true"></a></h2><h3 id="方法" class="article-heading"><a href="#方法" class="headerlink" title="方法"></a>方法<a class="article-anchor" href="#方法" aria-hidden="true"></a></h3><p><strong>注意</strong>: 调用者必须处理返回<code>false</code>的<code>return boolean</code>.调用者绝对不能假设返回<code>false</code>的情况不存在。</p>
+<h4 id="name" class="article-heading"><a href="#name" class="headerlink" title="name"></a>name<a class="article-anchor" href="#name" aria-hidden="true"></a></h4><p>返回令牌的名称 - 例如 <code>&quot;MyToken&quot;</code>.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@View</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="symbol" class="article-heading"><a href="#symbol" class="headerlink" title="symbol"></a>symbol<a class="article-anchor" href="#symbol" aria-hidden="true"></a></h4><p>返回令牌的符号 - 例如 “MT”.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@View</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">symbol</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="decimals" class="article-heading"><a href="#decimals" class="headerlink" title="decimals"></a>decimals<a class="article-anchor" href="#decimals" aria-hidden="true"></a></h4><p>返回令牌使用的小数位数 - 例如“8”表示将令牌数量除以“100000000”以获得其用户表示。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@View</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">decimals</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="totalSupply" class="article-heading"><a href="#totalSupply" class="headerlink" title="totalSupply"></a>totalSupply<a class="article-anchor" href="#totalSupply" aria-hidden="true"></a></h4><p>返回总令牌供应量。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">@View</span><br><span class="line">public BigInteger totalSupply();</span><br></pre></td></tr></table></figure>
+<h4 id="balanceOf" class="article-heading"><a href="#balanceOf" class="headerlink" title="balanceOf"></a>balanceOf<a class="article-anchor" href="#balanceOf" aria-hidden="true"></a></h4><p>返回地址为“owner”的帐户余额。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@View</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BigInteger <span class="title">balanceOf</span><span class="params">(@Required Address owner)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="transfer" class="article-heading"><a href="#transfer" class="headerlink" title="transfer"></a>transfer<a class="article-anchor" href="#transfer" aria-hidden="true"></a></h4><p>转移<code>value</code>的token数量到的地址<code>to</code>，并且必须触发<code>TransferEvent</code>事件。 如果<code>from</code>帐户余额没有足够的令牌来支出，该函数应该被revert。</p>
+<p>创建新令牌的令牌合同应该在创建令牌时将<code>from</code>地址设置为<code>null</code>触发<code>TransferEvent</code>事件。</p>
+<p>注意 0值的传输必须被视为正常传输并触发<code>TransferEvent</code>事件。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">transfer</span><span class="params">(@Required Address to, @Required BigInteger value)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="transferFrom" class="article-heading"><a href="#transferFrom" class="headerlink" title="transferFrom"></a>transferFrom<a class="article-anchor" href="#transferFrom" aria-hidden="true"></a></h4><p>从地址<code>from</code>发送数量为<code>value</code>的token到地址<code>to</code>,必须触发<code>TransferEvent</code>事件。</p>
+<p><code>transferFrom</code>方法用于提取工作流，允许合同代您转移token。这可以用于例如允许合约代您转让代币和/或以子货币收取费用。除了<code>from</code>帐户已经通过某种机制(比如调用<code>approve(@Required Address spender, @Required BigInteger value)</code>)故意地授权消息的发送者之外，否则该函数应该<code>revert</code>。</p>
+<p>注意 0值的传输必须被视为正常传输并触发传输事件。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">transferFrom</span><span class="params">(@Required Address from, @Required Address to, @Required BigInteger value)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="approve" class="article-heading"><a href="#approve" class="headerlink" title="approve"></a>approve<a class="article-anchor" href="#approve" aria-hidden="true"></a></h4><p>允许<code>spender</code>多次支配您的帐户，最高达<code>value</code>金额。 如果再次调用此函数，它将以<code>value</code>覆盖当前的余量。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">approve</span><span class="params">(@Required Address spender, @Required BigInteger value)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="allowance" class="article-heading"><a href="#allowance" class="headerlink" title="allowance"></a>allowance<a class="article-anchor" href="#allowance" aria-hidden="true"></a></h4><p>返回<code>spender</code>仍然被允许从<code>owner</code>提取的金额。<br>Returns the amount which <code>spender</code> is still allowed to withdraw from <code>owner</code>.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@View</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BigInteger <span class="title">allowance</span><span class="params">(@Required Address owner, @Required Address spender)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="Events" class="article-heading"><a href="#Events" class="headerlink" title="Events"></a>Events<a class="article-anchor" href="#Events" aria-hidden="true"></a></h3><h4 id="TransferEvent" class="article-heading"><a href="#TransferEvent" class="headerlink" title="TransferEvent"></a>TransferEvent<a class="article-anchor" href="#TransferEvent" aria-hidden="true"></a></h4><p>当token被转移(包括0值)，必须被触发。</p>
+<p>创建新令牌的令牌合同应该在创建令牌时将<code>from</code>地址设置为<code>null</code>触发<code>TransferEvent</code>事件。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">TransferEvent</span><span class="params">(Address from, @Required Address to, @Required BigInteger value)</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="ApprovalEvent" class="article-heading"><a href="#ApprovalEvent" class="headerlink" title="ApprovalEvent"></a>ApprovalEvent<a class="article-anchor" href="#ApprovalEvent" aria-hidden="true"></a></h4><p>当任何成功调用<code>approve(@Required Address spender, @Required BigInteger value)</code>后，必须被触发。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ApprovalEvent</span><span class="params">(@Required Address owner, @Required Address spender, @Required BigInteger value)</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Implementation" class="article-heading"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation<a class="article-anchor" href="#Implementation" aria-hidden="true"></a></h2><h4 id="Example-implementations-are-available-at" class="article-heading"><a href="#Example-implementations-are-available-at" class="headerlink" title="Example implementations are available at"></a>Example implementations are available at<a class="article-anchor" href="#Example-implementations-are-available-at" aria-hidden="true"></a></h4><ul>
+<li><a href="https://github.com/nuls-io/nuls-nrc20" target="_blank" rel="noopener">https://github.com/nuls-io/nuls-nrc20</a></li>
+</ul>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.996Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="index.html" class="article-footer-prev" title="开发者手册"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="IdeaPlugin.html" class="article-footer-next" title="IDEA插件操作手册"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NRC-20-Token-标准"><span class="toc-text">NRC-20 Token 标准</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简述"><span class="toc-text">简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#摘要"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动机"><span class="toc-text">动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#规则"><span class="toc-text">规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Token"><span class="toc-text">Token</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#name"><span class="toc-text">name</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#symbol"><span class="toc-text">symbol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#decimals"><span class="toc-text">decimals</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#totalSupply"><span class="toc-text">totalSupply</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#balanceOf"><span class="toc-text">balanceOf</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transfer"><span class="toc-text">transfer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transferFrom"><span class="toc-text">transferFrom</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#approve"><span class="toc-text">approve</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#allowance"><span class="toc-text">allowance</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Events"><span class="toc-text">Events</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TransferEvent"><span class="toc-text">TransferEvent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ApprovalEvent"><span class="toc-text">ApprovalEvent</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation"><span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Example-implementations-are-available-at"><span class="toc-text">Example implementations are available at</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Get Started</strong><a href="index.html" class="sidebar-link">开发者手册</a><a href="NRC-20_Token_Standard.html" class="sidebar-link current">NRC-20</a><a href="IdeaPlugin.html" class="sidebar-link">IDEA插件操作手册</a><a href="CommunityVote.html" class="sidebar-link">社区投票指南</a><a href="smartContract.html" class="sidebar-link">钱包智能合约操作手册</a><a href="SmartContractFee.html" class="sidebar-link">智能合约手续费</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Get Started</strong><a href="index.html" class="mobile-nav-link">开发者手册</a><a href="NRC-20_Token_Standard.html" class="mobile-nav-link current">NRC-20</a><a href="IdeaPlugin.html" class="mobile-nav-link">IDEA插件操作手册</a><a href="CommunityVote.html" class="mobile-nav-link">社区投票指南</a><a href="smartContract.html" class="mobile-nav-link">钱包智能合约操作手册</a><a href="SmartContractFee.html" class="mobile-nav-link">智能合约手续费</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="contract/NRC-20_Token_Standard.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

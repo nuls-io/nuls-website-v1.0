@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>CLI 使用指南 | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/docs/manual.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/docs/manual.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/docs/manual.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="docs/manual.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">CLI 使用指南</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/docs/manual.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h3 id="介绍" class="article-heading"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a class="article-anchor" href="#介绍" aria-hidden="true"></a></h3><p>​    本文档为NULS主网Linux版全节点钱包的使用指南，阅读本文档前用户需了解Linux系统的基本操作和使用方式，本文介绍了在Linux系统中如何利用NULS钱包创建账户、导入账户、转账、建立节点、委托等操作。我们建议用户利用Linux系统服务器建立稳定的NULS节点。</p>
+<h3 id="版本更新记录" class="article-heading"><a href="#版本更新记录" class="headerlink" title="版本更新记录"></a>版本更新记录<a class="article-anchor" href="#版本更新记录" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th style="text-align:center">版本</th>
+<th style="text-align:center">更新日期</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">V1.0.0</td>
+<td style="text-align:center">2018-07-12</td>
+<td style="text-align:center">主网正式版全部功能</td>
+</tr>
+</tbody>
+</table>
+<h3 id="准备" class="article-heading"><a href="#准备" class="headerlink" title="准备"></a>准备<a class="article-anchor" href="#准备" aria-hidden="true"></a></h3><h4 id="服务器硬件配置" class="article-heading"><a href="#服务器硬件配置" class="headerlink" title="服务器硬件配置"></a>服务器硬件配置<a class="article-anchor" href="#服务器硬件配置" aria-hidden="true"></a></h4><p><strong>建立NULS节点的服务器不低于如下配置：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">CPU</th>
+<th style="text-align:center">内存</th>
+<th style="text-align:center">硬盘</th>
+<th style="text-align:center">宽带</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">四核 3.0GHz</td>
+<td style="text-align:center">16G</td>
+<td style="text-align:center">128G硬盘</td>
+<td style="text-align:center">20M上行</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐配置：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">CPU</th>
+<th style="text-align:center">内存</th>
+<th style="text-align:center">硬盘</th>
+<th style="text-align:center">宽带</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">八核 3.0GHz</td>
+<td style="text-align:center">32G</td>
+<td style="text-align:center">256G硬盘</td>
+<td style="text-align:center">100M上行</td>
+</tr>
+</tbody>
+</table>
+<h4 id="系统及内核版本" class="article-heading"><a href="#系统及内核版本" class="headerlink" title="系统及内核版本"></a>系统及内核版本<a class="article-anchor" href="#系统及内核版本" aria-hidden="true"></a></h4><p><strong>Linux系统</strong></p>
+<ul>
+<li>CentOS (推荐)</li>
+</ul>
+<p>Linux内核版本推荐使用 2.6.32及以上</p>
+<h3 id="开始" class="article-heading"><a href="#开始" class="headerlink" title="开始"></a>开始<a class="article-anchor" href="#开始" aria-hidden="true"></a></h3><h4 id="下载" class="article-heading"><a href="#下载" class="headerlink" title="下载"></a>下载<a class="article-anchor" href="#下载" aria-hidden="true"></a></h4><ul>
+<li><p>最新版本的全节点钱包NULS官网下载地址：<a href="http://nuls.io/wallet；GitHub地址：https://github.com/nuls-io/nuls-wallet-release" target="_blank" rel="noopener">http://nuls.io/wallet；GitHub地址：https://github.com/nuls-io/nuls-wallet-release</a></p>
+</li>
+<li><p>进入<a href="http://nuls.io/wallet" target="_blank" rel="noopener">NULS官网钱包下载</a>界面后，选择Linux download，我们提供了MEGA和百度云盘两种下载方式，用户可自行选择。</p>
+<p>Linux系统中下载v1.0.0版的钱包可以使用如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://media.githubusercontent.com/media/nuls-io/nuls-wallet-release/master/NULS-Wallet-linux64-1.0.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p>注：如果后续有其他版本，下载地址可能会不同。</p>
+</li>
+</ul>
+<h4 id="安装" class="article-heading"><a href="#安装" class="headerlink" title="安装"></a>安装<a class="article-anchor" href="#安装" aria-hidden="true"></a></h4><ul>
+<li><p>在Linux中解压已下载的文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tar -zxf NULS-Wallet-linux64-1.0.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="运行" class="article-heading"><a href="#运行" class="headerlink" title="运行"></a>运行<a class="article-anchor" href="#运行" aria-hidden="true"></a></h4><ul>
+<li><p>进入解压后的bin目录，并运行启动脚本，启动全节点钱包</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> bin</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./start.sh</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用钱包" class="article-heading"><a href="#使用钱包" class="headerlink" title="使用钱包"></a>使用钱包<a class="article-anchor" href="#使用钱包" aria-hidden="true"></a></h3><h4 id="快速入门" class="article-heading"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门<a class="article-anchor" href="#快速入门" aria-hidden="true"></a></h4><ul>
+<li><p>在确定钱包已经启动后，启动钱包的命令行程序，可对钱包进行操作。</p>
+<p>进入bin目录，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./cmd.sh</span></span><br></pre></td></tr></table></figure>
+<p>将会出现NULS命名输入提示符<code>nuls&gt;&gt;&gt;</code> ，然后可直接输入NULS钱包操作命令，来进行操作。</p>
+<p>例如，创建账户的示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; create</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:*********</span><br><span class="line">Please confirm new password:*********</span><br><span class="line">[ "Nse9EtaRwgVgN42pxURgZjUR33LUx1j1" ]</span><br><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行<code>create</code>命令表示创建单个账户，然后输入密码，以及再次确认输入的密码，创建成功后将会返回账户的地址。</p>
+</li>
+</ul>
+<h3 id="约定" class="article-heading"><a href="#约定" class="headerlink" title="约定"></a>约定<a class="article-anchor" href="#约定" aria-hidden="true"></a></h3><ul>
+<li>设置密码规则：密码长度在8至20位，必须同时包含字母和数字。</li>
+<li>命令参数说明： &lt;parameter&gt; 表示必填参数；[parameter] 表示选填参数。”|” 在参数中表示或者，表示前后参数只能选其一。</li>
+</ul>
+<h3 id="钱包命令" class="article-heading"><a href="#钱包命令" class="headerlink" title="钱包命令"></a>钱包命令<a class="article-anchor" href="#钱包命令" aria-hidden="true"></a></h3><h4 id="帮助命令" class="article-heading"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令<a class="article-anchor" href="#帮助命令" aria-hidden="true"></a></h4><p>输出打印所有的命令，</p>
+<ul>
+<li><strong>命令： help [-a] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-a</td>
+<td style="text-align:left">格式化打印命令，选填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 help</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">getaccount &lt;address&gt; --get account information</span><br></pre></td></tr></table></figure>
+<p>返回信息 help -a</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">getaccount &lt;address&gt; --get account information</span><br><span class="line">	OPTIONS:</span><br><span class="line">	&lt;address&gt; the account address - Required</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; <span class="built_in">help</span></span></span><br><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; <span class="built_in">help</span> -a</span></span><br></pre></td></tr></table></figure>
+<h4 id="创建账户" class="article-heading"><a href="#创建账户" class="headerlink" title="创建账户"></a>创建账户<a class="article-anchor" href="#创建账户" aria-hidden="true"></a></h4><p>创建账户，返回账户地址集合</p>
+<ul>
+<li><strong>命令： create [number] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[number]</td>
+<td style="text-align:left">创建账户的数量，选填</td>
+</tr>
+</tbody>
+</table>
+<p>创建账户时，将会提示输入密码，如果账户不需要密码可以不用输入，直接enter；</p>
+<p>返回账户集合</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[ <span class="string">"NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2"</span>, <span class="string">"Nse6iqzBZsBtL5c46xaHhAhAqVDv3zQQ"</span> ]</span><br></pre></td></tr></table></figure>
+<p>示例 创建2个没有密码的账户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; create 2</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:</span><br><span class="line">[ "NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2", "Nse6iqzBZsBtL5c46xaHhAhAqVDv3zQQ" ]</span><br></pre></td></tr></table></figure>
+<h4 id="备份账户" class="article-heading"><a href="#备份账户" class="headerlink" title="备份账户"></a>备份账户<a class="article-anchor" href="#备份账户" aria-hidden="true"></a></h4><p>备份账户，将生成一个名称为账户地址，扩展名为.keystore的文件，该文件为账户的备份文件</p>
+<ul>
+<li><strong>命令：backup &lt;address&gt; [path]</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+<tr>
+<td>[path]</td>
+<td>文件生成备份文件的目标文件夹，默认为当前文件夹，选填</td>
+</tr>
+</tbody>
+</table>
+<p>注意：备份有密码的账户时需要输入账户当前密码，将来导入此备份文件生成账户时，要验证此密码；备份一个没有密码的账户是允许的，但是是非常不安全的，我们不建议这样做。</p>
+<p>返回信息</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">The path to the backup file is /nuls/bin/NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy.keystore</span><br></pre></td></tr></table></figure>
+<p>示例 备份一个有密码的账户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; backup NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">The path to the backup file is /nuls/bin/NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy.keystore</span><br></pre></td></tr></table></figure>
+<h4 id="移除账户" class="article-heading"><a href="#移除账户" class="headerlink" title="移除账户"></a>移除账户<a class="article-anchor" href="#移除账户" aria-hidden="true"></a></h4><p>根据账户地址移除本地账户，如果账户已加密，则需要输入密码</p>
+<ul>
+<li><strong>命令：remove &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户的地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Success</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; remove NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
+<h4 id="设置账户密码" class="article-heading"><a href="#设置账户密码" class="headerlink" title="设置账户密码"></a>设置账户密码<a class="article-anchor" href="#设置账户密码" aria-hidden="true"></a></h4><p>根据账户地址对未加密的账户设置密码，不能对已经有密码的账户进行设置密码的操作。</p>
+<ul>
+<li><strong>命令：setpwd &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户的地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Success</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; setpwd Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">Please enter the new password(8-20 characters, the combination of letters and numbers).</span><br><span class="line">Enter your new password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
+<h4 id="修改账户密码" class="article-heading"><a href="#修改账户密码" class="headerlink" title="修改账户密码"></a>修改账户密码<a class="article-anchor" href="#修改账户密码" aria-hidden="true"></a></h4><p>根据账户地址对已加密的账户修改密码，不能对未加密的账户进行修改密码的操作；修改密码时将会验证旧密码。</p>
+<ul>
+<li><strong>命令：resetpwd &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户的地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Success</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; resetpwd Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">Enter your old password:**********</span><br><span class="line">Please enter the new password(8-20 characters, the combination of letters and numbers).</span><br><span class="line">Enter your new password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
+<h4 id="设置别名" class="article-heading"><a href="#设置别名" class="headerlink" title="设置别名"></a>设置别名<a class="article-anchor" href="#设置别名" aria-hidden="true"></a></h4><p>给账户设置一个别名，如果用此账户建立节点，别名将作为节点来源显示</p>
+<ul>
+<li><strong>命令：setalias &lt;address&gt; &lt;alias&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户的地址，必填</td>
+</tr>
+<tr>
+<td>&lt;alias&gt;</td>
+<td>别名名称，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 交易hash</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"0020f94f36aefd59f9cca9bff3c018fc287dc6c0bcd7fbeb047133cadb5747e7d98d"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; setalias Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT nuls_alias</span></span><br><span class="line">"0020f94f36aefd59f9cca9bff3c018fc287dc6c0bcd7fbeb047133cadb5747e7d98d"</span><br></pre></td></tr></table></figure>
+<h4 id="导入账户keystore" class="article-heading"><a href="#导入账户keystore" class="headerlink" title="导入账户keystore"></a>导入账户keystore<a class="article-anchor" href="#导入账户keystore" aria-hidden="true"></a></h4><p>导入账户keystore文件，生成本地账户，如果本地已有该账户将无法导入。</p>
+<ul>
+<li><strong>命令：importkeystore &lt;path&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;path&gt;</td>
+<td>待导入的keystore文件地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>注意：导入keystore文件生成账户时，如果该keystore是加密的要验证备份keystore时的密码。</p>
+<p>返回信息 导入的账户地址</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; importkeystore /home/charlie/bin/NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy.keystore</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span><br></pre></td></tr></table></figure>
+<h4 id="导入账户私钥" class="article-heading"><a href="#导入账户私钥" class="headerlink" title="导入账户私钥"></a>导入账户私钥<a class="article-anchor" href="#导入账户私钥" aria-hidden="true"></a></h4><p>导入账户私钥，生成本地账户，如果本地已有该账户将无法导入。</p>
+<ul>
+<li><strong>命令：import &lt;privatekey&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;privatekey&gt;</td>
+<td>账户的私钥，必填</td>
+</tr>
+</tbody>
+</table>
+<p>注意：导入私钥时，可以设置新的密码，如果账户不需要加密则不用输入新密码。</p>
+<p>返回信息 导入的账户地址</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; import 00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span><br></pre></td></tr></table></figure>
+<h4 id="导入账户私钥-覆盖导入" class="article-heading"><a href="#导入账户私钥-覆盖导入" class="headerlink" title="导入账户私钥(覆盖导入)"></a>导入账户私钥(覆盖导入)<a class="article-anchor" href="#导入账户私钥-覆盖导入" aria-hidden="true"></a></h4><p>导入账户私钥，生成本地账户，如果本地已有该账户将执行覆盖导入。</p>
+<ul>
+<li><strong>命令：import &lt;privatekey&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;privatekey&gt;</td>
+<td>账户的私钥，必填</td>
+</tr>
+</tbody>
+</table>
+<p>注意：导入私钥时，可以设置新的密码，如果账户不需要加密则不用输入新密码。</p>
+<p>覆盖导入：如果本地已存在该账户，执行覆盖导入后，导入前账户的密码将会被改为新设置的密码，如果本次导入未给账户设置密码，那账户将变成未加密账户(即使导入之前的账户是加密的)。</p>
+<p>返回信息 导入的账户地址</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; import 00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655</span></span><br><span class="line">Please enter the password (password is between 8 and 20 inclusive of numbers and letters), If you do not want to set a password, return directly.</span><br><span class="line">Enter your password:**********</span><br><span class="line">Please confirm new password:**********</span><br><span class="line">"NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy"</span><br></pre></td></tr></table></figure>
+<h4 id="查询账户信息" class="article-heading"><a href="#查询账户信息" class="headerlink" title="查询账户信息"></a>查询账户信息<a class="article-anchor" href="#查询账户信息" aria-hidden="true"></a></h4><p>根据账户地址查询账户信息</p>
+<ul>
+<li><strong>命令：getaccount &lt;address&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td style="text-align:left">账户地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",//账户地址</span><br><span class="line">  "alias" : null,//别名</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",//公钥</span><br><span class="line">  "priKey" : "",//私钥(如果账户设置了密码，该项为空)</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",//加密后的私钥(如果账户没有设置了密码，该项为空)</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",//创建时间</span><br><span class="line">  "encrypted" : true//是否加密(是否设置了密码)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getaccount NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">&#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",</span><br><span class="line">  "priKey" : "",</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",</span><br><span class="line">  "encrypted" : true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询账户列表" class="article-heading"><a href="#查询账户列表" class="headerlink" title="查询账户列表"></a>查询账户列表<a class="article-anchor" href="#查询账户列表" aria-hidden="true"></a></h4><p>根据分页参数查询账户列表，所有账户以创建时间倒序输出。</p>
+<ul>
+<li><strong>命令：getaccounts &lt;pageNumber&gt; &lt;pageSize&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>页数，需要获取第几页的数据，必填</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>每一页显示的数据条数，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息，将输出账户集合</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[ &#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",//账户地址</span><br><span class="line">  "alias" : null,//别名</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",//公钥</span><br><span class="line">  "priKey" : "",//私钥(如果账户设置了密码，该项为空)</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",//加密后的私钥(如果账户没有设置了密码，该项为空)</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",//创建时间</span><br><span class="line">  "encrypted" : true//是否加密(是否设置了密码)</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "address" : "NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "035f063012385032d19082a302ba774af4e02abe32e43120d3bfe82ec72dcdeafa",</span><br><span class="line">  "priKey" : "3ba27d6a53fb52f52443d8d895155ca113c632fd8a1bd6e7846933d1fb378ecb",</span><br><span class="line">  "encryptedPriKey" : "",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:02:23",</span><br><span class="line">  "encrypted" : false</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<p>示例 获取账户列表 显示第一页，每页显示2条</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getaccounts 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "address" : "NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "03f364bae9bb632a9b957522f150cb501dbc950e3700cff7a3679ed8820c486875",</span><br><span class="line">  "priKey" : "",</span><br><span class="line">  "encryptedPriKey" : "712149fad00350cdfee4d20850a9e5c1e9d7e9c1562dabc593cbc9b5ac57e99f1549748ff2421b3f6830f34bff7c69d8",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:39:14",</span><br><span class="line">  "encrypted" : true</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "address" : "NsdwsD8n3GrW9Sx43eLZ3xv8C858ovE2",</span><br><span class="line">  "alias" : null,</span><br><span class="line">  "pubKey" : "035f063012385032d19082a302ba774af4e02abe32e43120d3bfe82ec72dcdeafa",</span><br><span class="line">  "priKey" : "3ba27d6a53fb52f52443d8d895155ca113c632fd8a1bd6e7846933d1fb378ecb",</span><br><span class="line">  "encryptedPriKey" : "",</span><br><span class="line">  "extend" : null,</span><br><span class="line">  "createTime" : "2018-07-13 11:02:23",</span><br><span class="line">  "encrypted" : false</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="查询账户私钥" class="article-heading"><a href="#查询账户私钥" class="headerlink" title="查询账户私钥"></a>查询账户私钥<a class="article-anchor" href="#查询账户私钥" aria-hidden="true"></a></h4><p>根据账户地址查询账户私钥，如果账户已加密，则需要输入密码</p>
+<ul>
+<li><strong>命令：getprikey &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户的地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 导入的账户地址</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getprikey NsdyM1Ls5qw8wutvAQsr93jxgq8qYAZy</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"00a166d10c2cc4cd8f76449ff699ab3eee44fe4f82b4bb866f7bba02751a6fd655"</span><br></pre></td></tr></table></figure>
+<h4 id="查询账户余额" class="article-heading"><a href="#查询账户余额" class="headerlink" title="查询账户余额"></a>查询账户余额<a class="article-anchor" href="#查询账户余额" aria-hidden="true"></a></h4><p>根据账户地址查询账户余额</p>
+<ul>
+<li><strong>命令：getbalance &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户的地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 导入的账户地址</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "balance" : "9999998.99",//余额</span><br><span class="line">  "locked" : "0",//已锁定余额</span><br><span class="line">  "usable" : "9999998.99"//可用余额</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getbalance Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">&#123;</span><br><span class="line">  "balance" : "9999998.99",</span><br><span class="line">  "locked" : "0",</span><br><span class="line">  "usable" : "9999998.99"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="转账" class="article-heading"><a href="#转账" class="headerlink" title="转账"></a>转账<a class="article-anchor" href="#转账" aria-hidden="true"></a></h4><p>根据账户地址将NULS转入另一账户地址中，如果转出账户有密码则需要验证密码，否则直接转出。</p>
+<ul>
+<li><strong>命令：transfer &lt;address&gt; &lt;toAddress&gt; &lt;amount&gt; [remark] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>转出地址，必填</td>
+</tr>
+<tr>
+<td>&lt;toAddress&gt;</td>
+<td>接收地址，必填</td>
+</tr>
+<tr>
+<td>&lt;amount&gt;</td>
+<td>转账数量，最多可以有8位小数（单位：NULS），必填</td>
+</tr>
+<tr>
+<td>[remark]</td>
+<td>备注信息，选填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 转账交易hash</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; transfer Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 100 转账</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596"</span><br></pre></td></tr></table></figure>
+<h4 id="查询交易详情" class="article-heading"><a href="#查询交易详情" class="headerlink" title="查询交易详情"></a>查询交易详情<a class="article-anchor" href="#查询交易详情" aria-hidden="true"></a></h4><p>根据交易hash查询交易详细信息</p>
+<ul>
+<li><strong>命令：gettx &lt;hash&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;hash&gt;</td>
+<td>交易hash，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 交易详细信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",//交易hash</span><br><span class="line">  "type" : "transfer",//交易类型（此示例为转账交易）</span><br><span class="line">  "time" : "2018-07-16 11:21:46",//交易时间</span><br><span class="line">  "blockHeight" : 26269,//打包交易的区块高度</span><br><span class="line">  "fee" : "0.001",//交易手续费</span><br><span class="line">  "value" : "100",//（转账）交易数量</span><br><span class="line">  "remark" : "转账",//备注</span><br><span class="line">  "scriptSig" : "2103f68aeb83f3a4fdf9b49259a6e8eae97cf73c7a0a1c52da8a1f9c09312a6d3c530046304402202932ea77976a603b832861c64f868a34e9ad59b728d3a8eeba27269f05b4267c0220217a6e1b97fb3f65e6711434e17e399f43e168f3699edb2aba8618bdd3f410e1",//签名</span><br><span class="line">  "status" : "confirm",//交易确认状态(已确认或者未确认)</span><br><span class="line">  "confirmCount" : 46,//确认次数</span><br><span class="line">  "size" : 254,//交易大小</span><br><span class="line">  "inputs" : [ &#123;//交易的输入</span><br><span class="line">    "fromHash" : "002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e",</span><br><span class="line">    "fromIndex" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">    "value" : "9979998.98",</span><br><span class="line">    "lockTime" : 0</span><br><span class="line">  &#125; ],</span><br><span class="line">  "outputs" : [ &#123;//交易的输出</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">    "index" : 0,</span><br><span class="line">    "address" : "NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T"//交易输出的目标地址(此数据相当于转出100给目标地址)</span><br><span class="line">    "value" : "100",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",//交易hash</span><br><span class="line">    "index" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",//交易输出的目标地址(此数据相当于找零给自己)</span><br><span class="line">    "value" : "9979898.979",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例 查询转账交易</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; gettx 00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">  "type" : "transfer",</span><br><span class="line">  "time" : "2018-07-16 11:21:46",</span><br><span class="line">  "blockHeight" : 26269,</span><br><span class="line">  "fee" : "0.001",</span><br><span class="line">  "value" : "100",</span><br><span class="line">  "remark" : "转账",</span><br><span class="line">  "scriptSig" : "2103f68aeb83f3a4fdf9b49259a6e8eae97cf73c7a0a1c52da8a1f9c09312a6d3c530046304402202932ea77976a603b832861c64f868a34e9ad59b728d3a8eeba27269f05b4267c0220217a6e1b97fb3f65e6711434e17e399f43e168f3699edb2aba8618bdd3f410e1",</span><br><span class="line">  "status" : "confirm",</span><br><span class="line">  "confirmCount" : 46,</span><br><span class="line">  "size" : 254,</span><br><span class="line">  "inputs" : [ &#123;</span><br><span class="line">    "fromHash" : "002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e",</span><br><span class="line">    "fromIndex" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">    "value" : "9979998.98",</span><br><span class="line">    "lockTime" : 0</span><br><span class="line">  &#125; ],</span><br><span class="line">  "outputs" : [ &#123;</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">    "index" : 0,</span><br><span class="line">    "address" : "NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T",</span><br><span class="line">    "value" : "100",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">    "index" : 1,</span><br><span class="line">    "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">    "value" : "9979898.979",</span><br><span class="line">    "lockTime" : 0,</span><br><span class="line">    "status" : "usable"</span><br><span class="line">  &#125; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询交易列表" class="article-heading"><a href="#查询交易列表" class="headerlink" title="查询交易列表"></a>查询交易列表<a class="article-anchor" href="#查询交易列表" aria-hidden="true"></a></h4><p>根据账户地址，查询该账户的交易列表</p>
+<ul>
+<li><strong>命令：gettxlist &lt;address&gt; &lt;pageNumber&gt; &lt;pageSize&gt;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>页数，需要获取第几页的数据，必填</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>每一页显示的数据条数，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 交易详细信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[ &#123;</span><br><span class="line">  "txHash" : "0020153f76bec3433676a96ef343d7e432b7de16b3175a9c5f4579338f604989996e",//交易hash</span><br><span class="line">  "blockHeight" : 26473,//交易的区块高度</span><br><span class="line">  "time" : "2018-07-16 11:55:43",//交易时间</span><br><span class="line">  "txType" : "transfer",//交易类型</span><br><span class="line">  "status" : 1,//确认状态</span><br><span class="line">  "info" : "+100"//信息</span><br><span class="line">&#125;,&#123;</span><br><span class="line">  "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">  "blockHeight" : 26269,</span><br><span class="line">  "time" : "2018-07-16 11:21:46",</span><br><span class="line">  "txType" : "transfer",</span><br><span class="line">  "status" : 1,</span><br><span class="line">  "info" : "+100"</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; gettxlist NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 1 10</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "txHash" : "0020153f76bec3433676a96ef343d7e432b7de16b3175a9c5f4579338f604989996e",</span><br><span class="line">  "blockHeight" : 26473,</span><br><span class="line">  "time" : "2018-07-16 11:55:43",</span><br><span class="line">  "txType" : "transfer",</span><br><span class="line">  "status" : 1,</span><br><span class="line">  "info" : "+100"</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "txHash" : "00200bef73ad728c48146c8a5eb0d76fe7325b85803c61d8357c16dba09ea33b3596",</span><br><span class="line">  "blockHeight" : 26269,</span><br><span class="line">  "time" : "2018-07-16 11:21:46",</span><br><span class="line">  "txType" : "transfer",</span><br><span class="line">  "status" : 1,</span><br><span class="line">  "info" : "+100"</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="创建节点" class="article-heading"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点<a class="article-anchor" href="#创建节点" aria-hidden="true"></a></h4><p>根据账户地址创建节点，创建节点时需要一个打包账户地址（打包地址不能有密码），同时需要至少20000NULS的保证金。</p>
+<ul>
+<li><strong>命令：createagent &lt;agentAddress&gt; &lt;packingAddress&gt; &lt;commissionRate&gt; &lt;deposit&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;agentAddress&gt;</td>
+<td>创建节点的账户地址，必填</td>
+</tr>
+<tr>
+<td>&lt;packingAddress&gt;</td>
+<td>节点打包账户地址，必填（注：该账户不能设置密码，否则节点不能打包出块）</td>
+</tr>
+<tr>
+<td>&lt;commissionRate&gt;</td>
+<td>代理佣金比例，范围：10~100，必填</td>
+</tr>
+<tr>
+<td>&lt;deposit&gt;</td>
+<td>创建节点的保证金，不能低于20000NULS，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 返回节点的agent hash</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e"</span></span><br></pre></td></tr></table></figure>
+<p>示例 创建一个节点，佣金比例为10%，押金20000NULS。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; createagent Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT NsdvAnqc8oEiNiGgcp6pEusfiRFZi4vt 10 20000</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e"</span><br></pre></td></tr></table></figure>
+<h4 id="加入共识（委托节点）" class="article-heading"><a href="#加入共识（委托节点）" class="headerlink" title="加入共识（委托节点）"></a>加入共识（委托节点）<a class="article-anchor" href="#加入共识（委托节点）" aria-hidden="true"></a></h4><p>根据账户地址和节点agentHash，加入共识，至少需要2000NULS</p>
+<ul>
+<li><strong>命令：deposit &lt;address&gt; &lt;agentHash&gt; &lt;deposit&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+<tr>
+<td>&lt;agentHash&gt;</td>
+<td>节点的agentHash，必填</td>
+</tr>
+<tr>
+<td>&lt;deposit&gt;</td>
+<td>加入共识保证金，不能低于2000NULS，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 加入共识的交易hash，如果要退出这笔共识，则需要该hash。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"0020d349b7ad322ff958e3abfa799d9ac76341afa6e1fb4d3857353a5adc74ba3fd0"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; deposit NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 002006a5b7eb1d32ed6d7d54e24e219b112d4fdb8530db5506ee953b6f65a0fdb55e 5000</span></span><br><span class="line">"0020d349b7ad322ff958e3abfa799d9ac76341afa6e1fb4d3857353a5adc74ba3fd0"</span><br></pre></td></tr></table></figure>
+<h4 id="退出共识（退出委托）" class="article-heading"><a href="#退出共识（退出委托）" class="headerlink" title="退出共识（退出委托）"></a>退出共识（退出委托）<a class="article-anchor" href="#退出共识（退出委托）" aria-hidden="true"></a></h4><p>根据账户地址和加入共识时的交易hash来退出共识(委托)，单个账户多次委托节点时，每次委托的交易是独立的，所以退出时也要通过单次委托时的交易hash来退出对应的那一次委托，而不会一次退出所有委托。</p>
+<ul>
+<li><strong>命令：withdraw &lt;address&gt; &lt;txHash&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+<tr>
+<td>&lt;txHash&gt;</td>
+<td>委托时的交易hash，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 退出共识交易hash</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"00201d70ac37b53d41c0e813ad245fc42e1d3a5d174d9148fbbbaed3c18d4d67bdbf"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; withdraw NsdtmV5XkgSdpBXi65ueTsrv2W5beV2T 0020d349b7ad322ff958e3abfa799d9ac76341afa6e1fb4d3857353a5adc74ba3fd0</span></span><br><span class="line">"00201d70ac37b53d41c0e813ad245fc42e1d3a5d174d9148fbbbaed3c18d4d67bdbf"</span><br></pre></td></tr></table></figure>
+<h4 id="停止节点" class="article-heading"><a href="#停止节点" class="headerlink" title="停止节点"></a>停止节点<a class="article-anchor" href="#停止节点" aria-hidden="true"></a></h4><p>停止节点，所有委托给节点的NULS将被退回，节点创建者账户的保证金将会被锁定72小时。</p>
+<ul>
+<li><strong>命令：stopagent &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息 停止节点交易hash</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">"0020f15eecd7c85be76521ed6af4d58a3810f7df58e536481cff4a96af6d4fddec5f"</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; stopagent Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">Please enter the password.</span><br><span class="line">Enter your password:**********</span><br><span class="line">"0020f15eecd7c85be76521ed6af4d58a3810f7df58e536481cff4a96af6d4fddec5f"</span><br></pre></td></tr></table></figure>
+<h4 id="获取节点详情" class="article-heading"><a href="#获取节点详情" class="headerlink" title="获取节点详情"></a>获取节点详情<a class="article-anchor" href="#获取节点详情" aria-hidden="true"></a></h4><p>根据节点agentHash获取节点详情</p>
+<ul>
+<li><strong>命令：getagent &lt;agentHash&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;agentHash&gt;</td>
+<td>节点agentHash值，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"agentHash"</span> : <span class="string">"0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6"</span>,</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//创建节点的账户地址</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",//节点打包(出块)地址</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//奖励地址(默认为创建节点地址)</span><br><span class="line">  "deposit" : "20000",//创建节点的保证金</span><br><span class="line">  "commissionRate" : 60.0,//代理佣金比例</span><br><span class="line">  "agentName" : null,//节点名称(来源)</span><br><span class="line">  "agentId" : "35024DE6",//节点ID</span><br><span class="line">  "time" : "2018-07-16 16:33:38",//创建节点时间</span><br><span class="line">  "blockHeight" : 28141,//创建节点交易的块高度</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",//状态</span><br><span class="line">  "creditVal" : 0.05,//信用值</span><br><span class="line">  "totalDeposit" : "208000",//节点当前委托总额</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5//参与数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getagent 0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6</span></span><br><span class="line">&#123;</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 60.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "35024DE6",</span><br><span class="line">  "time" : "2018-07-16 16:33:38",</span><br><span class="line">  "blockHeight" : 28141,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : 0.05,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="获取节点列表" class="article-heading"><a href="#获取节点列表" class="headerlink" title="获取节点列表"></a>获取节点列表<a class="article-anchor" href="#获取节点列表" aria-hidden="true"></a></h4><p>根据共识节点列表</p>
+<ul>
+<li><strong>命令：getagents &lt;pageNumber&gt; &lt;pageSize&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>页数，需要获取第几页的数据，必填</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>每一页显示的数据条数，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">  <span class="attr">"agentHash"</span> : <span class="string">"0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6"</span>,</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//创建节点的账户地址</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",//节点打包(出块)地址</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",//奖励地址(默认为创建节点地址)</span><br><span class="line">  "deposit" : "20000",//创建节点的保证金</span><br><span class="line">  "commissionRate" : 60.0,//代理佣金比例</span><br><span class="line">  "agentName" : null,//节点名称(来源)</span><br><span class="line">  "agentId" : "35024DE6",//节点ID</span><br><span class="line">  "time" : "2018-07-16 16:33:38",//创建节点时间</span><br><span class="line">  "blockHeight" : 28141,//创建节点交易的块高度</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",//状态</span><br><span class="line">  "creditVal" : 0.05,//信用值</span><br><span class="line">  "totalDeposit" : "208000",//节点当前委托总额</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5//参与数</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getagents 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 60.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "35024DE6",</span><br><span class="line">  "time" : "2018-07-16 16:33:38",</span><br><span class="line">  "blockHeight" : 28141,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : 0.18,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "agentHash" : "00202ef1977c1eea6fde8d1bf8d75b6f5650d62933e5fccc2d8d08023dea5ce291d8",</span><br><span class="line">  "agentAddress" : "NsdtEdrY4QWGa8VUGW83hXbZsbKhbrTN",</span><br><span class="line">  "packingAddress" : "NsdwhLzjCLJp9V7zULU9KBerqkW971K7",</span><br><span class="line">  "rewardAddress" : "NsdtEdrY4QWGa8VUGW83hXbZsbKhbrTN",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 10.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "5CE291D8",</span><br><span class="line">  "time" : "2018-07-16 16:31:12",</span><br><span class="line">  "blockHeight" : 28126,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : -0.16,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "00202ef1977c1eea6fde8d1bf8d75b6f5650d62933e5fccc2d8d08023dea5ce291d8",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="获取全网共识总体信息" class="article-heading"><a href="#获取全网共识总体信息" class="headerlink" title="获取全网共识总体信息"></a>获取全网共识总体信息<a class="article-anchor" href="#获取全网共识总体信息" aria-hidden="true"></a></h4><p>查询全网共识总体信息</p>
+<ul>
+<li><strong>命令：getconsensus </strong></li>
+</ul>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "agentCount" : 6,//节点数</span><br><span class="line">  "totalDeposit" : "1758000",//总委托数</span><br><span class="line">  "rewardOfDay" : "0",//奖励</span><br><span class="line">  "consensusAccountNumber" : 6,//共识账户数量</span><br><span class="line">  "packingAgentCount" : 6//打包地址数量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getconsensus</span></span><br><span class="line">&#123;</span><br><span class="line">  "agentCount" : 6,</span><br><span class="line">  "totalDeposit" : "1758000",</span><br><span class="line">  "rewardOfDay" : "0",</span><br><span class="line">  "consensusAccountNumber" : 6,</span><br><span class="line">  "packingAgentCount" : 6</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="获取单个账户的委托总览" class="article-heading"><a href="#获取单个账户的委托总览" class="headerlink" title="获取单个账户的委托总览"></a>获取单个账户的委托总览<a class="article-anchor" href="#获取单个账户的委托总览" aria-hidden="true"></a></h4><p>根据账户地址获取该账户参与的所有委托(共识)信息的总览</p>
+<ul>
+<li><strong>命令：getdepositedinfo &lt;address&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "agentCount" : 1,//创建的节点数</span><br><span class="line">  "totalDeposit" : "1600000",//总共委托的数量</span><br><span class="line">  "joinAgentCount" : 6,//加入委托的节点数</span><br><span class="line">  "usableBalance" : "8048998.869",//可用余额</span><br><span class="line">  "reward" : "219.65910271",//得到的奖励总数</span><br><span class="line">  "rewardOfDay" : "219.65910271",//一天得到的奖励数</span><br><span class="line">  "agentHash" : "00202794351e662e53f16fe04dd9217731463c3b24a6ee6cf80c9ba2d3e5e09eb7fd"//节点hash</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getdepositedinfo Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT</span></span><br><span class="line">&#123;</span><br><span class="line">  "agentCount" : 1,</span><br><span class="line">  "totalDeposit" : "1600000",</span><br><span class="line">  "joinAgentCount" : 6,</span><br><span class="line">  "usableBalance" : "8048998.869",</span><br><span class="line">  "reward" : "219.65910271",</span><br><span class="line">  "rewardOfDay" : "219.65910271",</span><br><span class="line">  "agentHash" : "00202794351e662e53f16fe04dd9217731463c3b24a6ee6cf80c9ba2d3e5e09eb7fd"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="获取单个账户的委托信息列表" class="article-heading"><a href="#获取单个账户的委托信息列表" class="headerlink" title="获取单个账户的委托信息列表"></a>获取单个账户的委托信息列表<a class="article-anchor" href="#获取单个账户的委托信息列表" aria-hidden="true"></a></h4><p>根据地址获取该账户参与的委托信息列表(返回共识信息列表)，当入参中跟上agentHash可以查看账户在某一个节点下的委托信息列表</p>
+<ul>
+<li><strong>命令：getdepositeds &lt;address&gt; &lt;pageNumber&gt; &lt;pageSize&gt; [agentHash] </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>页数，需要获取第几页的数据，必填</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>每一页显示的数据条数，必填</td>
+</tr>
+<tr>
+<td>[agentHash]</td>
+<td>节点Hash，选填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">  "deposit" : "2000",//委托金额</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "address" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",//委托者地址</span><br><span class="line">  "time" : "2018-07-16 16:38:25",//时间</span><br><span class="line">  "txHash" : "0020c93d039b57361a141470b3630c3cf6fa304b1acaeabb7a26a772f434d24de221",//委托交易hash</span><br><span class="line">  "blockHeight" : 28148,//交易的块高度</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",//节点状态</span><br><span class="line">  "agentName" : "35024DE6",//节点名</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh"//节点地址</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getdepositeds Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "deposit" : "2000",</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "address" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "time" : "2018-07-16 16:38:25",</span><br><span class="line">  "txHash" : "0020c93d039b57361a141470b3630c3cf6fa304b1acaeabb7a26a772f434d24de221",</span><br><span class="line">  "blockHeight" : 28148,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "agentName" : "35024DE6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh"</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "deposit" : "2000",</span><br><span class="line">  "agentHash" : "00202794351e662e53f16fe04dd9217731463c3b24a6ee6cf80c9ba2d3e5e09eb7fd",</span><br><span class="line">  "address" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "time" : "2018-07-16 16:38:43",</span><br><span class="line">  "txHash" : "00205278ce2eeaf9da7acc13ce81293a01a3f44a1de09e4e0b3ec078884a65700234",</span><br><span class="line">  "blockHeight" : 28149,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "agentName" : "E09EB7FD",</span><br><span class="line">  "agentAddress" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT"</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="获取单个账户的委托节点列表" class="article-heading"><a href="#获取单个账户的委托节点列表" class="headerlink" title="获取单个账户的委托节点列表"></a>获取单个账户的委托节点列表<a class="article-anchor" href="#获取单个账户的委托节点列表" aria-hidden="true"></a></h4><p>根据地址查询该账户委托的节点列表(返回节点信息列表)</p>
+<ul>
+<li><strong>命令：getdepositedagents &lt;address&gt; &lt;pageNumber&gt; &lt;pageSize&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;address&gt;</td>
+<td>账户地址，必填</td>
+</tr>
+<tr>
+<td>&lt;pageNumber&gt;</td>
+<td>页数，需要获取第几页的数据，必填</td>
+</tr>
+<tr>
+<td>&lt;pageSize&gt;</td>
+<td>每一页显示的数据条数，必填</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[ &#123;</span><br><span class="line">  "agentHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",//节点hash</span><br><span class="line">  "agentAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",//创建节点的账户地址</span><br><span class="line">  "packingAddress" : "Nse77VDHtiQ6WnkEhgCA7TbfNkoH9iyr",//节点打包(出块)地址</span><br><span class="line">  "rewardAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",//奖励地址(默认为创建节点地址)</span><br><span class="line">  "deposit" : "20000",//创建节点的保证金</span><br><span class="line">  "commissionRate" : 40.0,//代理佣金比例</span><br><span class="line">  "agentName" : null,//节点名称(来源)</span><br><span class="line">  "agentId" : "0198ACAF",//节点ID</span><br><span class="line">  "time" : "2018-07-16 16:32:52",//创建节点时间</span><br><span class="line">  "blockHeight" : 28136,//创建节点交易的块高度</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",//状态</span><br><span class="line">  "creditVal" : -0.91,//信用值</span><br><span class="line">  "totalDeposit" : "204000",//节点当前委托总额</span><br><span class="line">  "txHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",</span><br><span class="line">  "memberCount" : 3//参与数</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>示例 获取第一页，每页显示两条</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getdepositedagents Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto 1 2</span></span><br><span class="line">[ &#123;</span><br><span class="line">  "agentHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",</span><br><span class="line">  "agentAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "packingAddress" : "Nse77VDHtiQ6WnkEhgCA7TbfNkoH9iyr",</span><br><span class="line">  "rewardAddress" : "Nse6UxwHXNEDsySTnZr4hNfGwFZwkDto",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 40.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "0198ACAF",</span><br><span class="line">  "time" : "2018-07-16 16:32:52",</span><br><span class="line">  "blockHeight" : 28136,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : -0.91,</span><br><span class="line">  "totalDeposit" : "204000",</span><br><span class="line">  "txHash" : "0020617f9be18306fcdf95917fad80f4d15c51426667825ad5a6968ec0ee0198acaf",</span><br><span class="line">  "memberCount" : 3</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  "agentHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "agentAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "packingAddress" : "NsdwvEJuPC3hA5ws7VQGwXN77vqsM1PA",</span><br><span class="line">  "rewardAddress" : "Nsdy5AZmMkYQzQvfuEgVzwdmndnMYNmh",</span><br><span class="line">  "deposit" : "20000",</span><br><span class="line">  "commissionRate" : 60.0,</span><br><span class="line">  "agentName" : null,</span><br><span class="line">  "agentId" : "35024DE6",</span><br><span class="line">  "time" : "2018-07-16 16:33:38",</span><br><span class="line">  "blockHeight" : 28141,</span><br><span class="line">  "delHeight" : -1,</span><br><span class="line">  "status" : "consensus",</span><br><span class="line">  "creditVal" : 0.91,</span><br><span class="line">  "totalDeposit" : "208000",</span><br><span class="line">  "txHash" : "0020d349117a35c3b9c1e64f442d7750aae941162018f9d8d4c1db57565235024de6",</span><br><span class="line">  "memberCount" : 5</span><br><span class="line">&#125; ]</span><br></pre></td></tr></table></figure>
+<h4 id="获取最新的区块头信息" class="article-heading"><a href="#获取最新的区块头信息" class="headerlink" title="获取最新的区块头信息"></a>获取最新的区块头信息<a class="article-anchor" href="#获取最新的区块头信息" aria-hidden="true"></a></h4><p>获取最新的区块头信息</p>
+<ul>
+<li><strong>命令：getbestblockheader</strong></li>
+</ul>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "00206c4ae1d90fdfd875ee3bf84e72615db8bc628f015db089f8a6304ed46a47db5e",//区块hash</span><br><span class="line">  "preHash" : "00207ec8c85a6844899806f55cd9223efa091b548e5cc093ee7833f1c0208254957d",//前一区块hash</span><br><span class="line">  "merkleHash" : "002019aff9431c5b409df7af48a64a50e4e9a0af24cc309d6eefa84deada2a438877",//梅克尔hash</span><br><span class="line">  "time" : "2018-07-17 10:25:40",//区块生成时间</span><br><span class="line">  "height" : 33950,//区块高度</span><br><span class="line">  "txCount" : 1,//区块打包交易数量</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",//打包地址</span><br><span class="line">  "roundIndex" : 668413,//共识轮次</span><br><span class="line">  "consensusMemberCount" : 1,//参与共识成员数量</span><br><span class="line">  "roundStartTime" : "2018-07-17 10:25:30",//当前轮次开始时间</span><br><span class="line">  "packingIndexOfRound" : 1,//当前轮次打包出块的名次</span><br><span class="line">  "reward" : "0",//共识奖励</span><br><span class="line">  "fee" : "0",//区块的打包手续费</span><br><span class="line">  "confirmCount" : 0,//确认次数</span><br><span class="line">  "size" : 204,//区块大小</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100ece231eec6765c3d3cd7a4b74ef227eea05c3511e04ea46bc1b518a51a624e48022022208161b3064f261233bfa0c00308bf5b56421401ba7dd02232bac5077935b9"//签名</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getbestblockheader</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "00206c4ae1d90fdfd875ee3bf84e72615db8bc628f015db089f8a6304ed46a47db5e",</span><br><span class="line">  "preHash" : "00207ec8c85a6844899806f55cd9223efa091b548e5cc093ee7833f1c0208254957d",</span><br><span class="line">  "merkleHash" : "002019aff9431c5b409df7af48a64a50e4e9a0af24cc309d6eefa84deada2a438877",</span><br><span class="line">  "time" : "2018-07-17 10:25:40",</span><br><span class="line">  "height" : 33950,</span><br><span class="line">  "txCount" : 1,</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">  "roundIndex" : 668413,</span><br><span class="line">  "consensusMemberCount" : 1,</span><br><span class="line">  "roundStartTime" : "2018-07-17 10:25:30",</span><br><span class="line">  "packingIndexOfRound" : 1,</span><br><span class="line">  "reward" : "0",</span><br><span class="line">  "fee" : "0",</span><br><span class="line">  "confirmCount" : 0,</span><br><span class="line">  "size" : 204,</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100ece231eec6765c3d3cd7a4b74ef227eea05c3511e04ea46bc1b518a51a624e48022022208161b3064f261233bfa0c00308bf5b56421401ba7dd02232bac5077935b9"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询区块信息" class="article-heading"><a href="#查询区块信息" class="headerlink" title="查询区块信息"></a>查询区块信息<a class="article-anchor" href="#查询区块信息" aria-hidden="true"></a></h4><p>根据区块高度或者区块hash，查询区块信息，必须并且只能选择一种参数作为查询条件。</p>
+<ul>
+<li><strong>命令：getblock &lt;hash&gt; | &lt;height&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;hash&gt;</td>
+<td>区块的hash值</td>
+</tr>
+<tr>
+<td>&lt;height&gt;</td>
+<td>区块的高度</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",//区块hash</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",//前一区块hash</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",//梅克尔hash</span><br><span class="line">  "time" : "2018-07-16 16:29:30",//区块生成时间</span><br><span class="line">  "height" : 28115,//区块高度</span><br><span class="line">  "txCount" : 2,//区块打包交易数量</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",//打包地址</span><br><span class="line">  "roundIndex" : 662578,//共识轮次</span><br><span class="line">  "consensusMemberCount" : 1,//参与共识成员数量</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",//当前轮次开始时间</span><br><span class="line">  "packingIndexOfRound" : 1,//当前轮次打包出块的名次</span><br><span class="line">  "reward" : "0.001",//共识奖励</span><br><span class="line">  "fee" : "0.001",//区块的打包手续费</span><br><span class="line">  "confirmCount" : 6174,//确认次数</span><br><span class="line">  "size" : 507,//区块大小</span><br><span class="line">  "txList" : [ &#123;//交易集合</span><br><span class="line">    "hash" : "0020648f1d25237ba3614237a52c2121e51608f3822ac57a0e67d6a53e84c867e841",//交易hash</span><br><span class="line">    "type" : "coinbase",//交易类型</span><br><span class="line">    "time" : "2018-07-16 16:29:30",//交易时间</span><br><span class="line">    "blockHeight" : 28115,//交易所在区块高度</span><br><span class="line">    "fee" : "0",//交易手续费</span><br><span class="line">    "value" : null,</span><br><span class="line">    "remark" : null,</span><br><span class="line">    "scriptSig" : null,</span><br><span class="line">    "status" : "confirm",</span><br><span class="line">    "confirmCount" : 6174,</span><br><span class="line">    "size" : 54,</span><br><span class="line">    "inputs" : [ ],//交易的输入</span><br><span class="line">    "outputs" : [ //交易的输出</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"address"</span> : <span class="string">"NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw"</span>,</span><br><span class="line">          <span class="attr">"value"</span> : <span class="number">100000</span>,</span><br><span class="line">          <span class="attr">"lockTime"</span> : <span class="number">29115</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;],</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"//签名</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例 根据高度获取区块</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getblock 28115</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",</span><br><span class="line">  "time" : "2018-07-16 16:29:30",</span><br><span class="line">  "height" : 28115,</span><br><span class="line">  "txCount" : 2,</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">  "roundIndex" : 662578,</span><br><span class="line">  "consensusMemberCount" : 1,</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",</span><br><span class="line">  "packingIndexOfRound" : 1,</span><br><span class="line">  "reward" : "0.001",</span><br><span class="line">  "fee" : "0.001",</span><br><span class="line">  "confirmCount" : 6174,</span><br><span class="line">  "size" : 507,</span><br><span class="line">  "txList" : [ &#123;</span><br><span class="line">    "hash" : "0020648f1d25237ba3614237a52c2121e51608f3822ac57a0e67d6a53e84c867e841",</span><br><span class="line">    "type" : "coinbase",</span><br><span class="line">    "time" : "2018-07-16 16:29:30",</span><br><span class="line">    "blockHeight" : 28115,</span><br><span class="line">    "fee" : "0",</span><br><span class="line">    "value" : null,</span><br><span class="line">    "remark" : null,</span><br><span class="line">    "scriptSig" : null,</span><br><span class="line">    "status" : "confirm",</span><br><span class="line">    "confirmCount" : 6174,</span><br><span class="line">    "size" : 54,</span><br><span class="line">    "inputs" : [ ],</span><br><span class="line">    "outputs" : [ &#123;</span><br><span class="line">      "address" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">      "value" : 100000,</span><br><span class="line">      "lockTime" : 29115</span><br><span class="line">    &#125; ]</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    "hash" : "0020217945b6804801e0860913d24bf1ca500f9b77518a2be190c1afe63334b3ee2b",</span><br><span class="line">    "type" : "transfer",</span><br><span class="line">    "time" : "2018-07-16 16:29:27",</span><br><span class="line">    "blockHeight" : 28115,</span><br><span class="line">    "fee" : "0.001",</span><br><span class="line">    "value" : null,</span><br><span class="line">    "remark" : null,</span><br><span class="line">    "scriptSig" : "2103f68aeb83f3a4fdf9b49259a6e8eae97cf73c7a0a1c52da8a1f9c09312a6d3c53004730450221008a78bd954ea2f0f5be72217f0858faaf408b2e70f8d4d5aebc9ead9eb6e3aa22022015305c46eab978b08fbc23608c064306ea150be6552bb51cc83badef68217663",</span><br><span class="line">    "status" : "confirm",</span><br><span class="line">    "confirmCount" : 6174,</span><br><span class="line">    "size" : 249,</span><br><span class="line">    "inputs" : [ &#123;</span><br><span class="line">      "fromHash" : "0020f98434eb71e62bfda9a2708689c2f44b58f5b22299490f5956c35d54f2d48459",</span><br><span class="line">      "fromIndex" : 1,</span><br><span class="line">      "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">      "value" : 972899896100000</span><br><span class="line">    &#125; ],</span><br><span class="line">    "outputs" : [ &#123;</span><br><span class="line">      "address" : "NsdxeBuwQBStXHQ6mcaHyDpnTKijD5ne",</span><br><span class="line">      "value" : 3000000000000,</span><br><span class="line">      "lockTime" : 0</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      "address" : "Nse2TpVsJd4gLoj79MAY8NHwEsYuXwtT",</span><br><span class="line">      "value" : 969899896000000,</span><br><span class="line">      "lockTime" : 0</span><br><span class="line">    &#125; ]</span><br><span class="line">  &#125; ],</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询区块头信息" class="article-heading"><a href="#查询区块头信息" class="headerlink" title="查询区块头信息"></a>查询区块头信息<a class="article-anchor" href="#查询区块头信息" aria-hidden="true"></a></h4><p>根据区块高度或者区块hash，查询区块头信息，必须并且只能选择一种参数作为查询条件。</p>
+<ul>
+<li><strong>命令：getblockheader &lt;hash&gt; | &lt;height&gt; </strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;hash&gt;</td>
+<td>区块的hash值</td>
+</tr>
+<tr>
+<td>&lt;height&gt;</td>
+<td>区块的高度</td>
+</tr>
+</tbody>
+</table>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",//区块hash</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",//前一区块hash</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",//梅克尔hash</span><br><span class="line">  "time" : "2018-07-16 16:29:30",//区块生成时间</span><br><span class="line">  "height" : 28115,//区块高度</span><br><span class="line">  "txCount" : 2,//区块打包交易数量</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",//打包地址</span><br><span class="line">  "roundIndex" : 662578,//共识轮次</span><br><span class="line">  "consensusMemberCount" : 1,//参与共识成员数量</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",//当前轮次开始时间</span><br><span class="line">  "packingIndexOfRound" : 1,//当前轮次打包出块的名次</span><br><span class="line">  "reward" : "0.001",//共识奖励</span><br><span class="line">  "fee" : "0.001",//区块的打包手续费</span><br><span class="line">  "confirmCount" : 6174,//确认次数</span><br><span class="line">  "size" : 507,//区块大小</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"//签名</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例 根据高度获取区块头</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getblockheader 28115</span></span><br><span class="line">&#123;</span><br><span class="line">  "hash" : "0020c40f471756c88e7487fcc0d428545232120071b58f35e450891237d7b41eb817",</span><br><span class="line">  "preHash" : "0020fb1fd03cda7e2b6585256f4da85bdac7d8fc8bafa0740b8eb0ed577f3020b954",</span><br><span class="line">  "merkleHash" : "0020474c5a353f235e8e8514328e1e98d6b653d4a5445473d160691e39121cd8b158",</span><br><span class="line">  "time" : "2018-07-16 16:29:30",</span><br><span class="line">  "height" : 28115,</span><br><span class="line">  "txCount" : 2,</span><br><span class="line">  "packingAddress" : "NsdyF8gBxAfxCyiNbLzsENUvbJZ27mWw",</span><br><span class="line">  "roundIndex" : 662578,</span><br><span class="line">  "consensusMemberCount" : 1,</span><br><span class="line">  "roundStartTime" : "2018-07-16 16:29:20",</span><br><span class="line">  "packingIndexOfRound" : 1,</span><br><span class="line">  "reward" : "0.001",</span><br><span class="line">  "fee" : "0.001",</span><br><span class="line">  "confirmCount" : 6280,</span><br><span class="line">  "size" : 204,</span><br><span class="line">  "scriptSig" : "210381e44e0c2fffadc94603a41514f3e5b1c5fd53166be73eb8f49ce8c297059e5600473045022100d25b815fa30376247692fad856d3984acf45c9b49edd3d222e3afdab3169520c02200565a486e33358301848bf3d704c187ff8b2d1e859c93b704f713abb984584bf"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询网络信息" class="article-heading"><a href="#查询网络信息" class="headerlink" title="查询网络信息"></a>查询网络信息<a class="article-anchor" href="#查询网络信息" aria-hidden="true"></a></h4><p>查询网络基本信息</p>
+<ul>
+<li><strong>命令：getnetinfo </strong></li>
+</ul>
+<p>返回信息</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "localBestHeight" : 35317,//本地最新区块高度</span><br><span class="line">  "netBestHeight" : 35317,//网络最新区块高度</span><br><span class="line">  "timeOffset" : "0ms",//网络时间偏移值</span><br><span class="line">  "inCount" : 0,//被动连接节点数量</span><br><span class="line">  "outCount" : 1//主动连接节点数量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getnetinfo</span></span><br><span class="line">&#123;</span><br><span class="line">  "localBestHeight" : 35317,</span><br><span class="line">  "netBestHeight" : 35317,</span><br><span class="line">  "timeOffset" : "0ms",</span><br><span class="line">  "inCount" : 0,</span><br><span class="line">  "outCount" : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询网络节点IP" class="article-heading"><a href="#查询网络节点IP" class="headerlink" title="查询网络节点IP"></a>查询网络节点IP<a class="article-anchor" href="#查询网络节点IP" aria-hidden="true"></a></h4><p>查询网络节点IP</p>
+<ul>
+<li><strong>命令：getnetnodes </strong></li>
+</ul>
+<p>返回信息</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[ <span class="string">"192.168.1.223"</span> ]</span><br></pre></td></tr></table></figure>
+<p>示例 根据高度获取区块</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; getnetnodes</span></span><br><span class="line">[ "192.168.1.223" ]</span><br></pre></td></tr></table></figure>
+<h4 id="查询当前版本信息" class="article-heading"><a href="#查询当前版本信息" class="headerlink" title="查询当前版本信息"></a>查询当前版本信息<a class="article-anchor" href="#查询当前版本信息" aria-hidden="true"></a></h4><p>查询当前版本号</p>
+<ul>
+<li><strong>命令：version </strong></li>
+</ul>
+<p>返回信息</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[ <span class="string">"192.168.1.223"</span> ]</span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; version</span></span><br><span class="line">&#123;</span><br><span class="line">  "myVersion" : "1.0.0",</span><br><span class="line">  "newestVersion" : "0.9.11",</span><br><span class="line">  "upgradable" : false,</span><br><span class="line">  "infromation" : "地址格式修改,Change the format of address,节点发现逻辑优化,Peer discovery logic optimization,区块下载逻辑优化,Block download logic optimization,性能、稳定性优化,Performance and stability optimization"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="版本更新" class="article-heading"><a href="#版本更新" class="headerlink" title="版本更新"></a>版本更新<a class="article-anchor" href="#版本更新" aria-hidden="true"></a></h4><p>查询当前版本号</p>
+<ul>
+<li><strong>命令：upgrade &lt;version&gt; </strong></li>
+</ul>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; version 1.0.0</span></span><br></pre></td></tr></table></figure>
+<h4 id="退出钱包命令程序" class="article-heading"><a href="#退出钱包命令程序" class="headerlink" title="退出钱包命令程序"></a>退出钱包命令程序<a class="article-anchor" href="#退出钱包命令程序" aria-hidden="true"></a></h4><p>退出操作钱包的命令行程序，不会退出已启动的钱包节点。</p>
+<ul>
+<li><strong>命令：exit</strong></li>
+</ul>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">nuls&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.051Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="index.html" class="article-footer-prev" title="预览"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="sdk.html" class="article-footer-next" title="SDK"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本更新记录"><span class="toc-text">版本更新记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备"><span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器硬件配置"><span class="toc-text">服务器硬件配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#系统及内核版本"><span class="toc-text">系统及内核版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始"><span class="toc-text">开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用钱包"><span class="toc-text">使用钱包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#快速入门"><span class="toc-text">快速入门</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约定"><span class="toc-text">约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#钱包命令"><span class="toc-text">钱包命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#帮助命令"><span class="toc-text">帮助命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建账户"><span class="toc-text">创建账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备份账户"><span class="toc-text">备份账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移除账户"><span class="toc-text">移除账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置账户密码"><span class="toc-text">设置账户密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改账户密码"><span class="toc-text">修改账户密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置别名"><span class="toc-text">设置别名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入账户keystore"><span class="toc-text">导入账户keystore</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入账户私钥"><span class="toc-text">导入账户私钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导入账户私钥-覆盖导入"><span class="toc-text">导入账户私钥(覆盖导入)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询账户信息"><span class="toc-text">查询账户信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询账户列表"><span class="toc-text">查询账户列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询账户私钥"><span class="toc-text">查询账户私钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询账户余额"><span class="toc-text">查询账户余额</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转账"><span class="toc-text">转账</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询交易详情"><span class="toc-text">查询交易详情</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询交易列表"><span class="toc-text">查询交易列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建节点"><span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加入共识（委托节点）"><span class="toc-text">加入共识（委托节点）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#退出共识（退出委托）"><span class="toc-text">退出共识（退出委托）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#停止节点"><span class="toc-text">停止节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取节点详情"><span class="toc-text">获取节点详情</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取节点列表"><span class="toc-text">获取节点列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取全网共识总体信息"><span class="toc-text">获取全网共识总体信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取单个账户的委托总览"><span class="toc-text">获取单个账户的委托总览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取单个账户的委托信息列表"><span class="toc-text">获取单个账户的委托信息列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取单个账户的委托节点列表"><span class="toc-text">获取单个账户的委托节点列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取最新的区块头信息"><span class="toc-text">获取最新的区块头信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询区块信息"><span class="toc-text">查询区块信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询区块头信息"><span class="toc-text">查询区块头信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询网络信息"><span class="toc-text">查询网络信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询网络节点IP"><span class="toc-text">查询网络节点IP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询当前版本信息"><span class="toc-text">查询当前版本信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本更新"><span class="toc-text">版本更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#退出钱包命令程序"><span class="toc-text">退出钱包命令程序</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">预览</a><a href="manual.html" class="sidebar-link current">手册</a><a href="sdk.html" class="sidebar-link">SDK</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">预览</a><a href="manual.html" class="mobile-nav-link current">手册</a><a href="sdk.html" class="mobile-nav-link">SDK</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/manual.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

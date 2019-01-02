@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS Directory Structure | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/manual/structure.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/structure.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/structure.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="manual/structure.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">NULS Directory Structure</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/manual/structure.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <ul>
+<li>NULS Website：<a href="https://nuls.io" target="_blank" rel="noopener">https://nuls.io</a></li>
+<li>NULS Code URL：<a href="https://github.com/nuls-io" target="_blank" rel="noopener">https://github.com/nuls-io</a></li>
+<li>Technology Forum：<a href="http://nulsforum.org/?cat=17" target="_blank" rel="noopener">http://nulsforum.org/?cat=17</a></li>
+</ul>
+<h2 id="NULS-source-code-directory-structure-description" class="article-heading"><a href="#NULS-source-code-directory-structure-description" class="headerlink" title="NULS source code directory structure description"></a>NULS source code directory structure description<a class="article-anchor" href="#NULS-source-code-directory-structure-description" aria-hidden="true"></a></h2><p><img src="structure/1.png" alt="source project"></p>
+<ul>
+<li>Nuls : NULS core underlying source code</li>
+<li>Nuls-explorer : NULS blockchain browser（<a href="https://nulscan.io）" target="_blank" rel="noopener">https://nulscan.io）</a></li>
+<li>Nuls-client : NULS core wallet</li>
+<li>Api-server : NULS data service, NULS blockchain browser and online wallet 、 data services such as mobile wallet</li>
+<li>Website : NULS official website code</li>
+</ul>
+<h2 id="NULS-core-underlying-directory-structure-description" class="article-heading"><a href="#NULS-core-underlying-directory-structure-description" class="headerlink" title="NULS core underlying directory structure description"></a>NULS core underlying directory structure description<a class="article-anchor" href="#NULS-core-underlying-directory-structure-description" aria-hidden="true"></a></h2><p>   We will focus on the core layer of NULS, the github address is <a href="https://github.com/nuls-io/nuls。" target="_blank" rel="noopener">https://github.com/nuls-io/nuls。</a></p>
+<p>   The biggest feature of NULS is modular design, which is divided into network module, storage module, account module, ledger module, message bus module, general protocol module, consensus module, smart contract module, micro-kernel module, tool module, client module and sdk Module.</p>
+<ul>
+<li>account-ledger-module ： account ledger module</li>
+<li>account-module ： account module</li>
+<li>client-module ：client module</li>
+<li>consensus-module ： consensus module</li>
+<li>contract-module ：smart contract module</li>
+<li>core-module ：microkernel module</li>
+<li>db-module ：storage module</li>
+<li>ledger-module ：ledger module</li>
+<li>message-bus-module ：message bus module</li>
+<li>network-module ： network module</li>
+<li>protocol-module ： general protocol module</li>
+<li>tools-module ： general tool module</li>
+</ul>
+<h2 id="Module-directory-structure" class="article-heading"><a href="#Module-directory-structure" class="headerlink" title="Module directory structure"></a>Module directory structure<a class="article-anchor" href="#Module-directory-structure" aria-hidden="true"></a></h2><p>The above describes the top-level directory of each module. The modules in NULS are divided into two categories, one is a module with very clear business, such as a consensus module; the other is a relatively clear service, and the default is a basic implementation, such as a network module. We will take these two modules for detailed explanation.</p>
+<h3 id="Network-module" class="article-heading"><a href="#Network-module" class="headerlink" title="Network module"></a>Network module<a class="article-anchor" href="#Network-module" aria-hidden="true"></a></h3><p><img src="structure/2.png" alt="Markdown preferences pane"></p>
+<ul>
+<li>network-module ： Is the top level directory of the network module (type is folder)</li>
+<li>network ： The service interface definition provided for the network module (type is pom project)</li>
+<li>base ：The basic implementation of the network module (can also be understood as the default implementation, the type is a folder)</li>
+<li>network-base :  Implementation of the network interface (type is pom project)</li>
+<li>network-protocol :  Network protocol definition project for network module (type is pom project)</li>
+<li>network-rpc:  The rpc interface of the network module provides and implements the project (type is pom project)</li>
+<li>network-sdk :  The sdk provided by the network module (type is pom project)</li>
+<li>network-storage :  Network module storage implementation project (type is pom project)</li>
+<li>README.md ： Module specification, detailing the interface definition and usage of the module (type is md file)</li>
+</ul>
+<h3 id="Consensus-module" class="article-heading"><a href="#Consensus-module" class="headerlink" title="Consensus module"></a>Consensus module<a class="article-anchor" href="#Consensus-module" aria-hidden="true"></a></h3><p><img src="structure/3.png" alt="Markdown preferences pane"></p>
+<ul>
+<li>consensus-module ： The top level directory of the consensus module (type is folder)</li>
+<li>consensus ： Service interface definition of the consensus module (type is pom project)</li>
+<li>poc ：Implementation of the poc consensus mechanism (type is folder)</li>
+<li>consensus-poc-base :  Consensus interface implementation project based on poc consensus mechanism (type is pom project)</li>
+<li>consensus-poc-protocol :  Network protocol definition project of poc consensus mechanism (type is pom project)</li>
+<li>consensus-poc-rpc:  The rpc interface of the poc consensus mechanism provides and implements the project (type is pom project)</li>
+<li>consensus-poc-sdk :  The sdk (type pom project) provided by the poc consensus mechanism</li>
+<li>consensus-poc-storage :  Storage implementation project of poc consensus mechanism (type is pom project)</li>
+<li>README.md ： Module specification, detailing the interface definition and usage of the module (type is md file)</li>
+</ul>
+<h2 id="Analysis-of-modules-and-directory-structure" class="article-heading"><a href="#Analysis-of-modules-and-directory-structure" class="headerlink" title="Analysis of modules and directory structure"></a>Analysis of modules and directory structure<a class="article-anchor" href="#Analysis-of-modules-and-directory-structure" aria-hidden="true"></a></h2><p>The NULS system is a combination of multiple modules. The definition of the module has a set of rules: top-level directory -&gt; interface engineering, implementation directory -&gt; implementation project. There are also corresponding naming rules, such as a module is A, then the structure of this module is as follows：</p>
+<ul>
+<li>A-module</li>
+<li>A</li>
+<li>base</li>
+<li>A-base</li>
+<li>A-protocol</li>
+<li>A-rpc</li>
+<li>A-sdk</li>
+<li>A-storage</li>
+</ul>
+<p>The change is that this module has a very clear implementation of many different ways, then named according to the corresponding implementation, more typical consensus module and ledger module. In this case, for example, if a module is M and its implementation is B, then the structure of this module is as follows：</p>
+<ul>
+<li>M-module</li>
+<li>M</li>
+<li>B</li>
+<li>M-B-base</li>
+<li>M-B-protocol</li>
+<li>M-B-rpc</li>
+<li>M-B-sdk</li>
+<li>M-B-storage</li>
+</ul>
+<p>It is worth noting that not all module implementations must include these projects. For example, some modules do not need to use storage, so there is no need for storage. Some modules do not have a protocol, so no protocl is needed.</p>
+<h2 id="to-sum-up：" class="article-heading"><a href="#to-sum-up：" class="headerlink" title="to sum up："></a>to sum up：<a class="article-anchor" href="#to-sum-up：" aria-hidden="true"></a></h2><p>From the naming of the directory structure of NULS, it shows the great ambition of NULS. NULS hopes that communities, enterprises and individuals can provide various modules to the NULS code base, such as pow implementation and pos implementation under the consensus module. Also hope that the same module can produce modules with higher quality, better efficiency and more complete functions, such as network modules.</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.982Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="modularity.html" class="article-footer-prev" title="Modularity"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="modular_overview.html" class="article-footer-next" title="Modular Overview"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NULS-source-code-directory-structure-description"><span class="toc-text">NULS source code directory structure description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NULS-core-underlying-directory-structure-description"><span class="toc-text">NULS core underlying directory structure description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module-directory-structure"><span class="toc-text">Module directory structure</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Network-module"><span class="toc-text">Network module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Consensus-module"><span class="toc-text">Consensus module</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis-of-modules-and-directory-structure"><span class="toc-text">Analysis of modules and directory structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#to-sum-up："><span class="toc-text">to sum up：</span></a></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Architecture</a><a href="modularity.html" class="sidebar-link">Modularity</a><a href="structure.html" class="sidebar-link current">Structure</a><a href="modular_overview.html" class="sidebar-link">Modular Overview</a><a href="micro_kernel.html" class="sidebar-link">Micro Kernel</a><a href="message_bus.html" class="sidebar-link">Message Bus</a><strong class="sidebar-title">Module Overview</strong><a href="network_overview.html" class="sidebar-link">Network</a><a href="storage.html" class="sidebar-link">Storage</a><a href="account.html" class="sidebar-link">Account</a><a href="ledger.html" class="sidebar-link">Ledger</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="consensus.html" class="sidebar-link">Consensus</a><a href="contract.html" class="sidebar-link">Smart Contract</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Architecture</a><a href="modularity.html" class="mobile-nav-link">Modularity</a><a href="structure.html" class="mobile-nav-link current">Structure</a><a href="modular_overview.html" class="mobile-nav-link">Modular Overview</a><a href="micro_kernel.html" class="mobile-nav-link">Micro Kernel</a><a href="message_bus.html" class="mobile-nav-link">Message Bus</a><strong class="mobile-nav-title">Module Overview</strong><a href="network_overview.html" class="mobile-nav-link">Network</a><a href="storage.html" class="mobile-nav-link">Storage</a><a href="account.html" class="mobile-nav-link">Account</a><a href="ledger.html" class="mobile-nav-link">Ledger</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="consensus.html" class="mobile-nav-link">Consensus</a><a href="contract.html" class="mobile-nav-link">Smart Contract</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/structure.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

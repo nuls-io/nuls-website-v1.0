@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/manual/micro_kernel.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/micro_kernel.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/micro_kernel.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="manual/micro_kernel.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/manual/micro_kernel.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="Chapter-3-Microkernel-Module-Resolution" class="article-heading"><a href="#Chapter-3-Microkernel-Module-Resolution" class="headerlink" title="Chapter 3 Microkernel Module Resolution"></a>Chapter 3 Microkernel Module Resolution<a class="article-anchor" href="#Chapter-3-Microkernel-Module-Resolution" aria-hidden="true"></a></h1><p>[TOC]</p>
+<h2 id="1-module-overview" class="article-heading"><a href="#1-module-overview" class="headerlink" title="1, module overview"></a>1, module overview<a class="article-anchor" href="#1-module-overview" aria-hidden="true"></a></h2><p>The microkernel module is the core module of NULS, responsible for the core functions of module management, object management, thread management, service management, configuration management, etc.</p>
+<h2 id="2-module-function" class="article-heading"><a href="#2-module-function" class="headerlink" title="2, module function"></a>2, module function<a class="article-anchor" href="#2-module-function" aria-hidden="true"></a></h2><h3 id="2-1-Configuration-Management" class="article-heading"><a href="#2-1-Configuration-Management" class="headerlink" title="2.1 Configuration Management"></a>2.1 Configuration Management<a class="article-anchor" href="#2-1-Configuration-Management" aria-hidden="true"></a></h3><p>The microkernel module is responsible for reading and storing the system configuration file. When each module needs to be used, only the configuration manager needs to be called to obtain the required configuration item information.</p>
+<p>The configuration supports both the properties and the ini format.</p>
+<h3 id="2-2-Context-management" class="article-heading"><a href="#2-2-Context-management" class="headerlink" title="2.2 Context management"></a>2.2 Context management<a class="article-anchor" href="#2-2-Context-management" aria-hidden="true"></a></h3><p>The microkernel module provides the system’s context container NulsContext, through the context container can get the latest block, creation block, network height, chain id, default address type, the context also provides a quick access to the service manager’s get service object the way.</p>
+<h3 id="2-3-Module-Management" class="article-heading"><a href="#2-3-Module-Management" class="headerlink" title="2.3 Module Management"></a>2.3 Module Management<a class="article-anchor" href="#2-3-Module-Management" aria-hidden="true"></a></h3><p>The microkernel module defines the abstract class BaseModuleBootstrap of the module launcher. The module needs to inherit the abstract class to add the module to the management. The module manager manages the lifecycle of all modules, including loading, initializing, running, stopping, and destroying. The microkernel module also maintains the dependencies of the modules and controls the order in which the modules are started.</p>
+<h3 id="2-4-Object-Management" class="article-heading"><a href="#2-4-Object-Management" class="headerlink" title="2.4 Object Management"></a>2.4 Object Management<a class="article-anchor" href="#2-4-Object-Management" aria-hidden="true"></a></h3><p>An IOC container like spring-framework implements object instantiation and manages objects by annotation. The corresponding method is intercepted and verified. If the module in which the called object is located is not yet running, execution is not allowed.</p>
+<h3 id="2-5-thread-management" class="article-heading"><a href="#2-5-thread-management" class="headerlink" title="2.5 thread management"></a>2.5 thread management<a class="article-anchor" href="#2-5-thread-management" aria-hidden="true"></a></h3><p>The microkernel module provides a thread manager TaskManager that can create and allow threads or thread pools. Provide the default thread creation factory NulsThreadFactory, all threads should be created with this factory.</p>
+<h3 id="2-6-Service-Management" class="article-heading"><a href="#2-6-Service-Management" class="headerlink" title="2.6 Service Management"></a>2.6 Service Management<a class="article-anchor" href="#2-6-Service-Management" aria-hidden="true"></a></h3><p>All services in NULS are registered in the service manager. Inter-service interdependencies can be referenced by means of annotations or by the NulsContext context manager.</p>
+<h3 id="2-7-Internationalization" class="article-heading"><a href="#2-7-Internationalization" class="headerlink" title="2.7 Internationalization"></a>2.7 Internationalization<a class="article-anchor" href="#2-7-Internationalization" aria-hidden="true"></a></h3><p>The microkernel module provides a basic internationalization solution. The language can be switched through different configuration files (zh-CN.properties, en.properties). Any language can be added to the nuls system through configuration files.</p>
+<h2 id="3-module-interface" class="article-heading"><a href="#3-module-interface" class="headerlink" title="3, module interface"></a>3, module interface<a class="article-anchor" href="#3-module-interface" aria-hidden="true"></a></h2><h3 id="3-1-Setting-the-language" class="article-heading"><a href="#3-1-Setting-the-language" class="headerlink" title="3.1 Setting the language"></a>3.1 Setting the language<a class="article-anchor" href="#3-1-Setting-the-language" aria-hidden="true"></a></h3><p>Interface definition class:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">io.nuls.kernel.service.KernelService</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Get the creation block</p>
+<ul>
+<li>Method description:<br>Set the system language,</li>
+<li>Parameter Description:<br>Lang(String): The prefix of the internationalization configuration file. For example, the key configured in English en.properties is “en”.</li>
+<li>Return value description:<br>Success(boolean): Whether the operation is successful</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">   * 设置系统语言</span><br><span class="line">   * set language of system</span><br><span class="line">   *</span><br><span class="line">   * @param lang zhe name of the language properties file</span><br><span class="line">   * @return success or not</span><br><span class="line">   */</span><br><span class="line">  public Result setLanguage(String lang);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-2-thread-interface" class="article-heading"><a href="#3-2-thread-interface" class="headerlink" title="3.2 thread interface"></a>3.2 thread interface<a class="article-anchor" href="#3-2-thread-interface" aria-hidden="true"></a></h3><p>Interface definition class:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">io.nuls.kernel.thread.manager.TaskManager</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Create a thread pool</p>
+<ul>
+<li>Method description:<br>Create a thread pool based on the passed parameters and return</li>
+<li>Parameter Description:<br>threadCount(int): number of threads<br>  queueSize(int): number of queues<br>  Factory(NulsThreadFactory): Thread creates a factory object</li>
+<li>Return value description:<br>Data: returns the created thread pool object</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">     * 创建一个线程池，并返回</span><br><span class="line">     * create a thread pool and return it;</span><br><span class="line">     * @param threadCount the max count of thread </span><br><span class="line">     * @param queueSize the max size of the queue</span><br><span class="line">     * @param factory which create all the threads</span><br><span class="line">     * @return the thread pool</span><br><span class="line">     */</span><br><span class="line">    public static final ThreadPoolExecutor createThreadPool(int threadCount, int queueSize, NulsThreadFactory factory)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create a scheduled task thread pool</p>
+<ul>
+<li>Method description:<br>Create a timed task thread pool based on the passed parameters and return</li>
+<li>Parameter Description:<br>threadCount(int): number of threads<br>  Factory(NulsThreadFactory): Thread creates a factory object</li>
+<li>Return value description:<br>Data: returns the created thread pool object</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">     * 创建一个定时执行的线程池，并返回</span><br><span class="line">     * create a scheduled thread pool and return it;</span><br><span class="line">     * @param threadCount the max count of thread</span><br><span class="line">     * @param factory which create all the threads</span><br><span class="line">     * @return the thread pool</span><br><span class="line">     */</span><br><span class="line">    public static final ScheduledThreadPoolExecutor createScheduledThreadPool(int threadCount, NulsThreadFactory factory) ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Asynchronous method execution</p>
+<ul>
+<li>Method description:<br>The asynchronous method calls a run method, and all methods called in this way share the same thread pool.</li>
+<li>Parameter Description:<br>Runnable(Runnable):run</li>
+<li>Return value description:<br>Void</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">    * 异步执行一个方法，该方法会在系统中一个特定的线程池中异步执行，</span><br><span class="line">    * 该线程池为系统中所有该类的调用者共享。</span><br><span class="line">    * A method is executed asynchronously, which is executed asynchronously in a specific </span><br><span class="line">    * thread pool in the system, which is shared by all callers of this class in the system.</span><br><span class="line">    * @param runnable 可以行的run方法对象，Run method object</span><br><span class="line">    */</span><br><span class="line">   public static final void asynExecuteRunnable(Runnable runnable)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create a separate thread and run</p>
+<ul>
+<li>Method description:<br>Create a thread based on the parameters passed in,</li>
+<li>Parameter Description:<br>moduleId(short): module id<br>  threadName(String): thread name<br>  Runnable(Runnable): execution method object<br>  Deamon (boolean): whether to create a daemon</li>
+<li>Return value description:<br>Void</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">    * 创建一个独立的线程，并执行runnable的run方法</span><br><span class="line">    * Create a separate thread and execute the runnable run method</span><br><span class="line">    * @param moduleId 模块id</span><br><span class="line">    * @param threadName 线程名称</span><br><span class="line">    * @param runnable 方法对象</span><br><span class="line">    * @param deamon     是否是守护线程</span><br><span class="line">    */</span><br><span class="line">   public static final void createAndRunThread(short moduleId, String threadName, Runnable runnable, boolean deamon)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Stop all threads of a module</p>
+<ul>
+<li>Method description:<br>Stop all threads of the module based on the passed module id</li>
+<li>Parameter Description:<br>moduleId(short): module id</li>
+<li>Return value description:<br>Void</li>
+<li>code</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 停止一个模块的所有线程</span><br><span class="line"> * stop all the threads of the module</span><br><span class="line"> * @param moduleId 模块id</span><br><span class="line"> */</span><br><span class="line">public static void shutdownByModuleId(short moduleId)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4、Module-architecture" class="article-heading"><a href="#4、Module-architecture" class="headerlink" title="4、Module architecture"></a>4、Module architecture<a class="article-anchor" href="#4、Module-architecture" aria-hidden="true"></a></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. The microkernel module is the &quot;motherboard&quot; of the entire NULS system. All modules are plugged into the motherboard.</span><br><span class="line">2, module communication, function calls are dependent on the &quot;main board&quot;</span><br><span class="line">3, &quot;Motherboard&quot; provides management and synergy</span><br></pre></td></tr></table></figure>
+<h2 id="5、Module-protocol" class="article-heading"><a href="#5、Module-protocol" class="headerlink" title="5、Module protocol"></a>5、Module protocol<a class="article-anchor" href="#5、Module-protocol" aria-hidden="true"></a></h2><p>skip</p>
+<h2 id="6-the-core-process" class="article-heading"><a href="#6-the-core-process" class="headerlink" title="6, the core process"></a>6, the core process<a class="article-anchor" href="#6-the-core-process" aria-hidden="true"></a></h2><h3 id="6-1-system-startup" class="article-heading"><a href="#6-1-system-startup" class="headerlink" title="6.1 system startup"></a>6.1 system startup<a class="article-anchor" href="#6-1-system-startup" aria-hidden="true"></a></h3><p><img src="./kernel/bootstrap-en.png" alt=""></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.939Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="modular_overview.html" class="article-footer-prev" title="Modular Overview"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="message_bus.html" class="article-footer-next" title="Message Bus"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-3-Microkernel-Module-Resolution"><span class="toc-text">Chapter 3 Microkernel Module Resolution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-module-overview"><span class="toc-text">1, module overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-module-function"><span class="toc-text">2, module function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Configuration-Management"><span class="toc-text">2.1 Configuration Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Context-management"><span class="toc-text">2.2 Context management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Module-Management"><span class="toc-text">2.3 Module Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Object-Management"><span class="toc-text">2.4 Object Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-thread-management"><span class="toc-text">2.5 thread management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-Service-Management"><span class="toc-text">2.6 Service Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-Internationalization"><span class="toc-text">2.7 Internationalization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-module-interface"><span class="toc-text">3, module interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Setting-the-language"><span class="toc-text">3.1 Setting the language</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-thread-interface"><span class="toc-text">3.2 thread interface</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Module-architecture"><span class="toc-text">4、Module architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Module-protocol"><span class="toc-text">5、Module protocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-the-core-process"><span class="toc-text">6, the core process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-system-startup"><span class="toc-text">6.1 system startup</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Architecture</a><a href="modularity.html" class="sidebar-link">Modularity</a><a href="structure.html" class="sidebar-link">Structure</a><a href="modular_overview.html" class="sidebar-link">Modular Overview</a><a href="micro_kernel.html" class="sidebar-link current">Micro Kernel</a><a href="message_bus.html" class="sidebar-link">Message Bus</a><strong class="sidebar-title">Module Overview</strong><a href="network_overview.html" class="sidebar-link">Network</a><a href="storage.html" class="sidebar-link">Storage</a><a href="account.html" class="sidebar-link">Account</a><a href="ledger.html" class="sidebar-link">Ledger</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="consensus.html" class="sidebar-link">Consensus</a><a href="contract.html" class="sidebar-link">Smart Contract</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Architecture</a><a href="modularity.html" class="mobile-nav-link">Modularity</a><a href="structure.html" class="mobile-nav-link">Structure</a><a href="modular_overview.html" class="mobile-nav-link">Modular Overview</a><a href="micro_kernel.html" class="mobile-nav-link current">Micro Kernel</a><a href="message_bus.html" class="mobile-nav-link">Message Bus</a><strong class="mobile-nav-title">Module Overview</strong><a href="network_overview.html" class="mobile-nav-link">Network</a><a href="storage.html" class="mobile-nav-link">Storage</a><a href="account.html" class="mobile-nav-link">Account</a><a href="ledger.html" class="mobile-nav-link">Ledger</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="consensus.html" class="mobile-nav-link">Consensus</a><a href="contract.html" class="mobile-nav-link">Smart Contract</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/micro_kernel.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

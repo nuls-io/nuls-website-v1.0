@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>NULS</title>
+  
+  <subtitle>NULS is a global blockchain open-source project which is a highly customizable modular blockchain infrastructure.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://nuls-io.github.io/"/>
+  <updated>2019-01-02T05:45:51.838Z</updated>
+  <id>https://nuls-io.github.io/</id>
+  
+  <author>
+    <name>NULS</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NULS Developer Website Initialized</title>
+    <link href="https://nuls-io.github.io/news/2018/07/16/Initialized/"/>
+    <id>https://nuls-io.github.io/news/2018/07/16/Initialized/</id>
+    <published>2018-07-16T00:00:00.000Z</published>
+    <updated>2019-01-02T05:45:51.838Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h1><p>As the title, the NULS developer site is created. I hope everyone can contribute together.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Welcome&quot;&gt;&lt;a href=&quot;#Welcome&quot; class=&quot;headerlink&quot; title=&quot;Welcome&quot;&gt;&lt;/a&gt;Welcome&lt;/h1&gt;&lt;p&gt;As the title, the NULS developer site is created. 
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

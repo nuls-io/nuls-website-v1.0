@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/manual/message_bus.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/message_bus.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/message_bus.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="manual/message_bus.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name"></h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/manual/message_bus.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="NULS-Message-Bus-Module-Resolution" class="article-heading"><a href="#NULS-Message-Bus-Module-Resolution" class="headerlink" title="NULS Message Bus Module Resolution"></a>NULS Message Bus Module Resolution<a class="article-anchor" href="#NULS-Message-Bus-Module-Resolution" aria-hidden="true"></a></h1><h2 id="1、Overview" class="article-heading"><a href="#1、Overview" class="headerlink" title="1、Overview"></a>1、Overview<a class="article-anchor" href="#1、Overview" aria-hidden="true"></a></h2><p>The message bus module is a functional module used by NULS to process messages. It manages all network messages and protocol messages, and provides functions such as subscription, reception, and transmission of messages. It is a data relay station for each node of NULS.</p>
+<h2 id="2、Feature" class="article-heading"><a href="#2、Feature" class="headerlink" title="2、Feature"></a>2、Feature<a class="article-anchor" href="#2、Feature" aria-hidden="true"></a></h2><p>The message bus module manages all the messages in the NULS through the MessageManager, and provides functions such as message subscription, unsubscription, broadcast message, point-to-point sending message, receiving message, and creating message example.</p>
+<h2 id="3、Interface" class="article-heading"><a href="#3、Interface" class="headerlink" title="3、Interface"></a>3、Interface<a class="article-anchor" href="#3、Interface" aria-hidden="true"></a></h2><ul>
+<li>Class that defines the interface:  <code>io.nuls.message.bus.service.MessageBusService</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Subscribe to message</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> messageClass   The class object that needs to subscribe to the message.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> messageHandler The message message</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> The id of the subscription message.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">String <span class="title">subscribeMessage</span><span class="params">(Class&lt;? extends BaseMessage&gt; messageClass, NulsMessageHandler&lt;? extends BaseMessage&gt; messageHandler)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * unsubscribe</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> subscribeId id.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> subscribeId The id of the message message.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unsubscribeMessage</span><span class="params">(String subscribeId)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Receive the message and place the message on the message bus.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> message Received message.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> node    The message comes as to which node.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">receiveMessage</span><span class="params">(BaseMessage message, Node node)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * broadcast to nodes except "excludeNode"</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> message     The message was broadcast.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> excludeNode The node that is not passed.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> aysn        Asynchronous execution</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> Return all broadcasted node id list</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Result&lt;List&lt;String&gt;&gt; broadcast(BaseMessage message, Node excludeNode, <span class="keyword">boolean</span> aysn, <span class="keyword">int</span> percent);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * send msg to one node</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> message The message you want to sent</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> node    The node that received the message</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> aysn    Asynchronous execution</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> Return whether sent successfully</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Result <span class="title">sendToNode</span><span class="params">(BaseMessage message, Node node, <span class="keyword">boolean</span> aysn)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Instantiate a message object based on message type and module identity.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Result&lt;? extends BaseMessage&gt; getMessageInstance(<span class="keyword">short</span> moduleId, <span class="keyword">int</span> type);</span><br></pre></td></tr></table></figure>
+<h2 id="4、Architectures" class="article-heading"><a href="#4、Architectures" class="headerlink" title="4、Architectures"></a>4、Architectures<a class="article-anchor" href="#4、Architectures" aria-hidden="true"></a></h2><ul>
+<li>Module name：message-bus-module</li>
+<li>Module ID：6</li>
+</ul>
+<p><img src="message_bus/msgbusArchitecture.png" alt="mbarchitecture"></p>
+<h2 id="5、Core-Process" class="article-heading"><a href="#5、Core-Process" class="headerlink" title="5、Core Process"></a>5、Core Process<a class="article-anchor" href="#5、Core-Process" aria-hidden="true"></a></h2><h4 id="5-1-Module-start-gt-Subscribe-message" class="article-heading"><a href="#5-1-Module-start-gt-Subscribe-message" class="headerlink" title="5.1 Module start -&gt; Subscribe message"></a>5.1 Module start -&gt; Subscribe message<a class="article-anchor" href="#5-1-Module-start-gt-Subscribe-message" aria-hidden="true"></a></h4><p><img src="message_bus/flow_chart1.png" alt="MessageBus流程1"></p>
+<h4 id="5-2-Receive-message-gt-classification-processor-processing-gt-distribution-to-specific-message-handler-for-processing" class="article-heading"><a href="#5-2-Receive-message-gt-classification-processor-processing-gt-distribution-to-specific-message-handler-for-processing" class="headerlink" title="5.2 Receive message -&gt; classification processor processing -&gt; distribution to specific message handler for processing"></a>5.2 Receive message -&gt; classification processor processing -&gt; distribution to specific message handler for processing<a class="article-anchor" href="#5-2-Receive-message-gt-classification-processor-processing-gt-distribution-to-specific-message-handler-for-processing" aria-hidden="true"></a></h4><p><img src="message_bus/flow_chart2.png" alt="MessageBus流程2"></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.934Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="micro_kernel.html" class="article-footer-prev" title="Micro Kernel"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="network_overview.html" class="article-footer-next" title="Network"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NULS-Message-Bus-Module-Resolution"><span class="toc-text">NULS Message Bus Module Resolution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Overview"><span class="toc-text">1、Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Feature"><span class="toc-text">2、Feature</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Interface"><span class="toc-text">3、Interface</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Architectures"><span class="toc-text">4、Architectures</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Core-Process"><span class="toc-text">5、Core Process</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-Module-start-gt-Subscribe-message"><span class="toc-text">5.1 Module start -&gt; Subscribe message</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-Receive-message-gt-classification-processor-processing-gt-distribution-to-specific-message-handler-for-processing"><span class="toc-text">5.2 Receive message -&gt; classification processor processing -&gt; distribution to specific message handler for processing</span></a></li></ol></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Architecture</a><a href="modularity.html" class="sidebar-link">Modularity</a><a href="structure.html" class="sidebar-link">Structure</a><a href="modular_overview.html" class="sidebar-link">Modular Overview</a><a href="micro_kernel.html" class="sidebar-link">Micro Kernel</a><a href="message_bus.html" class="sidebar-link current">Message Bus</a><strong class="sidebar-title">Module Overview</strong><a href="network_overview.html" class="sidebar-link">Network</a><a href="storage.html" class="sidebar-link">Storage</a><a href="account.html" class="sidebar-link">Account</a><a href="ledger.html" class="sidebar-link">Ledger</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="consensus.html" class="sidebar-link">Consensus</a><a href="contract.html" class="sidebar-link">Smart Contract</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Architecture</a><a href="modularity.html" class="mobile-nav-link">Modularity</a><a href="structure.html" class="mobile-nav-link">Structure</a><a href="modular_overview.html" class="mobile-nav-link">Modular Overview</a><a href="micro_kernel.html" class="mobile-nav-link">Micro Kernel</a><a href="message_bus.html" class="mobile-nav-link current">Message Bus</a><strong class="mobile-nav-title">Module Overview</strong><a href="network_overview.html" class="mobile-nav-link">Network</a><a href="storage.html" class="mobile-nav-link">Storage</a><a href="account.html" class="mobile-nav-link">Account</a><a href="ledger.html" class="mobile-nav-link">Ledger</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="consensus.html" class="mobile-nav-link">Consensus</a><a href="contract.html" class="mobile-nav-link">Smart Contract</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/message_bus.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

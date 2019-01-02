@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS存储模块解析 | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/manual/storage.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/storage.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/storage.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="manual/storage.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">NULS存储模块解析</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/manual/storage.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="1、模块概述" class="article-heading"><a href="#1、模块概述" class="headerlink" title="1、模块概述"></a>1、模块概述<a class="article-anchor" href="#1、模块概述" aria-hidden="true"></a></h2><p>存储模块在NULS中扮演着一个工具模块的角色，它提供了在本地存储数据的功能，各个模块都可以通过存储模块的接口对自己的数据进行存储和取出。目前NULS存储模块的数据库实现是LevelDB，开发者们也可以根据自己的需求使用不同的数据库实现。</p>
+<h2 id="2、模块功能" class="article-heading"><a href="#2、模块功能" class="headerlink" title="2、模块功能"></a>2、模块功能<a class="article-anchor" href="#2、模块功能" aria-hidden="true"></a></h2><p>存储模块的功能主要分为保存数据、删除数据、查询数据；修改数据由覆盖保存或者先删除后保存来实现。而功能的实现分为单条数据的操作、批量操作，对序列化的二进制数据的操作、对model实例数据的操作等。</p>
+<h2 id="3、模块接口" class="article-heading"><a href="#3、模块接口" class="headerlink" title="3、模块接口"></a>3、模块接口<a class="article-anchor" href="#3、模块接口" aria-hidden="true"></a></h2><ul>
+<li>接口定义类  <code>io.nuls.db.service.DBService</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 创建一个数据区域</span></span><br><span class="line"><span class="comment">    * Create a data area</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> areaName</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">Result <span class="title">createArea</span><span class="params">(String areaName)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 创建一个自定义key比较器的数据区域</span></span><br><span class="line"><span class="comment">    * Create a data area for the custom key comparator.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> areaName</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> comparator 自定义key比较器/Custom key comparator.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">Result <span class="title">createArea</span><span class="params">(String areaName, Comparator&lt;<span class="keyword">byte</span>[]&gt; comparator)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 列出当前数据库中所有Area名称</span></span><br><span class="line"><span class="comment">    * Lists all Area names in the current database</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   String[] listArea();</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 按字节存储key-value</span></span><br><span class="line"><span class="comment">    * Store key-value in bytes.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">Result <span class="title">put</span><span class="params">(String area, <span class="keyword">byte</span>[] key, <span class="keyword">byte</span>[] value)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 存储对象</span></span><br><span class="line"><span class="comment">    * Store the object</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> value 需要存储的对象/Objects that need to be stored.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   &lt;T&gt; <span class="function">Result <span class="title">putModel</span><span class="params">(String area, <span class="keyword">byte</span>[] key, T value)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 根据key删除value</span></span><br><span class="line"><span class="comment">    * Delete value according to key.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">Result <span class="title">delete</span><span class="params">(String area, <span class="keyword">byte</span>[] key)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 根据key获取value</span></span><br><span class="line"><span class="comment">    * Get value from the key.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">byte</span>[] get(String area, <span class="keyword">byte</span>[] key);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 根据key和对象class获取指定对象</span></span><br><span class="line"><span class="comment">    * 前提是这个key的存储方式是putModel，否则value为null</span></span><br><span class="line"><span class="comment">    * Gets the specified object from the key and object class.</span></span><br><span class="line"><span class="comment">    * The premise is that this key is stored in a putModel, otherwise value is null.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> clazz 指定对象的class/Specifies the class of the object.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   &lt;T&gt; <span class="function">T <span class="title">getModel</span><span class="params">(String area, <span class="keyword">byte</span>[] key, Class&lt;T&gt; clazz)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 根据key获取Object对象</span></span><br><span class="line"><span class="comment">    * Get the Object of Object from the key.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * param area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">Object <span class="title">getModel</span><span class="params">(String area, <span class="keyword">byte</span>[] key)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取数据区域的所有key的无序集合</span></span><br><span class="line"><span class="comment">    * Gets an unordered collection of all keys in the data area.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   Set&lt;<span class="keyword">byte</span>[]&gt; keySet(String area);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取数据区域的所有key的有序集合</span></span><br><span class="line"><span class="comment">    * Gets an ordered collection of all keys in the data area.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   List&lt;<span class="keyword">byte</span>[]&gt; keyList(String area);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取数据区域的所有value的有序集合</span></span><br><span class="line"><span class="comment">    * Gets an ordered collection of all values in the data area.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   List&lt;<span class="keyword">byte</span>[]&gt; valueList(String area);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取数据区域的所有key-value的无序集合</span></span><br><span class="line"><span class="comment">    * Gets an unordered collection of all key-value in the data area.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   Set&lt;Entry&lt;<span class="keyword">byte</span>[], <span class="keyword">byte</span>[]&gt;&gt; entrySet(String area);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取数据区域的所有key-value的有序集合</span></span><br><span class="line"><span class="comment">    * Gets an ordered set of all key-values in the data area.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   List&lt;Entry&lt;<span class="keyword">byte</span>[], <span class="keyword">byte</span>[]&gt;&gt; entryList(String area);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取数据区域的所有key-value的有序集合，并指定返回的value对象</span></span><br><span class="line"><span class="comment">    * 前提是这个数据区域的存储方式是putModel，否则value为null</span></span><br><span class="line"><span class="comment">    * Gets the ordered collection of all key-value in the data area and specifies the returned value object.</span></span><br><span class="line"><span class="comment">    * The premise is that the storage mode in this data area is the putModel, otherwise value is null.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> clazz 指定对象的class/Specifies the class of the object.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   &lt;T&gt; List&lt;Entry&lt;<span class="keyword">byte</span>[], T&gt;&gt; entryList(String area, Class&lt;T&gt; clazz);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取数据区域的所有value的有序集合，并指定返回的value对象</span></span><br><span class="line"><span class="comment">    * 前提是这个数据区域的存储方式是putModel，否则value为null</span></span><br><span class="line"><span class="comment">    * Gets the ordered collection of all values in the data area and specifies the returned value object.</span></span><br><span class="line"><span class="comment">    * The premise is that the storage mode in this data area is the putModel, otherwise value is null.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> clazz 指定对象的class/Specifies the class of the object.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">values</span><span class="params">(String area, Class&lt;T&gt; clazz)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 指定数据区域的批量增删改操作</span></span><br><span class="line"><span class="comment">    * Specifies the batch add, delete, update operations in the data area.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> area</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">BatchOperation <span class="title">createWriteBatch</span><span class="params">(String area)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 清除Area</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> areaName</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">Result <span class="title">destroyArea</span><span class="params">(String areaName)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function">Result <span class="title">clearArea</span><span class="params">(String area)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>批量操作接口定义类 <code>io.nuls.db.service.BatchOperation</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 增加或者更新操作</span></span><br><span class="line"><span class="comment">   * Add or update operations.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function">Result <span class="title">put</span><span class="params">(<span class="keyword">byte</span>[] key, <span class="keyword">byte</span>[] value)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 存储或者更新对象</span></span><br><span class="line"><span class="comment">   * Add or update the object</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> value 需要存储或者更新的对象/Objects that need to be added or updated.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  &lt;T&gt; <span class="function">Result <span class="title">putModel</span><span class="params">(<span class="keyword">byte</span>[] key, T value)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 删除操作</span></span><br><span class="line"><span class="comment">   * Delete operation</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function">Result <span class="title">delete</span><span class="params">(<span class="keyword">byte</span>[] key)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 执行批量操作</span></span><br><span class="line"><span class="comment">   * Perform batch operation</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function">Result <span class="title">executeBatch</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="4、模块架构" class="article-heading"><a href="#4、模块架构" class="headerlink" title="4、模块架构"></a>4、模块架构<a class="article-anchor" href="#4、模块架构" aria-hidden="true"></a></h2><ul>
+<li>模块名称：db-module</li>
+<li>模块ID：2</li>
+</ul>
+<p><img src="storage/DBArchitecture.png" alt="mbarchitecture"></p>
+<h2 id="5、模块流程" class="article-heading"><a href="#5、模块流程" class="headerlink" title="5、模块流程"></a>5、模块流程<a class="article-anchor" href="#5、模块流程" aria-hidden="true"></a></h2><p>NULS启动时，各模块进行初始化时会在Storage中初始化使用到的DB Area常量，在模块业务逻辑中，存储数据时会时会将对应的Area和数据传给对应的存储功能接口，DB模块再执行单条数据或批量的存取操作。</p>
+<p><img src="storage/DBFlow.png" alt="DBFlow"></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.132Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="network_overview.html" class="article-footer-prev" title="网络模块"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="account.html" class="article-footer-next" title="账户模块"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、模块概述"><span class="toc-text">1、模块概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、模块功能"><span class="toc-text">2、模块功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、模块接口"><span class="toc-text">3、模块接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、模块架构"><span class="toc-text">4、模块架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、模块流程"><span class="toc-text">5、模块流程</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">基础</strong><a href="index.html" class="sidebar-link">总体架构</a><a href="modularity.html" class="sidebar-link">为什么模块化</a><a href="structure.html" class="sidebar-link">源码结构</a><a href="modular_overview.html" class="sidebar-link">模块说明</a><a href="micro_kernel.html" class="sidebar-link">微内核</a><a href="message_bus.html" class="sidebar-link">消息总线</a><strong class="sidebar-title">模块说明</strong><a href="network_overview.html" class="sidebar-link">网络模块</a><a href="storage.html" class="sidebar-link current">存储模块</a><a href="account.html" class="sidebar-link">账户模块</a><a href="ledger.html" class="sidebar-link">账本模块</a><a href="protocol.html" class="sidebar-link">通用协议</a><a href="consensus.html" class="sidebar-link">共识模块</a><a href="contract.html" class="sidebar-link">智能合约</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">基础</strong><a href="index.html" class="mobile-nav-link">总体架构</a><a href="modularity.html" class="mobile-nav-link">为什么模块化</a><a href="structure.html" class="mobile-nav-link">源码结构</a><a href="modular_overview.html" class="mobile-nav-link">模块说明</a><a href="micro_kernel.html" class="mobile-nav-link">微内核</a><a href="message_bus.html" class="mobile-nav-link">消息总线</a><strong class="mobile-nav-title">模块说明</strong><a href="network_overview.html" class="mobile-nav-link">网络模块</a><a href="storage.html" class="mobile-nav-link current">存储模块</a><a href="account.html" class="mobile-nav-link">账户模块</a><a href="ledger.html" class="mobile-nav-link">账本模块</a><a href="protocol.html" class="mobile-nav-link">通用协议</a><a href="consensus.html" class="mobile-nav-link">共识模块</a><a href="contract.html" class="mobile-nav-link">智能合约</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/storage.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Package | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/protocol/index.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/protocol/index.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/protocol/index.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="protocol/index.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">Package</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/protocol/index.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="Overview" class="article-heading"><a href="#Overview" class="headerlink" title="Overview"></a>Overview<a class="article-anchor" href="#Overview" aria-hidden="true"></a></h2><p>NULS uses custom messaging for communication over the TCP protocol.</p>
+<ul>
+<li>Digital binary stream using little endian。</li>
+<li>Floating point numbers convert to integers and transfer by little endian</li>
+</ul>
+<h2 id="Message-Structre" class="article-heading"><a href="#Message-Structre" class="headerlink" title="Message Structre"></a>Message Structre<a class="article-anchor" href="#Message-Structre" aria-hidden="true"></a></h2><p>The message consists of a 10-byte header and payload.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*---------------------------------------------------------------*</span><br><span class="line">|       Header(10 Byte)         |            Payload            |</span><br><span class="line">*---------------------------------------------------------------*</span><br></pre></td></tr></table></figure>
+<h2 id="Header" class="article-heading"><a href="#Header" class="headerlink" title="Header"></a>Header<a class="article-anchor" href="#Header" aria-hidden="true"></a></h2><p>The main role of the header is to indicate the payload length, verify data integrity, and solve TCP sticky packets.</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>MagicNumber</td>
+<td>uint32</td>
+<td>Packet valid flag</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PayloadLength</td>
+<td>uint32</td>
+<td>Payload length</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Xor</td>
+<td>uint8</td>
+<td>Payload valid flag</td>
+</tr>
+<tr>
+<td>1</td>
+<td>EncryptType</td>
+<td>uint8</td>
+<td>Encryption mode</td>
+</tr>
+</tbody>
+</table>
+<p>Remark:</p>
+<blockquote>
+<ul>
+<li>MagicNumber In addition to being validated as a valid check, it is also used for the division of the main network and test.</li>
+<li>EncryptType Currently reserved field for extended encryption.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Known MagicNumber</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">value</th>
+<th>net</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0x0133EEE8</td>
+<td>Main-net</td>
+</tr>
+<tr>
+<td style="text-align:center">0x0133EEFA</td>
+<td>Test-net</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Payload" class="article-heading"><a href="#Payload" class="headerlink" title="Payload"></a>Payload<a class="article-anchor" href="#Payload" aria-hidden="true"></a></h2><p>The payload is a variable-length binary stream, and PayloadLength in the header describes the length of the payload.</p>
+<p>The first 8 bytes of the payload are in a fixed format.</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>ModuleID</td>
+<td>uint32</td>
+<td>Module ID</td>
+</tr>
+<tr>
+<td>4</td>
+<td>EventType</td>
+<td>uint32</td>
+<td>Eevent ID</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>ModuleID indicates which module the load was sent from.</li>
+<li>EventType is the module’s custom event type</li>
+</ul>
+<p>The network layer forwards the payload to the module specified by ModuleID, and the module looks up the specific message processor for further processing according to the EventType.<br>Currently only two module data is sent via P2P network broadcast.</p>
+<ul>
+<li>Network = 4</li>
+<li>Protocol = 10</li>
+</ul>
+<h2 id="Common-Struecture" class="article-heading"><a href="#Common-Struecture" class="headerlink" title="Common Struecture"></a>Common Struecture<a class="article-anchor" href="#Common-Struecture" aria-hidden="true"></a></h2><h3 id="VarInt" class="article-heading"><a href="#VarInt" class="headerlink" title="VarInt"></a>VarInt<a class="article-anchor" href="#VarInt" aria-hidden="true"></a></h3><p>Variable-length integers that can be encoded based on the values expressed to save space.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Len</th>
+<th>Structure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 0xfd</td>
+<td>1</td>
+<td>uint8</td>
+</tr>
+<tr>
+<td>&lt;= 0xffff</td>
+<td>3</td>
+<td>0xfd + uint16</td>
+</tr>
+<tr>
+<td>&lt;= 0xffffffff</td>
+<td>5</td>
+<td>0xfe + uint32</td>
+</tr>
+<tr>
+<td>&gt; 0xffffffff</td>
+<td>9</td>
+<td>0xff + uint64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="VarString" class="article-heading"><a href="#VarString" class="headerlink" title="VarString"></a>VarString<a class="article-anchor" href="#VarString" aria-hidden="true"></a></h3><p>A variable-length byte stream consisting of a variable-length buffer. The string is encoded in UTF8.</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>length</td>
+<td>VarInt</td>
+<td>字符串的长度，以字节为单位</td>
+</tr>
+<tr>
+<td>length</td>
+<td>value</td>
+<td>uint8[length]</td>
+<td>字符串本身</td>
+</tr>
+</tbody>
+</table>
+<h3 id="VarByte" class="article-heading"><a href="#VarByte" class="headerlink" title="VarByte"></a>VarByte<a class="article-anchor" href="#VarByte" aria-hidden="true"></a></h3><p>Variable-length buffer, consistent with the VarString implementation.</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>length</td>
+<td>VarInt</td>
+<td>字符串的长度，以字节为单位</td>
+</tr>
+<tr>
+<td>length</td>
+<td>data</td>
+<td>byte[length]</td>
+<td>字符串本身</td>
+</tr>
+</tbody>
+</table>
+<h3 id="NulsDigestData" class="article-heading"><a href="#NulsDigestData" class="headerlink" title="NulsDigestData"></a>NulsDigestData<a class="article-anchor" href="#NulsDigestData" aria-hidden="true"></a></h3><p>Nuls Digest Data</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>digestAlgType</td>
+<td>Byte</td>
+<td>算法ID</td>
+</tr>
+<tr>
+<td>??</td>
+<td>digest</td>
+<td>VarString</td>
+<td>摘要</td>
+</tr>
+</tbody>
+</table>
+<h3 id="NulsSignData" class="article-heading"><a href="#NulsSignData" class="headerlink" title="NulsSignData"></a>NulsSignData<a class="article-anchor" href="#NulsSignData" aria-hidden="true"></a></h3><p>Nuls Signature Data</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>signAlgType</td>
+<td>Byte</td>
+<td>Algorithm ID</td>
+</tr>
+<tr>
+<td>??</td>
+<td>signature</td>
+<td>VarString</td>
+<td>Signature</td>
+</tr>
+</tbody>
+</table>
+<h3 id="P2PKHScriptSig" class="article-heading"><a href="#P2PKHScriptSig" class="headerlink" title="P2PKHScriptSig"></a>P2PKHScriptSig<a class="article-anchor" href="#P2PKHScriptSig" aria-hidden="true"></a></h3><p>NULS transaction signature</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>publicKey</td>
+<td>VarString</td>
+<td>Public Key</td>
+</tr>
+<tr>
+<td>??</td>
+<td>NulsSignData</td>
+<td>NulsSignData</td>
+<td>Signagture Data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Int48" class="article-heading"><a href="#Int48" class="headerlink" title="Int48"></a>Int48<a class="article-anchor" href="#Int48" aria-hidden="true"></a></h3><p>6-byte timestamp.</p>
+<h3 id="Transaction" class="article-heading"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction<a class="article-anchor" href="#Transaction" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>Trasaction Type</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>remark</td>
+</tr>
+<tr>
+<td>??</td>
+<td>txData</td>
+<td>??</td>
+<td>Transaction data</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>??</td>
+<td>Token data</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Node" class="article-heading"><a href="#Node" class="headerlink" title="Node"></a>Node<a class="article-anchor" href="#Node" aria-hidden="true"></a></h3><p>节点信息</p>
+<table>
+<thead>
+<tr>
+<th>Len</th>
+<th>Fields</th>
+<th>Data Type</th>
+<th>Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>magicNumber</td>
+<td>uint32</td>
+<td>Magic number</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Port</td>
+<td>uint16</td>
+<td>Server Port</td>
+</tr>
+<tr>
+<td>??</td>
+<td>IP</td>
+<td>VarString</td>
+<td>Server IP String</td>
+</tr>
+</tbody>
+</table>
+<h3 id="NotFoundType" class="article-heading"><a href="#NotFoundType" class="headerlink" title="NotFoundType"></a>NotFoundType<a class="article-anchor" href="#NotFoundType" aria-hidden="true"></a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">short</span> BLOCK = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">short</span> BLOCKS = <span class="number">2</span></span><br><span class="line"><span class="keyword">short</span> TRANSACTION = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">short</span> HASHES = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.986Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="network.html" class="article-footer-next" title="Network"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Overview"><span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Message-Structre"><span class="toc-text">Message Structre</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Header"><span class="toc-text">Header</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Payload"><span class="toc-text">Payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-Struecture"><span class="toc-text">Common Struecture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VarInt"><span class="toc-text">VarInt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VarString"><span class="toc-text">VarString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VarByte"><span class="toc-text">VarByte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NulsDigestData"><span class="toc-text">NulsDigestData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NulsSignData"><span class="toc-text">NulsSignData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P2PKHScriptSig"><span class="toc-text">P2PKHScriptSig</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Int48"><span class="toc-text">Int48</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transaction"><span class="toc-text">Transaction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node"><span class="toc-text">Node</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NotFoundType"><span class="toc-text">NotFoundType</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Protocol</strong><a href="index.html" class="sidebar-link current">Overview</a><a href="network.html" class="sidebar-link">Network</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="transaction.html" class="sidebar-link">Transaction</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Protocol</strong><a href="index.html" class="mobile-nav-link current">Overview</a><a href="network.html" class="mobile-nav-link">Network</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="transaction.html" class="mobile-nav-link">Transaction</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="protocol/index.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

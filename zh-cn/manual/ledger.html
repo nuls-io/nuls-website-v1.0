@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>账本模块解析 | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/manual/ledger.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/ledger.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/ledger.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="manual/ledger.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">账本模块解析</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/manual/ledger.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="1、模块概述" class="article-heading"><a href="#1、模块概述" class="headerlink" title="1、模块概述"></a>1、模块概述<a class="article-anchor" href="#1、模块概述" aria-hidden="true"></a></h2><p><code>Legder-module</code>模块保存了全网所有的交易以及<code>UTXO</code>，数据完整、公开、透明。</p>
+<blockquote>
+<p>正因如此，账本模块的主要作用是验证交易的合法性，如交易发出者必须拥有当前UTXO、UTXO未锁定即可用、输出不能大于输入、不能双花即不能重复支付。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>另账本模块可为回滚区块提供数据支撑。</p>
+</blockquote>
+</blockquote>
+<h2 id="2、模块协议" class="article-heading"><a href="#2、模块协议" class="headerlink" title="2、模块协议"></a>2、模块协议<a class="article-anchor" href="#2、模块协议" aria-hidden="true"></a></h2><h3 id="2-1-交易中CoinData数据结构-UTXO模型在NULS中的设计应用" class="article-heading"><a href="#2-1-交易中CoinData数据结构-UTXO模型在NULS中的设计应用" class="headerlink" title="2.1 交易中CoinData数据结构[UTXO模型在NULS中的设计应用]"></a>2.1 交易中<code>CoinData</code>数据结构[UTXO模型在NULS中的设计应用]<a class="article-anchor" href="#2-1-交易中CoinData数据结构-UTXO模型在NULS中的设计应用" aria-hidden="true"></a></h3><p><em>以转账为例</em></p>
+<ul>
+<li><p><strong><code>CoinData</code></strong></p>
+<pre><code>List&lt;Coin&gt; froms
+</code></pre><blockquote>
+<p>表示转账发出者可用于转出的UTXO(可用资金)</p>
+</blockquote>
+<pre><code>List&lt;Coin&gt; tos
+</code></pre><blockquote>
+<p>新生成的UTXO，表示转账金额以及找零给转账发出者的UTXO</p>
+</blockquote>
+<p>  eg.</p>
+<p>  账户A向账户B转账5个NULS，账户A有一个6NULS的UTXO，那么CoinData在不考虑手续费的情况下 </p>
+<blockquote>
+<p>froms: </p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>utxo-6-nuls-sender </p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>tos: </p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>utxo-5-nuls-receiver </p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>utxo-1-nuls-sender </p>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong><code>Coin</code></strong></p>
+<pre><code>byte[] owner
+</code></pre><blockquote>
+<p>在<em><code>List&lt;Coin&gt; froms</code></em>中<code>owner</code>保存的是上一笔交易的txHash+index[tos这个List的index]，如何理解呢，概述为这个UTXO的来源，是某一笔交易中的<code>List&lt;Coin&gt; tos</code>其中之一，具体是第几个，由index来定位。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p> -</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>在<em><code>List&lt;Coin&gt; tos</code></em>中<code>owner</code>保存的是转账接收者的账户地址</p>
+</blockquote>
+<pre><code>Na na
+</code></pre><blockquote>
+<p>这笔UTXO所含资金</p>
+</blockquote>
+<pre><code>long lockTime
+</code></pre><blockquote>
+<p>是否锁定，可按时间、区块高度锁定，例如创建交易后1小时后解锁，或者区块高度增加1000块后解锁</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="3、模块功能" class="article-heading"><a href="#3、模块功能" class="headerlink" title="3、模块功能"></a>3、模块功能<a class="article-anchor" href="#3、模块功能" aria-hidden="true"></a></h2><h3 id="3-1-验证交易" class="article-heading"><a href="#3-1-验证交易" class="headerlink" title="3.1 验证交易"></a>3.1 验证交易<a class="article-anchor" href="#3-1-验证交易" aria-hidden="true"></a></h3><p>验证逻辑：<em>交易发出者必须拥有当前UTXO、UTXO未锁定即可用、输出不能大于输入、不能双花即不能重复支付</em></p>
+<ul>
+<li>本地钱包节点：创建交易后保存未确认交易时验证交易</li>
+<li>出块节点：打包交易时验证交易</li>
+<li>共识节点：接收区块后验证区块时验证交易</li>
+</ul>
+<h3 id="3-2-保存交易" class="article-heading"><a href="#3-2-保存交易" class="headerlink" title="3.2 保存交易"></a>3.2 保存交易<a class="article-anchor" href="#3-2-保存交易" aria-hidden="true"></a></h3><p>保存逻辑：<em>维护交易中的<code>UTXO</code>，删除<code>from</code>中的<code>UTXO</code>即已花费，保存<code>to</code>中的<code>UTXO</code>即未花费，保存交易</em></p>
+<ul>
+<li>共识节点：区块验证通过后保存交易。</li>
+</ul>
+<h3 id="3-3-验证区块双花或者一个交易列表双花" class="article-heading"><a href="#3-3-验证区块双花或者一个交易列表双花" class="headerlink" title="3.3 验证区块双花或者一个交易列表双花"></a>3.3 验证区块双花或者一个交易列表双花<a class="article-anchor" href="#3-3-验证区块双花或者一个交易列表双花" aria-hidden="true"></a></h3><p>验证逻辑：<em>把所有交易中的<code>fromUtxo</code>拿出来，查找是否存在重复，有则为双花</em></p>
+<ul>
+<li>共识节点：区块验证时</li>
+<li>其他情况：需要对一个交易列表验证时</li>
+</ul>
+<h3 id="3-4-回滚交易" class="article-heading"><a href="#3-4-回滚交易" class="headerlink" title="3.4 回滚交易"></a>3.4 回滚交易<a class="article-anchor" href="#3-4-回滚交易" aria-hidden="true"></a></h3><p>回滚逻辑：<em>保存交易的反向操作</em></p>
+<ul>
+<li>链分叉需要回滚区块时</li>
+</ul>
+<h3 id="3-5-查询功能" class="article-heading"><a href="#3-5-查询功能" class="headerlink" title="3.5 查询功能"></a>3.5 查询功能<a class="article-anchor" href="#3-5-查询功能" aria-hidden="true"></a></h3><ul>
+<li>根据<code>txHash</code>获取交易</li>
+<li>获取全网<code>UTXO</code>资金之和</li>
+<li>根据<code>key</code>[txhash+index]获取UTXO</li>
+</ul>
+<h2 id="4、模块接口" class="article-heading"><a href="#4、模块接口" class="headerlink" title="4、模块接口"></a>4、模块接口<a class="article-anchor" href="#4、模块接口" aria-hidden="true"></a></h2><h3 id="4-1-接口定义类" class="article-heading"><a href="#4-1-接口定义类" class="headerlink" title="4.1 接口定义类"></a>4.1 接口定义类<a class="article-anchor" href="#4-1-接口定义类" aria-hidden="true"></a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">io.nuls.ledger.service.LedgerService</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-接口方法概述" class="article-heading"><a href="#4-2-接口方法概述" class="headerlink" title="4.2 接口方法概述"></a>4.2 接口方法概述<a class="article-anchor" href="#4-2-接口方法概述" aria-hidden="true"></a></h3><ul>
+<li><h4 id="验证交易" class="article-heading"><a href="#验证交易" class="headerlink" title="验证交易"></a><strong><em>验证交易</em></strong><a class="article-anchor" href="#验证交易" aria-hidden="true"></a></h4><p>  -</p>
+<ul>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ValidateResult <span class="title">verifyCoinData</span><span class="params">(Transaction transaction, Map&lt;String, Coin&gt; temporaryToMap, Set&lt;String&gt; temporaryFromSet)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ValidateResult <span class="title">verifyCoinData</span><span class="params">(Transaction transaction, Map&lt;String, Coin&gt; temporaryToMap, Set&lt;String&gt; temporaryFromSet, Long bestHeight)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法说明:</p>
+<p>验证交易发出者必须拥有当前UTXO、UTXO未锁定即可用、输出不能大于输入、不能双花即不能重复支付。</p>
+</li>
+<li><p>参数说明:</p>
+<pre><code>`Transaction transaction` 
+</code></pre><blockquote>
+<p>待验证交易</p>
+</blockquote>
+<pre><code>`Map&lt;String, Coin&gt; temporaryToMap` 
+</code></pre><blockquote>
+<p>本次打包的交易所产生的<code>UTXO(List&lt;Coin&gt; tos)</code>依次装进<code>temporaryToMap</code>中，用于验证一个区块中连续交易所使用的<code>UTXO</code>的合法性，即在同一个区块中上一笔交易产生的<code>UTXO</code>在下一笔交易里被花费，由于待打包区块的交易还未保存进全账本中，所以在验证交易使用的<code>UTXO</code>是否存在时，先检查全账本中是否存在，若不存在，再检查<code>temporaryToMap</code>，若也不存在，则说明使用的<code>UTXO</code>是非法的。 </p>
+<p>每个交易验证通过后，把本次交易产生的UTXO也装进<code>temporaryToMap</code>中，用于下一笔交易的验证。 </p>
+</blockquote>
+<pre><code>`Set&lt;String&gt; temporaryFromSet` 
+</code></pre><blockquote>
+<p>本次打包的交易所花费的<code>UTXO(List&lt;Coin&gt; froms)</code>依次装进<code>temporaryFromSet</code>中，用于验证本区块中交易使用的UTXO是否双花即重复支付。 </p>
+<p>每个交易验证通过后，把本次花费的<code>UTXO(List&lt;Coin&gt; froms)</code>也装进<code>temporaryFromSet</code>中，用于下一笔交易的验证。</p>
+</blockquote>
+<pre><code>`Long bestHeight` 
+</code></pre><blockquote>
+<p>验证<code>UTXO(List&lt;Coin&gt; froms)</code>里的<code>UTXO</code>的锁定状态时，指定当前解锁的最高区块高度</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>返回值说明:</p>
+<pre><code>验证通过则返回成功，不附带数据
+
+验证失败则返回失败错误码，不附带数据
+</code></pre></li>
+</ul>
+<ul>
+<li><h4 id="保存交易" class="article-heading"><a href="#保存交易" class="headerlink" title="保存交易"></a><strong><em>保存交易</em></strong><a class="article-anchor" href="#保存交易" aria-hidden="true"></a></h4><p>  -</p>
+<ul>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Result <span class="title">saveTx</span><span class="params">(Transaction tx)</span> <span class="keyword">throws</span> NulsException</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法说明:</p>
+<pre><code>验证区块通过后保存交易，维护交易中的`UTXO`，删除`from`中的`UTXO`即已花费，保存`to`中的`UTXO`即未花费，保存交易
+</code></pre></li>
+</ul>
+<ul>
+<li><p>参数说明:</p>
+<pre><code>`Transaction tx` 
+</code></pre><blockquote>
+<p>待保存交易   </p>
+</blockquote>
+</li>
+<li><p>返回值说明:</p>
+<pre><code>保存成功则返回成功，不附带数据
+
+保存失败则返回失败错误码，不附带数据
+</code></pre></li>
+</ul>
+<ul>
+<li><h4 id="验证区块双花或者一个交易列表双花" class="article-heading"><a href="#验证区块双花或者一个交易列表双花" class="headerlink" title="验证区块双花或者一个交易列表双花"></a><strong><em>验证区块双花或者一个交易列表双花</em></strong><a class="article-anchor" href="#验证区块双花或者一个交易列表双花" aria-hidden="true"></a></h4><p>  -</p>
+<ul>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ValidateResult&lt;List&lt;Transaction&gt;&gt; verifyDoubleSpend(Block block);</span><br><span class="line"></span><br><span class="line">ValidateResult&lt;List&lt;Transaction&gt;&gt; verifyDoubleSpend(List&lt;Transaction&gt; txList);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法说明:</p>
+<pre><code>把所有交易中的`fromUtxo`拿出来，查找是否存在重复，有则为双花    
+</code></pre></li>
+<li><p>参数说明:</p>
+<pre><code>`Block block` 
+</code></pre><blockquote>
+<p>待验证区块</p>
+</blockquote>
+<pre><code>`List&lt;Transaction&gt; txList`
+</code></pre><blockquote>
+<p>待验证交易列表  </p>
+</blockquote>
+</li>
+<li><p>返回值说明:</p>
+<pre><code>验证成功则返回成功，不附带数据
+
+验证失败则返回失败错误码，同时附带数据data, 即双花的两条交易        
+</code></pre><ul>
+<li><h4 id="回滚交易" class="article-heading"><a href="#回滚交易" class="headerlink" title="回滚交易"></a><strong><em>回滚交易</em></strong><a class="article-anchor" href="#回滚交易" aria-hidden="true"></a></h4></li>
+</ul>
+<p>-</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Result <span class="title">rollbackTx</span><span class="params">(Transaction tx)</span> <span class="keyword">throws</span> NulsException</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>方法说明:</p>
+<pre><code>链分叉需要回滚区块时回滚交易
+</code></pre></li>
+<li><p>参数说明:</p>
+<pre><code>`Transaction tx` 
+</code></pre><blockquote>
+<p>待回滚交易</p>
+</blockquote>
+</li>
+<li><p>返回值说明:</p>
+<pre><code>回滚成功则返回成功，不附带数据
+
+回滚失败则返回失败错误码，不附带数据
+</code></pre></li>
+</ul>
+<ul>
+<li><h4 id="查询交易" class="article-heading"><a href="#查询交易" class="headerlink" title="查询交易"></a><strong><em>查询交易</em></strong><a class="article-anchor" href="#查询交易" aria-hidden="true"></a></h4><p>  -</p>
+<ul>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Transaction <span class="title">getTx</span><span class="params">(NulsDigestData hash)</span></span>;</span><br><span class="line">  <span class="function">Transaction <span class="title">getTx</span><span class="params">(<span class="keyword">byte</span>[] txHashBytes)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法说明:</p>
+<pre><code>根据交易hash查询交易
+</code></pre></li>
+<li><p>参数说明:</p>
+<pre><code>`NulsDigestData hash` 
+</code></pre><blockquote>
+<p>交易hash对象    </p>
+</blockquote>
+<pre><code>`byte[] txHashBytes`
+</code></pre><blockquote>
+<p>交易hash字节数组</p>
+</blockquote>
+</li>
+<li><p>返回值说明:</p>
+<pre><code>返回交易对象或者空
+</code></pre></li>
+</ul>
+<ul>
+<li><h4 id="查询全网UTXO资金之和" class="article-heading"><a href="#查询全网UTXO资金之和" class="headerlink" title="查询全网UTXO资金之和"></a><strong><em>查询全网UTXO资金之和</em></strong><a class="article-anchor" href="#查询全网UTXO资金之和" aria-hidden="true"></a></h4><p>  -</p>
+<ul>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">getWholeUTXO</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法说明:</p>
+<pre><code>查询全网所有未花费的资金之和
+</code></pre></li>
+<li><p>参数说明:</p>
+<pre><code>无
+</code></pre></li>
+<li><p>返回值说明:</p>
+<pre><code>返回nuls的最小单位na
+</code></pre></li>
+</ul>
+<ul>
+<li><h4 id="根据key-txHash-index-查询UTXO" class="article-heading"><a href="#根据key-txHash-index-查询UTXO" class="headerlink" title="根据key[txHash+index]查询UTXO"></a><strong><em>根据key[txHash+index]查询UTXO</em></strong><a class="article-anchor" href="#根据key-txHash-index-查询UTXO" aria-hidden="true"></a></h4><p>  -</p>
+<ul>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Coin <span class="title">getUtxo</span><span class="params">(<span class="keyword">byte</span>[] owner)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法说明:</p>
+<pre><code>根据key[txHash+index]查询UTXO
+</code></pre></li>
+<li><p>参数说明:</p>
+<pre><code>`byte[] owner` 
+</code></pre><blockquote>
+<p>产生这个UTXO的交易的txHash+index    </p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>返回值说明:</p>
+<pre><code>返回Coin对象或者空
+</code></pre></li>
+</ul>
+<h2 id="5、模块架构" class="article-heading"><a href="#5、模块架构" class="headerlink" title="5、模块架构"></a>5、模块架构<a class="article-anchor" href="#5、模块架构" aria-hidden="true"></a></h2><p><img src="ledger/5.png" alt="architecture"></p>
+<h2 id="6、核心流程" class="article-heading"><a href="#6、核心流程" class="headerlink" title="6、核心流程"></a>6、核心流程<a class="article-anchor" href="#6、核心流程" aria-hidden="true"></a></h2><h3 id="6-1-系统核心流程概览" class="article-heading"><a href="#6-1-系统核心流程概览" class="headerlink" title="6.1 系统核心流程概览"></a>6.1 系统核心流程概览<a class="article-anchor" href="#6-1-系统核心流程概览" aria-hidden="true"></a></h3><blockquote>
+<p>账本模块的接口作为组件运用在系统其它流程中</p>
+</blockquote>
+<p><img src="ledger/core_processes.png" alt="core_processes"></p>
+<h3 id="6-2-账本模块核心流程" class="article-heading"><a href="#6-2-账本模块核心流程" class="headerlink" title="6.2 账本模块核心流程"></a>6.2 账本模块核心流程<a class="article-anchor" href="#6-2-账本模块核心流程" aria-hidden="true"></a></h3><ul>
+<li>保存交易</li>
+</ul>
+<p><img src="ledger/6.png" alt="save_transaction"></p>
+<ul>
+<li>验证UTXO</li>
+</ul>
+<p><img src="ledger/7.png" alt="verify_coindata"></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.080Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="account.html" class="article-footer-prev" title="账户模块"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="protocol.html" class="article-footer-next" title="通用协议"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、模块概述"><span class="toc-text">1、模块概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、模块协议"><span class="toc-text">2、模块协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-交易中CoinData数据结构-UTXO模型在NULS中的设计应用"><span class="toc-text">2.1 交易中CoinData数据结构[UTXO模型在NULS中的设计应用]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、模块功能"><span class="toc-text">3、模块功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-验证交易"><span class="toc-text">3.1 验证交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-保存交易"><span class="toc-text">3.2 保存交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-验证区块双花或者一个交易列表双花"><span class="toc-text">3.3 验证区块双花或者一个交易列表双花</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-回滚交易"><span class="toc-text">3.4 回滚交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-查询功能"><span class="toc-text">3.5 查询功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、模块接口"><span class="toc-text">4、模块接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-接口定义类"><span class="toc-text">4.1 接口定义类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-接口方法概述"><span class="toc-text">4.2 接口方法概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#验证交易"><span class="toc-text">验证交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#保存交易"><span class="toc-text">保存交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#验证区块双花或者一个交易列表双花"><span class="toc-text">验证区块双花或者一个交易列表双花</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回滚交易"><span class="toc-text">回滚交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询交易"><span class="toc-text">查询交易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询全网UTXO资金之和"><span class="toc-text">查询全网UTXO资金之和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#根据key-txHash-index-查询UTXO"><span class="toc-text">根据key[txHash+index]查询UTXO</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、模块架构"><span class="toc-text">5、模块架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、核心流程"><span class="toc-text">6、核心流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-系统核心流程概览"><span class="toc-text">6.1 系统核心流程概览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-账本模块核心流程"><span class="toc-text">6.2 账本模块核心流程</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">基础</strong><a href="index.html" class="sidebar-link">总体架构</a><a href="modularity.html" class="sidebar-link">为什么模块化</a><a href="structure.html" class="sidebar-link">源码结构</a><a href="modular_overview.html" class="sidebar-link">模块说明</a><a href="micro_kernel.html" class="sidebar-link">微内核</a><a href="message_bus.html" class="sidebar-link">消息总线</a><strong class="sidebar-title">模块说明</strong><a href="network_overview.html" class="sidebar-link">网络模块</a><a href="storage.html" class="sidebar-link">存储模块</a><a href="account.html" class="sidebar-link">账户模块</a><a href="ledger.html" class="sidebar-link current">账本模块</a><a href="protocol.html" class="sidebar-link">通用协议</a><a href="consensus.html" class="sidebar-link">共识模块</a><a href="contract.html" class="sidebar-link">智能合约</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">基础</strong><a href="index.html" class="mobile-nav-link">总体架构</a><a href="modularity.html" class="mobile-nav-link">为什么模块化</a><a href="structure.html" class="mobile-nav-link">源码结构</a><a href="modular_overview.html" class="mobile-nav-link">模块说明</a><a href="micro_kernel.html" class="mobile-nav-link">微内核</a><a href="message_bus.html" class="mobile-nav-link">消息总线</a><strong class="mobile-nav-title">模块说明</strong><a href="network_overview.html" class="mobile-nav-link">网络模块</a><a href="storage.html" class="mobile-nav-link">存储模块</a><a href="account.html" class="mobile-nav-link">账户模块</a><a href="ledger.html" class="mobile-nav-link current">账本模块</a><a href="protocol.html" class="mobile-nav-link">通用协议</a><a href="consensus.html" class="mobile-nav-link">共识模块</a><a href="contract.html" class="mobile-nav-link">智能合约</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/ledger.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

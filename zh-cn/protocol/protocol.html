@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Protocol | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/protocol/protocol.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/protocol/protocol.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/protocol/protocol.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="protocol/protocol.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">Protocol</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/protocol/protocol.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="ID-定义" class="article-heading"><a href="#ID-定义" class="headerlink" title="ID 定义"></a>ID 定义<a class="article-anchor" href="#ID-定义" aria-hidden="true"></a></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">short</span> PROTOCOL_NOT_FOUND = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_NEW_TX = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_GET_BLOCK = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_BLOCK = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_GET_BLOCKS_BY_HASH = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_GET_BLOCKS_BY_HEIGHT = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_GET_BLOCK_HEADER = <span class="number">7</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_BLOCK_HEADER = <span class="number">8</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_GET_TX_GROUP = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_TX_GROUP = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_NEW_BLOCK = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_GET_BLOCKS_HASH = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_BLOCKS_HASH = <span class="number">13</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_STRING = <span class="number">14</span>;</span><br><span class="line"><span class="keyword">short</span> PROTOCOL_COMPLETE = <span class="number">15</span>;</span><br><span class="line"><span class="keyword">short</span> REQUEST_REACT = <span class="number">16</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="载荷定义" class="article-heading"><a href="#载荷定义" class="headerlink" title="载荷定义"></a>载荷定义<a class="article-anchor" href="#载荷定义" aria-hidden="true"></a></h2><h4 id="PROTOCOL-NOT-FOUND" class="article-heading"><a href="#PROTOCOL-NOT-FOUND" class="headerlink" title="PROTOCOL_NOT_FOUND"></a>PROTOCOL_NOT_FOUND<a class="article-anchor" href="#PROTOCOL-NOT-FOUND" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>type</td>
+<td>NotFoundType</td>
+<td>未找到的类型</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Hash</td>
+<td>VarString</td>
+<td>请求但未找到的hash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-NEW-TX" class="article-heading"><a href="#PROTOCOL-NEW-TX" class="headerlink" title="PROTOCOL_NEW_TX"></a>PROTOCOL_NEW_TX<a class="article-anchor" href="#PROTOCOL-NEW-TX" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>transaction</td>
+<td>Transaction</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCK" class="article-heading"><a href="#PROTOCOL-GET-BLOCK" class="headerlink" title="PROTOCOL_GET_BLOCK"></a>PROTOCOL_GET_BLOCK<a class="article-anchor" href="#PROTOCOL-GET-BLOCK" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>blockHash</td>
+<td>NulsDigestData</td>
+<td>区块hash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-BLOCK" class="article-heading"><a href="#PROTOCOL-BLOCK" class="headerlink" title="PROTOCOL_BLOCK"></a>PROTOCOL_BLOCK<a class="article-anchor" href="#PROTOCOL-BLOCK" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>header</td>
+<td>BlockHeader</td>
+<td>块头</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Transaction[]</td>
+<td>Transaction[??]</td>
+<td>节点信息数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCKS-BY-HASH" class="article-heading"><a href="#PROTOCOL-GET-BLOCKS-BY-HASH" class="headerlink" title="PROTOCOL_GET_BLOCKS_BY_HASH"></a>PROTOCOL_GET_BLOCKS_BY_HASH<a class="article-anchor" href="#PROTOCOL-GET-BLOCKS-BY-HASH" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>startHeight</td>
+<td>NulsDigestData</td>
+<td>开始区块hash</td>
+</tr>
+<tr>
+<td>??</td>
+<td>endHeight</td>
+<td>NulsDigestData</td>
+<td>结束区块hash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCKS-BY-HEIGHT" class="article-heading"><a href="#PROTOCOL-GET-BLOCKS-BY-HEIGHT" class="headerlink" title="PROTOCOL_GET_BLOCKS_BY_HEIGHT"></a>PROTOCOL_GET_BLOCKS_BY_HEIGHT<a class="article-anchor" href="#PROTOCOL-GET-BLOCKS-BY-HEIGHT" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>startHash</td>
+<td>uint32</td>
+<td>开始区块高度</td>
+</tr>
+<tr>
+<td>4</td>
+<td>endHash</td>
+<td>uint32</td>
+<td>结束区块高度</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-BLOCK-HEADER" class="article-heading"><a href="#PROTOCOL-BLOCK-HEADER" class="headerlink" title="PROTOCOL_BLOCK_HEADER"></a>PROTOCOL_BLOCK_HEADER<a class="article-anchor" href="#PROTOCOL-BLOCK-HEADER" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>PreHash</td>
+<td>NulsDigestData</td>
+<td>上一个块摘要</td>
+</tr>
+<tr>
+<td>??</td>
+<td>MerkleHash</td>
+<td>NulsDigestData</td>
+<td>Merkle树根</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>4</td>
+<td>height</td>
+<td>uint32</td>
+<td>高度</td>
+</tr>
+<tr>
+<td>4</td>
+<td>txCount</td>
+<td>uint32</td>
+<td>交易数量</td>
+</tr>
+<tr>
+<td>??</td>
+<td>extend</td>
+<td>VarByte</td>
+<td>扩展数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>P2PKHScriptSig</td>
+<td>签名</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-TX-GROUP" class="article-heading"><a href="#PROTOCOL-GET-TX-GROUP" class="headerlink" title="PROTOCOL_GET_TX_GROUP"></a>PROTOCOL_GET_TX_GROUP<a class="article-anchor" href="#PROTOCOL-GET-TX-GROUP" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>TXHashCount</td>
+<td>VarInt</td>
+<td>交易摘要数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>NulsDigestData[]</td>
+<td>交易摘要数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-TX-GROUP" class="article-heading"><a href="#PROTOCOL-TX-GROUP" class="headerlink" title="PROTOCOL_TX_GROUP"></a>PROTOCOL_TX_GROUP<a class="article-anchor" href="#PROTOCOL-TX-GROUP" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>BlockHash</td>
+<td>NulsDigestData</td>
+<td>块摘要</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXCount</td>
+<td>VarInt</td>
+<td>交易数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>Transaction[]</td>
+<td>交易数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-NEW-BLOCK" class="article-heading"><a href="#PROTOCOL-NEW-BLOCK" class="headerlink" title="PROTOCOL_NEW_BLOCK"></a>PROTOCOL_NEW_BLOCK<a class="article-anchor" href="#PROTOCOL-NEW-BLOCK" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>header</td>
+<td>BlockHeader</td>
+<td>块头</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXCount</td>
+<td>VarInt</td>
+<td>交易数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>NulsDigestData[]</td>
+<td>交易摘要数组</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXCount</td>
+<td>VarInt</td>
+<td>交易数</td>
+</tr>
+<tr>
+<td>??</td>
+<td>TXHash</td>
+<td>Transaction[]</td>
+<td>交易数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-GET-BLOCKS-HASH" class="article-heading"><a href="#PROTOCOL-GET-BLOCKS-HASH" class="headerlink" title="PROTOCOL_GET_BLOCKS_HASH"></a>PROTOCOL_GET_BLOCKS_HASH<a class="article-anchor" href="#PROTOCOL-GET-BLOCKS-HASH" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>start</td>
+<td>uint32</td>
+<td>开始高度</td>
+</tr>
+<tr>
+<td>4</td>
+<td>end</td>
+<td>uint32</td>
+<td>结束高度</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-BLOCKS-HASH" class="article-heading"><a href="#PROTOCOL-BLOCKS-HASH" class="headerlink" title="PROTOCOL_BLOCKS_HASH"></a>PROTOCOL_BLOCKS_HASH<a class="article-anchor" href="#PROTOCOL-BLOCKS-HASH" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>requestEventHash</td>
+<td>NulsDigestData</td>
+<td>请求Hash</td>
+</tr>
+<tr>
+<td>??</td>
+<td>HeightListCount</td>
+<td>VarInt</td>
+<td>Hash列表数量</td>
+</tr>
+<tr>
+<td>??</td>
+<td>Hash[]</td>
+<td>NulsDigestData[]</td>
+<td>Hash列表</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-STRING" class="article-heading"><a href="#PROTOCOL-STRING" class="headerlink" title="PROTOCOL_STRING"></a>PROTOCOL_STRING<a class="article-anchor" href="#PROTOCOL-STRING" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>Hash</td>
+<td>VarString</td>
+</tr>
+</tbody>
+</table>
+<h4 id="PROTOCOL-COMPLETE" class="article-heading"><a href="#PROTOCOL-COMPLETE" class="headerlink" title="PROTOCOL_COMPLETE"></a>PROTOCOL_COMPLETE<a class="article-anchor" href="#PROTOCOL-COMPLETE" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>requestEventHash</td>
+<td>NulsDigestData</td>
+<td>请求Hash</td>
+</tr>
+<tr>
+<td>1</td>
+<td>success</td>
+<td>boolean</td>
+<td>结果</td>
+</tr>
+</tbody>
+</table>
+<h4 id="REQUEST-REACT" class="article-heading"><a href="#REQUEST-REACT" class="headerlink" title="REQUEST_REACT"></a>REQUEST_REACT<a class="article-anchor" href="#REQUEST-REACT" aria-hidden="true"></a></h4><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>??</td>
+<td>requestEventHash</td>
+<td>NulsDigestData</td>
+<td>请求Hash</td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:52.140Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                <a href="network.html" class="article-footer-prev" title="网络"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="transaction.html" class="article-footer-next" title="交易"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ID-定义"><span class="toc-text">ID 定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#载荷定义"><span class="toc-text">载荷定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-NOT-FOUND"><span class="toc-text">PROTOCOL_NOT_FOUND</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-NEW-TX"><span class="toc-text">PROTOCOL_NEW_TX</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCK"><span class="toc-text">PROTOCOL_GET_BLOCK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-BLOCK"><span class="toc-text">PROTOCOL_BLOCK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCKS-BY-HASH"><span class="toc-text">PROTOCOL_GET_BLOCKS_BY_HASH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCKS-BY-HEIGHT"><span class="toc-text">PROTOCOL_GET_BLOCKS_BY_HEIGHT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-BLOCK-HEADER"><span class="toc-text">PROTOCOL_BLOCK_HEADER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-TX-GROUP"><span class="toc-text">PROTOCOL_GET_TX_GROUP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-TX-GROUP"><span class="toc-text">PROTOCOL_TX_GROUP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-NEW-BLOCK"><span class="toc-text">PROTOCOL_NEW_BLOCK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-GET-BLOCKS-HASH"><span class="toc-text">PROTOCOL_GET_BLOCKS_HASH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-BLOCKS-HASH"><span class="toc-text">PROTOCOL_BLOCKS_HASH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-STRING"><span class="toc-text">PROTOCOL_STRING</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PROTOCOL-COMPLETE"><span class="toc-text">PROTOCOL_COMPLETE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#REQUEST-REACT"><span class="toc-text">REQUEST_REACT</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">概述</strong><a href="index.html" class="sidebar-link">模块说明</a><a href="network.html" class="sidebar-link">网络</a><a href="protocol.html" class="sidebar-link current">协议</a><a href="transaction.html" class="sidebar-link">交易</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">概述</strong><a href="index.html" class="mobile-nav-link">模块说明</a><a href="network.html" class="mobile-nav-link">网络</a><a href="protocol.html" class="mobile-nav-link current">协议</a><a href="transaction.html" class="mobile-nav-link">交易</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="protocol/protocol.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>NULS consensus module analysis | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/manual/consensus.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/manual/consensus.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/manual/consensus.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/docs/" class="main-nav-link">Documents</a><a href="/protocol/" class="main-nav-link">Protocol</a><a href="/contract/" class="main-nav-link">Smart Contract</a><a href="/chain/" class="main-nav-link">Cross-Chain</a><a href="/manual/" class="main-nav-link">Manual</a><a href="/news/" class="main-nav-link">News</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>English</span></label>
+      <select id="lang-select" data-canonical="manual/consensus.html">
+        
+          <option value="en" selected>English</option>
+        
+          <option value="zh-cn">简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">NULS consensus module analysis</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/manual/consensus.md" class="article-edit-link" title="Improve this doc"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="1、Module-overview" class="article-heading"><a href="#1、Module-overview" class="headerlink" title="1、Module overview"></a>1、Module overview<a class="article-anchor" href="#1、Module-overview" aria-hidden="true"></a></h2><p>As we all know, the core of the blockchain is the consensus mechanism. Unlike the traditional Internet’s clipet-server architecture, the nodes of the blockchain are peer-to-peer, without the center, and everyone has the same rights; so in order to make the data consistent, let a network without a center maintain a set of books that everyone agrees with. This is the role of the consensus mechanism.</p>
+<p>There are many public chain consensus mechanisms. The NULS main network adopts the self-originated POC (Proof Of Credit) consensus mechanism, which inherits the security and high efficiency of the Dpos consensus mechanism, and has made great improvements in collaboration. Can be seen as an upgraded version of Dpos.</p>
+<p>The NULS consensus module is highly abstracted at the interface layer, and some necessary functional interfaces are extracted, which is implemented as a POC consensus. Based on the modular architecture of NULS, any other possible consensus mechanism can be implemented. Look forward to the consensus mechanism of the community, individuals or institutions to achieve their needs, and contribute the code to the main warehouse of NULS. In addition to the POC, there will be multiple consensus algorithms such as POW, POS, DPOS and PBTF.</p>
+<p>This chapter focuses on the NULS consensus module interface definition and the implementation details of the default POC consensus mechanism.<br>​<br>​<br>​    <strong>Module information</strong><br>​<br>​    Module name：consensus-module<br>​<br>​    Module structure: module top-level directory consensus-module, consesnus project for module interface definition, poc implementation directory poc, poc implementation project consensus-poc-base, consensus-poc-protocol consensus implementation of related network protocols, consensus-poc-storage consensus storage interface And implementation engineering<br>​<br>​    Interface definition dependency module：<strong>protocol-module、network-module</strong><br>​<br>​    Implement additional dependency modules：<strong>core-module、ledger-module、account-module、account-ledger-module</strong></p>
+<h2 id="2、Module-function" class="article-heading"><a href="#2、Module-function" class="headerlink" title="2、Module function"></a>2、Module function<a class="article-anchor" href="#2、Module-function" aria-hidden="true"></a></h2><p>​    This section introduces the NULS consensus module functionality from two levels. The first level describes the interface function provided by the external interface. The external interface is a shared abstract interface that may be required by multiple consensus algorithms. The second level is summarized from the functional requirements of the POC implementation.</p>
+<h3 id="2-1-External-interface" class="article-heading"><a href="#2-1-External-interface" class="headerlink" title="2.1 External interface"></a>2.1 External interface<a class="article-anchor" href="#2-1-External-interface" aria-hidden="true"></a></h3><ul>
+<li><p>New transaction: The new transaction on the network received by the node. After the verification is passed, it needs to be put into a unified memory pool for the consensus module to confirm these transactions (that is, package the transaction into the block); at the same time, receive the new transaction. When the block is located, it is quickly assembled into a complete block by looking up the transactions of these sites (because the new block is generated, the block header information and the transaction hash list are broadcast to the peer nodes).</p>
+</li>
+<li><p>Get memory pool transaction: The consensus module provides a method for querying the list of pending transactions for other modules to call when needed.</p>
+</li>
+<li><p>Obtain a single transaction: query a transaction, in fact, the transaction of the NULS system should be provided by the account book module, but the transactions provided by the account book module are all confirmed transactions, and the unconfirmed transaction is in the memory pool of the consensus module, so the consensus The module provides a functional interface for finding a single transaction, as well as looking for unconfirmed transactions.</p>
+</li>
+<li><p>New block：</p>
+<ul>
+<li>During the download process, the downloaded target block is received: when a node is just started, the local block data of the node is probably not the latest data, and the incremental block needs to be downloaded from other peer nodes, and the downloaded block needs to enter the consensus module. Through the corresponding consensus rules, the downloaded block is considered to be correct, added to the main chain and saved.</li>
+<li>The newly generated block received during the operation: receiving a newly born block sent from the network, the general protocol module will get the complete block information (take the way of assembling the transaction, if some transactions are not found locally , then download to the corresponding node), and then hand over the complete block to the consensus module for verification - storage and other operations.</li>
+<li>Whether the above two scenarios are processed by the same business logic depends on the choice of the consensus mechanism, such as the POC consensus. The only difference is that the round information in the verification is inconsistent. The former uses the calculation history round to verify, the latter. It is verified by the current consensus theory; if the implementation of the POW consensus, the same business logic can be used. That is, the specific implementation can decide whether to reuse the code.</li>
+</ul>
+</li>
+<li><p>Rollback block: The rollback of a block means that when the node discovers that there is a longer chain than the local main chain on the network, it accepts the longer chain on the network as the local new main chain. It is necessary to delete all the blocks in the local main chain that are not included in the longer chain on the network, and the transactions in the corresponding blocks should also be deleted (the corresponding business logic should also be reversed, the terminology is called Rollback). In most cases, whether there is a fork or not, whether it needs to be forked, depends on the implementation and selection of the consensus mechanism. Most of the time, the consensus mechanism is internally processed. The consensus module provides this interface function. Other modules need to be called when needed (such as the initial start of the download, you may need to roll back the block). In particular, not all consensus mechanisms need to be rolled back.</p>
+</li>
+</ul>
+<h3 id="2-2-POC-functional-requirements-analysis" class="article-heading"><a href="#2-2-POC-functional-requirements-analysis" class="headerlink" title="2.2 POC functional requirements analysis"></a>2.2 POC functional requirements analysis<a class="article-anchor" href="#2-2-POC-functional-requirements-analysis" aria-hidden="true"></a></h3><p>To implement POC, you first need to know the design philosophy and business rules of POC. </p>
+<h5 id="In-the-POC-system-there-are-four-roles-agent-principal-packager-and-rewarder" class="article-heading"><a href="#In-the-POC-system-there-are-four-roles-agent-principal-packager-and-rewarder" class="headerlink" title="In the POC system, there are four roles: agent, principal, packager, and rewarder."></a>In the POC system, there are four roles: agent, principal, packager, and rewarder.<a class="article-anchor" href="#In-the-POC-system-there-are-four-roles-agent-principal-packager-and-rewarder" aria-hidden="true"></a></h5><ul>
+<li><p>The agent———— the node creator, initiates a transaction that creates a consensus node, logs it into the chain, and tells everyone that I want to be a consensus node. The basic condition for node creation is to lock 20,000 NULS. The purpose of setting up this basic condition is to prove that you are really trying to maintain the basic network of NULS.</p>
+</li>
+<li><p>The principal———— NULS holder can entrust the NULS he holds to the agent according to the agent’s credit value and the influence of the agent, etc., and enjoy the corresponding consensus. Revenue, if the agent node quality or integrity is found to decrease, the principal may withdraw its entrustment and change to others at any time.</p>
+</li>
+<li><p>Packager———— When creating a consensus node, the agent can specify a packager. This packager can be his own other account, or a friend who knows technology. The most important thing is that the packager can not hold any NULS. Even if the server participating in the consensus is hacked, the user will not have a huge loss, and the loss will only be affected by the earnings after the attack.</p>
+</li>
+<li><p>Rewarding people———— When creating a consensus node, an agent can not only specify a packager, but also designate a beneficiary to specify who can get the reward generated by the consensus.</p>
+</li>
+</ul>
+<h5 id="In-the-POC-system-there-are-four-business-logics-creating-a-proxy-creating-a-consensus-node-stopping-a-proxy-node-exiting-a-consensus-delegating-a-consensus-and-canceling-a-delegation" class="article-heading"><a href="#In-the-POC-system-there-are-four-business-logics-creating-a-proxy-creating-a-consensus-node-stopping-a-proxy-node-exiting-a-consensus-delegating-a-consensus-and-canceling-a-delegation" class="headerlink" title="In the POC system, there are four business logics: creating a proxy (creating a consensus node), stopping a proxy node (exiting a consensus), delegating a consensus, and canceling a delegation."></a>In the POC system, there are four business logics: creating a proxy (creating a consensus node), stopping a proxy node (exiting a consensus), delegating a consensus, and canceling a delegation.<a class="article-anchor" href="#In-the-POC-system-there-are-four-business-logics-creating-a-proxy-creating-a-consensus-node-stopping-a-proxy-node-exiting-a-consensus-delegating-a-consensus-and-canceling-a-delegation" aria-hidden="true"></a></h5><ul>
+<li><p>Create proxy (create consensus node): Lock 20,000 NULS and initiate a registration proxy transaction. After packaging, the whole network can be seen. Others can lock NULS to the proxy node.</p>
+</li>
+<li><p>Stop the agent node (exit consensus): The agent can stop its agent qualification at any time, initiate a transaction to delete the agent node, and after the transaction is packaged and confirmed, it will quickly withdraw from the consensus and no longer participate in the production of the new block. The 20,000 NULS locked during the registration of the agent will be unlocked after 72 hours, and the rest of the NULS delegated to the node will be unlocked immediately.</p>
+</li>
+<li><p>Delegate consensus: Users with NULS of 2000 or above can choose a proxy node to commission and obtain the corresponding block revenue. Before exiting, the corresponding delegated NULS will be locked out of use.</p>
+</li>
+<li><p>Cancellation of the delegation: The user can cancel the previous entrustment. After the revocation, the locked NULS will immediately explain and no longer enjoy the corresponding consensus revenue.</p>
+</li>
+</ul>
+<h5 id="Two-punishment-mechanisms-for-POC-systems" class="article-heading"><a href="#Two-punishment-mechanisms-for-POC-systems" class="headerlink" title="Two punishment mechanisms for POC systems"></a>Two punishment mechanisms for POC systems<a class="article-anchor" href="#Two-punishment-mechanisms-for-POC-systems" aria-hidden="true"></a></h5><ul>
+<li><p>Yellow card penalty: When the block node is disconnected from the network, card machine and other uncertain reasons, the block will not be out of the block, or the block is not used, then the yellow card will be punished in the next round. The yellow card penalty will affect the node’s income; when 100 consecutive yellow card penalties are awarded, a red card will be imposed.</p>
+</li>
+<li><p>Red card penalty: When the block node makes malicious fork, double flower and other behaviors that seriously endanger the stability of the network, or when it receives 100 yellow card penalties continuously, the system will give a red card penalty. The node that receives the red card penalty will be forced to stop the consensus. The deposit when the agent is created is frozen for 3 months, and the node can never be created again; the corresponding node of the node that received the red card penalty is immediately unlocked.</p>
+</li>
+</ul>
+<h5 id="Hidden-functional-requirements-of-POC-internal-systems" class="article-heading"><a href="#Hidden-functional-requirements-of-POC-internal-systems" class="headerlink" title="Hidden functional requirements of POC internal systems"></a>Hidden functional requirements of POC internal systems<a class="article-anchor" href="#Hidden-functional-requirements-of-POC-internal-systems" aria-hidden="true"></a></h5><ul>
+<li><p>Maintain an agent information form and update it based on the above four transactions received in real time.</p>
+</li>
+<li><p>Maintain a round of information table, so that each round of agents who meet the conditions of the outbound block are randomly queued out.</p>
+</li>
+<li><p>The proxy node that meets the condition of the outbound condition verifies and packages the transaction of the memory pool, assembles it into a new block and broadcasts it to the whole network.</p>
+</li>
+<li><p>Fork processing.</p>
+</li>
+</ul>
+<p>The above is a functional analysis of the consensus module POC consensus mechanism implementation, and the details of each function implementation are described in the [<strong> core process</strong>] (#core-processer) section.</p>
+<h2 id="3、Module-interface" class="article-heading"><a href="#3、Module-interface" class="headerlink" title="3、Module interface"></a>3、Module interface<a class="article-anchor" href="#3、Module-interface" aria-hidden="true"></a></h2><p>The external interface definition class of the consensus module is io.nuls.consensus.service.ConsensusService<br>, under the conssusus project.</p>
+<ul>
+<li><p><strong>New transaction</strong></p>
+<ul>
+<li>Method name: newTx</li>
+<li><p>Method description:</p>
+<ul>
+<li>The new transaction generated on the network or locally generated by the node is initially verified and passed into the transaction memory pool for confirmation.</li>
+</ul>
+</li>
+<li><p>Parameter Description:</p>
+<ul>
+<li>tx : Transaction</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Return value description:</p>
+<ul>
+<li>Type：Result</li>
+<li>Field：<pre><code>* success : Return whether the processing is successful
+</code></pre></li>
+</ul>
+</li>
+<li><p>Code</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">  * receive a new transaction, add in memory pool after verify success</span><br><span class="line">  * @param tx</span><br><span class="line">  * @return Result</span><br><span class="line">  */</span><br><span class="line"> Result newTx(Transaction&lt;? extends BaseNulsData&gt; tx);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>New block is born</strong></p>
+<ul>
+<li>Method name: newBlock</li>
+<li><p>Method description:</p>
+<ul>
+<li><p>After receiving a newly born block from the network, the general protocol module will get the complete block information (take the way of assembling the transaction, if some transactions are not found locally, download it to the corresponding node), and then complete The block is handed over to the consensus module for verification - operations such as warehousing.</p>
+<pre><code>There are two overloaded methods in the interface class, whether you know exactly which peer node received the new block.
+</code></pre></li>
+</ul>
+</li>
+<li><p>Parameter Description:</p>
+<ul>
+<li>block : Complete block information（Block)</li>
+<li>node :  Received peer node information（Node)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Return value description:</p>
+<ul>
+<li>Type：Result</li>
+<li>Field：<pre><code>* success : Return whether the processing is successful
+</code></pre></li>
+</ul>
+</li>
+<li><p>Code</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">   * receive block from other peers</span><br><span class="line">   * @param block</span><br><span class="line">   * @return Result</span><br><span class="line">   */</span><br><span class="line">  Result newBlock(Block block);</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * receive block from other peers</span><br><span class="line">   * @param block</span><br><span class="line">   * @param node</span><br><span class="line">   * @return Result</span><br><span class="line">   */</span><br><span class="line">  Result newBlock(Block block, Node node);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Add a block to the main chain</strong></p>
+<ul>
+<li>Method name: addBlock</li>
+<li><p>Method description:</p>
+<ul>
+<li>When the local block is lower than the latest height of the network, you need to download the latest incremental block from the network. After downloading to the block, call this method to add and connect the block to the local main chain.</li>
+</ul>
+</li>
+<li><p>Parameter Description:</p>
+<ul>
+<li>block : Complete block information（Block)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Return value description:</p>
+<ul>
+<li>Type：Result</li>
+<li>Field：<pre><code>* success : Return whether the processing is successful
+</code></pre></li>
+</ul>
+</li>
+<li><p>Code</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">  * synchronous block from other peers</span><br><span class="line">  * @param block</span><br><span class="line">  * @return Result</span><br><span class="line">  */</span><br><span class="line"> Result addBlock(Block block);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Rollback block</strong></p>
+<ul>
+<li>Method name: rollbackBlock</li>
+<li><p>Method description:</p>
+<ul>
+<li>The latest block in the local main chain is revoked. When the incoming block is not the latest block of the local main chain, it will return a failure. In the implementation of the POC, the optimal block of the main chain in the memory will be preferentially rolled back. After the success, the database is rolled back accordingly.</li>
+</ul>
+</li>
+<li><p>Parameter Description:</p>
+<ul>
+<li>block : Complete block information（Block)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Return value description:</p>
+<ul>
+<li>Type：Result</li>
+<li>Field：<pre><code>* success : Return whether the processing is successful
+</code></pre></li>
+</ul>
+</li>
+<li><p>Code</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">  * Roll back the latest block and roll back the status of the chain in the consensus service memory</span><br><span class="line">  *</span><br><span class="line">  * 回滚最新区块，同时回滚共识服务内存中链的状态</span><br><span class="line">  * @return Result</span><br><span class="line">  */</span><br><span class="line"> Result rollbackBlock(Block block) throws NulsException;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Get the transaction list of the memory pool</strong></p>
+<ul>
+<li>Method name: getMemoryTxs</li>
+<li><p>Method description:</p>
+<ul>
+<li>Get all the transactions in the memory pool</li>
+</ul>
+</li>
+<li><p>Parameter Description:</p>
+<ul>
+<li>No parameters</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Return value:</p>
+<ul>
+<li>Type：List\<transaction></transaction></li>
+<li>Description: Transaction collection</li>
+</ul>
+</li>
+<li><p>Code</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">  * Get all the transactions in the memory pool</span><br><span class="line">  *</span><br><span class="line">  * 获取内存池里面的所有交易</span><br><span class="line">  * @return List&lt;Transaction&gt;</span><br><span class="line">  */</span><br><span class="line"> List&lt;Transaction&gt; getMemoryTxs();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Get a single transaction</strong></p>
+<ul>
+<li>Method name: getTx</li>
+<li><p>Method description:</p>
+<ul>
+<li>Inquiring a transaction, in fact, the transaction of the NULS system should be provided by the ledger module, but the transactions provided by the ledger module are all confirmed transactions, and the unconfirmed transaction is in the memory pool of the consensus module, so the consensus module provides a lookup externally. A functional interface for a single transaction that also includes looking for unconfirmed transactions.</li>
+</ul>
+</li>
+<li><p>Parameter Description:</p>
+<ul>
+<li>hash : transaction hash（NulsDigestData)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>return value:</p>
+<ul>
+<li>Type：Transaction</li>
+<li>Description: The transaction object, if not, is null</li>
+</ul>
+</li>
+<li><p>Code</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Transaction getTx(NulsDigestData hash);</span><br></pre></td></tr></table></figure>
+<h2 id="4、Module-architecture" class="article-heading"><a href="#4、Module-architecture" class="headerlink" title="4、Module architecture"></a>4、Module architecture<a class="article-anchor" href="#4、Module-architecture" aria-hidden="true"></a></h2><p><img src="consensus/1.png" alt="tips"></p>
+<h2 id="5、Module-protocol" class="article-heading"><a href="#5、Module-protocol" class="headerlink" title="5、Module protocol"></a>5、Module protocol<a class="article-anchor" href="#5、Module-protocol" aria-hidden="true"></a></h2><h3 id="TX-TYPE-REGISTER-AGENT" class="article-heading"><a href="#TX-TYPE-REGISTER-AGENT" class="headerlink" title="TX_TYPE_REGISTER_AGENT"></a>TX_TYPE_REGISTER_AGENT<a class="article-anchor" href="#TX-TYPE-REGISTER-AGENT" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>8</td>
+<td>deposit</td>
+<td>uint64</td>
+<td>抵押金额</td>
+</tr>
+<tr>
+<td>23</td>
+<td>agentAddress</td>
+<td>Address</td>
+<td>节点地址</td>
+</tr>
+<tr>
+<td>23</td>
+<td>packingAddress</td>
+<td>Address</td>
+<td>打包地址</td>
+</tr>
+<tr>
+<td>23</td>
+<td>rewardAddress</td>
+<td>Address</td>
+<td>奖励地址</td>
+</tr>
+<tr>
+<td>8</td>
+<td>commissionRate</td>
+<td>Double</td>
+<td>昵称</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-JOIN-CONSENSUS" class="article-heading"><a href="#TX-TYPE-JOIN-CONSENSUS" class="headerlink" title="TX_TYPE_JOIN_CONSENSUS"></a>TX_TYPE_JOIN_CONSENSUS<a class="article-anchor" href="#TX-TYPE-JOIN-CONSENSUS" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>8</td>
+<td>deposit</td>
+<td>byte[]</td>
+<td>委托金额</td>
+</tr>
+<tr>
+<td>23</td>
+<td>address</td>
+<td>byte[23]</td>
+<td>地址</td>
+</tr>
+<tr>
+<td>8</td>
+<td>agentHash</td>
+<td>NulsDigestData</td>
+<td>委托节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-CANCEL-DEPOSIT" class="article-heading"><a href="#TX-TYPE-CANCEL-DEPOSIT" class="headerlink" title="TX_TYPE_CANCEL_DEPOSIT"></a>TX_TYPE_CANCEL_DEPOSIT<a class="article-anchor" href="#TX-TYPE-CANCEL-DEPOSIT" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>agentHash</td>
+<td>NulsDigestData</td>
+<td>委托节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-STOP-AGENT" class="article-heading"><a href="#TX-TYPE-STOP-AGENT" class="headerlink" title="TX_TYPE_STOP_AGENT"></a>TX_TYPE_STOP_AGENT<a class="article-anchor" href="#TX-TYPE-STOP-AGENT" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>agentHash</td>
+<td>NulsDigestData</td>
+<td>停止节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-YELLOW-PUNISH" class="article-heading"><a href="#TX-TYPE-YELLOW-PUNISH" class="headerlink" title="TX_TYPE_YELLOW_PUNISH"></a>TX_TYPE_YELLOW_PUNISH<a class="article-anchor" href="#TX-TYPE-YELLOW-PUNISH" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>count</td>
+<td>VarInt</td>
+<td>惩罚数量</td>
+</tr>
+<tr>
+<td>??</td>
+<td>addres</td>
+<td>Address[]</td>
+<td>被黄牌警告的节点地址</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TX-TYPE-RED-PUNISH" class="article-heading"><a href="#TX-TYPE-RED-PUNISH" class="headerlink" title="TX_TYPE_RED_PUNISH"></a>TX_TYPE_RED_PUNISH<a class="article-anchor" href="#TX-TYPE-RED-PUNISH" aria-hidden="true"></a></h3><table>
+<thead>
+<tr>
+<th>尺寸</th>
+<th>字段</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>type</td>
+<td>uint16</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time</td>
+<td>uint48</td>
+<td>时间戳</td>
+</tr>
+<tr>
+<td>??</td>
+<td>remark</td>
+<td>VarByte</td>
+<td>备注数据</td>
+</tr>
+<tr>
+<td>23</td>
+<td>address</td>
+<td>byte[23]</td>
+<td>惩罚数量</td>
+</tr>
+<tr>
+<td>1</td>
+<td>reasonCode</td>
+<td>byte</td>
+<td>处罚代码</td>
+</tr>
+<tr>
+<td>??</td>
+<td>evidence</td>
+<td>VarByte</td>
+<td>证据</td>
+</tr>
+<tr>
+<td>??</td>
+<td>coinData</td>
+<td>CoinData</td>
+<td>交易 UTXO</td>
+</tr>
+<tr>
+<td>??</td>
+<td>scriptSign</td>
+<td>VarByte</td>
+<td>P2PKHScriptSig</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6、Core-process" class="article-heading"><a href="#6、Core-process" class="headerlink" title=" 6、Core process"></a><a name="core-processer"></a> 6、Core process<a class="article-anchor" href="#6、Core-process" aria-hidden="true"></a></h2><h4 id="Create-an-agent" class="article-heading"><a href="#Create-an-agent" class="headerlink" title="Create an agent"></a>Create an agent<a class="article-anchor" href="#Create-an-agent" aria-hidden="true"></a></h4><ul>
+<li><p>Brief</p>
+<ul>
+<li>Any user who holds 20,000 or more NULS can create a proxy through the creation of a wallet consensus interface (Linux can be commanded via command line, or via the rpc command). After the creation, the transaction is verified and broadcasted to the entire network for confirmation.</li>
+<li>After the pen creation agent transaction is confirmed, the node where the package address is located will start consensus after 2 rounds.</li>
+</ul>
+</li>
+<li><p>flow chart<br><img src="consensus/2.png" alt="tips"></p>
+</li>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>The entry is the io.nuls.consensus.poc.rpc.resource.PocConsensusResource class under the consensus-poc-rpc project, corresponding to the createAgent method.</p>
+</li>
+<li><p>The createAgent method in PocConsensusResource first verifies the legality of the parameters (including the address can not be repeated, can not be empty, the account can be found in the local account, the correctness of the account password, etc.), then assemble the transaction and then call the txProcessing method for signature verification. And broadcast.</p>
+</li>
+<li><p>The corresponding network protocol is defined in the io.nuls.consensus.poc.protocol.tx.CreateAgentTransaction under the consensus-poc-protocol project;</p>
+</li>
+<li><p>The processor bound to the protocol is io.nuls.consensus.poc.tx.processor.CreateAgentTxProcessor under the consensus-poc-base project;</p>
+</li>
+<li><p>There are 3 validators, which are under the consensus-poc-base project: io.nuls.consensus.poc.tx.validator.AgentAddressesValidator、io.nuls.consensus.poc.tx.validator.AgentCountValidator、io.nuls.consensus.poc.tx.validator.CreateAgentTxValidator</p>
+</li>
+<li><p>CreateAgentTransaction will call verify method to verify when packaging, that is, call 3 bindings respectively, and return true to represent successful verification; after successful packaging, CreateAgentTxProcessor will be called to save to the database.</p>
+</li>
+<li><p>After the transaction is packaged into the block, the block will be saved by the addBlock method in io.nuls.consensus.poc.process.BlockProcess. When saving the block, some basic verification will be done first to verify whether the block header is legal. Whether the block contains a double flower transaction, etc., then it will verify whether the packager is legal, the code is</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">boolean verifyAndAddBlockResult = chainManager.getMasterChain().verifyAndAddBlock(block, isDownload);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>After running here, once successful, the transaction for creating the commission is placed in the agentList of Chain corresponding to ChainChatainer, and the next time the round is calculated, this data will be included.
+
+**In the same way, the following entrusted consensus, stop proxy, and unconfirmed transaction are the same process after being packaged into the block.**
+</code></pre><h4 id="Commission-consensus" class="article-heading"><a href="#Commission-consensus" class="headerlink" title="Commission consensus"></a>Commission consensus<a class="article-anchor" href="#Commission-consensus" aria-hidden="true"></a></h4><ul>
+<li><p>Brief</p>
+<ul>
+<li>Users with more than 2000NULS can choose to trust the proxy node to obtain consensus and obtain corresponding benefits.</li>
+</ul>
+</li>
+<li><p>flow chart</p>
+</li>
+</ul>
+<p><img src="consensus/3.png" alt="tips"></p>
+<ul>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>The entry is the io.nuls.consensus.poc.rpc.resource.PocConsensusResource class under the consensus-poc-rpc project, corresponding to the depositToAgent method.</p>
+</li>
+<li><p>The depositToAgent method in PocConsensusResource first verifies the legality of the parameters (including the proxy hash can not be empty and exists, the delegate account can not be empty and can be found in the local account, the correctness of the account password, etc.), then assemble the DepositTransaction transaction and then call The txProcessing method performs signature verification and broadcast.</p>
+</li>
+<li><p>The corresponding network protocol is defined in the io.nuls.consensus.poc.protocol.tx.DepositTransaction under the consensus-poc-protocol project;</p>
+</li>
+<li><p>The processor bound to the protocol is io.nuls.consensus.poc.tx.processor.DepositTxProcessor under the consensus-poc-base project;</p>
+</li>
+<li><p>The validator is io.nuls.consensus.poc.tx.validator.DepositTxValidator under the consensus-poc-base project</p>
+</li>
+<li><p>DepositTransaction will call the verify method to call the validator row validation when it is packaged. Returning true means that the verification is successful; after the package is successful, it will call DepositTxProcessor to save to the database.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Stop-agent" class="article-heading"><a href="#Stop-agent" class="headerlink" title="Stop agent"></a>Stop agent<a class="article-anchor" href="#Stop-agent" aria-hidden="true"></a></h4><ul>
+<li><p>Brief</p>
+<ul>
+<li>The node that successfully registers the agent can choose to stop the agent at any time, but the margin will be locked for 72 hours, and the agent will be unlocked immediately.</li>
+</ul>
+</li>
+<li><p>flow chart<br><img src="consensus/4.png" alt="tips"></p>
+</li>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>The entry is the io.nuls.consensus.poc.rpc.resource.PocConsensusResource class under the consensus-poc-rpc project, corresponding to the stopAgent method.</p>
+</li>
+<li><p>The stopAgent method in PocConsensusResource first verifies the validity of the parameters (including the proxy hash can not be empty and exists, and is the proxy created by itself, the account can not be empty and can be found in the local account, the correctness of the account password, etc.) Reassemble the StopAgentTransaction transaction and then call the txProcessing method for signature verification and broadcast.</p>
+</li>
+<li><p>When the StopAgentTransaction is assembled, the margin that was locked when the proxy was created is treated as the current input, and an output corresponding to the lock time is output, which is equivalent to spending the previous margin and relocking for a certain period of time.</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>* The corresponding network protocol is defined in the io.nuls.consensus.poc.protocol.tx.StopAgentTransaction under the consensus-poc-protocol project;
+
+* The processor bound to the protocol is io.nuls.consensus.poc.tx.processor.StopAgentTxProcessor under the consensus-poc-base project;
+
+* The validator is io.nuls.consensus.poc.tx.validator.StopAgentTxValidator under the consensus-poc-base project.
+
+* When the package is stopped, the StopAgentTransaction will call the verify method to call the validator to verify. The return true means the verification is successful. After the package is successful, the StopAgentTxProcessor will be saved to the database. When the StopAgentTxProcessor is executed, all the delegates corresponding to the proxy node will be Cancel and unlock.
+</code></pre><h4 id="Cancel-the-commission" class="article-heading"><a href="#Cancel-the-commission" class="headerlink" title="Cancel the commission"></a>Cancel the commission<a class="article-anchor" href="#Cancel-the-commission" aria-hidden="true"></a></h4><ul>
+<li><p>Brief</p>
+<ul>
+<li>The client can cancel the proxy of the proxy node at any time, and the locked deposit is immediately unlocked.</li>
+</ul>
+</li>
+<li><p>flow chart</p>
+</li>
+</ul>
+<p><img src="consensus/5.png" alt="tips"></p>
+<ul>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>The entry is the io.nuls.consensus.poc.rpc.resource.PocConsensusResource class under the consensus-poc-rpc project, corresponding to the withdraw method.</p>
+</li>
+<li><p>The withdraw method in PocConsensusResource first verifies the legality of the parameters (including the proxy hash can not be empty and exists, and is the proxy created by itself, the account can not be empty and can be found in the local account, the correctness of the account password, etc.) Reassemble the CancelDepositTransaction transaction and then call the txProcessing method for signature verification and broadcast.</p>
+</li>
+<li><p>When the CancelDepositTransaction is assembled, the margin that was locked in the previous delegate will be treated as this input, and an output that is immediately available will be output, which is equivalent to spending the previous margin and paying it to itself.</p>
+</li>
+<li><p>The corresponding network protocol is defined in the io.nuls.consensus.poc.protocol.tx. CancelDepositTransaction under the consensus-poc-protocol project.</p>
+</li>
+<li><p>The processor bound to the protocol is io.nuls.consensus.poc.tx.processor.CancelDepositTxProcessor under the consensus-poc-base project.</p>
+</li>
+<li><p>The validator is io.nuls.consensus.poc.tx.validator.CancelDepositTxValidator under the consensus-poc-base project.</p>
+</li>
+<li><p>CancelDepositTransaction will call the verify method to call the bound validator to verify when packaging, return true means the verification is successful; after the package is successful, CancelDepositTxProcessor will be called to save to the database.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Consensus-round" class="article-heading"><a href="#Consensus-round" class="headerlink" title="Consensus round"></a>Consensus round<a class="article-anchor" href="#Consensus-round" aria-hidden="true"></a></h4><ul>
+<li><p>Brief</p>
+<ul>
+<li>Initially, the NULS system will have five seed consensus nodes built in. The five seed consensus nodes are responsible for maintaining the initial network data in the initial period of the network; these five seed nodes have no locked margin, so the five seed nodes do not participate in the consensus reward ( Except for handling fees).</li>
+<li>Once the NULS system starts running, the subsequent registered consensus nodes will be added to the network maintenance of NULS. After the proxy node is successfully registered, it only needs to meet the 200,000 NULS entrustment amount to participate in the consensus.</li>
+<li>All the agent nodes that satisfy the consensus condition (including 5 seed nodes) have the same weight for maintaining the network (that is, the permissions between the agent nodes are the same, there is no large authority for the large amount of entrustment), and the same opportunity for the block is obtained. The consensus algorithm is randomly performed in blocks.</li>
+<li>All the agents who meet the consensus conditions, each period of one block, is called the consensus round; in one round, each person has a chance to make a block, and the order of the different rounds is random.</li>
+</ul>
+</li>
+<li><p>flow chart<br><img src="consensus/6.png" alt="tips"></p>
+</li>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>The process entry is the io.nuls.consensus.poc.scheduler.ConsensusScheduler class under the consensus-poc-base project. The initDatas method inside the io.nuls.consensus.poc.manager.CacheManager load method initializes the data.</p>
+</li>
+<li><p>CacheManager’s load method will first load the data needed by the system from the database (including the last 100 rounds of block headers, the last 10 complete blocks, all agents, delegates, stop agents and cancel delegate records, red and yellow card records), and then Assemble an io.nuls.consensus.poc.container.ChainContainer as the main chain and set it to the chainManager.</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  </span><br><span class="line">  The initRound method of io.nuls.consensus.poc.manager.RoundManager is then called to initialize the most recent round information. After the initialization is successful, it will be placed in the roundList of the RoundManager.</span><br><span class="line"></span><br><span class="line">* Use rounds：</span><br><span class="line">	</span><br><span class="line">  The verifyBlock method of io.nuls.consensus.poc.container.ChainContainer. First, the current round information is obtained by roundManager.getCurrentRound(), and the round information in the block header is compared. If it is not the desired round, then the roundManager.getRoundByIndex method is called again to get the desired round; or roundManager is called. .getNextRound gets the next round of the current round (without the latest round in the RoundManager).</span><br><span class="line"></span><br><span class="line">* Round change：</span><br><span class="line"></span><br><span class="line">  There are two ways to change the round. The first one is the roundManager.getNextRound that ends above. The second type of doWork in io.nuls.consensus.poc.process.ConsensusProcess, the code is</span><br><span class="line">  </span><br><span class="line">  ``` MeetingRound round = chainManager.getMasterChain().getOrResetCurrentRound();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>The system executes the doWork method every 1000 milliseconds, and finally calls the RoundManager&apos;s resetRound(true) method to get the round. If the current round has ended, it will return a new round of round information.
+</code></pre><h4 id="Packing-block" class="article-heading"><a href="#Packing-block" class="headerlink" title="Packing block"></a>Packing block<a class="article-anchor" href="#Packing-block" aria-hidden="true"></a></h4><ul>
+<li>Brief<ul>
+<li>The agent that satisfies the consensus condition, corresponding to the node where the block address is set, has one opportunity for each block.</li>
+<li>After the node is started, the task scheduler of the consensus module starts a task block of the packaged block, and the taskkeeper monitors in real time whether all unencrypted accounts of the current node become packaged nodes.</li>
+<li>If the node has an unencrypted account and becomes the outbound node of the proxy node, the task manager of the packed block monitors whether the proxy node satisfies the consensus outbound condition. Once it is satisfied, the consensus is started in the next round, and the consensus is performed according to the consensus rule.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>flow chart</li>
+</ul>
+<p><img src="consensus/7.png" alt="tips"></p>
+<ul>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>The launch of the Consensus Packer is in the start method of io.nuls.consensus.poc.scheduler.ConsensusScheduler.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ConsensusProcess consensusProcess = <span class="keyword">new</span> ConsensusProcess(chainManager);</span><br><span class="line">   threadPool.scheduleAtFixedRate(<span class="keyword">new</span> ConsensusProcessTask(consensusProcess), <span class="number">1000L</span>, <span class="number">1000L</span>, TimeUnit.MILLISECONDS);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>* io.nuls.consensus.poc.task.ConsensusProcessTask calls the process method of ConsensusProcess every second.
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        consensusProcess.process();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        Log.error(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+* io.nuls.consensus.poc.process.ConsensusProcess will first determine whether to continue processing the package according to the status of the consensus module, whether the configuration is packaged, or the network status.
+
+* After entering the doWork method, the round information is obtained first, and then the obtained round information is used to determine whether there is any outbound information corresponding to the account that needs to be out of the block (including the time of the block, the order index, the reward address, the delegation list, and the credit value). Etc.), if not, it means that the node does not need to be out of the block, then call the clearTxMemoryPool method to periodically clear the transactions in the memory pool.
+
+* If it needs to be packaged, it is judged whether the current time has reached the time when the block should be released. If it is reached, the packing method is called to package.
+
+* The packing will first call waitReceiveNewestBlock to wait for the reception of the previous block. If the previous node is normally out of the block and received normally, it will start to pack. If the previous node fails to pack in time or the network transmission is too bad, then the maximum waits. The 1/2 of the block time interval is 5 seconds. After the timeout, even if the previous block is not received, it needs to be packaged.
+
+* Call doPacking to perform the operation of packing the block; the flow is the assembly block round information -&gt; verify the transaction in the memory pool -&gt; the end of the time or the block size reaches the upper limit -&gt; verify the transaction in the block (including business conflict detection) -&gt; Call addConsensusTx method to assemble coinbase transaction (reward) and red and yellow card penalty transaction assembly -&gt; Call ConsensusTool.createBlock to assemble the complete block.
+
+* If the previous block was not received before packing, then it is detected again if the previous block was received. If it is received, it will be repackaged again because the transaction may be repeated.
+
+* The last is to save the block (saveBlock method), broadcast block (broadcastSmallBlock method).
+</code></pre><h4 id="Block-verification" class="article-heading"><a href="#Block-verification" class="headerlink" title="Block verification"></a>Block verification<a class="article-anchor" href="#Block-verification" aria-hidden="true"></a></h4><ul>
+<li><p>Brief</p>
+<ul>
+<li>When any NULS node receives a new block from another peer node on the network, it will check the block. Only the legal block can be correctly added to the main chain. The illegal block is It is a lone block.</li>
+<li>In addition to verifying the basic information of the block (such as block upper limit, signature, previous block hash reference, etc.), the most important thing is to verify whether the signer of the block is legal.</li>
+<li>To verify whether the signer of the block is legal, it is necessary to verify whether the block signer has a corresponding agent node, whether the corresponding agent node satisfies the consensus outbound condition, and whether the time zone of the block should be corresponding to the agent node.</li>
+</ul>
+</li>
+<li><p>flow chart<br><img src="consensus/8.png" alt="tips"></p>
+</li>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>io.nuls.consensus.poc.service.impl.ConsensusPocServiceImpl is the implementation of the consensus module external interface io.nuls.consensus.service.ConsensusService.</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Result <span class="title">newBlock</span><span class="params">(Block block)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> newBlock(block, <span class="keyword">null</span>);</span><br><span class="line">   &#125;</span><br><span class="line">		</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Result <span class="title">newBlock</span><span class="params">(Block block, Node node)</span> </span>&#123;</span><br><span class="line">       BlockContainer blockContainer = <span class="keyword">new</span> BlockContainer(block, node, BlockContainerStatus.RECEIVED);</span><br><span class="line">       <span class="keyword">boolean</span> success = blockQueueProvider.put(blockContainer);</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Result(success, <span class="keyword">null</span>);</span><br><span class="line">   &#125;</span><br><span class="line">		</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Result <span class="title">addBlock</span><span class="params">(Block block)</span> </span>&#123;</span><br><span class="line">       BlockContainer blockContainer = <span class="keyword">new</span> BlockContainer(block, BlockContainerStatus.DOWNLOADING);</span><br><span class="line">       <span class="keyword">boolean</span> success = blockQueueProvider.put(blockContainer);</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Result(success, <span class="keyword">null</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>* When the consensus module receives a request for a new block, it stores the block in a block queue provider, which is the blockQueueProvider for asynchronous processing.
+
+* io.nuls.consensus.poc.task.BlockProcessTask is a block processing task started by ConsensusScheduler. This task is executed every 300ms. When there is a new block in the block queue, BlockProcessTask will hand over the new block to io. The addBlock method of .nuls.consensus.poc.process.BlockProcess is processed.
+
+* BlockProcess&apos;s addBlock method will first verify the block, if it is larger than the current time, then directly discard, and then verify the basic information of the block (whether the block is legal), the corresponding block validator in the protocol project, respectively :
+
+        io.nuls.protocol.model.validator.BlockFieldValidator
+
+        io.nuls.protocol.model.validator.BlockHeaderValidator
+
+        io.nuls.protocol.model.validator.BlockMaxSizeValidator
+
+        io.nuls.protocol.model.validator.BlockMerkleValidator
+
+        io.nuls.protocol.model.validator.HeaderFieldValidator
+
+        io.nuls.protocol.model.validator.HeaderSignValidator
+
+* Then bifurcationUtil.validate(block.getHeader()) verifies that the block corresponds to the packager&apos;s malicious fork condition (multiple blocks are played in the same round), and if there is a malicious situation, a red card penalty is given.
+
+* ledgerService.verifyDoubleSpend(block) verifies that there is a double flower transaction in this block, and if there is a red card penalty.
+
+* **chainManager.getMasterChain().verifyAndAddBlock(block, isDownload)** Verify that the package of the block is legal, and verify that the block&apos;s coinbase transaction and penalty transaction (if any) are verified by then adding the block to the main chain in memory (while processing the block contains Create a proxy, commission, stop proxy, cancel commission, red and yellow card penalty transactions).
+
+* In the above successful case, continue to verify the transaction of this block, first verify the transaction signature (to provide efficiency, multi-thread asynchronous verification), and then verify whether the transaction utxo is legal **ledgerService.verifyCoinData(tx, toMaps, fromSet)**，Finally verify the business logic conflict of the transaction **tansactionService.conflictDetect(block.getTxs())**。
+
+* After the transaction is verified, save the block **blockService.saveBlock(block)**。
+
+* Finally, the latest block of the system is set and forwarded to other peer nodes.
+
+* If the above steps fail, the data of the memory main chain will be rolled back. **chainManager.getMasterChain().rollback(block)**。
+</code></pre><h4 id="Bifurcation" class="article-heading"><a href="#Bifurcation" class="headerlink" title="Bifurcation"></a>Bifurcation<a class="article-anchor" href="#Bifurcation" aria-hidden="true"></a></h4><ul>
+<li><p>Brief</p>
+<ul>
+<li>Due to the open nature of the block, it is possible that some peer nodes on the network are malicious (possibly modifying the program code because of open source), and it is also possible that some trusted nodes cause errors due to various unstable factors such as network and server. Blocks, blocks are not synchronized in time, etc.;</li>
+<li>In such a situation, it is possible that the block is malicious and needs to be discarded. It is also possible that the block is correct, but the receiving time delay of the node; then the final criterion for judging whether the block is included in the main chain is to look at the next one. Whether the block node continues to block out of this block.</li>
+<li>Therefore, the system needs a fork processor to handle various problems encountered during the operation of the node, and to ensure the unification of the entire network backbone.</li>
+</ul>
+</li>
+<li><p>flow chart</p>
+</li>
+</ul>
+<p><img src="consensus/9.png" alt="tips"></p>
+<ul>
+<li><p>Code interpretation</p>
+<ul>
+<li><p>The scheduler ConsensusScheduler will start a fork processing task</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ForkChainProcess forkChainProcess = <span class="keyword">new</span> ForkChainProcess(chainManager);</span><br><span class="line">threadPool.scheduleAtFixedRate(<span class="keyword">new</span> ForkChainProcessTask(forkChainProcess), <span class="number">1000L</span>, <span class="number">1000L</span>, TimeUnit.MILLISECONDS);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>    The task is executed once per second to detect and process the forked blocks.
+
+* io.nuls.consensus.poc.task.ForkChainProcessTask directly calls the doProcess method of io.nuls.consensus.poc.process.ForkChainProcess.
+
+* ForkChainProcess&apos;s doProcess method first calls the monitorOrphanChains method to process the orphan chain to detect whether the block of the orphan chain is connected to the main chain or the forked chain. If it is connected, it will be merged. If it is not connected, the task will not be processed.
+
+* Next check the fork chain, the code is as follows：
+
+    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">		</span><br><span class="line"><span class="keyword">long</span> newestBlockHeight = chainManager.getBestBlockHeight() + PocConsensusConstant.CHANGE_CHAIN_BLOCK_DIFF_COUNT;</span><br><span class="line"></span><br><span class="line">         ChainContainer newChain = chainManager.getMasterChain();</span><br><span class="line">         <span class="keyword">if</span> (<span class="keyword">null</span> == newChain) &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         Iterator&lt;ChainContainer&gt; iterator = chainManager.getChains().iterator();</span><br><span class="line">         <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">             ChainContainer forkChain = iterator.next();</span><br><span class="line">             <span class="keyword">if</span> (forkChain.getChain() == <span class="keyword">null</span> || forkChain.getChain().getStartBlockHeader() == <span class="keyword">null</span> || forkChain.getChain().getEndBlockHeader() == <span class="keyword">null</span>) &#123;</span><br><span class="line">                 iterator.remove();</span><br><span class="line">                 <span class="keyword">continue</span>;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">long</span> newChainHeight = forkChain.getChain().getEndBlockHeader().getHeight();</span><br><span class="line">             <span class="keyword">if</span> (newChainHeight &gt; newestBlockHeight || (newChainHeight == newestBlockHeight &amp;&amp; forkChain.getChain().getEndBlockHeader().getTime() &lt; newChain.getChain().getEndBlockHeader().getTime())) &#123;</span><br><span class="line">                 newChain = forkChain;</span><br><span class="line">                 newestBlockHeight = newChainHeight;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+
+
+    Check all the bifurcation chains, whether there are more than 3 blocks higher than the main chain, and choose the longest bifurcation chain. If not, then newChain is still the main chain, otherwise it is the corresponding bifurcation chain.
+
+* Check if newChain is the main chain. If it is not the main chain, it shows that a longer bifurcation chain is found.
+
+    <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">		</span><br><span class="line"><span class="keyword">if</span> (!newChain.equals(chainManager.getMasterChain())) &#123;</span><br><span class="line"></span><br><span class="line">             ChainContainer resultChain = verifyNewChain(newChain);</span><br><span class="line"></span><br><span class="line">             <span class="keyword">if</span> (resultChain == <span class="keyword">null</span>) &#123;</span><br><span class="line">                 chainManager.getChains().remove(newChain);</span><br><span class="line">             &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                 <span class="comment">//Verify pass, try to switch chain</span></span><br><span class="line">                 <span class="comment">//验证通过，尝试切换链</span></span><br><span class="line">                 <span class="keyword">boolean</span> success = changeChain(resultChain, newChain);</span><br><span class="line">                 <span class="keyword">if</span> (success) &#123;</span><br><span class="line">                     chainManager.getChains().remove(newChain);</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+
+
+* The verifyNewChain method is to verify whether the new fork chain is legal. It is mainly to verify whether the block chain of the new chain and the coinbase transaction and the red and yellow card penalty transactions in the block are legal. If not, the branch chain is deleted.
+
+* The changeChain method is to switch this longer bifurcation chain as the main chain, first find the bifurcation point, roll back all the blocks and transactions after the bifurcation point on the main chain; then divide the block of the new bifurcation chain from the bifurcation Verify and save one by one (including block headers and transactions). If successful, set the forked chain to the new main chain and revoke if it fails.
+
+* After the chain switch succeeds, the fork chain in the branch chain set is deleted.
+
+* Finally, the clearExpiredChain method is called to clear the expired isolated chain, the forked chain, etc., and release the memory.
+</code></pre>
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.909Z" itemprop="dateModified">Last updated: 2019-01-02</time>
+                <a href="protocol.html" class="article-footer-prev" title="Protocol"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="contract.html" class="article-footer-next" title="Smart Contract"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Module-overview"><span class="toc-text">1、Module overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Module-function"><span class="toc-text">2、Module function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-External-interface"><span class="toc-text">2.1 External interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-POC-functional-requirements-analysis"><span class="toc-text">2.2 POC functional requirements analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#In-the-POC-system-there-are-four-roles-agent-principal-packager-and-rewarder"><span class="toc-text">In the POC system, there are four roles: agent, principal, packager, and rewarder.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#In-the-POC-system-there-are-four-business-logics-creating-a-proxy-creating-a-consensus-node-stopping-a-proxy-node-exiting-a-consensus-delegating-a-consensus-and-canceling-a-delegation"><span class="toc-text">In the POC system, there are four business logics: creating a proxy (creating a consensus node), stopping a proxy node (exiting a consensus), delegating a consensus, and canceling a delegation.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Two-punishment-mechanisms-for-POC-systems"><span class="toc-text">Two punishment mechanisms for POC systems</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Hidden-functional-requirements-of-POC-internal-systems"><span class="toc-text">Hidden functional requirements of POC internal systems</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Module-interface"><span class="toc-text">3、Module interface</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Module-architecture"><span class="toc-text">4、Module architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、Module-protocol"><span class="toc-text">5、Module protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-REGISTER-AGENT"><span class="toc-text">TX_TYPE_REGISTER_AGENT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-JOIN-CONSENSUS"><span class="toc-text">TX_TYPE_JOIN_CONSENSUS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-CANCEL-DEPOSIT"><span class="toc-text">TX_TYPE_CANCEL_DEPOSIT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-STOP-AGENT"><span class="toc-text">TX_TYPE_STOP_AGENT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-YELLOW-PUNISH"><span class="toc-text">TX_TYPE_YELLOW_PUNISH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TX-TYPE-RED-PUNISH"><span class="toc-text">TX_TYPE_RED_PUNISH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、Core-process"><span class="toc-text"> 6、Core process</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-an-agent"><span class="toc-text">Create an agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Commission-consensus"><span class="toc-text">Commission consensus</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stop-agent"><span class="toc-text">Stop agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cancel-the-commission"><span class="toc-text">Cancel the commission</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Consensus-round"><span class="toc-text">Consensus round</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Packing-block"><span class="toc-text">Packing block</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Block-verification"><span class="toc-text">Block verification</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bifurcation"><span class="toc-text">Bifurcation</span></a></li></ol></li>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Architecture</a><a href="modularity.html" class="sidebar-link">Modularity</a><a href="structure.html" class="sidebar-link">Structure</a><a href="modular_overview.html" class="sidebar-link">Modular Overview</a><a href="micro_kernel.html" class="sidebar-link">Micro Kernel</a><a href="message_bus.html" class="sidebar-link">Message Bus</a><strong class="sidebar-title">Module Overview</strong><a href="network_overview.html" class="sidebar-link">Network</a><a href="storage.html" class="sidebar-link">Storage</a><a href="account.html" class="sidebar-link">Account</a><a href="ledger.html" class="sidebar-link">Ledger</a><a href="protocol.html" class="sidebar-link">Protocol</a><a href="consensus.html" class="sidebar-link current">Consensus</a><a href="contract.html" class="sidebar-link">Smart Contract</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/docs/" class="mobile-nav-link">Documents</a><a href="/protocol/" class="mobile-nav-link">Protocol</a><a href="/contract/" class="mobile-nav-link">Smart Contract</a><a href="/chain/" class="mobile-nav-link">Cross-Chain</a><a href="/manual/" class="mobile-nav-link">Manual</a><a href="/news/" class="mobile-nav-link">News</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Architecture</a><a href="modularity.html" class="mobile-nav-link">Modularity</a><a href="structure.html" class="mobile-nav-link">Structure</a><a href="modular_overview.html" class="mobile-nav-link">Modular Overview</a><a href="micro_kernel.html" class="mobile-nav-link">Micro Kernel</a><a href="message_bus.html" class="mobile-nav-link">Message Bus</a><strong class="mobile-nav-title">Module Overview</strong><a href="network_overview.html" class="mobile-nav-link">Network</a><a href="storage.html" class="mobile-nav-link">Storage</a><a href="account.html" class="mobile-nav-link">Account</a><a href="ledger.html" class="mobile-nav-link">Ledger</a><a href="protocol.html" class="mobile-nav-link">Protocol</a><a href="consensus.html" class="mobile-nav-link current">Consensus</a><a href="contract.html" class="mobile-nav-link">Smart Contract</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="manual/consensus.html">
+      
+        <option value="en" selected>English</option>
+      
+        <option value="zh-cn">简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

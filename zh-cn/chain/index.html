@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>跨链方案总体设计 | NULS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://nuls-io.github.io/zh-cn/chain/index.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://nuls-io.github.io/chain/index.html">
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://nuls-io.github.io/zh-cn/chain/index.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <meta name="generator" content="Hexo 3.8.0">
+  <!-- CSS -->
+  <!-- build:css build/css/nuls.css -->
+  <link rel="stylesheet" href="/css/nuls.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="NULS">
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/zh-cn/docs/" class="main-nav-link">文档</a><a href="/zh-cn/protocol/" class="main-nav-link">协议</a><a href="/zh-cn/contract/" class="main-nav-link">智能合约</a><a href="/zh-cn/chain/" class="main-nav-link">跨链</a><a href="/zh-cn/manual/" class="main-nav-link">参考手册</a><a href="/news/" class="main-nav-link">新闻</a>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="chain/index.html">
+        
+          <option value="en">English</option>
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope="" itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">跨链方案总体设计</h1>
+                <a href="https://github.com/nuls-io/devsite/edit/master/source/zh-cn/chain/index.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h2 id="一、行业背景" class="article-heading"><a href="#一、行业背景" class="headerlink" title="一、行业背景"></a>一、行业背景<a class="article-anchor" href="#一、行业背景" aria-hidden="true"></a></h2><p>区块链是去中心化应用的操作系统。需要跨链技术把一个个运行的操作系统连接起来，才能大力发展生态，形成区块链的互联网。</p>
+<h2 id="二、设计目标" class="article-heading"><a href="#二、设计目标" class="headerlink" title="二、设计目标"></a>二、设计目标<a class="article-anchor" href="#二、设计目标" aria-hidden="true"></a></h2><ul>
+<li>定义跨链标准，实现不同区块链间的通信。</li>
+<li>搭建“卫星链”，实现不同区块链间的资产流转。</li>
+</ul>
+<h2 id="三、总体方案" class="article-heading"><a href="#三、总体方案" class="headerlink" title="三、总体方案"></a>三、总体方案<a class="article-anchor" href="#三、总体方案" aria-hidden="true"></a></h2><h3 id="3-1总体架构" class="article-heading"><a href="#3-1总体架构" class="headerlink" title="3.1总体架构"></a>3.1总体架构<a class="article-anchor" href="#3-1总体架构" aria-hidden="true"></a></h3><p><img src="./image/3.1.png" alt="design"></p>
+<p>说明：</p>
+<p>​    一条独立的卫星链，负责和所有链对接。以开放的方式实现链间通信。</p>
+<p>​    基于NULS模块仓库实现的区块链（生态内的区块链），可以通过模块选择的方式添加跨链模块，使其在底层上可以和卫星链互通。</p>
+<p>​    以太坊和比特币等不受NULS影响的公有链，需要通过特殊的机制实现协议的转换，将公有链的协议和NULS跨链协议做适配，达到统一协议通讯的目的。</p>
+<p>​    所有区块链都只和卫星链通信，交易的验证由卫星链负责，各平行链信任卫星链的验证结果。</p>
+<ul>
+<li><p>链间连接方式</p>
+<p>区块链上的每个节点都运行跨链模块，每个节点都连接卫星链上的部分节点。通过随机算法决定连接哪些节点，尽可能地确保节点连接的分散，保证网络的安全性。</p>
+</li>
+<li><p>跨链交易是如何实现的</p>
+<p>假设A链的账户a1要转移其持有的资产a到b链的账户b1中，则处理流程如下：</p>
+<ul>
+<li>先在A链上发起跨链交易，由A链先行确认；</li>
+<li>当达到一定数量的区块确认后，交易被跨链模块推送到卫星链的节点中；</li>
+<li>卫星链接收到交易后进行确认，确认的方式分为两步：<ul>
+<li>1、通过询问A链上的节点，确认该交易是否已被确认，并且以跨链协议发送到卫星链中的交易是正确、真实的；</li>
+<li>2、在卫星链中以拜占庭容错算法对交易进行确认，若不能获得大部分节点的认同，则该交易视为无效。</li>
+</ul>
+</li>
+<li>交易打包到卫星链的区块中；</li>
+<li>节点将该跨链交易推送到B链中；</li>
+<li>B链节点通过连接的所有卫星链的节点，对该交易进行确认，若确认不通过则丢弃该交易；</li>
+<li>若通过确认，则创建对应的资产到目标地址中；</li>
+<li>在B链共识中确认该交易。</li>
+<li>完成，该资产可以在B链使用。</li>
+</ul>
+</li>
+<li><p>多算法适配</p>
+<p>卫星链支持市面上大部分数学算法，包括摘要算法、对称加密、非对称加密等，可以通过算法库提供的统一的接口进行使用。</p>
+</li>
+<li><p>社区化治理</p>
+<p>卫星链会内置社区治理机制，包括系统运行参数修改、协议升级、恶意链处理、社区资金使用等功能。</p>
+</li>
+</ul>
+<h2 id="四、-卫星链设计" class="article-heading"><a href="#四、-卫星链设计" class="headerlink" title="四、 卫星链设计"></a>四、 卫星链设计<a class="article-anchor" href="#四、-卫星链设计" aria-hidden="true"></a></h2><h3 id="4-1-卫星链架构" class="article-heading"><a href="#4-1-卫星链架构" class="headerlink" title="4.1 卫星链架构"></a>4.1 卫星链架构<a class="article-anchor" href="#4-1-卫星链架构" aria-hidden="true"></a></h3><p> <img src="./image/4.1.jpg" alt="layer"></p>
+<ul>
+<li>卫星链使用POC共识机制，结合拜占庭容错机制实现跨链交易的确认和打包，做到去中心化与性能、安全性的兼顾。</li>
+<li>卫星链上的协议是统一定义的NULS跨链协议，每个节点都会连接多个区块链的多个节点。</li>
+<li>卫星链提供链管理机制，用来管理所有在卫星链上登记的对等区块链。登记的内容包括链信息、资产信息、跨链抵押金等。</li>
+<li>当一条区块链上收到其他链的资产时，需要在本链产生对应的资产。不同区块链上的token，都以资产的方式在其他链上存储。</li>
+<li>一条区块链中转入其他链资产的明细会在卫星链中存储。该资产转出这条区块链时会进行验证，不允许非法的资产从该区块链中产生。对有恶意的区块链，会通过社区机制进行处理，如：暂停跨链、中止跨链、没收保证金等。</li>
+<li>卫星链将提供api使用手册，任何开发者都可以根据手册开发自己的钱包、浏览器、轻钱包等工具。</li>
+<li>为了降低卫星链的业务复杂度，将不在卫星链中运行智能合约。</li>
+<li>卫星链中提供协议供应用扩展，可以使用该协议进行DApp的开发和跨链协议的优化。</li>
+</ul>
+<h3 id="4-2-卫星链的运行" class="article-heading"><a href="#4-2-卫星链的运行" class="headerlink" title="4.2 卫星链的运行"></a>4.2 卫星链的运行<a class="article-anchor" href="#4-2-卫星链的运行" aria-hidden="true"></a></h3><p><img src="./image/4.2.png" alt=""></p>
+<ul>
+<li>卫星链以模块化的方式架构。</li>
+<li>每个模块都是一个可以独立运行的微服务。</li>
+<li>微服务之间直接通过http协议通信。</li>
+<li>模块不限制开发语言。</li>
+<li>提供微内核模块负责服务管理、配置管理和数据共享功能。</li>
+<li>卫星链的模块在一定程度上将可以与NULS主网共用，所以卫星链的模块也会和NULS的模块一样加入到NULS模块仓库中，供“链工厂”等应用直接使用。</li>
+<li>每个模块在使用的同时都支持扩展。即如果模块仓库中的模块只能满足部分业务需求时，可以对该模块进行扩展以避免重新开发。</li>
+</ul>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2019-01-02T05:45:51.993Z" itemprop="dateModified">上次更新：2019-01-02</time>
+                
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、行业背景"><span class="toc-text">一、行业背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、设计目标"><span class="toc-text">二、设计目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、总体方案"><span class="toc-text">三、总体方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1总体架构"><span class="toc-text">3.1总体架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、-卫星链设计"><span class="toc-text">四、 卫星链设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-卫星链架构"><span class="toc-text">4.1 卫星链架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-卫星链的运行"><span class="toc-text">4.2 卫星链的运行</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner">
+    <strong class="sidebar-title">概述</strong><a href="index.html" class="sidebar-link current">总体设计</a>
+  </div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <div class="footer-index" id="footer">
+   <div class="footer-index-inner">
+      <div class="footer-left">
+         <div>© 2018 <a href="https://nuls.io" target="_blank">Nuls</a></div>
+         <div>Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+         <div>Power by <a href="https://hexo.io" target="_blank">HEXO</a></div>
+      </div>
+      <div class="footer-middle">
+        <div>
+          <a href="https://twitter.com/nulsservice" target="_blank"><i class="footer-icon1"></i></a>
+        </div>
+        <div>
+         <a href="https://www.reddit.com/r/nulsservice/" target="_blank"><i class="footer-icon2"></i></a>
+        </div>
+        <div>
+          <a href="https://t.me/Nulsio" target="_blank"><i class="footer-icon3"></i></a>
+        </div>
+        <div>
+           <a href="https://steemit.com/@nuls" target="_blank"><i class="footer-icon4"></i></a>
+        </div>
+        <div>
+          <a href="https://github.com/nuls-io/nuls" target="_blank"><i class="footer-icon5"></i></a>
+        </div>
+        <div>
+          <a href="https://www.facebook.com/nulscommunity/" target="_blank"><i class="footer-icon6"></i></a>
+        </div>
+        <div>
+          <a href="https://join.slack.com/t/nuls/shared_invite/enQtMjQ4MTM4ODAyNTI4LWJjNGMwYTE0YjRlYmFlZGUwM2JhOGE4MDIwZmE4MzA2MDg1YzUyMmVkN2RhZjkyNWMzZjY5ZDU5ZmViMjZjNGQ" target="_blank"><i class="footer-icon7"></i></a>
+        </div>
+        <div>
+          <a href="https://gitter.im/nuls_io" target="_blank"><i class="footer-icon8"></i></a>
+        </div>
+      </div>
+   </div>
+</div>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/zh-cn/docs/" class="mobile-nav-link">文档</a><a href="/zh-cn/protocol/" class="mobile-nav-link">协议</a><a href="/zh-cn/contract/" class="mobile-nav-link">智能合约</a><a href="/zh-cn/chain/" class="mobile-nav-link">跨链</a><a href="/zh-cn/manual/" class="mobile-nav-link">参考手册</a><a href="/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/nuls-io/nuls" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">概述</strong><a href="index.html" class="mobile-nav-link current">总体设计</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="chain/index.html">
+      
+        <option value="en">English</option>
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js"></script>
+<script src="/js/toc.js"></script>
+<script src="/js/mobile_nav.js"></script>
+<script src="/js/common.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>
